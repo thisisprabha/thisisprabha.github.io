@@ -17,6 +17,7 @@
       flex-direction: column;
       height: 100vh;
       text-align: center;
+      overflow: hidden;
     }
 
     .profile-pic {
@@ -54,10 +55,21 @@
       color: #f5f5f5;
       font-weight: bold;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
   </style>
 </head>
 <body>
-  <!-- Replace the src with your profile picture URL -->
+  <canvas id="particleCanvas"></canvas>
+
   <img src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakar's Picture" class="profile-pic">
 
   <div class="bio">
@@ -71,5 +83,78 @@
   <div class="reading">
     Currently reading: <span class="highlight">[Read Write Own by Chiris Dixon]</span>
   </div>
+
+  <script>
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    function createParticle() {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: canvas.height + Math.random() * 100,
+        size: Math.random() * 1.0 + 0.2, // Smaller particles
+        speedY: Math.random() * -0.8 - 0.2, // Slower particles
+        alpha: Math.random() * 0.5 + 0.5
+      });
+    }
+
+    function initParticles() {
+      for (let i = 0; i < 150; i++) {
+        createParticle();
+      }
+    }
+
+    function updateParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.y += p.speedY;
+        if (p.y < -10) {
+          particles.splice(i, 1);
+          createParticle();
+        }
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function animate() {
+      updateParticles();
+      drawParticles();
+      requestAnimationFrame(animate);
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      for (let i = 0; i < 5; i++) { // Fewer particles on mousemove
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          size: Math.random() * 1.5 + 0.5,
+          speedY: Math.random() * -0.8 - 0.2,
+          alpha: Math.random() * 0.5 + 0.5
+        });
+      }
+    });
+
+    initParticles();
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+  </script>
 </body>
 </html>
