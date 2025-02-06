@@ -1,94 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prabha - Product Designer</title>
-    <style>
-      /* Basic styling for layout and typography */
-      body {
-        font-family: Quicksand, sans-serif;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-        background: #fafafa;
-        color: #333;
-      }
-      header,
-      footer {
-        background: #f0f0f0;
-        padding: 20px;
-        text-align: center;
-      }
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1,
-      h2 {
-        color: #333333;
-      }
-      p {
-        font-size: 20px;
-      }
-      .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background: #007bff;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        margin-top: 10px;
-      }
-      .case-study {
-        margin-bottom: 40px;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <h1>Hello Folks 👋🏽 I'm Prabha</h1>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prabhakar's Portfolio</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
+    }
 
-    <main class="container">
-      <section class="intro">
-        <p>
-          My superpower is to find and transform user frustrations in SaaS
-          products into intuitive, delightful experiences✨. I'm also a design
-          evangelist, influencing PMs and engineers to build user-centric
-          products. Currently, I'm simmering on some exciting new features and
-          products that promise to truly resonate with users🚀.
-        </p>
-      </section>
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #f5f5f5;
+      margin-bottom: 20px;
+    }
 
-      <section class="case-study">
-        <h2>Edutech Case Study</h2>
-        <p>A concept product for students who need to improve their studies.</p>
-        <a
-          href="https://www.thisisprabha.com/featured-project"
-          target="_blank"
-          class="btn"
-          >View Now</a
-        >
-      </section>
+    .bio {
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-size: 18px;
+    }
 
-      <section class="case-study">
-        <h2>Brand Management Case Study</h2>
-        <p>
-          The enterprise product that helps brands to partner with each other.
-        </p>
-        <a
-          href="https://www.thisisprabha.com/copy-of-edutech"
-          target="_blank"
-          class="btn"
-          >View Now</a
-        >
-      </section>
-    </main>
+    .linkedin {
+      margin-top: 20px;
+    }
 
-    <footer>
-      <p>&copy;2022 by Prabhakaran.R.</p>
-    </footer>
-  </body>
+    .linkedin a {
+      color: #0a66c2;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .reading {
+      margin-top: 40px;
+      font-size: 16px;
+      color: #c7c7c7;
+    }
+
+    .highlight {
+      color: #f5f5f5;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <!-- Replace the src with your profile picture URL -->
+  <img src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakar's Picture" class="profile-pic">
+
+  <div class="bio">
+    <p>Hello, I’m Prabhakaran, a Lead Product Designer at SuperOps with 10 years of experience in graphic, web, and mobile design. I started as a graphic designer and grew into product design, working on platforms like IndiaProperty, Fantain, and Subex. Currently, I focus on improving MSP workflows by crafting user-friendly tools. I also mentor designers, review UI, and collaborate closely with teams to create better product experiences. Outside work, I enjoy retro games, PC gaming, and reading.</p>
+  </div>
+
+  <div class="linkedin">
+    <a href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank">Connect with me on LinkedIn</a>
+  </div>
+
+  <div class="reading">
+    Currently reading: <span class="highlight">[Read Write Own by Chiris Dixon]</span>
+  </div>
+</body>
 </html>
