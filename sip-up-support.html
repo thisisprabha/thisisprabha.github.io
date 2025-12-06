@@ -1,429 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Support page for Sip up! - Your water intake tracking app for iOS and Apple Watch">
-    <title>Support - Sip up!</title>
+    <title>Support - Fish-o Hydrate</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: white;
-            min-height: 100vh;
+            color: #333;
         }
-        
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #0a192f 0%, #112240 100%);
-            color: white;
-            margin: -20px -20px 40px -20px;
-        }
-        
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        .section h2 {
-            color: #0a192f;
-            font-size: 1.8em;
-            margin-bottom: 20px;
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
-            border-bottom: 3px solid #2196F3;
         }
-        
-        .section h3 {
-            color: #112240;
-            font-size: 1.3em;
-            margin-top: 25px;
-            margin-bottom: 15px;
+
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
         }
-        
-        .feature-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        
-        .feature-list li {
-            padding: 12px 0;
-            padding-left: 30px;
-            position: relative;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .feature-list li:before {
-            content: "💧";
-            position: absolute;
-            left: 0;
-            font-size: 1.2em;
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            border-left: 4px solid #2196F3;
-        }
-        
-        .faq-question {
-            font-weight: 600;
-            color: #0a192f;
-            font-size: 1.1em;
+
+        h3 {
+            color: #2980b9;
+            margin-top: 20px;
             margin-bottom: 10px;
         }
-        
-        .faq-answer {
-            color: #555;
-            line-height: 1.8;
-        }
-        
-        .troubleshooting-step {
-            padding: 15px;
-            margin-bottom: 15px;
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            border-radius: 4px;
-        }
-        
-        .troubleshooting-step strong {
-            color: #856404;
-        }
-        
-        .contact-info {
-            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        
-        .contact-info a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-        
-        .contact-info a:hover {
-            opacity: 0.8;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            background: #2196F3;
-            color: white;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        
-        .highlight {
-            background: #e3f2fd;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-        
-        ul, ol {
+
+        ul {
             margin-left: 20px;
-            margin-top: 10px;
         }
-        
-        ul li, ol li {
-            margin-bottom: 8px;
+
+        li {
+            margin-bottom: 10px;
         }
-        
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
+
+        .highlight {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .note {
             font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 5px;
         }
-        
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            
-            .section {
-                padding: 20px;
-            }
-            
-            .container {
-                padding: 10px;
-            }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>💧 Sip up!</h1>
-            <p>Your Personal Water Intake Tracker</p>
-        </header>
+    <h1>Support for Fish-o Hydrate</h1>
+    <p>Welcome to Fish-o Hydrate support! We're here to help you keep your virtual aquarium healthy while you stay
+        hydrated.</p>
 
-        <div class="section">
-            <h2>About Sip up!</h2>
-            <p><strong>Sip up!</strong> is a beautiful and intuitive water intake tracking app designed for iOS and Apple Watch. Stay hydrated with stunning water wave animations, smart reminders, and comprehensive health integration.</p>
-            
-            <h3>Key Features</h3>
-            <ul class="feature-list">
-                <li><strong>Beautiful Water Wave UI</strong> - Physics-based animations that respond to device motion</li>
-                <li><strong>iOS Home Screen Widget</strong> - Track your progress at a glance with our interactive widget</li>
-                <li><strong>Apple Watch App</strong> - Full-featured watch app with gesture controls and complications</li>
-                <li><strong>HealthKit Integration</strong> - Automatically syncs with Apple Health for comprehensive tracking</li>
-                <li><strong>Smart Notifications</strong> - Personalized reminders based on your motivation type (9 AM - 6 PM)</li>
-                <li><strong>Streak Tracking</strong> - Build and maintain your hydration streak</li>
-                <li><strong>Yearly Analytics</strong> - Visualize your progress over time</li>
-                <li><strong>Customizable Settings</strong> - Set your daily goal, water per glass/bottle, and motivation type</li>
-                <li><strong>Real-time Sync</strong> - Seamless synchronization between iPhone and Apple Watch</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question">How do I set up the app?</div>
-                <div class="faq-answer">
-                    <ol>
-                        <li>Open the app and grant HealthKit permissions when prompted</li>
-                        <li>Go to Settings to customize your daily goal and water per glass/bottle</li>
-                        <li>Choose your motivation type (Kidney Health, Weight Loss, or Energy Boost)</li>
-                        <li>Enable notifications if you want smart reminders</li>
-                        <li>Start tracking by tapping the "+" button or using gestures on Apple Watch</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How do I add the iOS widget to my home screen?</div>
-                <div class="faq-answer">
-                    <ol>
-                        <li>Long press on your home screen to enter edit mode</li>
-                        <li>Tap the "+" button in the top-left corner</li>
-                        <li>Search for "Sip up!" or "Water Intake"</li>
-                        <li>Select the widget size (Small or Medium)</li>
-                        <li>Tap "Add Widget" and position it on your home screen</li>
-                        <li>You can tap the "+" button on the widget to quickly add water!</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How does the Apple Watch app work?</div>
-                <div class="faq-answer">
-                    The Apple Watch app offers intuitive gesture controls:
-                    <ul>
-                        <li><strong>Swipe Right/Up:</strong> Add one glass/bottle of water</li>
-                        <li><strong>Swipe Left:</strong> Remove the last entry</li>
-                        <li><strong>Double Tap:</strong> View your daily summary</li>
-                    </ul>
-                    The app also supports watch face complications so you can see your progress at a glance!
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Why isn't my data syncing between iPhone and Apple Watch?</div>
-                <div class="faq-answer">
-                    The app uses multiple sync methods for reliability:
-                    <ol>
-                        <li>Ensure both apps are installed and have been opened at least once</li>
-                        <li>Check that both devices are connected (same Apple ID, Bluetooth enabled)</li>
-                        <li>Restart both apps if sync seems delayed</li>
-                        <li>Verify HealthKit permissions are granted on both devices</li>
-                        <li>If issues persist, restart both devices</li>
-                    </ol>
-                    The app automatically uses HealthKit as the source of truth, so data should sync through Apple Health.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How are notifications scheduled?</div>
-                <div class="faq-answer">
-                    Smart notifications are sent between <span class="highlight">9 AM and 6 PM</span> only:
-                    <ul>
-                        <li>Notifications are sent 1 hour after your last water intake (if goal not reached)</li>
-                        <li>No notifications are sent if you've reached your daily goal</li>
-                        <li>Notifications stop after 6 PM to avoid disturbing your evening</li>
-                        <li>Messages are personalized based on your selected motivation type</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">What motivation types are available?</div>
-                <div class="faq-answer">
-                    Choose from three motivation types in Settings:
-                    <ul>
-                        <li><strong>Kidney Health:</strong> Focuses on kidney function and overall health</li>
-                        <li><strong>Weight Loss:</strong> Emphasizes metabolism and weight management benefits</li>
-                        <li><strong>Energy Boost:</strong> Highlights energy levels and mental clarity</li>
-                    </ul>
-                    Your choice affects the notification messages you receive.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">How is my streak calculated?</div>
-                <div class="faq-answer">
-                    Your streak is calculated based on consecutive days where you've met your daily goal:
-                    <ul>
-                        <li>The streak counts days where you drank at least your daily goal amount</li>
-                        <li>If you miss a day, your streak resets to 0</li>
-                        <li>Data is pulled from HealthKit, so it's accurate and reliable</li>
-                        <li>The streak updates automatically as you log water throughout the day</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Can I use the app without HealthKit?</div>
-                <div class="faq-answer">
-                    HealthKit integration is recommended for the best experience, as it:
-                    <ul>
-                        <li>Ensures accurate data synchronization</li>
-                        <li>Allows data to sync across all your Apple devices</li>
-                        <li>Provides reliable streak calculations</li>
-                        <li>Integrates with other health apps</li>
-                    </ul>
-                    However, the app will still function with local storage if HealthKit is not available.
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Troubleshooting</h2>
-            
-            <h3>Widget Not Appearing</h3>
-            <div class="troubleshooting-step">
-                <strong>Step 1:</strong> Ensure you've built and run the main app at least once before adding the widget
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 2:</strong> Check that the widget extension is properly installed (it installs with the main app)
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 3:</strong> Try restarting your device if the widget still doesn't appear
-            </div>
-
-            <h3>HealthKit Authorization Issues</h3>
-            <div class="troubleshooting-step">
-                <strong>Step 1:</strong> Go to Settings > Privacy & Security > Health > Sip up!
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 2:</strong> Ensure "Water" is enabled for both "Read Data" and "Write Data"
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 3:</strong> If permissions were denied, you may need to reinstall the app to see the permission prompt again
-            </div>
-
-            <h3>Watch App Not Syncing</h3>
-            <div class="troubleshooting-step">
-                <strong>Step 1:</strong> Ensure both iPhone and Apple Watch are connected and on the same Apple ID
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 2:</strong> Open both apps at least once to establish the connection
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 3:</strong> Check that HealthKit permissions are granted on both devices
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 4:</strong> Try force-quitting and reopening both apps
-            </div>
-
-            <h3>Notifications Not Working</h3>
-            <div class="troubleshooting-step">
-                <strong>Step 1:</strong> Go to Settings > Notifications > Sip up! and ensure notifications are enabled
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 2:</strong> Check that you haven't reached your daily goal (notifications stop when goal is met)
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 3:</strong> Verify the current time is between 9 AM and 6 PM (notifications only work during these hours)
-            </div>
-            <div class="troubleshooting-step">
-                <strong>Step 4:</strong> Ensure Do Not Disturb or Focus modes aren't blocking notifications
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>System Requirements</h2>
-            <ul>
-                <li><strong>iOS:</strong> iOS 16.0 or later</li>
-                <li><strong>watchOS:</strong> watchOS 8.0 or later (for Apple Watch app)</li>
-                <li><strong>Device:</strong> iPhone and/or Apple Watch</li>
-                <li><strong>Permissions:</strong> HealthKit access (recommended), Motion & Fitness (for watch gestures), Notifications (optional)</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Privacy & Data</h2>
-            <p>Your privacy is important to us. <strong>Sip up!</strong> uses:</p>
-            <ul>
-                <li><strong>HealthKit:</strong> To read and write water intake data. This data stays on your device and in your iCloud account (if enabled).</li>
-                <li><strong>App Group:</strong> For syncing data between iPhone and Apple Watch apps. Data is stored locally on your devices.</li>
-                <li><strong>No Third-Party Services:</strong> We don't collect, store, or transmit your data to any external servers.</li>
-            </ul>
-            <p>All data is stored locally on your device and synced through Apple's HealthKit and iCloud services. We have no access to your personal health data.</p>
-        </div>
-
-        <div class="contact-info">
-            <h2 style="color: white; border-bottom: 2px solid rgba(255,255,255,0.3); padding-bottom: 15px; margin-bottom: 20px;">Need More Help?</h2>
-            <p style="font-size: 1.1em; margin-bottom: 15px;">
-                If you're experiencing issues not covered here, please contact us:
-            </p>
-            <p style="font-size: 1.2em; margin-top: 20px;">
-                <strong>Email:</strong> <a href="mailto:support@wateryoyo.com">support@wateryoyo.com</a>
-            </p>
-            <p style="margin-top: 30px; opacity: 0.9;">
-                We typically respond within 24-48 hours.
-            </p>
-        </div>
-
-        <footer style="text-align: center; padding: 30px 20px; color: #666; margin-top: 40px;">
-            <p>&copy; 2025 Sip up! All rights reserved.</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">
-                Made with ❤️ for better hydration habits
-            </p>
-        </footer>
+    <div class="highlight">
+        <h3>🐠 Core Features</h3>
+        <p>Fish-o Hydrate gamifies your water intake. The health of your fish depends on your daily hydration habits.
+        </p>
     </div>
+
+    <h2>How It Works</h2>
+
+    <h3>1. Stay Hydrated, Keep Fish Alive</h3>
+    <p>Drink water to hit your daily goal. Your hydration directly impacts your aquarium's health. Consistent hydration
+        keeps your water clean and your fish happy!</p>
+
+    <h3>2. Water Quality Indicator</h3>
+    <p>The water in your tank reflects your consistency:</p>
+    <ul>
+        <li><strong>Clean Blue Water:</strong> You are meeting your goals. Nice job!</li>
+        <li><strong>Yellow Water:</strong> Warning! You missed yesterday's goal. Drink water today to clean it up.</li>
+        <li><strong>Brown Water (Fish Death):</strong> Danger! You missed your goal for 2 consecutive days. Your fish
+            will die, and you will need to reset the tank to start over.</li>
+    </ul>
+
+    <h3>3. Weekly Unlocks & Progress</h3>
+    <p>Consistency pays off! Unlock new items for your aquarium every week by hitting your streaks:</p>
+    <ul>
+        <li><strong>New Fishes:</strong> Unlock exotic species like Snow, Woody, Miho, Candy, Dante, and Wall-E.</li>
+        <li><strong>Decorations:</strong> Add colorful sand, pebbles, and ornaments.</li>
+        <li><strong>Plants:</strong> Grow a lush underwater garden with new plant unlocks.</li>
+    </ul>
+
+    <h2>App Features</h2>
+
+    <h3>Smart Notifications</h3>
+    <p>Get intelligent reminders between <strong>9:00 AM and 10:00 PM</strong> (or your configured wake/sleep times).
+        The app reminds you only when needed to help you stay on track without being annoying.</p>
+
+    <h3>Calm Meditation Mode</h3>
+    <p>Need a break? Open the app to watch your fish swim peacefully. Enjoy the calming underwater visuals to relax and
+        de-stress.</p>
+
+    <h3>Cross-Device Support</h3>
+    <ul>
+        <li><strong>Apple Watch:</strong> Log water quickly from your wrist and check your tank status at a glance.</li>
+        <li><strong>iPad:</strong> Enjoy a larger, immersive view of your aquarium.</li>
+    </ul>
+
+    <h2>Coming Soon</h2>
+    <h3>Interact with Fishes</h3>
+    <p>We are working on exciting new features allowing you to feed, tap, and interact with your fish directly!</p>
+
+    <h2>Contact Us</h2>
+    <p>If you have any issues or suggestions, please reach out to us:</p>
+    <ul>
+        <li><strong>Email:</strong> <a href="mailto:uxcurry@gmail.com">uxcurry@gmail.com</a></li>
+        <li><strong>Website:</strong> <a href="https://thisisprabha.com">thisisprabha.com</a></li>
+    </ul>
+
 </body>
+
 </html>
