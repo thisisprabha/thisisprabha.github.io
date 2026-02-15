@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - Networth-y</title>
+  <style>
+    :root {
+      --bg: #f4f1ec;
+      --card: #fffaf3;
+      --text: #1e1a16;
+      --muted: #5d564e;
+      --accent: #2b5f4b;
+      --border: #e2d9cd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Alegreya", "Georgia", serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% 0%, #fffaf2 0%, transparent 60%),
+        radial-gradient(1000px 500px at 90% 0%, #f0efe7 0%, transparent 55%),
+        var(--bg);
+      line-height: 1.7;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2.2rem;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    h2 {
+      margin-top: 28px;
+      font-size: 1.2rem;
+      color: var(--text);
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">Last Updated: <span id="date"></span></p>
+
+      <h2>Introduction</h2>
+      <p>
+        Networth-y ("we", "our", or "us") is committed to protecting your
+        privacy. This Privacy Policy explains how we handle your data when you
+        use our mobile application.
+      </p>
+
+      <h2>Information We Collect</h2>
+      <p>
+        Networth-y is designed with privacy in mind. We collect and store the
+        following information locally on your device:
+      </p>
+      <ul>
+        <li><strong>Financial Entries:</strong> Assets, values, and categories you manually enter into the app.</li>
+        <li><strong>User Name:</strong> The name you choose to display in the app.</li>
+      </ul>
+
+      <h2>Data Storage</h2>
+      <p>
+        All data you enter in Networth-y is stored locally on your device. This
+        data is:
+      </p>
+      <ul>
+        <li>Stored only on your device</li>
+        <li>Never transmitted to external servers</li>
+        <li>Never shared with third parties</li>
+      </ul>
+
+      <h2>Data Sharing</h2>
+      <p>
+        We do not collect, transmit, or share your data with any third parties.
+        Your data remains on your device at all times.
+      </p>
+
+      <h2>Third-Party Services</h2>
+      <p>
+        Networth-y does not use any third-party analytics, advertising, or
+        tracking services. We do not integrate with any external data collection
+        services.
+      </p>
+
+      <h2>Data Deletion</h2>
+      <p>
+        You can delete individual entries or all data at any time through the
+        app. When you delete the app from your device, all associated data is
+        removed.
+      </p>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        Networth-y is not intended for children under the age of 13. We do not
+        knowingly collect personal information from children.
+      </p>
+
+      <h2>Changes to This Privacy Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. We will notify you
+        of any changes by updating the "Last Updated" date at the top of this
+        policy. You are advised to review this Privacy Policy periodically for
+        any changes.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have any questions about this Privacy Policy, please contact us
+        at <strong>uxcurry@gmail.com</strong>.
+      </p>
+
+      <h2>Your Consent</h2>
+      <p>
+        By using Networth-y, you consent to this Privacy Policy and agree to its
+        terms.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("date").textContent = new Date().toLocaleDateString(
+      "en-US",
+      { year: "numeric", month: "long", day: "numeric" }
+    );
+  </script>
+</body>
+</html>
