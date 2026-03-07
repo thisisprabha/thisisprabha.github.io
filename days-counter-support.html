@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day counter Support</title>
+  <meta name="description" content="Support page for Day counter: Countdown Widget.">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #1d4ed8;
+      --border: #dbe3f0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    .hero,
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .hero {
+      margin-bottom: 20px;
+    }
+
+    .card + .card {
+      margin-top: 16px;
+    }
+
+    h1,
+    h2 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    p,
+    ul {
+      margin: 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .button.secondary {
+      background: #e8eefc;
+      color: var(--accent);
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 20px 14px 40px;
+      }
+
+      .hero,
+      .card {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <p class="muted">Support</p>
+      <h1>Day counter</h1>
+      <p>
+        Help and support for <strong>Day counter: Countdown Widget</strong>.
+        If you need help with the app, widgets, reminders, or anything else,
+        contact support using the email below.
+      </p>
+      <div class="actions">
+        <a class="button" href="mailto:uxcurry@gmail.com">Email Support</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How to Get Help</h2>
+      <ul>
+        <li>Email <a href="mailto:uxcurry@gmail.com">uxcurry@gmail.com</a> for app support.</li>
+        <li>For widget issues, include your iPhone model, iOS version, and a short description of what is not working.</li>
+        <li>For feature requests or suggestions, describe what you want to track and how you expect it to work.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Common Topics</h2>
+      <ul>
+        <li>Countdowns and count-up events</li>
+        <li>Widget setup and refresh issues</li>
+        <li>Calendar import</li>
+        <li>Backup and restore</li>
+        <li>Reminders and notifications</li>
+        <li>Leave planner setup</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Useful Links</h2>
+      <ul>
+        <li>Website: <a href="https://www.thisisprabha.com" target="_blank" rel="noopener noreferrer">www.thisisprabha.com</a></li>
+        <li>Email: <a href="mailto:uxcurry@gmail.com">uxcurry@gmail.com</a></li>
+        <li>Privacy details: update this section with your privacy policy URL if you publish one separately.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Before You Contact Support</h2>
+      <ul>
+        <li>Make sure the app is updated to the latest version.</li>
+        <li>Restart the app if a widget or reminder appears out of date.</li>
+        <li>When reporting a problem, include screenshots if possible.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Day counter support page
+    </footer>
+  </main>
+</body>
+</html>
