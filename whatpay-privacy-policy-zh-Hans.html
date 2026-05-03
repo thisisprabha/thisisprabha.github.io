@@ -54,43 +54,39 @@
             Whatpay 的设计理念是保护隐私。我们会在您的设备本地收集并存储以下信息：
         </p>
         <ul>
-            <li><strong>订阅和支付数据：</strong> 您手动输入到应用中的关于订阅、分期付款、支付金额、账单周期和支付日期的信息。</li>
+            <li><strong>订阅和支付数据：</strong> 您手动输入到应用中的关于订阅、免费试用、分期付款、支付金额、账单周期和支付日期的信息。</li>
             <li><strong>用户名：</strong> 您选择在应用中显示的名称（如果未设置，默认为 "My"）。</li>
+            <li><strong>无账号信息：</strong> Whatpay 不要求创建账号或登录。</li>
         </ul>
         
         <h2>数据存储</h2>
         <p>
-            您在 Whatpay 中输入的数据会使用 Apple 的 UserDefaults 和 App Groups 存储在您的设备本地。如果您启用 iCloud 同步，应用数据还会通过 Apple 的 CloudKit 同步到您的个人 iCloud 账户。这些数据：
+            您在 Whatpay 中输入的数据会使用 Apple 的 UserDefaults 和 App Groups 存储在您的设备本地。应用数据还会通过 Apple 的 CloudKit 默认同步到您的个人 iCloud 账户。这些数据：
         </p>
         <ul>
-            <li>仅存储在您的设备上</li>
-            <li>除非您启用 iCloud 同步，否则不会传输到外部服务器</li>
+            <li>存储在您的设备和您的个人 iCloud 账户中</li>
+            <li>不会存储在我们的自有服务器上</li>
             <li>绝不会与第三方共享</li>
             <li>仅供您和应用的微件（widget）扩展程序访问</li>
         </ul>
         
         <h2>数据共享</h2>
         <p>
-            我们不会为广告目的收集、传输或与第三方共享您的数据。默认情况下，您的数据保留在您的设备上。例外情况包括：
+            我们不会为广告目的收集、传输或与第三方共享您的数据。您的数据存储在您的设备上，并通过 CloudKit 同步到您的个人 iCloud 账户。以下共享仅用于核心功能：
         </p>
         <ul>
             <li><strong>微件扩展程序：</strong> 您的订阅数据通过 Apple 的 App Groups 功能与 Whatpay 微件扩展程序共享，以便微件显示您的信息。此共享完全发生在您的设备上。</li>
-            <li><strong>iCloud 同步（可选）：</strong> 启用后，应用数据会通过 Apple 的 CloudKit 与您的个人 iCloud 账户同步。</li>
-        </ul>
-        
-        <h2>数据导出</h2>
-        <p>
-            您可以使用应用的导出功能将订阅数据导出为 CSV 文件。此导出操作在您的设备本地执行，您可以选择导出的文件共享到何处。
-        </p>
-        
+            <li><strong>iCloud 同步：</strong> 应用数据会通过 Apple 的 CloudKit 默认与您的个人 iCloud 账户同步。</li>
+            <li><strong>App 内购买：</strong> 购买由 Apple 通过 App Store 和 StoreKit 处理。我们不会接收您完整的支付卡信息。</li>
+        </ul>        
         <h2>第三方服务</h2>
         <p>
-            Whatpay 不使用任何第三方分析、广告或跟踪服务。如果您启用 iCloud 同步，数据同步将通过 Apple 的 CloudKit 进行。
+            Whatpay 使用 Apple 服务进行 iCloud 同步（CloudKit）和 App 内购买（App Store/StoreKit）。我们不使用第三方分析、广告 SDK 或广告跟踪。
         </p>
         
         <h2>数据删除</h2>
         <p>
-            您可以随时通过应用删除单项订阅或所有数据。当您从设备中删除应用时，本地数据会被移除。如果已启用 iCloud 同步，同步数据也可以在您的 Apple ID iCloud 设置中管理。
+            您可以随时通过应用删除单项订阅或所有数据。当您从设备中删除应用时，本地数据会被移除。同步数据也可以在您的 Apple ID iCloud 设置中管理。
         </p>
         
         <h2>儿童隐私</h2>

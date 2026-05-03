@@ -54,38 +54,34 @@
             Whatpay wurde mit Blick auf den Datenschutz entwickelt. Wir sammeln und speichern die folgenden Informationen lokal auf Ihrem Gerät:
         </p>
         <ul>
-            <li><strong>Abonnement- und Zahlungsdaten:</strong> Informationen über Ihre Abonnements, Ratenzahlungen, Zahlungsbeträge, Abrechnungszyklen und Zahlungstermine, die Sie manuell in die App eingeben.</li>
+            <li><strong>Abonnement- und Zahlungsdaten:</strong> Informationen über Ihre Abonnements, Probezeiträume, Ratenzahlungen, Zahlungsbeträge, Abrechnungszyklen und Zahlungstermine, die Sie manuell in die App eingeben.</li>
             <li><strong>Benutzername:</strong> Der Name, den Sie in der App anzeigen möchten (Standardwert "My", falls nicht festgelegt).</li>
+            <li><strong>Keine Kontoinformationen:</strong> Whatpay erfordert keine Kontoerstellung und kein Login.</li>
         </ul>
         
         <h2>Datenspeicherung</h2>
         <p>
-            Daten, die Sie in Whatpay eingeben, werden lokal auf Ihrem Gerät mit Apples UserDefaults und App Groups gespeichert. Wenn Sie die iCloud-Synchronisierung aktivieren, werden App-Daten zusätzlich über Apples CloudKit mit Ihrem persönlichen iCloud-Konto synchronisiert. Diese Daten:
+            Daten, die Sie in Whatpay eingeben, werden lokal auf Ihrem Gerät mit Apples UserDefaults und App Groups gespeichert. App-Daten werden zusätzlich über Apples CloudKit standardmäßig mit Ihrem persönlichen iCloud-Konto synchronisiert. Diese Daten:
         </p>
         <ul>
-            <li>Werden nur auf Ihrem Gerät gespeichert</li>
-            <li>Werden nicht an externe Server übertragen, außer wenn Sie die iCloud-Synchronisierung aktivieren</li>
+            <li>Werden auf Ihrem Gerät und in Ihrem persönlichen iCloud-Konto gespeichert</li>
+            <li>Werden nicht auf unseren eigenen Servern gespeichert</li>
             <li>Werden niemals mit Dritten geteilt</li>
             <li>Sind nur für Sie und die Widget-Erweiterung der App zugänglich</li>
         </ul>
         
         <h2>Datenweitergabe</h2>
         <p>
-            Wir sammeln, übertragen oder teilen Ihre Daten nicht mit Dritten zu Werbezwecken. Ihre Daten bleiben standardmäßig auf Ihrem Gerät. Die Ausnahmen sind:
+            Wir sammeln, übertragen oder teilen Ihre Daten nicht mit Dritten zu Werbezwecken. Ihre Daten werden auf Ihrem Gerät gespeichert und über CloudKit mit Ihrem persönlichen iCloud-Konto synchronisiert. Die folgenden Fälle sind für Kernfunktionen erforderlich:
         </p>
         <ul>
             <li><strong>Widget-Erweiterung:</strong> Ihre Abonnementdaten werden über Apples App Groups-Funktion mit der Whatpay-Widget-Erweiterung geteilt, damit das Widget Ihre Informationen anzeigen kann. Diese Weitergabe erfolgt vollständig auf Ihrem Gerät.</li>
-            <li><strong>iCloud-Synchronisierung (optional):</strong> Wenn aktiviert, werden App-Daten über Apples CloudKit mit Ihrem persönlichen iCloud-Konto synchronisiert.</li>
-        </ul>
-        
-        <h2>Datenexport</h2>
-        <p>
-            Sie können Ihre Abonnementdaten als CSV-Datei exportieren, indem Sie die Exportfunktion der App verwenden. Dieser Export wird lokal auf Ihrem Gerät durchgeführt, und Sie wählen aus, wo Sie die exportierte Datei teilen möchten.
-        </p>
-        
+            <li><strong>iCloud-Synchronisierung:</strong> App-Daten werden standardmäßig über Apples CloudKit mit Ihrem persönlichen iCloud-Konto synchronisiert.</li>
+            <li><strong>In-App-Käufe:</strong> Käufe werden von Apple über den App Store und StoreKit verarbeitet. Wir erhalten keine vollständigen Zahlungskartendaten.</li>
+        </ul>        
         <h2>Dienste von Drittanbietern</h2>
         <p>
-            Whatpay verwendet keine Analyse-, Werbe- oder Tracking-Dienste von Drittanbietern. Wenn Sie die iCloud-Synchronisierung aktivieren, erfolgt die Synchronisierung über Apples CloudKit.
+            Whatpay verwendet Apple-Dienste für die iCloud-Synchronisierung (CloudKit) und In-App-Käufe (App Store/StoreKit). Wir verwenden keine Drittanbieter-Analysen, Werbung oder Ad-Tracking.
         </p>
         
         <h2>Datenlöschung</h2>

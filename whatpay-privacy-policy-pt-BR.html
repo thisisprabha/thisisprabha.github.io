@@ -54,43 +54,39 @@
             O Whatpay foi concebido com a privacidade em mente. Coletamos e armazenamos as seguintes informações localmente no seu dispositivo:
         </p>
         <ul>
-            <li><strong>Dados de Assinatura e Pagamento:</strong> Informações sobre as suas assinaturas, parcelas (EMIs), valores de pagamento, ciclos de faturação e datas de pagamento que introduz manualmente na aplicação.</li>
+            <li><strong>Dados de Assinatura e Pagamento:</strong> Informações sobre as suas assinaturas, períodos de teste gratuitos, parcelas (EMIs), valores de pagamento, ciclos de faturação e datas de pagamento que introduz manualmente na aplicação.</li>
             <li><strong>Nome de Utilizador:</strong> O nome que escolhe para ser exibido na aplicação (o padrão é "My" se não for definido).</li>
+            <li><strong>Sem informações de conta:</strong> O Whatpay não exige criação de conta nem login.</li>
         </ul>
         
         <h2>Armazenamento de Dados</h2>
         <p>
-            Os dados que você insere no Whatpay são armazenados localmente no seu dispositivo usando UserDefaults e App Groups da Apple. Se você ativar a sincronização com iCloud, os dados do app também são sincronizados com sua conta pessoal do iCloud por meio do CloudKit da Apple. Esses dados:
+            Os dados que você insere no Whatpay são armazenados localmente no seu dispositivo usando UserDefaults e App Groups da Apple. Os dados do app também são sincronizados com sua conta pessoal do iCloud por meio do CloudKit da Apple por padrão. Esses dados:
         </p>
         <ul>
-            <li>São armazenados apenas no seu dispositivo</li>
-            <li>Não são transmitidos para servidores externos, exceto quando você ativa a sincronização com iCloud</li>
+            <li>São armazenados no seu dispositivo e na sua conta pessoal do iCloud</li>
+            <li>Não são armazenados em nossos próprios servidores</li>
             <li>Nunca são compartilhados com terceiros</li>
             <li>São acessíveis apenas por si e pela extensão do widget da aplicação</li>
         </ul>
         
         <h2>Compartilhamento de Dados</h2>
         <p>
-            Não coletamos, transmitimos ou compartilhamos seus dados com terceiros para fins de publicidade. Seus dados permanecem no seu dispositivo por padrão. As exceções são:
+            Não coletamos, transmitimos ou compartilhamos seus dados com terceiros para fins de publicidade. Seus dados ficam armazenados no seu dispositivo e sincronizados com sua conta pessoal do iCloud via CloudKit. Os casos abaixo são necessários para funções principais:
         </p>
         <ul>
             <li><strong>Extensão do Widget:</strong> Os seus dados de assinatura são compartilhados com a extensão do widget Whatpay através da funcionalidade App Groups da Apple, permitindo que o widget exiba as suas informações. Este compartilhamento ocorre inteiramente no seu dispositivo.</li>
-            <li><strong>Sincronização com iCloud (Opcional):</strong> Quando ativada, os dados do app são sincronizados com sua conta pessoal do iCloud por meio do CloudKit da Apple.</li>
-        </ul>
-        
-        <h2>Exportação de Dados</h2>
-        <p>
-            Pode exportar os seus dados de assinatura como um arquivo CSV utilizando a funcionalidade de exportação da aplicação. Esta exportação é realizada localmente no seu dispositivo, e você escolhe onde compartilhar o arquivo exportado.
-        </p>
-        
+            <li><strong>Sincronização com iCloud:</strong> Os dados do app são sincronizados com sua conta pessoal do iCloud por meio do CloudKit da Apple por padrão.</li>
+            <li><strong>Compras no app:</strong> As compras são processadas pela Apple por meio da App Store e StoreKit. Não recebemos os dados completos do seu cartão de pagamento.</li>
+        </ul>        
         <h2>Serviços de Terceiros</h2>
         <p>
-            O Whatpay não utiliza serviços de análise, publicidade ou rastreamento de terceiros. Se você ativar a sincronização com iCloud, os dados são sincronizados por meio do CloudKit da Apple.
+            O Whatpay utiliza serviços da Apple para sincronização com iCloud (CloudKit) e compras no app (App Store/StoreKit). Não utilizamos análises de terceiros, publicidade ou rastreamento de anúncios.
         </p>
         
         <h2>Exclusão de Dados</h2>
         <p>
-            Você pode excluir assinaturas individuais ou todos os dados a qualquer momento pelo app. Quando você remove o app do dispositivo, os dados locais são removidos. Se a sincronização com iCloud estiver ativada, os dados sincronizados também podem ser gerenciados nas configurações de iCloud do seu Apple ID.
+            Você pode excluir assinaturas individuais ou todos os dados a qualquer momento pelo app. Quando você remove o app do dispositivo, os dados locais são removidos. Os dados sincronizados também podem ser gerenciados nas configurações de iCloud do seu Apple ID.
         </p>
         
         <h2>Privacidade das Crianças</h2>
