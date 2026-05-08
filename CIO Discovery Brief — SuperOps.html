@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<!-- saved from url=(0123)file:///Users/arunm/Documents/Claude/Projects/Building%20an%20AI-%20powered%20IT%20product/CIO_Survey_V4_DiscoveryPlan.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>CIO Discovery Brief — SuperOps</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#050C14; --panel:#070F1A; --panel2:#0A1524;
+    --border:rgba(0,200,255,.12); --border2:rgba(0,200,255,.28);
+    --cyan:#00D4FF; --green:#00FF9C; --amber:#FFB800; --orange:#FF7043; --red:#FF4444;
+    --dim:rgba(255,255,255,.45); --dimmer:rgba(255,255,255,.2);
+    --text:#ffffff; --text-inv:#050C14;
+    --hud-bg:rgba(5,12,20,.96); --hud-border:var(--border2);
+    --card-bg:rgba(0,0,0,.3); --card-hover:rgba(255,255,255,.04);
+    --input-bg:rgba(0,0,0,.5); --input-border:var(--border2);
+    --scan:rgba(0,0,0,.07); --grid-c:rgba(0,212,255,.04);
+    --font:'Space Grotesk',system-ui,sans-serif; --mono:'Space Mono',monospace;
+  }
+  [data-theme="light"] {
+    /* ── EDITORIAL LIGHT — content-first, zero noise ── */
+    --bg:#FFFFFF;
+    --panel:#FFFFFF; --panel2:#F5F5F4;
+    --border:rgba(0,0,0,.08); --border2:rgba(0,0,0,.14);
+    --cyan:#1D4ED8; --green:#15803D; --amber:#A16207; --orange:#C2410C; --red:#B91C1C;
+    --dim:rgba(0,0,0,.55); --dimmer:rgba(0,0,0,.32);
+    --text:#111111; --text-inv:#ffffff;
+    --hud-bg:rgba(255,255,255,.98); --hud-border:rgba(0,0,0,.08);
+    --card-bg:#FFFFFF; --card-hover:#F5F5F4;
+    --input-bg:#FAFAF9; --input-border:rgba(0,0,0,.14);
+    --scan:transparent; --grid-c:rgba(0,0,0,.025);
+    --slide-bg:radial-gradient(ellipse 140% 85% at 50% 25%, #D0E6F8 0%, #FFFFFF 65%);
+    /* selection — clean electric blue */
+    --sel:#1D4ED8; --sel-bg:rgba(29,78,216,.08); --sel-border:rgba(29,78,216,.40);
+  }
+  html,body { width:100%; height:100%; overflow:hidden; background:var(--bg); font-family:var(--font); color:var(--text); -webkit-tap-highlight-color:transparent; touch-action:none; transition:background .35s,color .35s; }
+  body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,var(--scan) 2px,var(--scan) 4px); pointer-events:none; z-index:900; }
+  body::after  { content:''; position:fixed; inset:0; background-image:linear-gradient(var(--grid-c) 1px,transparent 1px),linear-gradient(90deg,var(--grid-c) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+
+  /* HUD */
+  #hud { position:fixed; top:0; left:0; right:0; height:54px; background:var(--hud-bg); border-bottom:1px solid var(--hud-border); backdrop-filter:blur(20px); display:flex; align-items:center; padding:0 24px; gap:16px; z-index:500; transition:background .35s,border-color .35s; }
+  .hud-logo { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .hud-logo svg { width:18px; height:18px; color:var(--cyan); }
+  .hud-brand { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.14em; text-transform:uppercase; }
+  .hud-sep { width:1px; height:22px; background:var(--border2); flex-shrink:0; }
+  .hud-live { display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:10px; color:var(--green); letter-spacing:.1em; text-transform:uppercase; }
+  .hud-live .blink { width:6px; height:6px; border-radius:50%; background:var(--green); animation:blink 1.2s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.15} }
+  .hud-right { margin-left:auto; display:flex; align-items:center; gap:14px; }
+  /* THEME TOGGLE */
+  #theme-toggle { display:flex; align-items:center; gap:6px; background:var(--card-bg); border:1px solid var(--border2); border-radius:20px; padding:5px 11px; cursor:pointer; transition:all .25s; flex-shrink:0; }
+  #theme-toggle:hover { border-color:var(--cyan); }
+  #theme-toggle .tog-icon { font-size:13px; line-height:1; }
+  #theme-toggle .tog-label { font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); transition:color .25s; white-space:nowrap; }
+  #theme-toggle:hover .tog-label { color:var(--cyan); }
+  #hud-timer { display:none; align-items:center; gap:7px; font-family:var(--mono); font-size:12px; font-weight:700; letter-spacing:.08em; color:var(--green); font-variant-numeric:tabular-nums; }
+  #hud-timer svg { width:13px; height:13px; flex-shrink:0; }
+  #hud-timer.warn { color:var(--amber); }
+  #hud-timer.urgent { color:var(--red); animation:timer-pulse .7s ease-in-out infinite; }
+  @keyframes timer-pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .hud-segs { display:flex; gap:4px; }
+  .hud-seg { width:22px; height:4px; border-radius:2px; background:rgba(0,212,255,.12); transition:background .35s,box-shadow .35s; }
+  .hud-seg.lit     { background:var(--cyan);  box-shadow:0 0 8px var(--cyan); }
+  .hud-seg.complete{ background:var(--green); box-shadow:0 0 8px var(--green); }
+  #hud-frac { font-family:var(--mono); font-size:10px; color:var(--dim); letter-spacing:.06em; }
+
+  /* DECK / SLIDES */
+  #deck { position:fixed; inset:54px 0 0 0; overflow:hidden; z-index:1; }
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 24px 72px; transform:translateX(100%); opacity:0; transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .22s; will-change:transform,opacity; overflow-y:auto; }
+  .slide.active    { transform:translateX(0);    opacity:1; }
+  .slide.exit-left  { transform:translateX(-100%); opacity:0; }
+  .slide.exit-right { transform:translateX(100%);  opacity:0; }
+
+  /* BRACKETS */
+  .brackets { position:absolute; inset:0; pointer-events:none; }
+  .brackets::before,.brackets::after,.brackets span::before,.brackets span::after { content:''; position:absolute; width:18px; height:18px; border-color:rgba(0,212,255,.3); border-style:solid; }
+  .brackets::before      { top:16px;    left:16px;  border-width:2px 0 0 2px; }
+  .brackets::after       { top:16px;    right:16px; border-width:2px 2px 0 0; }
+  .brackets span::before { bottom:16px; left:16px;  border-width:0 0 2px 2px; }
+  .brackets span::after  { bottom:16px; right:16px; border-width:0 2px 2px 0; }
+
+  /* COVER */
+  #slide-0 { background:radial-gradient(ellipse 90% 70% at 50% 60%,#0A2240 0%,var(--bg) 100%); }
+  .cover-inner { width:100%; max-width:900px; display:flex; flex-direction:column; align-items:flex-start; }
+  .cover-mission-id { font-family:var(--mono); font-size:10px; color:var(--cyan); letter-spacing:.2em; text-transform:uppercase; display:flex; align-items:center; gap:8px; margin-bottom:20px; }
+  .cover-mission-id::before { content:'▶'; font-size:8px; }
+  .cover-title { font-size:clamp(32px,4.8vw,58px); font-weight:700; line-height:1.06; letter-spacing:-.025em; margin-bottom:18px; }
+  .cover-title .c1 { color:#fff; display:block; }
+  .cover-title .c2 { color:var(--cyan); display:block; }
+  .cover-title .c3 { color:var(--green); display:block; }
+  .cover-desc { font-size:15px; color:var(--dim); max-width:600px; line-height:1.7; margin-bottom:28px; }
+  .cover-stats { display:flex; gap:12px; width:100%; margin-bottom:32px; }
+  .cstat { flex:1; padding:22px 24px; background:var(--card-bg); border:1px solid var(--border2); border-radius:12px; display:flex; align-items:center; gap:16px; position:relative; overflow:hidden; transition:border-color .25s,background .25s; }
+  .cstat:hover { border-color:rgba(0,212,255,.45); background:rgba(0,212,255,.06); }
+  .cstat::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(0,212,255,.07) 0%,transparent 70%); pointer-events:none; }
+  .cstat-icon { display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:24px; line-height:1; }
+  .cstat .v { display:block; font-family:var(--mono); font-size:20px; font-weight:700; color:#fff; line-height:1; }
+  .cstat .l { display:block; font-size:9px; color:var(--dim); letter-spacing:.14em; text-transform:uppercase; margin-top:5px; }
+  .cover-actions { display:flex; align-items:center; width:100%; }
+  .begin-btn { display:inline-flex; align-items:center; gap:10px; background:var(--cyan); border:1.5px solid var(--cyan); border-radius:10px; padding:14px 32px; font-family:var(--mono); font-size:13px; font-weight:700; color:var(--bg); letter-spacing:.1em; text-transform:uppercase; cursor:pointer; flex-shrink:0; }
+  .begin-btn span,.begin-btn svg { position:relative; z-index:1; }
+  .begin-btn svg { width:16px; height:16px; }
+  .cover-key-hints { display:flex; align-items:center; gap:20px; margin-top:28px; padding:14px 20px; background:rgba(0,212,255,.04); border:1px solid rgba(0,212,255,.12); border-radius:12px; width:100%; }
+  .ck-item { display:flex; align-items:center; gap:10px; }
+  .ck-keys { display:flex; gap:4px; }
+  .ck-key { width:32px; height:32px; border:1.5px solid rgba(0,212,255,.35); border-bottom-width:3px; border-radius:7px; background:rgba(0,212,255,.08); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-family:var(--mono); font-size:12px; font-weight:700; box-shadow:0 2px 8px rgba(0,212,255,.1); }
+  .ck-key svg { width:14px; height:14px; }
+  .ck-key.ck-wide { width:36px; }
+  .ck-item span { font-family:var(--mono); font-size:10px; color:var(--dimmer); letter-spacing:.1em; text-transform:uppercase; white-space:nowrap; }
+  .ck-divider { width:1px; height:28px; background:rgba(0,212,255,.15); flex-shrink:0; }
+
+  /* DIRECTIVE BASE */
+  .dir-slide { background:var(--slide-bg, var(--bg)); }
+  .dir-inner { width:100%; max-width:900px; }
+  .dir-header { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .dir-num { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.25); padding:5px 12px; border-radius:6px; letter-spacing:.1em; flex-shrink:0; }
+  .dir-slide.responded .dir-num { color:var(--green); background:rgba(0,255,156,.1); border-color:rgba(0,255,156,.3); }
+  .dir-class { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.18em; text-transform:uppercase; padding:4px 10px; border:1px solid rgba(255,184,0,.2); border-radius:4px; background:rgba(255,184,0,.06); flex-shrink:0; }
+  .dir-state { margin-left:auto; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; }
+  .dir-state.pending { color:var(--dimmer); }
+  .dir-state.done    { color:var(--green); }
+  .dir-q { font-size:clamp(20px,3.2vw,30px); font-weight:600; line-height:1.4; letter-spacing:-.01em; margin-bottom:10px; }
+  .dir-sub { font-family:var(--mono); font-size:12px; color:var(--dim); border-left:2px solid rgba(0,212,255,.3); padding:10px 14px; margin-bottom:20px; line-height:1.6; background:rgba(0,212,255,.04); border-radius:0 6px 6px 0; }
+  .dir-sub::before { content:'// '; color:rgba(0,212,255,.4); }
+
+  /* STANDARD OPTIONS */
+  .resp-options { display:flex; flex-direction:column; gap:9px; }
+  .resp-btn { display:flex; align-items:center; gap:14px; padding:15px 20px; border:1px solid var(--border2); border-radius:10px; background:var(--card-bg); cursor:pointer; text-align:left; -webkit-user-select:none; user-select:none; }
+  .resp-btn.selected { background:rgba(0,255,156,.07); border-color:rgba(0,255,156,.5); box-shadow:0 0 22px rgba(0,255,156,.08); transform:translateX(4px); }
+  .resp-key { font-family:var(--mono); font-size:13px; font-weight:700; width:34px; height:34px; border-radius:8px; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.25); display:flex; align-items:center; justify-content:center; color:var(--cyan); flex-shrink:0; transition:all .2s; }
+  .resp-btn.selected .resp-key { background:var(--green); border-color:var(--green); color:var(--bg); }
+  .resp-text { font-size:16px; font-weight:500; color:var(--dim); line-height:1.45; transition:color .2s; }
+  .resp-btn.selected .resp-text { color:#fff; }
+  .resp-check { margin-left:auto; opacity:0; transition:opacity .2s; color:var(--green); flex-shrink:0; }
+  .resp-btn.selected .resp-check { opacity:1; }
+
+  /* PILL SELECTORS */
+  .pill-section { margin-bottom:16px; }
+  .pill-label { font-family:var(--mono); font-size:9px; color:var(--cyan); letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px; }
+  .pill-group { display:flex; flex-wrap:wrap; gap:8px; }
+  .pill-btn { padding:10px 18px; border-radius:100px; cursor:pointer; font-size:14px; font-weight:500; color:var(--text); background:var(--card-bg); border:1px solid var(--border2); -webkit-user-select:none; user-select:none; white-space:nowrap; }
+  .pill-btn.selected { background:rgba(0,255,156,.1); border-color:rgba(0,255,156,.5); color:var(--green); }
+
+  /* OPEN FIELD */
+  .field-label { font-family:var(--mono); font-size:10px; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin-bottom:8px; }
+  .field-label::before { content:'> '; color:rgba(0,212,255,.35); }
+  .cmd-input { width:100%; background:var(--input-bg); border:1px solid var(--input-border); border-radius:10px; padding:16px 18px; font-size:14px; color:var(--text); font-family:var(--font); resize:none; min-height:90px; outline:none; line-height:1.6; caret-color:var(--cyan); transition:border-color .2s,box-shadow .2s,background .35s; touch-action:auto; }
+  .cmd-input::placeholder { color:rgba(0,212,255,.2); font-family:var(--mono); font-size:11px; }
+  .cmd-input:focus { border-color:rgba(0,212,255,.5); box-shadow:0 0 24px rgba(0,212,255,.07); }
+
+  /* SEED CHIPS — toggle select/deselect */
+  .seed-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.15em; text-transform:uppercase; margin:14px 0 10px; }
+  .seed-chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .seed-chip {
+    padding:9px 16px; border-radius:100px; cursor:pointer;
+    font-size:13px; font-weight:500; color:rgba(0,212,255,.75);
+    background:rgba(0,212,255,.06); border:1px solid rgba(0,212,255,.2);
+    transition:all .22s; -webkit-user-select:none; user-select:none; white-space:nowrap;
+  }
+  .seed-chip:hover { background:rgba(0,212,255,.12); border-color:rgba(0,212,255,.4); color:var(--cyan); }
+  .seed-chip.selected {
+    background:rgba(0,212,255,.14); border-color:var(--cyan);
+    color:#fff; box-shadow:0 0 12px rgba(0,212,255,.15);
+  }
+  .seed-chip.selected::after { content:' ✓'; font-size:11px; opacity:.7; }
+  /* Reference-only chips — non-interactive */
+  .chip-ref { cursor:default !important; pointer-events:none; opacity:.45; font-size:12px; }
+  .chip-ref:hover { background:rgba(0,212,255,.06) !important; border-color:rgba(0,212,255,.2) !important; color:rgba(0,212,255,.75) !important; }
+  .ref-chips { margin-top:6px; }
+  .ref-chips-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.12em; text-transform:uppercase; margin:22px 0 8px; opacity:.6; }
+  /* Required field indicator */
+  .field-required { font-family:var(--mono); font-size:9px; font-weight:400; color:var(--amber); letter-spacing:.08em; text-transform:uppercase; margin-left:8px; opacity:.85; }
+
+  /* AI SIMULATION BOX */
+  .sim-box { background:var(--card-bg); border:1px solid rgba(0,212,255,.18); border-radius:12px; padding:18px 20px; margin-bottom:18px; transition:background .35s; }
+  .sim-prompt-row { display:flex; align-items:center; gap:0; margin-bottom:12px; }
+  .sim-prompt-tag { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.16em; text-transform:uppercase; flex-shrink:0; margin-right:10px; }
+  .sim-prompt-line { flex:1; height:1px; background:rgba(0,212,255,.15); }
+  .sim-prompt-text { border:1px dashed rgba(0,212,255,.3); border-radius:8px; padding:10px 16px; font-size:14px; font-style:italic; color:rgba(255,255,255,.7); background:rgba(0,212,255,.03); margin-bottom:14px; }
+  .sim-stat-row { display:flex; align-items:baseline; gap:10px; margin-bottom:12px; }
+  .sim-stat-num { font-family:var(--mono); font-size:32px; font-weight:700; color:var(--amber); line-height:1; }
+  .sim-stat-desc { font-size:13px; color:var(--dim); }
+  .sim-table { width:100%; border-collapse:collapse; }
+  .sim-table th { text-align:left; padding:5px 10px; font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.12em; text-transform:uppercase; border-bottom:1px solid rgba(0,212,255,.18); }
+  .sim-table td { padding:7px 10px; color:var(--dim); border-bottom:1px solid rgba(255,255,255,.05); font-size:12px; }
+  .sim-table tr.more td { color:var(--dimmer); font-style:italic; }
+  .sim-action-q { font-size:17px; font-weight:700; color:#fff; margin-bottom:14px; }
+
+  /* TRUST CARDS */
+  .trust-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .trust-card { padding:14px 16px; border:1px solid var(--border2); border-radius:10px; background:var(--card-bg); cursor:pointer; transition:all .2s; display:flex; flex-direction:column; gap:8px; -webkit-user-select:none; user-select:none; }
+  .trust-card:hover { background:rgba(255,255,255,.04); border-color:rgba(0,212,255,.38); }
+  .trust-card.selected { transform:translateY(-2px); }
+  .trust-card.tc-a:hover,.trust-card.tc-a.selected { border-color:var(--cyan);   background:rgba(0,212,255,.08); }
+  .trust-card.tc-b:hover,.trust-card.tc-b.selected { border-color:var(--amber);  background:rgba(255,184,0,.07); }
+  .trust-card.tc-c:hover,.trust-card.tc-c.selected { border-color:var(--orange); background:rgba(255,112,67,.07); }
+  .trust-card.tc-d:hover,.trust-card.tc-d.selected { border-color:var(--red);    background:rgba(255,68,68,.07); }
+  .trust-card-top { display:flex; align-items:center; gap:8px; }
+  .trust-key { font-family:var(--mono); font-size:11px; font-weight:700; width:26px; height:26px; border-radius:6px; background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.22); display:flex; align-items:center; justify-content:center; color:var(--cyan); flex-shrink:0; transition:all .2s; }
+  .trust-card.selected .trust-key { background:var(--green); border-color:var(--green); color:var(--bg); }
+  .trust-badge { font-family:var(--mono); font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+  .tc-a .trust-badge { color:var(--cyan); }
+  .tc-b .trust-badge { color:var(--amber); }
+  .tc-c .trust-badge { color:var(--orange); }
+  .tc-d .trust-badge { color:var(--red); }
+  .trust-title { font-size:13px; font-weight:600; color:var(--dim); line-height:1.35; transition:color .2s; }
+  .trust-card.selected .trust-title { color:#fff; }
+  .trust-desc { font-size:11px; color:var(--dimmer); line-height:1.4; }
+
+  /* CONDITIONAL SLIDE */
+  .cond-inner { width:100%; max-width:900px; }
+  .cond-tag-row { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .cond-tag { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.16em; text-transform:uppercase; padding:4px 10px; border:1px solid rgba(255,255,255,.1); border-radius:4px; background:rgba(255,255,255,.03); }
+  .cond-tag-line { flex:1; height:1px; background:rgba(0,212,255,.12); }
+  .cond-q { font-size:clamp(18px,2.8vw,26px); font-weight:600; line-height:1.4; margin-bottom:8px; }
+  .cond-sub { font-size:13px; color:var(--dim); margin-bottom:24px; line-height:1.6; }
+  .barrier-pills { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:20px; }
+  .barrier-pill { padding:12px 20px; border-radius:100px; cursor:pointer; font-size:14px; font-weight:500; color:var(--dim); background:var(--card-bg); border:1px solid var(--border2); transition:all .2s; -webkit-user-select:none; user-select:none; }
+  .barrier-pill:hover { background:rgba(0,212,255,.08); border-color:rgba(0,212,255,.38); color:#fff; }
+  .barrier-pill.selected { background:rgba(0,212,255,.1); border-color:rgba(0,212,255,.5); color:var(--cyan); }
+  .cond-tone { font-family:var(--mono); font-size:10px; color:var(--dimmer); font-style:italic; letter-spacing:.05em; }
+  .cond-tone::before { content:'// '; color:rgba(0,212,255,.3); }
+
+  /* INLINE CONDITIONAL EXPAND */
+  .cond-inline { max-height:0; overflow:hidden; opacity:0; margin-top:0; transition:max-height .45s ease, opacity .35s ease, margin-top .35s ease; }
+  .cond-inline.visible { max-height:800px; opacity:1; margin-top:22px; }
+  .cond-inline-inner { padding:20px; background:rgba(0,212,255,.03); border:1px solid rgba(0,212,255,.14); border-radius:12px; }
+  .cond-inline-tag { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.18em; text-transform:uppercase; padding:3px 10px; border:1px solid rgba(255,184,0,.2); border-radius:4px; background:rgba(255,184,0,.05); display:inline-block; margin-bottom:14px; }
+  .cond-inline-q { font-size:clamp(15px,2.4vw,20px); font-weight:600; line-height:1.4; margin-bottom:6px; }
+  .cond-inline-sub { font-size:13px; color:var(--dim); margin-bottom:16px; line-height:1.5; }
+  .cond-inline-sep { height:1px; background:rgba(0,212,255,.12); margin:18px 0; }
+
+  /* CONCEPT CARDS */
+  .concept-cards { display:flex; flex-direction:column; gap:10px; }
+  .concept-card { padding:18px 20px; align-items:flex-start; }
+  .concept-body { display:flex; align-items:flex-start; gap:14px; flex:1; }
+  .concept-emoji { font-size:26px; line-height:1; flex-shrink:0; margin-top:2px; }
+  .concept-title { font-size:16px; font-weight:600; color:var(--dim); margin-bottom:4px; transition:color .2s; }
+  .resp-btn.selected .concept-title { color:#fff; }
+  .concept-desc { font-size:13px; color:var(--dimmer); line-height:1.5; }
+  .concept-card-a { border-left:3px solid rgba(0,212,255,.35); }
+  .concept-card-a:hover,.concept-card-a.selected { border-left-color:var(--cyan); }
+  .concept-card-b { border-left:3px solid rgba(255,184,0,.35); }
+  .concept-card-b:hover,.concept-card-b.selected { border-left-color:var(--amber); }
+  .concept-card-c { border-left:3px solid rgba(0,255,156,.35); }
+  .concept-card-c:hover,.concept-card-c.selected { border-left-color:var(--green); }
+
+  /* STACK CHIPS */
+  .stack-sections { display:flex; flex-direction:column; gap:14px; }
+  .stack-cat-label { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px; }
+  .stack-chips { display:flex; flex-wrap:wrap; gap:7px; }
+  .stack-chip { padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:500; color:var(--dim); background:var(--card-bg); border:1px solid var(--border2); transition:all .18s; -webkit-user-select:none; user-select:none; display:inline-flex; align-items:center; gap:7px; }
+  .stack-chip:hover { background:rgba(0,212,255,.08); border-color:rgba(0,212,255,.4); color:#fff; }
+  .stack-chip.selected { background:rgba(0,212,255,.1); border-color:rgba(0,212,255,.5); color:var(--cyan); }
+  /* Brand letter-badges */
+  .bb { width:18px; height:18px; border-radius:4px; display:inline-flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:7px; font-weight:800; color:#fff; flex-shrink:0; letter-spacing:-.01em; }
+  .bb-sn  { background:#00C9A7; } .bb-jira { background:#0052CC; } .bb-fs { background:#00BFA5; }
+  .bb-zd  { background:#17494D; } .bb-bmc  { background:#E6212A; } .bb-so  { background:#6C5CE7; }
+  .bb-dat { background:#005BAA; } .bb-cw   { background:#D94B3A; } .bb-nj  { background:#29ABE2; }
+  .bb-nab { background:#009ADE; } .bb-me   { background:#F47920; }
+  .bb-van { background:#4C43DB; } .bb-dra  { background:#5B47ED; } .bb-qua { background:#ED2224; } .bb-ten { background:#00B9E0; }
+  /* pricing emoji */
+  .resp-emoji { font-size:20px; line-height:1; flex-shrink:0; }
+  /* Other — inline input reveal */
+  .other-reveal { max-height:0; overflow:hidden; opacity:0; margin-top:0; transition:max-height .32s ease, opacity .26s ease, margin-top .26s ease; }
+  .other-reveal.visible { max-height:70px; opacity:1; margin-top:10px; }
+  .other-input { width:100%; background:rgba(0,0,0,.45); border:1px solid rgba(0,212,255,.25); border-radius:8px; padding:10px 14px; font-size:13px; color:#fff; font-family:var(--font); outline:none; transition:border-color .2s,box-shadow .2s; touch-action:auto; }
+  .other-input:focus { border-color:rgba(0,212,255,.5); box-shadow:0 0 14px rgba(0,212,255,.07); }
+  .other-input::placeholder { color:rgba(0,212,255,.22); font-family:var(--mono); font-size:11px; }
+  .count-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .count-pill { padding:10px 20px; border-radius:100px; cursor:pointer; font-family:var(--mono); font-size:13px; font-weight:700; color:var(--dim); background:rgba(255,255,255,.04); border:1px solid var(--border2); transition:all .2s; -webkit-user-select:none; user-select:none; }
+  .count-pill:hover { background:rgba(0,255,156,.08); border-color:rgba(0,255,156,.4); color:var(--green); }
+  .count-pill.selected { background:rgba(0,255,156,.1); border-color:rgba(0,255,156,.5); color:var(--green); }
+
+  /* NAV */
+  .nav-row { display:flex; align-items:center; gap:12px; margin-top:20px; }
+  .nav-btn { display:flex; align-items:center; gap:8px; padding:12px 22px; border-radius:9px; cursor:pointer; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; transition:all .2s; border:none; }
+  .nav-btn.back { background:var(--card-bg); color:var(--text); border:1px solid var(--border2); }
+  .nav-btn.next { flex:1; justify-content:center; background:var(--cyan); color:var(--bg); border:1.5px solid var(--cyan); }
+  .nav-btn.next span,.nav-btn.next svg { position:relative; z-index:1; }
+  .nav-btn svg { width:14px; height:14px; flex-shrink:0; }
+  .transmit-btn { flex:1; justify-content:center; display:flex; align-items:center; gap:8px; padding:12px 22px; border-radius:9px; cursor:pointer; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; background:var(--green); color:var(--bg); border:1.5px solid var(--green); }
+  .transmit-btn span,.transmit-btn svg { position:relative; z-index:1; }
+
+  /* TRANSMIT / COMPLETE */
+  .tp-email { width:100%; background:var(--input-bg); border:1px solid var(--input-border); border-radius:10px; padding:14px 18px; font-size:14px; color:var(--text); font-family:var(--font); outline:none; transition:border-color .2s,background .35s; margin-bottom:16px; touch-action:auto; }
+  .tp-email::placeholder { color:var(--dimmer); }
+  .tp-email:focus { border-color:rgba(0,212,255,.5); }
+  /* COMPLETE */
+  .tp-anon { font-family:var(--mono); font-size:10px; color:var(--dimmer); letter-spacing:.08em; text-align:center; }
+  .tp-anon::before { content:'⚡ '; color:var(--amber); }
+  #slide-complete { background:radial-gradient(ellipse 80% 60% at 50% 50%,#021A0F 0%,var(--bg) 100%); text-align:center; }
+  .comp-ring { width:80px; height:80px; border-radius:50%; border:2px solid var(--green); display:flex; align-items:center; justify-content:center; margin:0 auto 24px; box-shadow:0 0 40px rgba(0,255,156,.2); position:relative; }
+  .comp-ring svg { width:38px; height:38px; color:var(--green); }
+  .comp-ring::after { content:''; position:absolute; inset:-12px; border-radius:50%; border:1px solid rgba(0,255,156,.2); animation:expand 2s ease-out infinite; }
+  @keyframes expand { 0%{transform:scale(1);opacity:.6} 100%{transform:scale(1.6);opacity:0} }
+  .comp-label { font-family:var(--mono); font-size:11px; color:var(--green); letter-spacing:.2em; text-transform:uppercase; margin-bottom:12px; }
+  .comp-title { font-size:clamp(28px,6vw,46px); font-weight:700; letter-spacing:-.02em; margin-bottom:12px; }
+  .comp-sub { font-size:15px; color:var(--dim); max-width:420px; margin:0 auto 28px; line-height:1.65; }
+  .comp-sid { font-family:var(--mono); font-size:11px; color:var(--dimmer); letter-spacing:.15em; }
+
+  /* BOTTOM BAR */
+  #bottom-bar { position:fixed; bottom:0; left:0; right:0; height:54px; background:var(--hud-bg); border-top:1px solid var(--hud-border); display:flex; align-items:center; justify-content:center; gap:10px; z-index:500; backdrop-filter:blur(16px); transition:background .35s,border-color .35s; }
+  .dot-item { width:6px; height:6px; border-radius:3px; background:rgba(0,212,255,.2); cursor:pointer; transition:all .3s; }
+  .dot-item.active { width:24px; background:var(--cyan); box-shadow:0 0 8px var(--cyan); }
+  .dot-item.done   { background:rgba(0,255,156,.5); }
+
+  #key-flash { position:fixed; bottom:62px; left:50%; transform:translateX(-50%); background:rgba(0,212,255,.15); border:1px solid rgba(0,212,255,.45); color:var(--cyan); font-family:var(--mono); font-size:12px; font-weight:700; padding:7px 16px; border-radius:7px; pointer-events:none; z-index:600; opacity:0; transition:opacity .25s; letter-spacing:.06em; }
+  #key-legend { position:fixed; bottom:62px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:10px; color:var(--dimmer); letter-spacing:.08em; pointer-events:none; z-index:400; white-space:nowrap; transition:opacity .4s; }
+  #key-legend kbd { background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.25); border-radius:4px; padding:2px 6px; font-family:var(--mono); font-size:10px; color:var(--cyan); }
+  #key-legend.hidden { opacity:0; pointer-events:none; }
+
+  .orb { position:fixed; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0; opacity:.12; animation:orb-pulse 7s ease-in-out infinite; }
+  .orb1 { width:500px; height:500px; background:#005080; top:-150px; right:-150px; }
+  .orb2 { width:350px; height:350px; background:#004030; bottom:-100px; left:-100px; animation-delay:-3.5s; }
+  @keyframes orb-pulse { 0%,100%{opacity:.12} 50%{opacity:.2} }
+
+  /* ── LIGHT MODE OVERRIDES ──────────────────────────────────────────── */
+  [data-theme="light"] body::before { display:none; }
+  [data-theme="light"] .orb { opacity:.5; animation:orb-pulse-light 7s ease-in-out infinite; }
+  [data-theme="light"] .orb1 { background:#BBDAF5; }
+  [data-theme="light"] .orb2 { background:#BBE8DC; }
+  @keyframes orb-pulse-light { 0%,100%{opacity:.40} 50%{opacity:.60} }
+
+  /* Cover */
+  /* cover BG on all slides */
+  [data-theme="light"] #slide-0 { background:radial-gradient(ellipse 90% 70% at 50% 60%, #D0E6F8 0%, #FFFFFF 100%); }
+  [data-theme="light"] .cover-title .c1 { color:var(--text); }
+  [data-theme="light"] .cover-title .c2 { color:var(--cyan); }
+  [data-theme="light"] .cover-title .c3 { color:var(--green); }
+  [data-theme="light"] .cover-desc { color:var(--dim); }
+  [data-theme="light"] .cstat { box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  [data-theme="light"] .cstat .v { color:var(--text); }
+  [data-theme="light"] .cstat::after { display:none; }
+  [data-theme="light"] .cover-key-hints { background:rgba(29,78,216,.04); border-color:rgba(29,78,216,.14); }
+  [data-theme="light"] .ck-key { background:rgba(29,78,216,.07); border-color:rgba(29,78,216,.25); color:var(--cyan); }
+
+  /* Directive slides */
+  
+  [data-theme="light"] .brackets::before,[data-theme="light"] .brackets::after,
+  [data-theme="light"] .brackets span::before,[data-theme="light"] .brackets span::after { border-color:rgba(0,0,0,.12); }
+  [data-theme="light"] .dir-q { color:var(--text); }
+  [data-theme="light"] .dir-sub { color:var(--dim); background:rgba(29,78,216,.04); border-left-color:rgba(29,78,216,.3); }
+  [data-theme="light"] .dir-num { color:var(--cyan); background:rgba(29,78,216,.08); border-color:rgba(29,78,216,.2); }
+  [data-theme="light"] .dir-slide.responded .dir-num { color:var(--green); background:rgba(0,105,62,.08); border-color:rgba(0,105,62,.25); }
+
+  /* Resp buttons */
+  [data-theme="light"] .resp-btn { box-shadow:0 1px 4px rgba(0,0,0,.07); }
+  [data-theme="light"] .resp-btn:hover { background:var(--sel-bg); border-color:var(--sel-border); box-shadow:0 4px 14px rgba(0,0,0,.1); }
+  [data-theme="light"] .resp-btn.selected { background:var(--sel-bg); border-color:var(--sel-border); box-shadow:0 4px 14px rgba(29,78,216,.12); }
+  [data-theme="light"] .resp-text { color:var(--dim); }
+  [data-theme="light"] .resp-btn.selected .resp-text { color:var(--text); }
+  [data-theme="light"] .resp-key { background:rgba(0,0,0,.06); border-color:rgba(0,0,0,.15); color:var(--dim); }
+  [data-theme="light"] .resp-btn.selected .resp-key { background:var(--sel); border-color:var(--sel); color:#fff; }
+  [data-theme="light"] .resp-check { color:var(--sel); }
+
+  /* Pills */
+  [data-theme="light"] .pill-btn { box-shadow:0 1px 3px rgba(0,0,0,.07); color:var(--text); }
+  [data-theme="light"] .pill-btn.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+  [data-theme="light"] .pill-label { color:var(--dim); }
+
+  /* Seed chips */
+  [data-theme="light"] .seed-chip { color:var(--dim); background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.14); }
+  [data-theme="light"] .seed-chip.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); box-shadow:none; }
+  [data-theme="light"] .chip-ref { color:var(--dim); background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.09); }
+  [data-theme="light"] .ref-chips-label { color:var(--dimmer); }
+
+  /* AI Sim box */
+  [data-theme="light"] .sim-box { border-color:rgba(0,0,0,.12); box-shadow:0 2px 10px rgba(0,0,0,.08); }
+  [data-theme="light"] .sim-prompt-text { border-color:rgba(29,78,216,.25); background:rgba(29,78,216,.04); color:var(--dim); }
+  [data-theme="light"] .sim-stat-num { color:var(--amber); }
+  [data-theme="light"] .sim-stat-desc { color:var(--dim); }
+  [data-theme="light"] .sim-table th { color:var(--dimmer); border-bottom-color:rgba(0,0,0,.12); }
+  [data-theme="light"] .sim-table td { color:var(--dim); border-bottom-color:rgba(0,0,0,.06); }
+  [data-theme="light"] .sim-action-q { color:var(--text); }
+  [data-theme="light"] .sim-prompt-tag { color:var(--dimmer); }
+  [data-theme="light"] .sim-prompt-line { background:rgba(0,0,0,.12); }
+
+  /* Trust cards */
+  [data-theme="light"] .trust-card { box-shadow:0 1px 6px rgba(0,0,0,.08); }
+  [data-theme="light"] .trust-card.selected { border-color:var(--sel-border) !important; background:var(--sel-bg) !important; box-shadow:0 4px 16px rgba(29,78,216,.15) !important; }
+  [data-theme="light"] .trust-key { background:rgba(0,0,0,.06); border-color:rgba(0,0,0,.15); color:var(--dim); }
+  [data-theme="light"] .trust-card.selected .trust-key { background:var(--sel); border-color:var(--sel); color:#fff; }
+  [data-theme="light"] .trust-title { color:var(--dim); }
+  [data-theme="light"] .trust-desc { color:var(--dimmer); }
+  [data-theme="light"] .trust-card.selected .trust-title { color:var(--text); }
+  [data-theme="light"] .tc-a .trust-badge { color:var(--cyan); }
+  [data-theme="light"] .tc-b .trust-badge { color:var(--amber); }
+  [data-theme="light"] .tc-c .trust-badge { color:var(--orange); }
+  [data-theme="light"] .tc-d .trust-badge { color:var(--red); }
+
+  /* Inline conditionals */
+  [data-theme="light"] .cond-inline-inner { background:rgba(29,78,216,.04); border-color:rgba(29,78,216,.15); }
+  [data-theme="light"] .cond-inline-tag { color:var(--amber); border-color:rgba(138,96,0,.2); background:rgba(138,96,0,.06); }
+  [data-theme="light"] .cond-inline-q { color:var(--text); }
+  [data-theme="light"] .cond-inline-sub { color:var(--dim); }
+  [data-theme="light"] .cond-inline-sep { background:rgba(0,0,0,.1); }
+  [data-theme="light"] .cond-tone { color:var(--dimmer); }
+  [data-theme="light"] .barrier-pill { box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  [data-theme="light"] .barrier-pill.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+
+  /* Concept cards */
+  [data-theme="light"] .concept-title { color:var(--dim); }
+  [data-theme="light"] .resp-btn.selected .concept-title { color:var(--text); }
+  [data-theme="light"] .concept-desc { color:var(--dimmer); }
+
+  /* Stack chips */
+  [data-theme="light"] .stack-chip { box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  [data-theme="light"] .stack-chip:hover { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+  [data-theme="light"] .stack-chip.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+  [data-theme="light"] .stack-cat-label { color:var(--dim); }
+  [data-theme="light"] .count-pill { box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  [data-theme="light"] .count-pill:hover { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+  [data-theme="light"] .count-pill.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
+
+  /* Nav buttons */
+  [data-theme="light"] .nav-btn.back:hover { background:rgba(0,0,0,.08); color:var(--text); }
+  [data-theme="light"] .nav-btn.next { border-color:var(--cyan); color:var(--cyan); }
+  [data-theme="light"] .nav-btn.next::before { background:var(--cyan); }
+  [data-theme="light"] .nav-btn.next:hover { color:#fff; }
+  [data-theme="light"] .transmit-btn { border-color:var(--green); color:var(--green); }
+  [data-theme="light"] .transmit-btn::before { background:var(--green); }
+  [data-theme="light"] .transmit-btn:hover { color:#fff; }
+
+  /* HUD elements */
+  [data-theme="light"] .hud-brand { color:var(--cyan); }
+  [data-theme="light"] .hud-live { color:var(--green); }
+  [data-theme="light"] .hud-live .blink { background:var(--green); }
+  [data-theme="light"] .hud-sep { background:rgba(0,0,0,.12); }
+  [data-theme="light"] .hud-seg { background:rgba(0,0,0,.1); }
+  [data-theme="light"] #hud-frac { color:var(--dim); }
+  [data-theme="light"] .dot-item { background:rgba(0,0,0,.15); }
+
+  /* Inputs */
+  [data-theme="light"] .field-label { color:var(--cyan); }
+  [data-theme="light"] .cmd-input::placeholder { color:rgba(0,0,0,.25); }
+  [data-theme="light"] .other-input { background:#FFFFFF; border-color:rgba(0,0,0,.18); color:var(--text); }
+  [data-theme="light"] .other-input::placeholder { color:rgba(0,0,0,.3); }
+
+  /* Complete screen */
+  [data-theme="light"] #slide-complete { background:radial-gradient(ellipse 80% 60% at 50% 50%,#C8EAD8 0%,var(--bg) 100%); }
+  [data-theme="light"] .comp-title { color:var(--text); }
+  [data-theme="light"] .comp-sub { color:var(--dim); }
+  [data-theme="light"] .comp-sid { color:var(--dimmer); }
+
+  /* Cover begin btn + key hints */
+  [data-theme="light"] .begin-btn { border-color:var(--cyan); color:var(--cyan); }
+  [data-theme="light"] .begin-btn::before { background:var(--cyan); }
+  [data-theme="light"] .begin-btn:hover { color:#fff; }
+  [data-theme="light"] .dir-class { color:var(--amber); border-color:rgba(138,96,0,.2); background:rgba(138,96,0,.06); }
+  [data-theme="light"] .dir-state.pending { color:var(--dimmer); }
+  [data-theme="light"] .dir-state.done { color:var(--green); }
+
+  @media (max-width:720px) { .trust-grid { grid-template-columns:repeat(2,1fr); } .cover-stats { flex-direction:column; } .cover-key-hints { flex-wrap:wrap; gap:14px; } .ck-divider { display:none; } }
+  @media (max-width:520px) { .dir-q { font-size:17px; } .cover-title { font-size:32px; } }
+
+  /* ── RADIO LIST (Screen 2, 6) ── */
+  .radio-list { display:flex; flex-direction:column; gap:5px; margin:10px 0; }
+  .radio-item { display:flex; align-items:flex-start; gap:13px; padding:12px 16px; border-radius:9px; cursor:pointer; border:1px solid var(--border2); background:var(--card-bg); transition:border-color .15s, box-shadow .15s; }
+  .radio-item.selected { border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
+  .radio-dot { width:16px; height:16px; border-radius:50%; border:2px solid var(--border2); flex-shrink:0; margin-top:2px; transition:all .15s; }
+  .radio-item.selected .radio-dot { border-color:var(--cyan); background:var(--cyan); }
+  .radio-text { font-size:14px; color:var(--text); line-height:1.55; }
+  .radio-item.selected .radio-text { font-weight:500; }
+  /* ── CHECK LIST (Screen 3) ── */
+  .check-list { display:flex; flex-direction:column; gap:5px; margin:10px 0; }
+  .check-item { display:flex; align-items:flex-start; gap:13px; padding:12px 16px; border-radius:9px; cursor:pointer; border:1px solid var(--border2); background:var(--card-bg); transition:border-color .15s, box-shadow .15s; }
+  .check-item.selected { border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
+  .check-box { width:16px; height:16px; border-radius:3px; border:2px solid var(--border2); flex-shrink:0; margin-top:2px; transition:all .15s; display:flex; align-items:center; justify-content:center; }
+  .check-item.selected .check-box { border-color:var(--cyan); background:var(--cyan); }
+  .check-box::after { content:''; display:none; width:8px; height:5px; border-left:2px solid var(--bg); border-bottom:2px solid var(--bg); transform:rotate(-45deg) translateY(-1px); }
+  .check-item.selected .check-box::after { display:block; }
+  .check-text { font-size:14px; color:var(--text); line-height:1.55; }
+  .check-item.selected .check-text { font-weight:500; }
+  .check-limit { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px; }
+  /* ── VIGNETTES (Screen 5) ── */
+  .vignette-block { padding:14px 16px; background:var(--card-bg); border:1px solid var(--border); border-radius:10px; margin-bottom:8px; }
+  .vignette-label { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.15em; text-transform:uppercase; margin-bottom:7px; }
+  .vignette-text { font-size:14px; color:var(--text); line-height:1.5; margin-bottom:10px; }
+  .vig-opts { display:flex; gap:8px; }
+  .vig-opt { flex:1; padding:10px 6px; border-radius:7px; border:1px solid var(--border2); background:var(--card-bg); color:var(--text); font-size:11.5px; font-family:var(--mono); font-weight:700; cursor:pointer; text-align:center; text-transform:uppercase; letter-spacing:.06em; transition:border-color .15s, box-shadow .15s; }
+  .vig-opt.selected { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,.08); box-shadow:0 0 0 1px var(--cyan); }
+  .vig-note { font-size:11px; color:var(--dimmer); font-style:italic; margin-bottom:10px; line-height:1.5; }
+  /* ── FIELD SEP LABEL ── */
+  .field-sep-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.18em; text-transform:uppercase; margin:14px 0 10px; display:flex; align-items:center; gap:10px; }
+  .field-sep-label::before { content:''; flex:1; max-width:28px; height:1px; background:var(--border2); }
+  /* ── BUDGET COND ── */
+  .budget-cond { margin-top:12px; }
+  /* LIGHT MODE additions */
+  [data-theme="light"] .radio-item { background:#FFFFFF; border-color:rgba(0,0,0,.16); box-shadow:0 1px 4px rgba(0,0,0,.07); }
+  [data-theme="light"] .radio-item.selected { background:rgba(29,78,216,.04); border-color:var(--sel); box-shadow:0 0 0 1px var(--sel); }
+  [data-theme="light"] .radio-item.selected .radio-dot { border-color:var(--sel); background:var(--sel); }
+  [data-theme="light"] .radio-item.selected .radio-text { color:var(--text); }
+  [data-theme="light"] .check-item { background:#FFFFFF; border-color:rgba(0,0,0,.16); box-shadow:0 1px 4px rgba(0,0,0,.07); }
+  [data-theme="light"] .check-item.selected { background:rgba(29,78,216,.04); border-color:var(--sel); box-shadow:0 0 0 1px var(--sel); }
+  [data-theme="light"] .check-item.selected .check-box { border-color:var(--sel); background:var(--sel); }
+  [data-theme="light"] .vig-opt { background:#FFFFFF; border-color:rgba(0,0,0,.16); box-shadow:0 1px 4px rgba(0,0,0,.07); color:var(--text); }
+  [data-theme="light"] .vig-opt.selected { background:rgba(29,78,216,.05); border-color:var(--sel); color:var(--sel); box-shadow:0 0 0 1px var(--sel); }
+
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div id="hud">
+  <div class="hud-logo">
+    <span class="hud-brand">SuperOps Intel</span>
+  </div>
+  <div class="hud-sep"></div>
+  <div class="hud-live"><div class="blink"></div>Discovery Active</div>
+  <div class="hud-right">
+    <button id="theme-toggle" onclick="toggleTheme()">
+      <span class="tog-icon" id="tog-icon">☀️</span>
+      <span class="tog-label" id="tog-label">Light</span>
+    </button>
+    <div class="hud-sep"></div>
+    <div id="hud-timer" style="display: flex;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      <span id="timer-display">1:53</span>
+    </div>
+    <div class="hud-sep" id="timer-sep" style="display: block;"></div>
+    <div class="hud-segs">
+      <div class="hud-seg complete" id="seg0"></div><div class="hud-seg complete" id="seg1"></div>
+      <div class="hud-seg" id="seg2"></div><div class="hud-seg" id="seg3"></div>
+      <div class="hud-seg" id="seg4"></div><div class="hud-seg" id="seg5"></div>
+    </div>
+    <div id="hud-frac">2 / 6</div>
+  </div>
+</div>
+
+<div id="deck">
+
+  <!-- 0: COVER -->
+  <div class="slide active" id="slide-0" style="">
+    <div class="brackets"><span></span></div>
+    <div class="cover-inner">
+      <div class="cover-mission-id">Discovery Brief #CIO-2026-DELTA · Classification: Strategic</div>
+      <h1 class="cover-title"><span class="c1">Six Questions.</span><span class="c2">Five Minutes.</span><span class="c3">Your Blueprint.</span></h1>
+      <p class="cover-desc">Help us build the AI-native IT platform you actually need. Six focused directives — no fluff, no follow-up unless you want it.</p>
+      <div class="cover-stats">
+        <div class="cstat"><div class="cstat-icon">🎯</div><div class="cstat-text"><span class="v">6</span><span class="l">Directives</span></div></div>
+        <div class="cstat"><div class="cstat-icon">⚡</div><div class="cstat-text"><span class="v">~5 min</span><span class="l">Duration</span></div></div>
+        <div class="cstat"><div class="cstat-icon">🔐</div><div class="cstat-text"><span class="v">Private</span><span class="l">Encrypted</span></div></div>
+      </div>
+      <div class="cover-actions">
+        <button class="begin-btn" onclick="goTo(1)"><span>Begin Mission</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 1: ABOUT YOU -->
+  <div class="slide dir-slide responded" id="slide-1" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-01</div><div class="dir-class">About You</div><div class="dir-state done" id="state-1">✓ Logged</div></div>
+      <div class="dir-q">Tell us how you'd run IT if it could just listen.</div>
+      <div class="dir-sub" style="font-style:italic">Two minutes to win {TBD}. If you tell us something we hadn't heard, we'll loop back and offer to build a piece of it with you.</div>
+      <div class="field-sep-label">About you (10 sec)</div>
+      <div class="field-label">Email</div>
+      <input type="email" class="cmd-input" id="field-1-email" placeholder="you@company.com" style="margin-bottom:14px" oninput="answers[&#39;dir1_email&#39;]=this.value; if(this.value.includes(&#39;@&#39;)) markResponded(1)">
+      <div class="pill-section"><div class="pill-label">Company size</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">300–500</button>
+        <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">500–2,000</button>
+        <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">2,000–5,000</button>
+        <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">5,000+</button>
+      </div></div>
+      <div class="pill-section"><div class="pill-label">Industry</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Healthcare</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;industry&#39;,this,1)">Financial services</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;industry&#39;,this,1)">Professional services</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">SaaS-tech</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Manufacturing</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Education</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Government</button>
+        <button class="pill-btn" data-other="other-industry" onclick="pickPill(&#39;industry&#39;,this,1)">Other</button>
+      </div>
+      <div class="other-reveal" id="other-industry"><input class="other-input" placeholder="Your industry…" oninput="answers[&#39;dir1_industry_other&#39;]=this.value"></div>
+      </div>
+      <div class="pill-section"><div class="pill-label">Role</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">VP/Director IT</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">IT Manager</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;role&#39;,this,1)">CISO</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Compliance</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Service Desk Lead</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Sysadmin</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Endpoint</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Identity</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">CIO</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">CFO</button>
+        <button class="pill-btn" data-other="other-role" onclick="pickPill(&#39;role&#39;,this,1)">Other</button>
+      </div>
+      <div class="other-reveal" id="other-role"><input class="other-input" placeholder="Your role…" oninput="answers[&#39;dir1_role_other&#39;]=this.value"></div>
+      </div>
+      <div class="pill-section"><div class="pill-label">Tools touched in a normal week</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">1–2</button>
+        <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">3–5</button>
+        <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">6–10</button>
+        <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">11+</button>
+      </div></div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="nav-btn next" onclick="goTo(2)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: WHAT HURTS MOST -->
+  <div class="slide dir-slide responded" id="slide-2" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-02</div><div class="dir-class">Pain Point</div><div class="dir-state done" id="state-2">✓ Logged</div></div>
+      <div class="dir-q">What hurts most this quarter?</div>
+      <div class="dir-sub" style="font-style:italic">Pick the one that hurts the most. One choice. Two minutes total.</div>
+      <div class="radio-list" id="opts-2">
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Patches are slipping behind&#39;)"><div class="radio-dot"></div><div class="radio-text">Patches are slipping behind — fleet's not on the latest OS or third-party apps.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Audit prep eats my month&#39;)"><div class="radio-dot"></div><div class="radio-text">Audit prep eats my month — evidence collection is a fire drill.</div></div>
+        <div class="radio-item selected" onclick="pickRadio(2,this,&#39;New hires take a week to be productive&#39;)"><div class="radio-dot"></div><div class="radio-text">New hires take a week to be productive — accounts, laptop, software, access.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tickets pile up faster than we close them&#39;)"><div class="radio-dot"></div><div class="radio-text">Tickets pile up faster than we close them — same ones come back.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Endpoints drift out of policy&#39;)"><div class="radio-dot"></div><div class="radio-text">Endpoints drift out of policy — config / hardening / CIS benchmarks.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tools don&#39;t talk&#39;)"><div class="radio-dot"></div><div class="radio-text">Tools don't talk — I'm the integration layer.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Identity sprawl&#39;)"><div class="radio-dot"></div><div class="radio-text">Identity sprawl — orphan accounts, excess privilege, access reviews.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Outcomes vs cost visibility&#39;)"><div class="radio-dot"></div><div class="radio-text">I can't tell my CFO what IT is delivering — outcomes vs. cost.</div></div>
+        <div class="radio-item" data-other="other-pain" onclick="pickRadio(2,this,&#39;other&#39;)"><div class="radio-dot"></div><div class="radio-text" style="font-style:italic">Something else — type what you'd want your IT platform to actually do.</div></div>
+      </div>
+      <div class="other-reveal" id="other-pain"><textarea class="cmd-input" rows="2" placeholder="The thing that actually keeps you up at night…" oninput="answers[&#39;dir2_other&#39;]=this.value"></textarea>
+      <div class="dir-sub" style="margin-top:6px;font-size:11px;font-style:italic">Open lane: free text, no length cap. The single most diagnostic field.</div></div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="nav-btn next" onclick="goTo(3)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: WHAT WOULD YOU LET IT DO -->
+  <div class="slide dir-slide" id="slide-3" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-03</div><div class="dir-class">Autonomy</div><div class="dir-state pending" id="state-3">Pending Response</div></div>
+      <div class="dir-q">What would you let it do, tonight, no human approval, if it stayed in policy?</div>
+      <div class="dir-sub" style="font-style:italic">Pick up to 3. Anchored on what AEM literature now describes as established workloads.</div>
+      <div class="check-limit" id="check-limit-3">0 / 3 selected</div>
+      <div class="check-list" id="opts-3">
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Deploy OS patches across the fleet</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Patch third-party applications when a CVE drops</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Re-apply configuration when an endpoint drifts</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Enforce a security policy across all endpoints continuously</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Quarantine an endpoint that fails compliance</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Lock or wipe a device that hasn't checked in for N days</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Auto-resolve a Tier-1 ticket type (password reset, software install)</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Provision / deprovision identity access on a trigger</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Generate audit evidence for a control automatically</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Reroute or escalate based on SLA risk</div></div>
+        <div class="check-item" data-other="other-auto" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text" style="font-style:italic">None of these. The thing I'd actually want is —</div></div>
+      </div>
+      <div class="other-reveal" id="other-auto"><textarea class="cmd-input" rows="2" placeholder="Describe the action you&#39;d trust it to take…" oninput="answers[&#39;dir3_other&#39;]=this.value"></textarea></div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(2)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="nav-btn next" onclick="goTo(4)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: BUDGET -->
+  <div class="slide dir-slide" id="slide-4" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-04</div><div class="dir-class">Economics</div><div class="dir-state pending" id="state-4">Pending Response</div></div>
+      <div class="dir-q">What would you defend at budget time?</div>
+      <div class="dir-sub" style="font-style:italic">Annual budget you'd defend for an AI-native IT platform that materially removed the pain you picked.</div>
+      <div class="radio-list" id="opts-4">
+        <div class="radio-item" onclick="pickBudget(this,&#39;0-10K&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;0 – 10K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;10-30K&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;10 – 30K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;30-60K&#39;)" data-budget-cond="yes"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;30 – 60K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;60-120K&#39;)" data-budget-cond="yes"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;60 – 120K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;120K+&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;120K+</div></div>
+      </div>
+      <div class="cond-inline budget-cond" id="cond-budget">
+        <div class="cond-inline-inner">
+          <div class="field-sep-label">Conditional follow-up if 30–60K or 60–120K</div>
+          <textarea class="cmd-input" rows="2" placeholder="What&#39;s the outcome that makes this an easy yes?" oninput="answers[&#39;dir4_outcome&#39;]=this.value"></textarea>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="nav-btn next" onclick="goTo(5)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: TRUST VIGNETTES -->
+  <div class="slide dir-slide" id="slide-5" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-05</div><div class="dir-class">Trust Line</div><div class="dir-state pending" id="state-5">Pending Response</div></div>
+      <div class="dir-q">Trust line — three vignettes.</div>
+      <div class="dir-sub">How much autonomy would you grant an AI agent?</div>
+      <div class="vig-note">Three levels: <strong>Do it</strong> (AI acts), <strong>Approve first</strong> (AI proposes, you approve), <strong>Never</strong> (humans only). Pick one for each action.</div>
+      <div class="vignette-block">
+        <div class="vignette-label">Vignette 1</div>
+        <div class="vignette-text">Patch a critical CVE on a Friday night.</div>
+        <div class="vig-opts" id="vig-1">
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Never&#39;,this)">Never</button>
+        </div>
+      </div>
+      <div class="vignette-block">
+        <div class="vignette-label">Vignette 2</div>
+        <div class="vignette-text">Revoke a contractor's access when their HRIS record flips to terminated.</div>
+        <div class="vig-opts" id="vig-2">
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Never&#39;,this)">Never</button>
+        </div>
+      </div>
+      <div class="vignette-block">
+        <div class="vignette-label">Vignette 3</div>
+        <div class="vignette-text">Generate the SOC 2 evidence package and submit it to your auditor.</div>
+        <div class="vig-opts" id="vig-3">
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Never&#39;,this)">Never</button>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(4)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="nav-btn next" onclick="goTo(6)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: BUILD IT WITH US -->
+  <div class="slide dir-slide" id="slide-6" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">DIR-06</div><div class="dir-class">Co-build</div><div class="dir-state pending" id="state-6">Pending Response</div></div>
+      <div class="dir-q">Build it with us, not just for us.</div>
+      <div class="dir-sub" style="font-style:italic">If we built the thing you described, would you give us 2 hours on a call to shape it together? You bring the use case; we bring the platform team and the wiring. Working sessions, not pitches.</div>
+      <div class="radio-list" id="opts-6">
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;Yes — send me a Calendly link&#39;)"><div class="radio-dot"></div><div class="radio-text">Yes — send me a Calendly link.</div></div>
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;Maybe — send me details&#39;)"><div class="radio-dot"></div><div class="radio-text">Maybe — send me details and I'll decide.</div></div>
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;No thanks&#39;)"><div class="radio-dot"></div><div class="radio-text">No thanks — happy to share thoughts here only.</div></div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="transmit-btn" onclick="goTo(7)"><span>Almost done</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- 7: TRANSMIT -->
+  <div class="slide dir-slide" id="slide-7" style="">
+    <div class="brackets"><span></span></div>
+    <div class="dir-inner">
+      <div class="dir-header"><div class="dir-num">TX-00</div><div class="dir-class">Transmission</div><div class="dir-state pending" id="state-7">Ready to Send</div></div>
+      <div class="dir-q">That's it. Thank you.</div>
+      <div class="dir-sub">Collect your [gift card / jersey] at the desk.</div>
+      <div class="field-label">Want early access when this is real?</div>
+      <input type="email" class="tp-email" id="tp-email" placeholder="you@company.com">
+      <div class="nav-row">
+        <button class="nav-btn back" onclick="goTo(6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
+        <button class="transmit-btn" onclick="transmit()"><span>Count me in</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 19-7z"></path></svg></button>
+      </div>
+      <div class="tp-anon" style="margin-top:16px">No spam. Just a heads-up when we launch.</div>
+    </div>
+  </div>
+
+  <!-- 9: COMPLETE -->
+  <div class="slide" id="slide-complete">
+    <div class="brackets"><span></span></div>
+    <div class="comp-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"></path></svg></div>
+    <div class="comp-label">◈ Transmission Complete</div>
+    <div class="comp-title">Intel Received.</div>
+    <p class="comp-sub">Your perspective is shaping the architecture of AI-native IT. We'll share what we discover.</p>
+    <div class="comp-sid" id="comp-sid">Session ID: Generating…</div>
+  </div>
+
+</div>
+
+<div id="bottom-bar"><div class="dot-item active"></div><div class="dot-item done"></div><div class="dot-item done"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div></div>
+<div id="key-flash" style="opacity: 0;">→</div>
+<div id="key-legend" class="hidden"><kbd>←</kbd><kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>A</kbd>–<kbd>D</kbd> select &nbsp;·&nbsp; <kbd>↵</kbd> begin / send</div>
+
+<script>
+// ── Scenario library — keyed by chip data-key ──────────────────────────
+const SCENARIOS = {
+  compliance: {
+    prompt: '"Show me every endpoint that failed SOC 2 last quarter"',
+    num: '47', desc: 'endpoints failed SOC 2 controls in Q1 2026',
+    thead: ['Device','User','Dept','Failed Control','Last Checked'],
+    rows: [
+      ['LAPTOP-0417','Priya Shah','Finance','Disk encryption','Mar 28, 2026'],
+      ['LAPTOP-0981','Marcus Lee','Engineering','OS update','Mar 31, 2026'],
+      ['MAC-1124','Elena Torres','Legal','Antivirus','Apr 02, 2026'],
+      ['LAPTOP-2203','Sam Okafor','Sales','Disk encryption','Apr 09, 2026'],
+      ['MAC-3310','…43 more','—','mixed','—'],
+    ],
+    action: 'I can remediate these. What would you prefer?',
+    cards: [
+      { t:'Just show me the details',             d:'Read-only. I\'ll decide what happens next.' },
+      { t:'Show me a remediation plan for review', d:'Draft the plan, I\'ll approve.' },
+      { t:'Fix them, but ask me before each action',d:'Act with my per-step approval.' },
+      { t:'Fix them all and log the evidence',     d:'Go. Show me the audit trail.' },
+    ]
+  },
+  onboard: {
+    prompt: '"Onboard this new hire — accounts, laptop, software, access"',
+    num: '12', desc: 'tasks detected for new hire Sarah Chen',
+    thead: ['Task','System','Status','Owner'],
+    rows: [
+      ['Create AD account','Active Directory','Ready','IT'],
+      ['Provision MacBook Pro','MDM','Ready','IT'],
+      ['Assign M365 license','Microsoft 365','Ready','IT'],
+      ['Grant repo access','GitHub','Needs approval','Manager'],
+      ['…8 more tasks','—','—','—'],
+    ],
+    action: 'Ready to run the onboarding workflow. How should I proceed?',
+    cards: [
+      { t:'Show me the task list, I\'ll assign manually', d:'Read-only. You control each step.' },
+      { t:'Create a checklist and notify each owner',      d:'Orchestrate comms, I\'ll execute.' },
+      { t:'Execute each task, confirm with me first',      d:'Act with my per-task sign-off.' },
+      { t:'Run it all — notify me when Sarah\'s ready',   d:'Full automation. Just brief me.' },
+    ]
+  },
+  tickets: {
+    prompt: '"Why are tickets spiking this week?"',
+    num: '3×', desc: 'spike — 147 tickets this week vs 49 last week',
+    thead: ['Category','Count','vs Last Week','Top Issue'],
+    rows: [
+      ['VPN / Remote Access','61','+520%','Auth failure after cert update'],
+      ['Password Reset','38','+180%','MFA reconfiguration rollout'],
+      ['Software Crash','29','+90%','Teams v2.1.4 regression'],
+      ['Other','19','+12%','—'],
+    ],
+    action: 'Root cause identified. What should I do about it?',
+    cards: [
+      { t:'Show me the analysis, I\'ll plan the fix', d:'Read-only report. You decide.' },
+      { t:'Draft a runbook for each category',        d:'I\'ll write the playbook, you approve.' },
+      { t:'Start remediating — check with me per action', d:'Act on each, get my sign-off.' },
+      { t:'Resolve the top 3 and brief me after',    d:'Full execution. Summary delivered.' },
+    ]
+  },
+  dashboard: {
+    prompt: '"Build me a patch compliance dashboard for the board"',
+    num: '83%', desc: 'patch compliance — 417 of 502 devices current',
+    thead: ['Category','Devices','Compliant','Gap'],
+    rows: [
+      ['Windows workstations','234','201','33'],
+      ['Macs','156','148','8'],
+      ['Servers','62','47','15'],
+      ['Mobile / BYOD','50','21','29'],
+    ],
+    action: 'I can build this dashboard. How do you want to go about it?',
+    cards: [
+      { t:'Show me the raw data export',             d:'I\'ll build the dashboard myself.' },
+      { t:'Generate a draft I can customize',        d:'Give me a starting point.' },
+      { t:'Build it and confirm each section with me',d:'Collaborate step by step.' },
+      { t:'Publish it to the board portal automatically',d:'Done. Just send me the link.' },
+    ]
+  },
+  soc2: {
+    prompt: '"Prepare the SOC 2 evidence package for Q2"',
+    num: '9', desc: 'evidence gaps — 14 of 23 controls already ready',
+    thead: ['Control','Status','Evidence','Due'],
+    rows: [
+      ['Access reviews','✓ Ready','47 exports collected','—'],
+      ['Patch logs','✓ Ready','Auto-collected','—'],
+      ['Change management','⚠ Gap','Missing 3 approvals','Apr 30'],
+      ['Vendor reviews','⚠ Gap','2 contracts expired','Apr 30'],
+      ['…5 more gaps','—','—','—'],
+    ],
+    action: 'I can close the gaps. How far should I go?',
+    cards: [
+      { t:'Show me the gap report only',              d:'I\'ll handle remediation myself.' },
+      { t:'Draft remediation steps for each gap',    d:'Plan it, I\'ll execute and submit.' },
+      { t:'Collect evidence, confirm each submission',d:'Act step-by-step with my approval.' },
+      { t:'Close all gaps and submit the package',   d:'Fully automated. Audit-ready.' },
+    ]
+  },
+  byod: {
+    prompt: '"Lock all BYOD devices that haven\'t checked in for 30 days"',
+    num: '34', desc: 'devices haven\'t checked in for 30+ days',
+    thead: ['Device','User','Dept','Last Seen','Risk'],
+    rows: [
+      ['iPhone-Carey','James Carey','Sales','47 days ago','Medium'],
+      ['Android-Wu','Lisa Wu','Marketing','33 days ago','Low'],
+      ['iPad-Brown','Mark Brown','Finance','61 days ago','High'],
+      ['iPhone-Patel','Aisha Patel','HR','31 days ago','Low'],
+      ['…30 more devices','—','—','—','—'],
+    ],
+    action: 'Ready to act. What level of action should I take?',
+    cards: [
+      { t:'Send me the device list, I\'ll decide per device', d:'Read-only. You call each lock.' },
+      { t:'Draft a lock policy for my review',               d:'Policy first, I\'ll authorize.' },
+      { t:'Lock high-risk devices, confirm each lock',       d:'Targeted action with approval.' },
+      { t:'Lock all 34 and send the compliance report',      d:'Full sweep. Evidence logged.' },
+    ]
+  },
+};
+const DEFAULT_KEY = 'compliance';
+
+// ── State ──────────────────────────────────────────────────────────────
+const TOTAL = 9;
+const DIRECTIVE_SLIDES = [1, 2, 3, 4, 5, 6];
+let current = 0;
+const answers = {};
+const responded = new Set();
+const stackSelected = new Set();
+let selectedChips = []; // ordered list of chip keys selected in DIR-02
+
+// ── Clock ──────────────────────────────────────────────────────────────
+
+// ── Theme toggle ───────────────────────────────────────────────────────
+let isDark = true;
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('tog-icon').textContent  = isDark ? '☀️' : '🌙';
+  document.getElementById('tog-label').textContent = isDark ? 'Light' : 'Dark';
+}
+
+// ── Countdown timer ────────────────────────────────────────────────────
+const timerEl    = document.getElementById('hud-timer');
+const timerDisp  = document.getElementById('timer-display');
+const timerSep   = document.getElementById('timer-sep');
+let timerSecs    = 3 * 60;
+let timerStarted = false;
+let timerInt     = null;
+
+function startTimer() {
+  if (timerStarted) return;
+  timerStarted = true;
+  timerEl.style.display  = 'flex';
+  timerSep.style.display = 'block';
+  timerInt = setInterval(() => {
+    timerSecs--;
+    const m = Math.floor(timerSecs / 60);
+    const s = timerSecs % 60;
+    timerDisp.textContent = m + ':' + String(s).padStart(2,'0');
+    timerEl.classList.toggle('warn',   timerSecs <= 60 && timerSecs > 30);
+    timerEl.classList.toggle('urgent', timerSecs <= 30);
+    if (timerSecs <= 0) { clearInterval(timerInt); timerDisp.textContent = '0:00'; }
+  }, 1000);
+}
+
+// ── Dots ───────────────────────────────────────────────────────────────
+const bar = document.getElementById('bottom-bar');
+for (let i=0;i<TOTAL;i++) { const d=document.createElement('div'); d.className='dot-item'; d.onclick=()=>goTo(i); bar.appendChild(d); }
+
+// ── goTo ───────────────────────────────────────────────────────────────
+function goTo(idx) {
+  if (idx<0||idx>=TOTAL) return;
+  const slides=document.querySelectorAll('.slide'), prev=current, fwd=idx>prev;
+  slides[prev].classList.remove('active');
+  slides[prev].classList.add(fwd?'exit-left':'exit-right');
+  setTimeout(()=>slides[prev].classList.remove('exit-left','exit-right','prev'),600);
+  slides[idx].style.transition='none';
+  slides[idx].style.transform=fwd?'translateX(100%)':'translateX(-100%)';
+  slides[idx].style.opacity='0';
+  slides[idx].classList.remove('active','prev','exit-left','exit-right');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    slides[idx].style.transition=''; slides[idx].style.transform=''; slides[idx].style.opacity='';
+    slides[idx].classList.add('active');
+  }));
+  current=idx; updateUI();
+  if (idx===1) startTimer();
+  if (idx===3) renderScenario();
+  if (idx>0) document.getElementById('key-legend').classList.add('hidden');
+}
+
+// inline conditionals live on slide-3 — always go straight to slide-4
+
+// ── Show inline conditional section ───────────────────────────────────
+function showInline(el) {
+  el.classList.add('visible');
+  setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'nearest'}), 80);
+}
+
+// ── Render scenario in DIR-03 based on chip selections ─────────────────
+function renderScenario() {
+  const key = selectedChips.length ? selectedChips[0] : DEFAULT_KEY;
+  const s = SCENARIOS[key];
+  document.getElementById('sim-prompt').textContent = s.prompt;
+  document.getElementById('sim-num').textContent    = s.num;
+  document.getElementById('sim-desc').textContent   = s.desc;
+  document.getElementById('sim-action-q').textContent = s.action;
+
+  // Table header
+  const thead = document.getElementById('sim-thead');
+  thead.innerHTML = '<tr>' + s.thead.map(h=>`<th>${h}</th>`).join('') + '</tr>';
+
+  // Table body
+  const tbody = document.getElementById('sim-tbody');
+  tbody.innerHTML = s.rows.map((row,i)=>
+    `<tr${i===s.rows.length-1?' class="more"':''}>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`
+  ).join('');
+
+  // Trust card titles/descs
+  s.cards.forEach((c,i)=>{
+    document.getElementById('tc-title-'+i).textContent = c.t;
+    document.getElementById('tc-desc-'+i).textContent  = c.d;
+  });
+
+  // Reset trust selection and inline conditionals
+  document.querySelectorAll('#trust-grid .trust-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('cond-inline-1').classList.remove('visible');
+  document.getElementById('cond-inline-2').classList.remove('visible');
+  document.querySelectorAll('#barriers .barrier-pill, #trust-builders .barrier-pill').forEach(p=>p.classList.remove('selected'));
+  delete answers['dir3'];
+  const stateEl = document.getElementById('state-3');
+  if (!responded.has(3)) { stateEl.textContent='Pending Response'; stateEl.className='dir-state pending'; }
+}
+
+// ── updateUI ───────────────────────────────────────────────────────────
+function updateUI() {
+  const dots=bar.querySelectorAll('.dot-item');
+  dots.forEach((d,i)=>{ d.classList.toggle('active',i===current); d.classList.toggle('done',DIRECTIVE_SLIDES.includes(i)&&responded.has(i)); });
+  DIRECTIVE_SLIDES.forEach((sIdx,i)=>{
+    const seg=document.getElementById('seg'+i);
+    seg.classList.toggle('lit', current>sIdx && !responded.has(sIdx));
+    seg.classList.toggle('complete', responded.has(sIdx));
+  });
+  document.getElementById('hud-frac').textContent=responded.size+' / 6';
+}
+
+// ── markResponded ──────────────────────────────────────────────────────
+function markResponded(slideIdx) {
+  if (!DIRECTIVE_SLIDES.includes(slideIdx)) return;
+  responded.add(slideIdx);
+  const el=document.getElementById('state-'+slideIdx);
+  if (el) { el.textContent='✓ Logged'; el.className='dir-state done'; }
+  const sl=document.getElementById('slide-'+slideIdx);
+  if (sl) sl.classList.add('responded');
+  updateUI();
+}
+
+// ── Toggle seed chip (multi-select, ordered) ───────────────────────────
+function toggleChip(el, slideIdx) {
+  const key = el.dataset.key;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    selectedChips = selectedChips.filter(k=>k!==key);
+  } else {
+    el.classList.add('selected');
+    selectedChips.push(key);
+  }
+  answers['dir2_chips'] = [...selectedChips];
+  if (selectedChips.length > 0) markResponded(slideIdx);
+}
+
+// ── Trust card pick ────────────────────────────────────────────────────
+function pickTrust(val, el) {
+  document.querySelectorAll('#trust-grid .trust-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir3']=val; markResponded(3);
+  const c1 = document.getElementById('cond-inline-1');
+  const c2 = document.getElementById('cond-inline-2');
+  if (val === 0) {
+    showInline(c1);
+  } else {
+    c1.classList.remove('visible');
+    c2.classList.remove('visible');
+    document.querySelectorAll('#barriers .barrier-pill, #trust-builders .barrier-pill').forEach(p=>p.classList.remove('selected'));
+    answers['cond_barriers'] = [];
+    answers['cond_trust_builders'] = [];
+  }
+}
+
+// ── Pick option A–E ────────────────────────────────────────────────────
+function pickOpt(slideIdx, val, el) {
+  document.querySelectorAll(`#opts-${slideIdx} .resp-btn`).forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir'+slideIdx]=val; markResponded(slideIdx);
+}
+
+// ── Pick pill ──────────────────────────────────────────────────────────
+function pickPill(group, el, slideIdx) {
+  // Hide any open "Other" input for this group first
+  const prevOther = document.querySelector(`#pills-${group} .pill-btn.selected[data-other]`);
+  if (prevOther && prevOther !== el) {
+    const prev = document.getElementById(prevOther.dataset.other);
+    if (prev) prev.classList.remove('visible');
+  }
+  document.querySelectorAll(`#pills-${group} .pill-btn`).forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir'+slideIdx+'_'+group]=el.textContent.trim(); markResponded(slideIdx);
+  // Show "Other" input if this pill has data-other
+  if (el.dataset.other) {
+    const reveal = document.getElementById(el.dataset.other);
+    if (reveal) {
+      reveal.classList.add('visible');
+      setTimeout(()=>reveal.querySelector('input').focus(), 280);
+    }
+  }
+}
+
+// ── Open field ─────────────────────────────────────────────────────────
+function onField(slideIdx, el) {
+  answers['dir'+slideIdx+'_text']=el.value;
+  const threshold = slideIdx===2 ? 10 : 5; // DIR-02 is mandatory — needs a real answer
+  if (el.value.trim().length>threshold) markResponded(slideIdx);
+}
+
+// ── Barrier pills ──────────────────────────────────────────────────────
+function toggleBarrier(el, groupId) {
+  el.classList.toggle('selected');
+  if (groupId === 'barriers') {
+    answers['cond_barriers'] = Array.from(document.querySelectorAll('#barriers .barrier-pill.selected')).map(b=>b.dataset.val);
+    // Reveal COND-02 as soon as first barrier is picked
+    const anySelected = document.querySelectorAll('#barriers .barrier-pill.selected').length > 0;
+    const c2 = document.getElementById('cond-inline-2');
+    if (anySelected && !c2.classList.contains('visible')) showInline(c2);
+    else if (!anySelected) c2.classList.remove('visible');
+  } else {
+    answers['cond_trust_builders'] = Array.from(document.querySelectorAll('#trust-builders .barrier-pill.selected')).map(b=>b.dataset.val);
+  }
+}
+
+// ── Stack chips ────────────────────────────────────────────────────────
+function pickStack(el, slideIdx) {
+  el.classList.toggle('selected');
+  const t=el.textContent.trim();
+  el.classList.contains('selected')?stackSelected.add(t):stackSelected.delete(t);
+  answers['dir'+slideIdx+'_stack']=Array.from(stackSelected); markResponded(slideIdx);
+  // Toggle "Other" input reveal if chip has data-other
+  if (el.dataset.other) {
+    const reveal = document.getElementById(el.dataset.other);
+    if (reveal) {
+      if (el.classList.contains('selected')) {
+        reveal.classList.add('visible');
+        setTimeout(()=>reveal.querySelector('input').focus(), 280);
+      } else {
+        reveal.classList.remove('visible');
+      }
+    }
+  }
+}
+
+function pickCount(el, slideIdx) {
+  document.querySelectorAll('#count-pills .count-pill').forEach(p=>p.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir'+slideIdx+'_count']=el.textContent.trim(); markResponded(slideIdx);
+}
+
+// ── Transmit ───────────────────────────────────────────────────────────
+function transmit() {
+  answers.email=document.getElementById('tp-email').value;
+  console.log('Transmitted:', JSON.stringify(answers,null,2));
+  document.getElementById('comp-sid').textContent='Session ID: SOP-'+Date.now().toString(36).toUpperCase();
+  goTo(8);
+}
+
+// ── Key flash ──────────────────────────────────────────────────────────
+const flashEl=document.getElementById('key-flash'); let flashTimer;
+function flash(l) { flashEl.textContent=l; flashEl.style.opacity='1'; clearTimeout(flashTimer); flashTimer=setTimeout(()=>{flashEl.style.opacity='0';},700); }
+
+// ── Keyboard ───────────────────────────────────────────────────────────
+const optKeys={a:0,b:1,c:2,d:3,e:4,f:5};
+document.addEventListener('keydown',e=>{
+  const tag=document.activeElement&&document.activeElement.tagName;
+  if (tag==='TEXTAREA'||tag==='INPUT') return;
+  const k=e.key;
+  if (k==='ArrowRight'||k==='ArrowDown') { e.preventDefault(); if(current<TOTAL-1){flash('→');goTo(current+1);} return; }
+  if (k==='ArrowLeft' ||k==='ArrowUp')   { e.preventDefault(); if(current>0){flash('←');goTo(current-1);} return; }
+  if ((k==='Enter'||k===' ')&&current===0) { e.preventDefault(); goTo(1); flash('↵ Begin'); return; }
+  if (k==='Enter'&&current===7) { e.preventDefault(); transmit(); flash('↵ Transmit'); return; }
+  const lk=k.toLowerCase();
+  if (current===3&&lk in optKeys) { e.preventDefault(); const i=optKeys[lk],c=document.querySelectorAll('#trust-grid .trust-card')[i]; if(c){pickTrust(i,c);flash('KEY '+k.toUpperCase());} return; }
+  if ((current===4||current===5)&&lk in optKeys) { e.preventDefault(); const i=optKeys[lk],b=document.querySelectorAll(`#opts-${current} .resp-btn`)[i]; if(b){pickOpt(current,i,b);flash('KEY '+k.toUpperCase());} return; }
+});
+
+// ── Touch swipe ────────────────────────────────────────────────────────
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if (Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>48) {
+    if (dx<0&&current<TOTAL-1) { goTo(current+1); }
+    else if (dx>0&&current>0)  { goTo(current-1); }
+  }
+},{passive:true});
+
+// ── Init ───────────────────────────────────────────────────────────────
+renderScenario();
+updateUI();
+
+// ── pickRadio — single select radio list ───────────────────────────────
+function pickRadio(slideIdx, el, val) {
+  const list = el.closest('.radio-list');
+  list.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir'+slideIdx] = val;
+  // handle other-reveal
+  const otherId = el.dataset.other;
+  list.querySelectorAll('.other-reveal').forEach(r => {
+    r.classList.remove('visible');
+  });
+  if (otherId) {
+    const rev = document.getElementById(otherId);
+    if (rev) { rev.classList.add('visible'); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),280); }
+  }
+  markResponded(slideIdx);
+}
+
+// ── toggleCheck — multi-select with max ────────────────────────────────
+function toggleCheck(el, slideIdx, max) {
+  const list = el.closest('.check-list');
+  const selected = list.querySelectorAll('.check-item.selected');
+  const isSelected = el.classList.contains('selected');
+  if (!isSelected && selected.length >= max) return; // cap
+  el.classList.toggle('selected');
+  // other reveal
+  const otherId = el.dataset.other;
+  if (otherId) {
+    const rev = document.getElementById(otherId);
+    if (rev) {
+      if (el.classList.contains('selected')) { rev.classList.add('visible'); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),280); }
+      else rev.classList.remove('visible');
+    }
+  }
+  const nowSelected = list.querySelectorAll('.check-item.selected');
+  answers['dir'+slideIdx] = Array.from(nowSelected).map(c=>c.querySelector('.check-text').textContent.trim());
+  const lim = document.getElementById('check-limit-'+slideIdx);
+  if (lim) lim.textContent = nowSelected.length+' / '+max+' selected';
+  if (nowSelected.length > 0) markResponded(slideIdx);
+}
+
+// ── pickBudget — single select with conditional reveal ─────────────────
+function pickBudget(el, val) {
+  const list = el.closest('.radio-list');
+  list.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['dir4'] = val;
+  const cond = document.getElementById('cond-budget');
+  if (el.dataset.budgetCond === 'yes') { cond.classList.add('visible'); setTimeout(()=>cond.querySelector('textarea')?.focus(),280); }
+  else cond.classList.remove('visible');
+  markResponded(4);
+}
+
+// ── pickVignette — per-vignette 3-way choice ──────────────────────────
+const vigAnswers = {};
+function pickVignette(vigNum, val, el) {
+  const group = document.getElementById('vig-'+vigNum);
+  group.querySelectorAll('.vig-opt').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  vigAnswers['vig'+vigNum] = val;
+  answers['dir5_vig'+vigNum] = val;
+  if (vigAnswers.vig1 && vigAnswers.vig2 && vigAnswers.vig3) markResponded(5);
+}
+
+</script>
+
+
+</body></html>
