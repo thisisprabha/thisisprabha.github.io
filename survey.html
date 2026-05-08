@@ -69,7 +69,7 @@
 
   /* DECK / SLIDES */
   #deck { position:fixed; inset:54px 0 0 0; overflow:hidden; z-index:1; }
-  .slide { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 24px 80px; transform:translateX(100%); opacity:0; transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .22s; will-change:transform,opacity; overflow-y:auto; -webkit-overflow-scrolling:touch; scroll-padding-bottom:80px; }
+  .slide { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 24px 72px; transform:translateX(100%); opacity:0; transition:transform .26s cubic-bezier(.4,0,.2,1),opacity .22s; will-change:transform,opacity; overflow-y:auto; }
   .slide.active    { transform:translateX(0);    opacity:1; }
   .slide.exit-left  { transform:translateX(-100%); opacity:0; }
   .slide.exit-right { transform:translateX(100%);  opacity:0; }
@@ -122,9 +122,9 @@
   .dir-state { margin-left:auto; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; }
   .dir-state.pending { color:var(--dimmer); }
   .dir-state.done    { color:var(--green); }
-  .dir-q { font-size:clamp(16px,2vw,20px); font-weight:500; line-height:1.4; letter-spacing:-.01em; margin-bottom:12px; color:var(--text); opacity:.6; }
-  .dir-sub { font-family:var(--font); font-size:18px; font-weight:600; font-style:normal; color:var(--text); border-left:4px solid var(--cyan); padding:16px 20px; margin-bottom:24px; line-height:1.6; background:rgba(0,212,255,.07); border-radius:0 10px 10px 0; letter-spacing:-.01em; }
-  .dir-sub::before { content:''; }
+  .dir-q { font-size:clamp(20px,3.2vw,30px); font-weight:600; line-height:1.4; letter-spacing:-.01em; margin-bottom:10px; }
+  .dir-sub { font-family:var(--mono); font-size:12px; color:var(--dim); border-left:2px solid rgba(0,212,255,.3); padding:10px 14px; margin-bottom:20px; line-height:1.6; background:rgba(0,212,255,.04); border-radius:0 6px 6px 0; }
+  .dir-sub::before { content:'// '; color:rgba(0,212,255,.4); }
 
   /* STANDARD OPTIONS */
   .resp-options { display:flex; flex-direction:column; gap:9px; }
@@ -138,10 +138,10 @@
   .resp-btn.selected .resp-check { opacity:1; }
 
   /* PILL SELECTORS */
-  .pill-section { margin-bottom:10px; padding-top:10px; }
+  .pill-section { margin-bottom:16px; }
   .pill-label { font-family:var(--mono); font-size:9px; color:var(--cyan); letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px; }
   .pill-group { display:flex; flex-wrap:wrap; gap:8px; }
-  .pill-btn { padding:10px 18px; border-radius:100px; cursor:pointer; font-size:14px; font-weight:500; color:var(--text); background:var(--card-bg); border:1px solid var(--border2); -webkit-user-select:none; user-select:none; white-space:nowrap; word-spacing:5px; }
+  .pill-btn { padding:10px 18px; border-radius:100px; cursor:pointer; font-size:14px; font-weight:500; color:var(--text); background:var(--card-bg); border:1px solid var(--border2); -webkit-user-select:none; user-select:none; white-space:nowrap; }
   .pill-btn.selected { background:rgba(0,255,156,.1); border-color:rgba(0,255,156,.5); color:var(--green); }
 
   /* OPEN FIELD */
@@ -152,7 +152,7 @@
   .cmd-input:focus { border-color:rgba(0,212,255,.5); box-shadow:0 0 24px rgba(0,212,255,.07); }
 
   /* SEED CHIPS — toggle select/deselect */
-  .seed-label { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin:14px 0 10px; }
+  .seed-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.15em; text-transform:uppercase; margin:14px 0 10px; }
   .seed-chips { display:flex; flex-wrap:wrap; gap:8px; }
   .seed-chip {
     padding:9px 16px; border-radius:100px; cursor:pointer;
@@ -170,7 +170,7 @@
   .chip-ref { cursor:default !important; pointer-events:none; opacity:.45; font-size:12px; }
   .chip-ref:hover { background:rgba(0,212,255,.06) !important; border-color:rgba(0,212,255,.2) !important; color:rgba(0,212,255,.75) !important; }
   .ref-chips { margin-top:6px; }
-  .ref-chips-label { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.12em; text-transform:uppercase; margin:22px 0 8px; }
+  .ref-chips-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.12em; text-transform:uppercase; margin:22px 0 8px; opacity:.6; }
   /* Required field indicator */
   .field-required { font-family:var(--mono); font-size:9px; font-weight:400; color:var(--amber); letter-spacing:.08em; text-transform:uppercase; margin-left:8px; opacity:.85; }
 
@@ -250,7 +250,7 @@
 
   /* STACK CHIPS */
   .stack-sections { display:flex; flex-direction:column; gap:14px; }
-  .stack-cat-label { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px; }
+  .stack-cat-label { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.18em; text-transform:uppercase; margin-bottom:8px; }
   .stack-chips { display:flex; flex-wrap:wrap; gap:7px; }
   .stack-chip { padding:8px 14px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:500; color:var(--dim); background:var(--card-bg); border:1px solid var(--border2); transition:all .18s; -webkit-user-select:none; user-select:none; display:inline-flex; align-items:center; gap:7px; }
   .stack-chip:hover { background:rgba(0,212,255,.08); border-color:rgba(0,212,255,.4); color:#fff; }
@@ -265,8 +265,8 @@
   /* pricing emoji */
   .resp-emoji { font-size:20px; line-height:1; flex-shrink:0; }
   /* Other — inline input reveal */
-  .other-reveal { max-height:0; overflow:hidden; opacity:0; margin-top:0; transition:max-height .36s ease, opacity .28s ease, margin-top .28s ease; }
-  .other-reveal.visible { max-height:200px; opacity:1; margin-top:10px; margin-bottom:8px; }
+  .other-reveal { max-height:0; overflow:hidden; opacity:0; margin-top:0; transition:max-height .32s ease, opacity .26s ease, margin-top .26s ease; }
+  .other-reveal.visible { max-height:70px; opacity:1; margin-top:10px; }
   .other-input { width:100%; background:rgba(0,0,0,.45); border:1px solid rgba(0,212,255,.25); border-radius:8px; padding:10px 14px; font-size:13px; color:#fff; font-family:var(--font); outline:none; transition:border-color .2s,box-shadow .2s; touch-action:auto; }
   .other-input:focus { border-color:rgba(0,212,255,.5); box-shadow:0 0 14px rgba(0,212,255,.07); }
   .other-input::placeholder { color:rgba(0,212,255,.22); font-family:var(--mono); font-size:11px; }
@@ -276,7 +276,7 @@
   .count-pill.selected { background:rgba(0,255,156,.1); border-color:rgba(0,255,156,.5); color:var(--green); }
 
   /* NAV */
-  .nav-row { display:flex; align-items:center; gap:12px; margin-top:20px; position:sticky; bottom:0; padding:12px 0 4px; background:var(--slide-bg, var(--bg)); z-index:10; }
+  .nav-row { display:flex; align-items:center; gap:12px; margin-top:20px; }
   .nav-btn { display:flex; align-items:center; gap:8px; padding:12px 22px; border-radius:9px; cursor:pointer; font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; transition:all .2s; border:none; }
   .nav-btn.back { background:var(--card-bg); color:var(--text); border:1px solid var(--border2); }
   .nav-btn.next { flex:1; justify-content:center; background:var(--cyan); color:var(--bg); border:1.5px solid var(--cyan); }
@@ -309,7 +309,7 @@
   .dot-item.done   { background:rgba(0,255,156,.5); }
 
   #key-flash { position:fixed; bottom:62px; left:50%; transform:translateX(-50%); background:rgba(0,212,255,.15); border:1px solid rgba(0,212,255,.45); color:var(--cyan); font-family:var(--mono); font-size:12px; font-weight:700; padding:7px 16px; border-radius:7px; pointer-events:none; z-index:600; opacity:0; transition:opacity .25s; letter-spacing:.06em; }
-  #key-legend { display:none; }
+  #key-legend { position:fixed; bottom:62px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:10px; color:var(--dimmer); letter-spacing:.08em; pointer-events:none; z-index:400; white-space:nowrap; transition:opacity .4s; }
   #key-legend kbd { background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.25); border-radius:4px; padding:2px 6px; font-family:var(--mono); font-size:10px; color:var(--cyan); }
   #key-legend.hidden { opacity:0; pointer-events:none; }
 
@@ -343,7 +343,7 @@
   [data-theme="light"] .brackets::before,[data-theme="light"] .brackets::after,
   [data-theme="light"] .brackets span::before,[data-theme="light"] .brackets span::after { border-color:rgba(0,0,0,.12); }
   [data-theme="light"] .dir-q { color:var(--text); }
-  [data-theme="light"] .dir-sub { color:var(--text); background:rgba(29,78,216,.06); border-left-color:var(--cyan); }
+  [data-theme="light"] .dir-sub { color:var(--dim); background:rgba(29,78,216,.04); border-left-color:rgba(29,78,216,.3); }
   [data-theme="light"] .dir-num { color:var(--cyan); background:rgba(29,78,216,.08); border-color:rgba(29,78,216,.2); }
   [data-theme="light"] .dir-slide.responded .dir-num { color:var(--green); background:rgba(0,105,62,.08); border-color:rgba(0,105,62,.25); }
 
@@ -360,13 +360,13 @@
   /* Pills */
   [data-theme="light"] .pill-btn { box-shadow:0 1px 3px rgba(0,0,0,.07); color:var(--text); }
   [data-theme="light"] .pill-btn.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
-  [data-theme="light"] .pill-label { color:var(--cyan); }
+  [data-theme="light"] .pill-label { color:var(--dim); }
 
   /* Seed chips */
   [data-theme="light"] .seed-chip { color:var(--dim); background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.14); }
   [data-theme="light"] .seed-chip.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); box-shadow:none; }
   [data-theme="light"] .chip-ref { color:var(--dim); background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.09); }
-  [data-theme="light"] .ref-chips-label { color:var(--cyan); }
+  [data-theme="light"] .ref-chips-label { color:var(--dimmer); }
 
   /* AI Sim box */
   [data-theme="light"] .sim-box { border-color:rgba(0,0,0,.12); box-shadow:0 2px 10px rgba(0,0,0,.08); }
@@ -409,15 +409,21 @@
 
   /* Stack chips */
   [data-theme="light"] .stack-chip { box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  [data-theme="light"] .stack-chip:hover { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
   [data-theme="light"] .stack-chip.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
-  [data-theme="light"] .stack-cat-label { color:var(--cyan); }
+  [data-theme="light"] .stack-cat-label { color:var(--dim); }
   [data-theme="light"] .count-pill { box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  [data-theme="light"] .count-pill:hover { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
   [data-theme="light"] .count-pill.selected { background:var(--sel-bg); border-color:var(--sel-border); color:var(--sel); }
 
   /* Nav buttons */
-  [data-theme="light"] .nav-btn.back { color:var(--text); }
-  [data-theme="light"] .nav-btn.next { background:var(--cyan); border-color:var(--cyan); color:#fff; }
-  [data-theme="light"] .transmit-btn { background:var(--green); border-color:var(--green); color:#fff; }
+  [data-theme="light"] .nav-btn.back:hover { background:rgba(0,0,0,.08); color:var(--text); }
+  [data-theme="light"] .nav-btn.next { border-color:var(--cyan); color:var(--cyan); }
+  [data-theme="light"] .nav-btn.next::before { background:var(--cyan); }
+  [data-theme="light"] .nav-btn.next:hover { color:#fff; }
+  [data-theme="light"] .transmit-btn { border-color:var(--green); color:var(--green); }
+  [data-theme="light"] .transmit-btn::before { background:var(--green); }
+  [data-theme="light"] .transmit-btn:hover { color:#fff; }
 
   /* HUD elements */
   [data-theme="light"] .hud-brand { color:var(--cyan); }
@@ -440,87 +446,16 @@
   [data-theme="light"] .comp-sub { color:var(--dim); }
   [data-theme="light"] .comp-sid { color:var(--dimmer); }
 
-  /* Cover begin btn */
-  [data-theme="light"] .begin-btn { background:var(--cyan); border-color:var(--cyan); color:#fff; }
+  /* Cover begin btn + key hints */
+  [data-theme="light"] .begin-btn { border-color:var(--cyan); color:var(--cyan); }
+  [data-theme="light"] .begin-btn::before { background:var(--cyan); }
+  [data-theme="light"] .begin-btn:hover { color:#fff; }
   [data-theme="light"] .dir-class { color:var(--amber); border-color:rgba(138,96,0,.2); background:rgba(138,96,0,.06); }
   [data-theme="light"] .dir-state.pending { color:var(--dimmer); }
   [data-theme="light"] .dir-state.done { color:var(--green); }
 
-  /* ── IPAD LANDSCAPE (1024px and below) ── */
-  @media (max-width:1024px) {
-    .dir-inner { max-width:100%; }
-    .cover-inner { max-width:100%; }
-    .dir-sub { font-size:16px; padding:14px 18px; }
-    .cover-title { font-size:clamp(28px,4vw,48px); }
-  }
-
-  /* ── IPAD PORTRAIT (768px–834px) ── */
-  @media (max-width:834px) {
-    #hud { height:50px; padding:0 16px; gap:10px; }
-    #deck { inset:50px 0 0 0; }
-    .slide { padding:20px 20px 80px; justify-content:flex-start; padding-top:28px; }
-    .hud-brand { font-size:10px; }
-    .hud-live { display:none; }
-    .hud-seg { width:18px; }
-    #hud-frac { font-size:9px; }
-    #theme-toggle .tog-label { display:none; }
-    #theme-toggle { padding:5px 8px; }
-
-    .cover-inner { padding-top:12px; }
-    .cover-title { font-size:clamp(26px,5vw,40px); margin-bottom:14px; }
-    .cover-desc { font-size:14px; margin-bottom:20px; }
-    .cover-stats { gap:8px; margin-bottom:20px; }
-    .cstat { padding:14px 16px; gap:12px; }
-    .cstat .v { font-size:17px; }
-    .cstat-icon { font-size:20px; }
-    .begin-btn { padding:13px 28px; font-size:12px; }
-
-    .dir-header { margin-bottom:14px; flex-wrap:wrap; gap:8px; }
-    .dir-state { display:none; }
-    .dir-q { font-size:clamp(14px,2.2vw,17px); margin-bottom:10px; }
-    .dir-sub { font-size:15px; padding:12px 16px; margin-bottom:16px; line-height:1.55; }
-
-    .radio-list, .check-list { gap:6px; }
-    .radio-item, .check-item { padding:13px 14px; }
-    .radio-text, .check-text { font-size:14px; }
-
-    .pill-btn { padding:10px 16px; font-size:13px; }
-    .pill-group { gap:7px; }
-
-    .vignette-block { padding:12px 14px; }
-    .vignette-text { font-size:13px; }
-    .vig-opt { padding:11px 6px; font-size:11px; }
-
-    .nav-btn { padding:13px 20px; font-size:11px; }
-    .nav-row { margin-top:16px; gap:10px; }
-
-    .trust-grid { grid-template-columns:repeat(2,1fr); }
-    .cover-stats { flex-direction:row; }
-  }
-
-  /* ── IPAD MINI / SMALL TABLET (768px) ── */
-  @media (max-width:768px) {
-    .slide { padding:16px 16px 80px; }
-    .dir-sub { font-size:14px; padding:11px 14px; }
-    .cover-stats { flex-direction:column; }
-    .cover-title { font-size:clamp(24px,5.5vw,36px); }
-    .vig-opts { gap:6px; }
-    .vig-opt { font-size:10.5px; padding:10px 4px; }
-    .check-limit { font-size:10px; }
-    .field-sep-label { font-size:10px; }
-    .pill-label { font-size:10px; }
-    .dir-num { font-size:10px; padding:4px 10px; }
-  }
-
-  /* ── TOUCH: increase tap targets on all touch devices ── */
-  @media (hover:none) and (pointer:coarse) {
-    .radio-item, .check-item { min-height:52px; padding:14px 16px; }
-    .pill-btn { min-height:44px; padding:11px 18px; }
-    .vig-opt { min-height:48px; padding:13px 6px; }
-    .nav-btn { min-height:50px; }
-    .transmit-btn { min-height:50px; }
-    .begin-btn { min-height:52px; padding:15px 32px; }
-  }
+  @media (max-width:720px) { .trust-grid { grid-template-columns:repeat(2,1fr); } .cover-stats { flex-direction:column; } .cover-key-hints { flex-wrap:wrap; gap:14px; } .ck-divider { display:none; } }
+  @media (max-width:520px) { .dir-q { font-size:17px; } .cover-title { font-size:32px; } }
 
   /* ── RADIO LIST (Screen 2, 6) ── */
   .radio-list { display:flex; flex-direction:column; gap:5px; margin:10px 0; }
@@ -528,7 +463,7 @@
   .radio-item.selected { border-color:var(--cyan); box-shadow:0 0 0 1px var(--cyan); }
   .radio-dot { width:16px; height:16px; border-radius:50%; border:2px solid var(--border2); flex-shrink:0; margin-top:2px; transition:all .15s; }
   .radio-item.selected .radio-dot { border-color:var(--cyan); background:var(--cyan); }
-  .radio-text { font-size:14px; color:var(--text); line-height:1.55; word-spacing:5px; }
+  .radio-text { font-size:14px; color:var(--text); line-height:1.55; }
   .radio-item.selected .radio-text { font-weight:500; }
   /* ── CHECK LIST (Screen 3) ── */
   .check-list { display:flex; flex-direction:column; gap:5px; margin:10px 0; }
@@ -538,25 +473,20 @@
   .check-item.selected .check-box { border-color:var(--cyan); background:var(--cyan); }
   .check-box::after { content:''; display:none; width:8px; height:5px; border-left:2px solid var(--bg); border-bottom:2px solid var(--bg); transform:rotate(-45deg) translateY(-1px); }
   .check-item.selected .check-box::after { display:block; }
-  .check-text { font-size:14px; color:var(--text); line-height:1.55; word-spacing:5px; }
+  .check-text { font-size:14px; color:var(--text); line-height:1.55; }
   .check-item.selected .check-text { font-weight:500; }
-  .check-limit { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px; }
+  .check-limit { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.12em; text-transform:uppercase; margin-bottom:6px; }
   /* ── VIGNETTES (Screen 5) ── */
   .vignette-block { padding:14px 16px; background:var(--card-bg); border:1px solid var(--border); border-radius:10px; margin-bottom:8px; }
-  .vignette-label { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin-bottom:7px; }
+  .vignette-label { font-family:var(--mono); font-size:9px; color:var(--amber); letter-spacing:.15em; text-transform:uppercase; margin-bottom:7px; }
   .vignette-text { font-size:14px; color:var(--text); line-height:1.5; margin-bottom:10px; }
   .vig-opts { display:flex; gap:8px; }
-  .vig-opt { flex:1; padding:10px 6px; border-radius:7px; border:1px solid var(--border2); background:var(--card-bg); color:var(--text); font-size:11.5px; font-family:var(--mono); font-weight:700; cursor:pointer; text-align:center; text-transform:uppercase; letter-spacing:.06em; transition:border-color .15s, box-shadow .15s; word-spacing:5px; }
+  .vig-opt { flex:1; padding:10px 6px; border-radius:7px; border:1px solid var(--border2); background:var(--card-bg); color:var(--text); font-size:11.5px; font-family:var(--mono); font-weight:700; cursor:pointer; text-align:center; text-transform:uppercase; letter-spacing:.06em; transition:border-color .15s, box-shadow .15s; }
   .vig-opt.selected { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,.08); box-shadow:0 0 0 1px var(--cyan); }
   .vig-note { font-size:11px; color:var(--dimmer); font-style:italic; margin-bottom:10px; line-height:1.5; }
-  /* ── FIELD VALIDATION ── */
-  .field-err { display:none; font-family:var(--mono); font-size:11px; color:var(--red); margin-top:6px; padding-left:2px; }
-  .req-star { color:var(--red); font-size:13px; line-height:1; }
   /* ── FIELD SEP LABEL ── */
-  .field-sep-label { font-family:var(--mono); font-size:11px; font-weight:700; color:var(--cyan); letter-spacing:.18em; text-transform:uppercase; margin:16px 0 12px; display:flex; align-items:center; gap:12px; }
-  .field-sep-label::after { content:''; flex:1; height:1px; background:var(--border2); }
-  [data-theme="light"] .field-sep-label { color:var(--cyan); }
-  [data-theme="light"] .field-sep-label::after { background:rgba(0,0,0,.12); }
+  .field-sep-label { font-family:var(--mono); font-size:9px; color:var(--dimmer); letter-spacing:.18em; text-transform:uppercase; margin:14px 0 10px; display:flex; align-items:center; gap:10px; }
+  .field-sep-label::before { content:''; flex:1; max-width:28px; height:1px; background:var(--border2); }
   /* ── BUDGET COND ── */
   .budget-cond { margin-top:12px; }
   /* LIGHT MODE additions */
@@ -589,25 +519,24 @@
       <span class="tog-label" id="tog-label">Light</span>
     </button>
     <div class="hud-sep"></div>
-    <div id="hud-timer">
+    <div id="hud-timer" style="display: flex;">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-      <span id="timer-display">3:00</span>
+      <span id="timer-display">1:53</span>
     </div>
-    <div class="hud-sep" id="timer-sep" style="display:none"></div>
+    <div class="hud-sep" id="timer-sep" style="display: block;"></div>
     <div class="hud-segs">
-      <div class="hud-seg" id="seg0"></div><div class="hud-seg" id="seg1"></div>
+      <div class="hud-seg complete" id="seg0"></div><div class="hud-seg complete" id="seg1"></div>
       <div class="hud-seg" id="seg2"></div><div class="hud-seg" id="seg3"></div>
       <div class="hud-seg" id="seg4"></div><div class="hud-seg" id="seg5"></div>
-      <div class="hud-seg" id="seg6"></div>
     </div>
-    <div id="hud-frac">0 / 7</div>
+    <div id="hud-frac">2 / 6</div>
   </div>
 </div>
 
 <div id="deck">
 
   <!-- 0: COVER -->
-  <div class="slide active" id="slide-0">
+  <div class="slide active" id="slide-0" style="">
     <div class="brackets"><span></span></div>
     <div class="cover-inner">
       <div class="cover-mission-id">Discovery Brief #CIO-2026-DELTA · Classification: Strategic</div>
@@ -626,79 +555,78 @@
 
 
   <!-- 1: ABOUT YOU -->
-  <div class="slide dir-slide" id="slide-1">
+  <div class="slide dir-slide responded" id="slide-1" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
-      <div class="dir-header"><div class="dir-num">DIR-01</div><div class="dir-class">About You</div><div class="dir-state pending" id="state-1">Pending Response</div></div>
+      <div class="dir-header"><div class="dir-num">DIR-01</div><div class="dir-class">About You</div><div class="dir-state done" id="state-1">✓ Logged</div></div>
       <div class="dir-q">Tell us how you'd run IT if it could just listen.</div>
       <div class="dir-sub" style="font-style:italic">Two minutes to win {TBD}. If you tell us something we hadn't heard, we'll loop back and offer to build a piece of it with you.</div>
       <div class="field-sep-label">About you (10 sec)</div>
       <div class="field-label">Email</div>
-      <input type="email" class="cmd-input" id="field-1-email" placeholder="you@company.com" style="margin-bottom:4px; min-height:unset; padding:11px 16px; font-size:14px;" oninput="answers[&#39;dir1_email&#39;]=this.value; if(this.value.includes(&#39;@&#39;)&amp;&amp;this.value.includes(&#39;.&#39;)) { markResponded(1); document.getElementById(&#39;email-err&#39;).style.display=&#39;none&#39;; }">
-      <div id="email-err" style="display:none; font-family:var(--mono); font-size:11px; color:var(--red); margin-bottom:12px; padding-left:2px;">⚠ A valid email is required to continue.</div>
-      <div class="pill-section"><div class="pill-label">Company size <span class="req-star">*</span></div><div class="pill-group" id="pills-size">
+      <input type="email" class="cmd-input" id="field-1-email" placeholder="you@company.com" style="margin-bottom:14px" oninput="answers[&#39;dir1_email&#39;]=this.value; if(this.value.includes(&#39;@&#39;)) markResponded(1)">
+      <div class="pill-section"><div class="pill-label">Company size</div><div class="pill-group">
         <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">300–500</button>
         <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">500–2,000</button>
         <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">2,000–5,000</button>
         <button class="pill-btn" onclick="pickPill(&#39;size&#39;,this,1)">5,000+</button>
-      </div><div id="err-size" class="field-err">⚠ Please select your company size.</div></div>
-      <div class="pill-section"><div class="pill-label">Industry <span class="req-star">*</span></div><div class="pill-group" id="pills-industry">
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">🏥 Healthcare</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">🏦 Financial services</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">💼 Professional services</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">💻 SaaS-tech</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">🏭 Manufacturing</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">🎓 Education</button>
-        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">🏛️ Government</button>
-        <button class="pill-btn" data-other="other-industry" onclick="pickPill(&#39;industry&#39;,this,1)">➕ Other</button>
+      </div></div>
+      <div class="pill-section"><div class="pill-label">Industry</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Healthcare</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;industry&#39;,this,1)">Financial services</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;industry&#39;,this,1)">Professional services</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">SaaS-tech</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Manufacturing</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Education</button>
+        <button class="pill-btn" onclick="pickPill(&#39;industry&#39;,this,1)">Government</button>
+        <button class="pill-btn" data-other="other-industry" onclick="pickPill(&#39;industry&#39;,this,1)">Other</button>
       </div>
       <div class="other-reveal" id="other-industry"><input class="other-input" placeholder="Your industry…" oninput="answers[&#39;dir1_industry_other&#39;]=this.value"></div>
-      <div id="err-industry" class="field-err">⚠ Please select your industry.</div></div>
-      <div class="pill-section"><div class="pill-label">Role <span class="req-star">*</span></div><div class="pill-group" id="pills-role">
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">🎯 VP/Director IT</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">🖥️ IT Manager</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">🔐 CISO</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">✅ Compliance</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">🎧 Service Desk Lead</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">⚙️ Sysadmin</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">📡 Endpoint</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">🔑 Identity</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">👑 CIO</button>
-        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">💰 CFO</button>
-        <button class="pill-btn" data-other="other-role" onclick="pickPill(&#39;role&#39;,this,1)">➕ Other</button>
+      </div>
+      <div class="pill-section"><div class="pill-label">Role</div><div class="pill-group">
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">VP/Director IT</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">IT Manager</button>
+        <button class="pill-btn selected" onclick="pickPill(&#39;role&#39;,this,1)">CISO</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Compliance</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Service Desk Lead</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Sysadmin</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Endpoint</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">Identity</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">CIO</button>
+        <button class="pill-btn" onclick="pickPill(&#39;role&#39;,this,1)">CFO</button>
+        <button class="pill-btn" data-other="other-role" onclick="pickPill(&#39;role&#39;,this,1)">Other</button>
       </div>
       <div class="other-reveal" id="other-role"><input class="other-input" placeholder="Your role…" oninput="answers[&#39;dir1_role_other&#39;]=this.value"></div>
-      <div id="err-role" class="field-err">⚠ Please select your role.</div></div>
-      <div class="pill-section"><div class="pill-label">Tools touched in a normal week <span class="req-star">*</span></div><div class="pill-group" id="pills-tools">
+      </div>
+      <div class="pill-section"><div class="pill-label">Tools touched in a normal week</div><div class="pill-group">
         <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">1–2</button>
         <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">3–5</button>
         <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">6–10</button>
         <button class="pill-btn" onclick="pickPill(&#39;tools&#39;,this,1)">11+</button>
-      </div><div id="err-tools" class="field-err">⚠ Please select number of tools.</div></div>
+      </div></div>
       <div class="nav-row">
         <button class="nav-btn back" onclick="goTo(0)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
-        <button class="nav-btn next" onclick="goToSlide2()"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+        <button class="nav-btn next" onclick="goTo(2)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
       </div>
     </div>
   </div>
 
   <!-- 2: WHAT HURTS MOST -->
-  <div class="slide dir-slide" id="slide-2">
+  <div class="slide dir-slide responded" id="slide-2" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
-      <div class="dir-header"><div class="dir-num">DIR-02</div><div class="dir-class">Pain Point</div><div class="dir-state pending" id="state-2">Pending Response</div></div>
+      <div class="dir-header"><div class="dir-num">DIR-02</div><div class="dir-class">Pain Point</div><div class="dir-state done" id="state-2">✓ Logged</div></div>
       <div class="dir-q">What hurts most this quarter?</div>
       <div class="dir-sub" style="font-style:italic">Pick the one that hurts the most. One choice. Two minutes total.</div>
       <div class="radio-list" id="opts-2">
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Patches are slipping behind&#39;)"><div class="radio-dot"></div><div class="radio-text">🩹 Patches are slipping behind — fleet's not on the latest OS or third-party apps.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Audit prep eats my month&#39;)"><div class="radio-dot"></div><div class="radio-text">📋 Audit prep eats my month — evidence collection is a fire drill.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;New hires take a week to be productive&#39;)"><div class="radio-dot"></div><div class="radio-text">👤 New hires take a week to be productive — accounts, laptop, software, access.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tickets pile up faster than we close them&#39;)"><div class="radio-dot"></div><div class="radio-text">🎫 Tickets pile up faster than we close them — same ones come back.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Endpoints drift out of policy&#39;)"><div class="radio-dot"></div><div class="radio-text">💻 Endpoints drift out of policy — config / hardening / CIS benchmarks.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tools don&#39;t talk&#39;)"><div class="radio-dot"></div><div class="radio-text">🔌 Tools don't talk — I'm the integration layer.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Identity sprawl&#39;)"><div class="radio-dot"></div><div class="radio-text">🔑 Identity sprawl — orphan accounts, excess privilege, access reviews.</div></div>
-        <div class="radio-item" onclick="pickRadio(2,this,&#39;Outcomes vs cost visibility&#39;)"><div class="radio-dot"></div><div class="radio-text">📊 I can't tell my CFO what IT is delivering — outcomes vs. cost.</div></div>
-        <div class="radio-item" data-other="other-pain" onclick="pickRadio(2,this,&#39;other&#39;)"><div class="radio-dot"></div><div class="radio-text" style="font-style:italic">✏️ Something else — type what you'd want your IT platform to actually do.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Patches are slipping behind&#39;)"><div class="radio-dot"></div><div class="radio-text">Patches are slipping behind — fleet's not on the latest OS or third-party apps.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Audit prep eats my month&#39;)"><div class="radio-dot"></div><div class="radio-text">Audit prep eats my month — evidence collection is a fire drill.</div></div>
+        <div class="radio-item selected" onclick="pickRadio(2,this,&#39;New hires take a week to be productive&#39;)"><div class="radio-dot"></div><div class="radio-text">New hires take a week to be productive — accounts, laptop, software, access.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tickets pile up faster than we close them&#39;)"><div class="radio-dot"></div><div class="radio-text">Tickets pile up faster than we close them — same ones come back.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Endpoints drift out of policy&#39;)"><div class="radio-dot"></div><div class="radio-text">Endpoints drift out of policy — config / hardening / CIS benchmarks.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Tools don&#39;t talk&#39;)"><div class="radio-dot"></div><div class="radio-text">Tools don't talk — I'm the integration layer.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Identity sprawl&#39;)"><div class="radio-dot"></div><div class="radio-text">Identity sprawl — orphan accounts, excess privilege, access reviews.</div></div>
+        <div class="radio-item" onclick="pickRadio(2,this,&#39;Outcomes vs cost visibility&#39;)"><div class="radio-dot"></div><div class="radio-text">I can't tell my CFO what IT is delivering — outcomes vs. cost.</div></div>
+        <div class="radio-item" data-other="other-pain" onclick="pickRadio(2,this,&#39;other&#39;)"><div class="radio-dot"></div><div class="radio-text" style="font-style:italic">Something else — type what you'd want your IT platform to actually do.</div></div>
       </div>
       <div class="other-reveal" id="other-pain"><textarea class="cmd-input" rows="2" placeholder="The thing that actually keeps you up at night…" oninput="answers[&#39;dir2_other&#39;]=this.value"></textarea>
       <div class="dir-sub" style="margin-top:6px;font-size:11px;font-style:italic">Open lane: free text, no length cap. The single most diagnostic field.</div></div>
@@ -710,7 +638,7 @@
   </div>
 
   <!-- 3: WHAT WOULD YOU LET IT DO -->
-  <div class="slide dir-slide" id="slide-3">
+  <div class="slide dir-slide" id="slide-3" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
       <div class="dir-header"><div class="dir-num">DIR-03</div><div class="dir-class">Autonomy</div><div class="dir-state pending" id="state-3">Pending Response</div></div>
@@ -718,17 +646,17 @@
       <div class="dir-sub" style="font-style:italic">Pick up to 3. Anchored on what AEM literature now describes as established workloads.</div>
       <div class="check-limit" id="check-limit-3">0 / 3 selected</div>
       <div class="check-list" id="opts-3">
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">🖥️ Deploy OS patches across the fleet</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">🛡️ Patch third-party applications when a CVE drops</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">⚙️ Re-apply configuration when an endpoint drifts</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">🔒 Enforce a security policy across all endpoints continuously</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">🚫 Quarantine an endpoint that fails compliance</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">📱 Lock or wipe a device that hasn't checked in for N days</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">🎫 Auto-resolve a Tier-1 ticket type (password reset, software install)</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">👤 Provision / deprovision identity access on a trigger</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">📋 Generate audit evidence for a control automatically</div></div>
-        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">↗️ Reroute or escalate based on SLA risk</div></div>
-        <div class="check-item" data-other="other-auto" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text" style="font-style:italic">✏️ None of these. The thing I'd actually want is —</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Deploy OS patches across the fleet</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Patch third-party applications when a CVE drops</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Re-apply configuration when an endpoint drifts</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Enforce a security policy across all endpoints continuously</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Quarantine an endpoint that fails compliance</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Lock or wipe a device that hasn't checked in for N days</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Auto-resolve a Tier-1 ticket type (password reset, software install)</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Provision / deprovision identity access on a trigger</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Generate audit evidence for a control automatically</div></div>
+        <div class="check-item" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text">Reroute or escalate based on SLA risk</div></div>
+        <div class="check-item" data-other="other-auto" onclick="toggleCheck(this,3,3)"><div class="check-box"></div><div class="check-text" style="font-style:italic">None of these. The thing I'd actually want is —</div></div>
       </div>
       <div class="other-reveal" id="other-auto"><textarea class="cmd-input" rows="2" placeholder="Describe the action you&#39;d trust it to take…" oninput="answers[&#39;dir3_other&#39;]=this.value"></textarea></div>
       <div class="nav-row">
@@ -739,18 +667,24 @@
   </div>
 
   <!-- 4: BUDGET -->
-  <div class="slide dir-slide" id="slide-4">
+  <div class="slide dir-slide" id="slide-4" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
       <div class="dir-header"><div class="dir-num">DIR-04</div><div class="dir-class">Economics</div><div class="dir-state pending" id="state-4">Pending Response</div></div>
       <div class="dir-q">What would you defend at budget time?</div>
       <div class="dir-sub" style="font-style:italic">Annual budget you'd defend for an AI-native IT platform that materially removed the pain you picked.</div>
       <div class="radio-list" id="opts-4">
-        <div class="radio-item" onclick="pickBudget(this,&#39;0-10K&#39;)"><div class="radio-dot"></div><div class="radio-text">💸 £ / $&nbsp;&nbsp;0 – 10K</div></div>
-        <div class="radio-item" onclick="pickBudget(this,&#39;10-30K&#39;)"><div class="radio-dot"></div><div class="radio-text">💵 £ / $&nbsp;&nbsp;10 – 30K</div></div>
-        <div class="radio-item" onclick="pickBudget(this,&#39;30-60K&#39;)"><div class="radio-dot"></div><div class="radio-text">💰 £ / $&nbsp;&nbsp;30 – 60K</div></div>
-        <div class="radio-item" onclick="pickBudget(this,&#39;60-120K&#39;)"><div class="radio-dot"></div><div class="radio-text">🏦 £ / $&nbsp;&nbsp;60 – 120K</div></div>
-        <div class="radio-item" onclick="pickBudget(this,&#39;120K+&#39;)"><div class="radio-dot"></div><div class="radio-text">🚀 £ / $&nbsp;&nbsp;120K+</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;0-10K&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;0 – 10K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;10-30K&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;10 – 30K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;30-60K&#39;)" data-budget-cond="yes"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;30 – 60K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;60-120K&#39;)" data-budget-cond="yes"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;60 – 120K</div></div>
+        <div class="radio-item" onclick="pickBudget(this,&#39;120K+&#39;)"><div class="radio-dot"></div><div class="radio-text">£ / $&nbsp;&nbsp;120K+</div></div>
+      </div>
+      <div class="cond-inline budget-cond" id="cond-budget">
+        <div class="cond-inline-inner">
+          <div class="field-sep-label">Conditional follow-up if 30–60K or 60–120K</div>
+          <textarea class="cmd-input" rows="2" placeholder="What&#39;s the outcome that makes this an easy yes?" oninput="answers[&#39;dir4_outcome&#39;]=this.value"></textarea>
+        </div>
       </div>
       <div class="nav-row">
         <button class="nav-btn back" onclick="goTo(3)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
@@ -760,7 +694,7 @@
   </div>
 
   <!-- 5: TRUST VIGNETTES -->
-  <div class="slide dir-slide" id="slide-5">
+  <div class="slide dir-slide" id="slide-5" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
       <div class="dir-header"><div class="dir-num">DIR-05</div><div class="dir-class">Trust Line</div><div class="dir-state pending" id="state-5">Pending Response</div></div>
@@ -771,27 +705,27 @@
         <div class="vignette-label">Vignette 1</div>
         <div class="vignette-text">Patch a critical CVE on a Friday night.</div>
         <div class="vig-opts" id="vig-1">
-          <button class="vig-opt" onclick="pickVignette(1,&#39;Do it&#39;,this)">✅ Do it</button>
-          <button class="vig-opt" onclick="pickVignette(1,&#39;Approve first&#39;,this)">👁️ Approve first</button>
-          <button class="vig-opt" onclick="pickVignette(1,&#39;Never&#39;,this)">🚫 Never</button>
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(1,&#39;Never&#39;,this)">Never</button>
         </div>
       </div>
       <div class="vignette-block">
         <div class="vignette-label">Vignette 2</div>
         <div class="vignette-text">Revoke a contractor's access when their HRIS record flips to terminated.</div>
         <div class="vig-opts" id="vig-2">
-          <button class="vig-opt" onclick="pickVignette(2,&#39;Do it&#39;,this)">✅ Do it</button>
-          <button class="vig-opt" onclick="pickVignette(2,&#39;Approve first&#39;,this)">👁️ Approve first</button>
-          <button class="vig-opt" onclick="pickVignette(2,&#39;Never&#39;,this)">🚫 Never</button>
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(2,&#39;Never&#39;,this)">Never</button>
         </div>
       </div>
       <div class="vignette-block">
         <div class="vignette-label">Vignette 3</div>
         <div class="vignette-text">Generate the SOC 2 evidence package and submit it to your auditor.</div>
         <div class="vig-opts" id="vig-3">
-          <button class="vig-opt" onclick="pickVignette(3,&#39;Do it&#39;,this)">✅ Do it</button>
-          <button class="vig-opt" onclick="pickVignette(3,&#39;Approve first&#39;,this)">👁️ Approve first</button>
-          <button class="vig-opt" onclick="pickVignette(3,&#39;Never&#39;,this)">🚫 Never</button>
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Do it&#39;,this)">Do it</button>
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Approve first&#39;,this)">Approve first</button>
+          <button class="vig-opt" onclick="pickVignette(3,&#39;Never&#39;,this)">Never</button>
         </div>
       </div>
       <div class="nav-row">
@@ -802,60 +736,39 @@
   </div>
 
   <!-- 6: BUILD IT WITH US -->
-  <div class="slide dir-slide" id="slide-6">
+  <div class="slide dir-slide" id="slide-6" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
       <div class="dir-header"><div class="dir-num">DIR-06</div><div class="dir-class">Co-build</div><div class="dir-state pending" id="state-6">Pending Response</div></div>
       <div class="dir-q">Build it with us, not just for us.</div>
       <div class="dir-sub" style="font-style:italic">If we built the thing you described, would you give us 2 hours on a call to shape it together? You bring the use case; we bring the platform team and the wiring. Working sessions, not pitches.</div>
       <div class="radio-list" id="opts-6">
-        <div class="radio-item" onclick="pickRadio(6,this,&#39;Yes — send me a Calendly link&#39;)"><div class="radio-dot"></div><div class="radio-text">📅 Yes — send me a Calendly link.</div></div>
-        <div class="radio-item" onclick="pickRadio(6,this,&#39;Maybe — send me details&#39;)"><div class="radio-dot"></div><div class="radio-text">🤔 Maybe — send me details and I'll decide.</div></div>
-        <div class="radio-item" onclick="pickRadio(6,this,&#39;No thanks&#39;)"><div class="radio-dot"></div><div class="radio-text">👋 No thanks — happy to share thoughts here only.</div></div>
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;Yes — send me a Calendly link&#39;)"><div class="radio-dot"></div><div class="radio-text">Yes — send me a Calendly link.</div></div>
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;Maybe — send me details&#39;)"><div class="radio-dot"></div><div class="radio-text">Maybe — send me details and I'll decide.</div></div>
+        <div class="radio-item" onclick="pickRadio(6,this,&#39;No thanks&#39;)"><div class="radio-dot"></div><div class="radio-text">No thanks — happy to share thoughts here only.</div></div>
       </div>
       <div class="nav-row">
         <button class="nav-btn back" onclick="goTo(5)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
-        <button class="nav-btn next" onclick="goTo(7)"><span>Next</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+        <button class="transmit-btn" onclick="goTo(7)"><span>Almost done</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
       </div>
     </div>
   </div>
 
 
-  <!-- 7: DIR-07 — ADOPTION FRICTION -->
-  <div class="slide dir-slide" id="slide-7">
+    <!-- 7: TRANSMIT -->
+  <div class="slide dir-slide" id="slide-7" style="">
     <div class="brackets"><span></span></div>
     <div class="dir-inner">
-      <div class="dir-header"><div class="dir-num">DIR-07</div><div class="dir-class">Adoption</div><div class="dir-state pending" id="state-7">Pending Response</div></div>
-      <div class="dir-q">You've tried (or considered) AI for IT before. What stopped it from sticking?</div>
-      <div class="dir-sub">30 seconds. Pick all that apply, then tell us what would unlock it. Probes the friction beyond product-fit — the Adoption-as-Service hypothesis.</div>
-      <div class="field-sep-label">What got in the way (pick any)</div>
-      <div class="check-list" id="opts-7">
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🧹 Data wasn't clean enough for AI to act on</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🎓 Team didn't have the skills to operate it</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🔒 Security / legal review killed it or stalled it</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">📊 Couldn't prove ROI fast enough to renew</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🏢 No executive sponsor to hold the line</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🔌 Integration was too painful</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🙈 People just didn't use it — passive resistance</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">📦 Procurement / vendor onboarding blocked it</div></div>
-        <div class="check-item" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text">🆕 Haven't tried yet</div></div>
-        <div class="check-item" data-other="other-friction" onclick="toggleCheck(this,7,99)"><div class="check-box"></div><div class="check-text" style="font-style:italic">✏️ Something else stopped it — type it here.</div></div>
-      </div>
-      <div class="other-reveal" id="other-friction"><textarea class="cmd-input" rows="2" placeholder="What actually blocked it…" oninput="answers[&#39;dir7_other&#39;]=this.value"></textarea></div>
-      <div class="field-sep-label" style="margin-top:18px">What would have made it stick?</div>
-      <div class="pill-group" id="pills-stick" style="gap:8px; margin-bottom:20px;">
-        <button class="pill-btn" onclick="toggleStick(this)">🚀 Better onboarding</button>
-        <button class="pill-btn" onclick="toggleStick(this)">🎓 Hands-on training</button>
-        <button class="pill-btn" onclick="toggleStick(this)">🤝 Vendor-side success manager</button>
-        <button class="pill-btn" onclick="toggleStick(this)">👑 Exec mandate</button>
-        <button class="pill-btn" onclick="toggleStick(this)">🧹 Cleaner data first</button>
-        <button class="pill-btn" onclick="toggleStick(this)">🏆 Proof from a peer in our industry</button>
-        <button class="pill-btn" onclick="toggleStick(this)">⏳ Nothing — the tech wasn't ready</button>
-      </div>
+      <div class="dir-header"><div class="dir-num">TX-00</div><div class="dir-class">Transmission</div><div class="dir-state pending" id="state-7">Ready to Send</div></div>
+      <div class="dir-q">That's it. Thank you.</div>
+      <div class="dir-sub">Collect your [gift card / jersey] at the desk.</div>
+      <div class="field-label">Want early access when this is real?</div>
+      <input type="email" class="tp-email" id="tp-email" placeholder="you@company.com">
       <div class="nav-row">
         <button class="nav-btn back" onclick="goTo(6)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>Back</button>
-        <button class="transmit-btn" onclick="transmit()"><span>Submit</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 19-7z"></path></svg></button>
+        <button class="transmit-btn" onclick="transmit()"><span>Count me in</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 19-7z"></path></svg></button>
       </div>
+      <div class="tp-anon" style="margin-top:16px">No spam. Just a heads-up when we launch.</div>
     </div>
   </div>
 
@@ -871,11 +784,17 @@
 
 </div>
 
-<div id="bottom-bar"><div class="dot-item active"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div></div>
-<div id="key-flash"></div>
-<div id="key-legend"><kbd>←</kbd><kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>A</kbd>–<kbd>D</kbd> select &nbsp;·&nbsp; <kbd>↵</kbd> begin / send</div>
+<div id="bottom-bar"><div class="dot-item active"></div><div class="dot-item done"></div><div class="dot-item done"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div><div class="dot-item"></div></div>
+<div id="key-flash" style="opacity: 0;">→</div>
+<div id="key-legend" class="hidden"><kbd>←</kbd><kbd>→</kbd> navigate &nbsp;·&nbsp; <kbd>A</kbd>–<kbd>D</kbd> select &nbsp;·&nbsp; <kbd>↵</kbd> begin / send</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+// ── Supabase ────────────────────────────────────────────────────────────
+const SUPABASE_URL  = 'https://xeestmltmimgeidzxbiw.supabase.co';   // replace
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlZXN0bWx0bWltZ2VpZHp4Yml3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMjEwMDcsImV4cCI6MjA5Mzc5NzAwN30.Nzp26-VOor8vWiHvGgAQYz3ZWLvoMcS4tHZ1KfmH0yc'; // replace
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
 // ── Scenario library — keyed by chip data-key ──────────────────────────
 const SCENARIOS = {
   compliance: {
@@ -995,7 +914,7 @@ const DEFAULT_KEY = 'compliance';
 
 // ── State ──────────────────────────────────────────────────────────────
 const TOTAL = 9;
-const DIRECTIVE_SLIDES = [1, 2, 3, 4, 5, 6, 7];
+const DIRECTIVE_SLIDES = [1, 2, 3, 4, 5, 6];
 let current = 0;
 const answers = {};
 const responded = new Set();
@@ -1041,27 +960,6 @@ function startTimer() {
 const bar = document.getElementById('bottom-bar');
 for (let i=0;i<TOTAL;i++) { const d=document.createElement('div'); d.className='dot-item'; d.onclick=()=>goTo(i); bar.appendChild(d); }
 
-// ── Slide 1 full validation gate ─────────────────────────────────────
-function goToSlide2() {
-  let valid = true;
-  // Email
-  const email = document.getElementById('field-1-email').value.trim();
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  document.getElementById('email-err').style.display = emailOk ? 'none' : 'block';
-  if (!emailOk) { valid = false; if (valid === false) document.getElementById('field-1-email').focus(); }
-  // Pills
-  const checks = ['size','industry','role','tools'];
-  checks.forEach(g => {
-    const sel = document.querySelector(`#pills-${g} .pill-btn.selected`);
-    const err = document.getElementById('err-'+g);
-    if (err) err.style.display = sel ? 'none' : 'block';
-    if (!sel) valid = false;
-  });
-  if (!valid) return;
-  goTo(2);
-}
-
-
 // ── goTo ───────────────────────────────────────────────────────────────
 function goTo(idx) {
   if (idx<0||idx>=TOTAL) return;
@@ -1088,21 +986,42 @@ function goTo(idx) {
 // ── Show inline conditional section ───────────────────────────────────
 function showInline(el) {
   el.classList.add('visible');
-  setTimeout(() => {
-    const slide = el.closest('.slide');
-    if (!slide) return;
-    const elBottom = el.getBoundingClientRect().bottom;
-    const navHeight = 80; // sticky nav approx height
-    const viewBottom = window.innerHeight - navHeight;
-    if (elBottom > viewBottom) {
-      slide.scrollBy({ top: elBottom - viewBottom + 24, behavior: 'smooth' });
-    }
-  }, 360); // wait for expand animation to finish
+  setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'nearest'}), 80);
 }
 
-// ── Render scenario (legacy — sim elements removed, no-op guard) ──────
+// ── Render scenario in DIR-03 based on chip selections ─────────────────
 function renderScenario() {
-  // Scenario sim box was removed in new slide layout — nothing to render
+  const key = selectedChips.length ? selectedChips[0] : DEFAULT_KEY;
+  const s = SCENARIOS[key];
+  document.getElementById('sim-prompt').textContent = s.prompt;
+  document.getElementById('sim-num').textContent    = s.num;
+  document.getElementById('sim-desc').textContent   = s.desc;
+  document.getElementById('sim-action-q').textContent = s.action;
+
+  // Table header
+  const thead = document.getElementById('sim-thead');
+  thead.innerHTML = '<tr>' + s.thead.map(h=>`<th>${h}</th>`).join('') + '</tr>';
+
+  // Table body
+  const tbody = document.getElementById('sim-tbody');
+  tbody.innerHTML = s.rows.map((row,i)=>
+    `<tr${i===s.rows.length-1?' class="more"':''}>${row.map(c=>`<td>${c}</td>`).join('')}</tr>`
+  ).join('');
+
+  // Trust card titles/descs
+  s.cards.forEach((c,i)=>{
+    document.getElementById('tc-title-'+i).textContent = c.t;
+    document.getElementById('tc-desc-'+i).textContent  = c.d;
+  });
+
+  // Reset trust selection and inline conditionals
+  document.querySelectorAll('#trust-grid .trust-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('cond-inline-1').classList.remove('visible');
+  document.getElementById('cond-inline-2').classList.remove('visible');
+  document.querySelectorAll('#barriers .barrier-pill, #trust-builders .barrier-pill').forEach(p=>p.classList.remove('selected'));
+  delete answers['dir3'];
+  const stateEl = document.getElementById('state-3');
+  if (!responded.has(3)) { stateEl.textContent='Pending Response'; stateEl.className='dir-state pending'; }
 }
 
 // ── updateUI ───────────────────────────────────────────────────────────
@@ -1114,7 +1033,7 @@ function updateUI() {
     seg.classList.toggle('lit', current>sIdx && !responded.has(sIdx));
     seg.classList.toggle('complete', responded.has(sIdx));
   });
-  document.getElementById('hud-frac').textContent=responded.size+' / 7';
+  document.getElementById('hud-frac').textContent=responded.size+' / 6';
 }
 
 // ── markResponded ──────────────────────────────────────────────────────
@@ -1150,10 +1069,10 @@ function pickTrust(val, el) {
   const c1 = document.getElementById('cond-inline-1');
   const c2 = document.getElementById('cond-inline-2');
   if (val === 0) {
-    if (c1) showInline(c1);
+    showInline(c1);
   } else {
-    if (c1) c1.classList.remove('visible');
-    if (c2) c2.classList.remove('visible');
+    c1.classList.remove('visible');
+    c2.classList.remove('visible');
     document.querySelectorAll('#barriers .barrier-pill, #trust-builders .barrier-pill').forEach(p=>p.classList.remove('selected'));
     answers['cond_barriers'] = [];
     answers['cond_trust_builders'] = [];
@@ -1177,9 +1096,6 @@ function pickPill(group, el, slideIdx) {
   }
   document.querySelectorAll(`#pills-${group} .pill-btn`).forEach(b=>b.classList.remove('selected'));
   el.classList.add('selected');
-  // Hide validation error for this group
-  const err = document.getElementById('err-'+group);
-  if (err) err.style.display = 'none';
   answers['dir'+slideIdx+'_'+group]=el.textContent.trim(); markResponded(slideIdx);
   // Show "Other" input if this pill has data-other
   if (el.dataset.other) {
@@ -1206,10 +1122,8 @@ function toggleBarrier(el, groupId) {
     // Reveal COND-02 as soon as first barrier is picked
     const anySelected = document.querySelectorAll('#barriers .barrier-pill.selected').length > 0;
     const c2 = document.getElementById('cond-inline-2');
-    if (c2) {
-      if (anySelected && !c2.classList.contains('visible')) showInline(c2);
-      else if (!anySelected) c2.classList.remove('visible');
-    }
+    if (anySelected && !c2.classList.contains('visible')) showInline(c2);
+    else if (!anySelected) c2.classList.remove('visible');
   } else {
     answers['cond_trust_builders'] = Array.from(document.querySelectorAll('#trust-builders .barrier-pill.selected')).map(b=>b.dataset.val);
   }
@@ -1242,10 +1156,36 @@ function pickCount(el, slideIdx) {
 }
 
 // ── Transmit ───────────────────────────────────────────────────────────
-function transmit() {
-  answers.email=document.getElementById('tp-email').value;
-  console.log('Transmitted:', JSON.stringify(answers,null,2));
-  document.getElementById('comp-sid').textContent='Session ID: SOP-'+Date.now().toString(36).toUpperCase();
+async function transmit() {
+  answers.email = document.getElementById('tp-email').value;
+  const sessionId = 'SOP-' + Date.now().toString(36).toUpperCase();
+  document.getElementById('comp-sid').textContent = 'Session ID: ' + sessionId;
+
+  const payload = {
+    session_id:          sessionId,
+    dir1_email:          answers.dir1_email        || null,
+    dir1_size:           answers.dir1_size          || null,
+    dir1_industry:       answers.dir1_industry      || null,
+    dir1_industry_other: answers.dir1_industry_other|| null,
+    dir1_role:           answers.dir1_role          || null,
+    dir1_role_other:     answers.dir1_role_other    || null,
+    dir1_tools:          answers.dir1_tools         || null,
+    dir2:                answers.dir2               || null,
+    dir2_other:          answers.dir2_other         || null,
+    dir3:                Array.isArray(answers.dir3) ? answers.dir3 : null,
+    dir3_other:          answers.dir3_other         || null,
+    dir4:                answers.dir4               || null,
+    dir4_outcome:        answers.dir4_outcome       || null,
+    dir5_vig1:           answers.dir5_vig1          || null,
+    dir5_vig2:           answers.dir5_vig2          || null,
+    dir5_vig3:           answers.dir5_vig3          || null,
+    dir6:                answers.dir6               || null,
+    email:               answers.email              || null,
+  };
+
+  const { error } = await db.from('cio_responses').insert(payload);
+  if (error) console.error('Supabase insert failed:', error.message);
+
   goTo(8);
 }
 
@@ -1296,7 +1236,7 @@ function pickRadio(slideIdx, el, val) {
   });
   if (otherId) {
     const rev = document.getElementById(otherId);
-    if (rev) { showInline(rev); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),380); }
+    if (rev) { rev.classList.add('visible'); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),280); }
   }
   markResponded(slideIdx);
 }
@@ -1313,7 +1253,7 @@ function toggleCheck(el, slideIdx, max) {
   if (otherId) {
     const rev = document.getElementById(otherId);
     if (rev) {
-      if (el.classList.contains('selected')) { showInline(rev); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),380); }
+      if (el.classList.contains('selected')) { rev.classList.add('visible'); setTimeout(()=>rev.querySelector('textarea,input')?.focus(),280); }
       else rev.classList.remove('visible');
     }
   }
@@ -1330,13 +1270,10 @@ function pickBudget(el, val) {
   list.querySelectorAll('.radio-item').forEach(r => r.classList.remove('selected'));
   el.classList.add('selected');
   answers['dir4'] = val;
+  const cond = document.getElementById('cond-budget');
+  if (el.dataset.budgetCond === 'yes') { cond.classList.add('visible'); setTimeout(()=>cond.querySelector('textarea')?.focus(),280); }
+  else cond.classList.remove('visible');
   markResponded(4);
-}
-
-// ── toggleStick — multi-select pills for DIR-07 ───────────────────────
-function toggleStick(el) {
-  el.classList.toggle('selected');
-  answers['dir7_stick'] = Array.from(document.querySelectorAll('#pills-stick .pill-btn.selected')).map(b=>b.textContent.trim());
 }
 
 // ── pickVignette — per-vignette 3-way choice ──────────────────────────
