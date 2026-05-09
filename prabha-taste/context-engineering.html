@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Context Engineering with My Setup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --surface: #FFFFFF;
+    --bg: #F4F4F1;
+    --ink: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --accent: #F2673C;
+    --blue: #4A7C9B;
+    --green: #16A34A;
+    --radius: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    padding: 48px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header { margin-bottom: 36px; }
+
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+  }
+
+  /* Linear stacked blocks */
+  .wall {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+  }
+
+  .block .tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .block h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .block p, .block li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .block ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 6px;
+  }
+
+  .block li {
+    padding: 3px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .block li::before {
+    content: '•';
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .highlight {
+    background: rgba(242,103,60,0.08);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .accent-left {
+    border-left: 3px solid var(--green);
+    padding-left: 19px;
+  }
+
+  .accent-left.blue { border-left-color: var(--blue); }
+  .accent-left.orange { border-left-color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .two-up { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Context Engineering — My Setup</h1>
+    <p>How Agent Tina's stack turns memory, retrieval, and quality gates into coherent context for every turn.</p>
+  </header>
+
+  <div class="wall">
+
+    <!-- 1. Context Window -->
+    <div class="block accent-left">
+      <div class="tag">01. Context Window</div>
+      <h3>Kimi K2.6 — 2M+ tokens</h3>
+      <p>The model is the ceiling. I feed it <span class="highlight">session history + user profile + active skills + current task</span> at every turn. No window is wasted on filler.</p>
+      <ul>
+        <li>System prompt injects memory, rules, and active experiments</li>
+        <li>Skill instructions are loaded, not summarized — exact text matters</li>
+        <li>Honcho peer card auto-injected as compressed facts</li>
+      </ul>
+    </div>
+
+    <!-- 2. Retrieval Strategies -->
+    <div class="block accent-left blue">
+      <div class="tag">02. Retrieval</div>
+      <h3>Two Layers: FTS5 + Semantic</h3>
+      <div class="two-up">
+        <div>
+          <p style="font-weight:600;color:var(--ink);font-size:13px;margin-bottom:4px;">Session Search</p>
+          <p>Full-text search across all past sessions. Fast, cheap, exact-match fallback.</p>
+        </div>
+        <div>
+          <p style="font-weight:600;color:var(--ink);font-size:13px;margin-bottom:4px;">Honcho Search / Reasoning</p>
+          <p>Semantic context from 1,654 docs. Reasoning levels: minimal → max. Dialectic layer.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Memory Systems -->
+    <div class="block">
+      <div class="tag">03. Memory Systems</div>
+      <h3>Prabha-Taste + Honcho + Session Search</h3>
+      <div class="two-up">
+        <div>
+          <ul>
+            <li><strong>Prabha-taste</strong> — design preference engine: screenshots, good/bad index, token synthesis, anti-bento rules</li>
+            <li><strong>Skills memory</strong> — pitfall tracking, versioned references, changelogs</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Honcho</strong> — peer card, conclusions, reasoning on <span class="mono">localhost:8000</span></li>
+            <li><strong>Session transcripts</strong> — every turn searchable via FTS5</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Quality Gates -->
+    <div class="block accent-left orange">
+      <div class="tag">04. Quality Gates</div>
+      <h3>Verification Before Shipping</h3>
+      <p>Every output passes a taste check. The skill itself has a verification checklist baked in.</p>
+      <ul>
+        <li><strong>Prabha-taste verify:</strong> colors from rotation? typography from pairings? avoid known bad patterns?</li>
+        <li><strong>Delivery rule:</strong> Google Docs/Drive primary. Markdown = emergency fallback only</li>
+        <li><strong>Vision verify:</strong> PDFs/screenshots always eyeball-checked before "done"</li>
+      </ul>
+    </div>
+
+    <!-- 5. Agent Persona -->
+    <div class="block">
+      <div class="tag">05. Agent Persona</div>
+      <h3>Agent Tina — Chaotic Good</h3>
+      <p>The persona is context, not costume. It shapes tone, which shapes how memory is read back and how decisions are framed.</p>
+      <ul>
+        <li>Proactive auto-fixes — no permission loops for obvious fixes</li>
+        <li>Short, bullets over paragraphs, GIFs when they add flavor</li>
+        <li>Honest about what works and what flops — no false "done" claims</li>
+        <li>Strict honesty: verify before claiming, especially for URLs/API status</li>
+      </ul>
+    </div>
+
+    <!-- 6. Integrations -->
+    <div class="block">
+      <div class="tag">06. Integrations</div>
+      <h3>The Glue Layer</h3>
+      <div class="two-up">
+        <div>
+          <ul>
+            <li><strong>Google Workspace</strong> — Docs, Drive, Calendar (deliverables + email)</li>
+            <li><strong>Todoist</strong> — task source of truth, closes tasks strictly (not just complete)</li>
+            <li><strong>GitHub</strong> — thisisprabha (repos, pages, skills)</li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li><strong>Figma</strong> — MCP-connected for design ops</li>
+            <li><strong>Keka</strong> — HR automation via OAuth</li>
+            <li><strong>Telegram</strong> — primary chat interface</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. The Loop -->
+    <div class="block accent-left">
+      <div class="tag">07. The Loop</div>
+      <h3>Crons Tie It All Together</h3>
+      <p><span class="highlight">6PM</span> processes raw files + syncs + email. <span class="highlight">7PM</span> plans next day. <span class="highlight">3AM</span> executes overnight queue. Every loop feeds context back into Honcho and the vault.</p>
+      <ul>
+        <li>Output goes to Google Docs — no orphaned local saves</li>
+        <li>Raw → processed → notes — vault pipeline stays clean</li>
+        <li>Design kits and Figma stay manual unless explicitly automated</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
