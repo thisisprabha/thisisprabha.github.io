@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Hermes Setup</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #F4F4F1;
+    --surface: #FFFFFF;
+    --ink: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --peach: #FAD4C0;
+    --blue: #80A1C1;
+    --coral: #F2673C;
+    --green: #16A34A;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    padding: 40px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 520px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+  }
+
+  /* Bento Grid */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(140px, auto);
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid var(--border);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .card .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .card p, .card li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card li {
+    padding: 3px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .card li::before {
+    content: '•';
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .card .accent-bar {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .peach .accent-bar { background: var(--peach); }
+  .blue .accent-bar { background: var(--blue); }
+  .coral .accent-bar { background: var(--coral); }
+
+  .metric {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  .metric-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* Card spans */
+  .span-2 { grid-column: span 2; }
+  .span-2-r { grid-row: span 2; }
+  .span-4 { grid-column: span 4; }
+
+  /* Small cards */
+  .small-card {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .small-card .metric {
+    font-size: 28px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .span-2, .span-4 { grid-column: span 2; }
+    .span-2-r { grid-row: span 1; }
+  }
+
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; }
+    .span-2, .span-4 { grid-column: span 1; }
+    body { padding: 24px 16px; }
+  }
+
+  /* Token pills */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .pill.peach-pill { background: var(--peach); color: #4a3b32; border: none; }
+  .pill.blue-pill { background: var(--blue); color: #fff; border: none; }
+
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .status-dot.yellow { background: #D97706; }
+  .status-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .mono {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="badge">System Online</div>
+    <h1>My Hermes Setup</h1>
+    <p>Agent Tina's automation stack — crons, memory, design taste, and integrations running on macOS.</p>
+  </header>
+
+  <div class="bento">
+
+    <!-- Model & Provider -->
+    <div class="card peach span-2">
+      <div class="accent-bar"></div>
+      <div class="label">Active Model</div>
+      <div class="metric">Kimi K2.6</div>
+      <div class="metric-sub">Wolama Cloud • $20/mo subscription</div>
+      <div class="pills">
+        <span class="pill">kimi-k2.6</span>
+        <span class="pill">context window: 2M+</span>
+        <span class="pill peach-pill">custom provider</span>
+      </div>
+    </div>
+
+    <!-- Hermes Version -->
+    <div class="card blue small-card">
+      <div class="accent-bar"></div>
+      <div class="label">Hermes Agent</div>
+      <div class="metric">v0.26</div>
+      <div class="metric-sub">Global agent CLI</div>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <span class="status-text">Up to date</span>
+      </div>
+    </div>
+
+    <!-- Cron Jobs Count -->
+    <div class="card small-card">
+      <div class="label">Active Cron Jobs</div>
+      <div class="metric">3</div>
+      <div class="metric-sub">Daily automation cadence</div>
+      <div class="pills">
+        <span class="pill">6PM IST</span>
+        <span class="pill">7PM IST</span>
+        <span class="pill">3AM IST</span>
+      </div>
+    </div>
+
+    <!-- Cron Details -->
+    <div class="card span-2 span-2-r">
+      <div class="label">Daily Cron Schedule</div>
+      <h3>Automation Pipeline</h3>
+      <ul>
+        <li><strong>6PM Processor</strong> — Raw file processing, Todoist sync, email scan (work + personal), stale task check</li>
+        <li><strong>7PM Planner</strong> — Daily planning, next-day task prep</li>
+        <li><strong>3AM Executor</strong> — Overnight work queue: oldest stale tasks, scheduled research, model memory tests</li>
+      </ul>
+      <p style="margin-top:10px;">All outputs route to <strong>Google Docs / Drive</strong>. Markdown is strict fallback only.</p>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <span class="status-text">Provider: custom (Wolama)</span>
+      </div>
+    </div>
+
+    <!-- Memory Systems -->
+    <div class="card span-2">
+      <div class="label">Memory & Context</div>
+      <h3>Honcho + Prabha Taste</h3>
+      <ul>
+        <li><strong>Honcho</strong> running on <span class="mono">localhost:8000</span> — peer modeling, 1,654 docs stored</li>
+        <li><strong>Prabha-taste skill</strong> — design preference engine with screenshot ingestion, good/bad index, token synthesis</li>
+        <li><strong>Session search</strong> — cross-session recall via FTS5</li>
+        <li><strong>Memory notes</strong> — durable user facts saved across sessions</li>
+      </ul>
+    </div>
+
+    <!-- Design System -->
+    <div class="card blue">
+      <div class="accent-bar"></div>
+      <div class="label">Design System</div>
+      <h3>SuperOps Kit</h3>
+      <p>Figma design system + AI Service Desk at SuperOps.</p>
+      <div class="pills" style="margin-top:auto;">
+        <span class="pill blue-pill">Figma</span>
+        <span class="pill">Code Connect</span>
+      </div>
+    </div>
+
+    <!-- Integrations -->
+    <div class="card span-2">
+      <div class="label">Connected Platforms</div>
+      <h3>Integrations Stack</h3>
+      <ul>
+        <li><strong>Google Workspace</strong> — Docs, Drive, Calendar (uxcurry + work)</li>
+        <li><strong>Todoist</strong> — Task source of truth, ID <span class="mono">6CrfX9WCx3pm62Xf</span></li>
+        <li><strong>GitHub</strong> — thisisprabha (gist, repo, workflow scopes)</li>
+        <li><strong>Figma</strong> — MCP server connected for design ops</li>
+        <li><strong>Keka</strong> — SuperOps HR automation</li>
+        <li><strong>Telegram</strong> — Primary chat interface</li>
+      </ul>
+    </div>
+
+    <!-- iOS Projects -->
+    <div class="card peach">
+      <div class="accent-bar"></div>
+      <div class="label">iOS Apps</div>
+      <h3>WhatPay</h3>
+      <p>Live on App Store v1.0. v1.1 in review with iCloud sync.</p>
+      <div class="pills" style="margin-top:auto;">
+        <span class="pill peach-pill">SwiftUI</span>
+        <span class="pill">App Store</span>
+      </div>
+    </div>
+
+    <!-- Vault -->
+    <div class="card">
+      <div class="label">Knowledge Vault</div>
+      <h3>Obsidian Wiki</h3>
+      <p>~/.hermes/obsidian-vault</p>
+      <p style="margin-top:6px;">raw/ → processed/ → notes/ pipeline. Nightly sync.</p>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <span class="status-text">Synced</span>
+      </div>
+    </div>
+
+    <!-- Agent Identity -->
+    <div class="card span-4">
+      <div class="label">Agent Persona</div>
+      <h3>Agent Tina</h3>
+      <p>Chaotic good hacker personality. Ships at 2am, commits with 🤪, proactive auto-fixes, short explanations, bullet points over paragraphs. Warm but efficient. GIFs when they add flavor.</p>
+      <div class="pills" style="margin-top:12px;">
+        <span class="pill">chaotic good</span>
+        <span class="pill">proactive</span>
+        <span class="pill">auto-fix</span>
+        <span class="pill">no hand-holding</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
