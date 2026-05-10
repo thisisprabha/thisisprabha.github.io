@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Agentic Workflow Documentation — How Agent Tina runs on Hermes + Kimi K2.6">
+<meta property="og:title" content="Agentic Workflow — thisisprabha.com">
+<meta property="og:description" content="Full stack docs: crons, memory, task engine, design system">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thisisprabha.com/bento/agentic-workflow.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🤖%3C/text%3E%3C/svg%3E">
+<title>Agentic Workflow — thisisprabha.com</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #F4F4F1;
+    --surface: #FFFFFF;
+    --ink: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --peach: #FAD4C0;
+    --blue: #80A1C1;
+    --coral: #F2673C;
+    --green: #16A34A;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    padding: 40px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 32px;
+  }
+
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 620px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .badge::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+  }
+
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(140px, auto);
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    border: 1px solid var(--border);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .card .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .card p, .card li {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .card li {
+    padding: 3px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .card li::before {
+    content: '•';
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .card .accent-bar {
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .peach .accent-bar { background: var(--peach); }
+  .blue .accent-bar { background: var(--blue); }
+  .coral .accent-bar { background: var(--coral); }
+
+  .metric {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  .metric-sub {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .span-2 { grid-column: span 2; }
+  .span-2-r { grid-row: span 2; }
+  .span-4 { grid-column: span 4; }
+
+  .small-card {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .small-card .metric {
+    font-size: 28px;
+  }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 12px;
+  }
+
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .pill.peach-pill { background: var(--peach); color: #4a3b32; border: none; }
+  .pill.blue-pill { background: var(--blue); color: #fff; border: none; }
+  .pill.coral-pill { background: var(--coral); color: #fff; border: none; }
+
+  .mono {
+    font-family: 'SF Mono', 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  a {
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .span-2, .span-4 { grid-column: span 2; }
+    .span-2-r { grid-row: span 1; }
+  }
+
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; }
+    .span-2, .span-4 { grid-column: span 1; }
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">System Online</div>
+  <h1>Agentic Workflow</h1>
+  <p>How Agent Tina runs on Hermes + Kimi K2.6. Cron pipeline, memory systems, task engine, and design conventions.</p>
+</header>
+
+<div class="bento">
+
+  <!-- Agent Stack -->
+  <div class="card peach span-2">
+    <div class="accent-bar"></div>
+    <div class="label">Agent Stack</div>
+    <h3>Hermes + Kimi K2.6</h3>
+    <ul>
+      <li><strong>Model:</strong> Kimi K2.6 via Wolama Cloud <span class="mono">$20/mo</span></li>
+      <li><strong>Context:</strong> 2M+ tokens — session history + profile + skills injected every turn</li>
+      <li><strong>Persona:</strong> Chaotic good — proactive, auto-fix, no hand-holding</li>
+      <li><strong>Interface:</strong> Terminal + file tools + web search</li>
+    </ul>
+    <div class="pills">
+      <span class="pill peach-pill">Hermes v0.26</span>
+      <span class="pill">Kimi K2.6</span>
+      <span class="pill">2M+ ctx</span>
+    </div>
+  </div>
+
+  <!-- Cron Count -->
+  <div class="card small-card">
+    <div class="label">Active Crons</div>
+    <div class="metric">3</div>
+    <div class="metric-sub">Daily automation cadence</div>
+    <div class="pills">
+      <span class="pill">6PM IST</span>
+      <span class="pill">7PM IST</span>
+      <span class="pill">3AM IST</span>
+    </div>
+  </div>
+
+  <!-- Memory Size -->
+  <div class="card small-card">
+    <div class="label">Memory Store</div>
+    <div class="metric">1,654</div>
+    <div class="metric-sub">Honcho docs on localhost:8000</div>
+    <div class="pills">
+      <span class="pill">Honcho</span>
+      <span class="pill">FTS5</span>
+      <span class="pill">Semantic</span>
+    </div>
+  </div>
+
+  <!-- Cron Pipeline -->
+  <div class="card span-2 span-2-r">
+    <div class="label">Cron Pipeline</div>
+    <h3>Daily Automation</h3>
+    <ul>
+      <li><strong>6PM Processor</strong> — Raw file processing, Todoist sync, email scan, stale task check</li>
+      <li><strong>7PM Planner</strong> — Daily planning, next-day task prep</li>
+      <li><strong>3AM Executor</strong> — Overnight queue: oldest stale tasks, scheduled research, model memory tests</li>
+    </ul>
+    <p style="margin-top:10px">All outputs route to Google Docs/Drive. Markdown is strict fallback only.</p>
+    <div class="pills">
+      <span class="pill blue-pill">Google Workspace</span>
+      <span class="pill">Todoist</span>
+    </div>
+  </div>
+
+  <!-- Task Engine -->
+  <div class="card span-2">
+    <div class="label">Task Engine</div>
+    <h3>4-Board Classification</h3>
+    <ul>
+      <li><strong>TINA</strong> — Auto-execute (hermes, agent, cron, bridge, wiki, memory, skill)</li>
+      <li><strong>PERSONAL</strong> — Auto-execute (blog, youtube, portfolio, html, gallery, design)</li>
+      <li><strong>PROFESSIONAL</strong> — Needs approval (SuperOps, design kit, client work)</li>
+      <li><strong>APP</strong> — Needs approval (WhatPay, iOS, Xcode, App Store, TestFlight)</li>
+    </ul>
+    <p style="margin-top:10px">Vague tasks (<code>consider</code>, <code>explore</code>) go to needs-details. Approval queue: APPROVE/SKIP <span class="mono">hash123</span>.</p>
+  </div>
+
+  <!-- Memory Systems -->
+  <div class="card span-2">
+    <div class="label">Memory & Context</div>
+    <h3>Honcho + Prabha Taste</h3>
+    <ul>
+      <li><strong>Honcho</strong> — Peer modeling, 1,654 docs stored, auto-injected as compressed facts</li>
+      <li><strong>Prabha-taste skill</strong> — Screenshot ingestion, good/bad index, token synthesis</li>
+      <li><strong>Session search</strong> — Cross-session recall via FTS5 + semantic retrieval</li>
+      <li><strong>Memory notes</strong> — Durable user facts saved across sessions</li>
+    </ul>
+  </div>
+
+  <!-- Vault Pipeline -->
+  <div class="card blue">
+    <div class="accent-bar"></div>
+    <div class="label">Knowledge Vault</div>
+    <h3>Obsidian Pipeline</h3>
+    <p><span class="mono">raw/</span> → <span class="mono">processed/</span> → <span class="mono">notes/</span></p>
+    <p style="margin-top:8px">Nightly sync. Task engine scans <span class="mono">raw/</span> every 4h, extracts action items.</p>
+    <div class="pills" style="margin-top:auto">
+      <span class="pill blue-pill">4h heartbeat</span>
+    </div>
+  </div>
+
+  <!-- Design Conventions -->
+  <div class="card coral span-2">
+    <div class="accent-bar"></div>
+    <div class="label">Design System</div>
+    <h3>Folder Conventions</h3>
+    <ul>
+      <li><strong>/bento/</strong> — Dashboard layouts (card grids, metrics)</li>
+      <li><strong>/sketch/</strong> — Organic layouts (hand-drawn, Caveat font)</li>
+      <li><strong>/prabha-taste/</strong> — Design system reference + component docs</li>
+      <li><strong>/whatpay-review/</strong> — App review galleries (dark theme, lightbox)</li>
+    </ul>
+    <p style="margin-top:10px">Two modes: <strong>Bento</strong> (Inter, clean, geometric) and <strong>Sketch</strong> (Inter + Caveat, irregular borders, warm paper).</p>
+  </div>
+
+  <!-- Integrations -->
+  <div class="card">
+    <div class="label">Integrations</div>
+    <h3>Connected</h3>
+    <ul>
+      <li>Google Workspace</li>
+      <li>Todoist</li>
+      <li>GitHub</li>
+      <li>Figma MCP</li>
+      <li>Keka</li>
+      <li>Telegram</li>
+    </ul>
+    <div class="pills" style="margin-top:auto">
+      <span class="pill">6 platforms</span>
+    </div>
+  </div>
+
+  <!-- iOS Apps -->
+  <div class="card">
+    <div class="label">iOS Apps</div>
+    <h3>WhatPay</h3>
+    <p>Live on App Store v1.0. v1.1 in review with iCloud sync.</p>
+    <div class="pills" style="margin-top:auto">
+      <span class="pill coral-pill">SwiftUI</span>
+      <span class="pill">App Store</span>
+    </div>
+  </div>
+
+  <!-- Footer Card -->
+  <div class="card span-4">
+    <div class="label">Reference</div>
+    <h3>Links & Artifacts</h3>
+    <ul>
+      <li><a href="https://thisisprabha.com/bento/hermes-setup.html">My Hermes Setup</a> — System dashboard</li>
+      <li><a href="https://thisisprabha.com/prabha-taste/design-system.html">Design System</a> — Colors, typography, components</li>
+      <li><a href="https://thisisprabha.com/whatpay-review-v2/">WhatPay Review</a> — App Store submission gallery</li>
+      <li><a href="https://thisisprabha.com/sketch/context-engineering.html">Context Engineering</a> — Sketch-style explainer</li>
+    </ul>
+    <p style="margin-top:10px">All artifacts auto-deploy on push to <span class="mono">thisisprabha.github.io</span> main branch via GitHub Pages.</p>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
