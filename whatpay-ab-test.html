@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatPay Tagline A/B Test — Know what you pay vs Track subscriptions & EMIs</title>
+<style>
+  :root{ --bg:#0a0a0a; --card:#111; --text:#eee; --muted:#999; --accent:#ff3b6f; --green:#34c759; --blue:#0a84ff; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  body{ background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  header{ padding:48px 20px 24px; text-align:center; border-bottom:1px solid #1a1a1a; }
+  header h1{ font-size:clamp(22px,5vw,32px); font-weight:800; letter-spacing:-0.5px; }
+  header p{ color:var(--muted); margin-top:8px; font-size:15px; }
+  .container{ max-width:860px; margin:0 auto; padding:28px 16px 60px; }
+  .variant{ background:var(--card); border-radius:18px; padding:28px 24px; margin-bottom:24px; border:1px solid #1a1a1a; }
+  .variant .tag{ display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.3px; margin-bottom:14px; }
+  .variant-a .tag{ background:var(--blue); color:#fff; }
+  .variant-b .tag{ background:var(--accent); color:#fff; }
+  .variant h2{ font-size:22px; font-weight:700; margin-bottom:12px; letter-spacing:-0.3px; }
+  .variant .copy{ color:var(--muted); font-size:15px; line-height:1.6; margin-bottom:18px; }
+  .mock{ background:#000; border-radius:14px; padding:20px; border:1px solid #222; }
+  .mock .app-icon{ width:56px; height:56px; border-radius:12px; background:linear-gradient(135deg,#ff3b6f,#ff8c42); display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:12px; }
+  .mock h3{ font-size:18px; font-weight:700; margin-bottom:4px; }
+  .mock .subtitle{ color:var(--muted); font-size:13px; margin-bottom:12px; }
+  .mock .screenshots{ display:flex; gap:8px; margin-top:12px; }
+  .mock .ss{ flex:1; aspect-ratio:9/19; background:#1a1a1a; border-radius:8px; min-height:120px; }
+  .score{ display:flex; gap:12px; margin-top:18px; flex-wrap:wrap; }
+  .score .pill{ background:#1a1a1a; padding:8px 14px; border-radius:20px; font-size:13px; color:var(--muted); }
+  .score .pill strong{ color:var(--text); }
+  .recommendation{ background:rgba(52,199,89,0.08); border:1px solid rgba(52,199,89,0.2); border-radius:18px; padding:24px; margin-top:32px; }
+  .recommendation h2{ font-size:18px; font-weight:700; color:var(--green); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .recommendation p{ color:#bbb; font-size:15px; line-height:1.6; }
+  .footer{ text-align:center; padding:40px 20px; color:#555; font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>WhatPay Tagline A/B Test</h1>
+  <p>Comparing two App Store subtitle & screenshot copy variants — May 11, 2026</p>
+</header>
+<div class="container">
+
+  <div class="variant variant-a">
+    <span class="tag">Variant A</span>
+    <h2>"Know what you pay"</h2>
+    <p class="copy">Emotional, benefit-driven. Speaks to the anxiety of hidden fees and surprise charges. Short, punchy, memorable. Works well as a standalone headline on screenshot overlays.</p>
+    <div class="mock">
+      <div class="app-icon">💸</div>
+      <h3>WhatPay</h3>
+      <p class="subtitle">Know what you pay — subscription & EMI tracker</p>
+      <div class="screenshots">
+        <div class="ss"></div><div class="ss"></div><div class="ss"></div>
+      </div>
+    </div>
+    <div class="score">
+      <span class="pill"><strong>Clarity:</strong> 9/10</span>
+      <span class="pill"><strong>Emotion:</strong> 8/10</span>
+      <span class="pill"><strong>Searchability:</strong> 5/10</span>
+      <span class="pill"><strong>Length:</strong> 4 words ✅</span>
+    </div>
+  </div>
+
+  <div class="variant variant-b">
+    <span class="tag">Variant B</span>
+    <h2>"Track subscriptions & EMIs"</h2>
+    <p class="copy">Functional, keyword-rich. Immediately tells the user what the app does. Better for App Store search ("subscription tracker", "EMI tracker"). Slightly colder, but highly scannable.</p>
+    <div class="mock">
+      <div class="app-icon">💸</div>
+      <h3>WhatPay</h3>
+      <p class="subtitle">Track subscriptions & EMIs — never miss a due date</p>
+      <div class="screenshots">
+        <div class="ss"></div><div class="ss"></div><div class="ss"></div>
+      </div>
+    </div>
+    <div class="score">
+      <span class="pill"><strong>Clarity:</strong> 10/10</span>
+      <span class="pill"><strong>Emotion:</strong> 5/10</span>
+      <span class="pill"><strong>Searchability:</strong> 9/10</span>
+      <span class="pill"><strong>Length:</strong> 4 words ✅</span>
+    </div>
+  </div>
+
+  <div class="recommendation">
+    <h2>✅ Recommendation — Use both</h2>
+    <p><strong>Primary tagline (App Store subtitle):</strong> "Track subscriptions & EMIs" — maximizes search visibility and instantly communicates utility.<br><br>
+    <strong>Screenshot overlay copy:</strong> "Know what you pay" — emotional hook for the first 3 screenshots where users are browsing visually, not reading subtitles. Use "Track subscriptions & EMIs" on the feature-detail screenshots (4-6) to reinforce the functional promise.<br><br>
+    <strong>A/B test plan:</strong> Run subtitle swap for 2 weeks via App Store Connect metadata update. Monitor conversion rate (Product Page Views → App Units) in App Analytics. Screenshot overlay can be tested via custom product pages if you have ASC advanced features enabled.</p>
+  </div>
+
+</div>
+<div class="footer">
+  Auto-generated by Tina — Task Engine Cron Job — thisisprabha.com/whatpay-ab-test.html
+</div>
+</body>
+</html>
