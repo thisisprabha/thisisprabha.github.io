@@ -24,7 +24,7 @@
   .badge.review{ background:var(--yellow); color:#000; }
   .badge.pass{ background:var(--green); color:#000; }
   .progress-bar{ width:min(320px,80%); height:4px; background:#222; border-radius:2px; margin:18px auto 0; overflow:hidden; }
-  .progress-bar .fill{ height:100%; width:75%; background:var(--green); border-radius:2px; transition:width .6s ease; }
+    .progress-bar .fill{ height:100%; width:50%; background:var(--green); border-radius:2px; transition:width .6s ease; }
 
   /* Layout */
   .container{ max-width:960px; margin:0 auto; padding:28px 16px 60px; }
@@ -203,19 +203,23 @@
 
   <!-- Checklist -->
   <div class="checklist">
-    <h2>App Store Submission Checklist <span class="count">11/12 done</span></h2>
+    <h2>App Store Submission Checklist <span class="count">6/12 verified</span></h2>
     <ul>
-      <li><span class="check done"></span><div><strong>Version bumped</strong><span class="desc">v1.1 build incremented in Xcode</span></div></li>
-      <li><span class="check done"></span><div><strong>App Icon</strong><span class="desc">All required sizes generated (1024pt marketing included)</span></div></li>
-      <li><span class="check done"></span><div><strong>Screenshots</strong><span class="desc">9 iPhone 16e captures, dark mode, no overlays</span></div></li>
-      <li><span class="check done"></span><div><strong>URL scheme bug fixed</strong><span class="desc">CFBundleURLTypes no longer triggers on launch</span></div></li>
-      <li><span class="check done"></span><div><strong>iCloud sync tested</strong><span class="desc">Quick Add subscriptions persist across reinstall</span></div></li>
-      <li><span class="check done"></span><div><strong>Privacy manifest</strong><span class="desc">Required APIs declared (file timestamp, system boot time)</span></div></li>
-      <li><span class="check done"></span><div><strong>App Tracking Transparency</strong><span class="desc">Request shown if analytics added (currently N/A)</span></div></li>
-      <li><span class="check done"></span><div><strong>TestFlight beta</strong><span class="desc">Internal testing with 2 devices passed</span></div></li>
-      <li><span class="check done"></span><div><strong>App Review info</strong><span class="desc">Demo account credentials provided (not required for this app)</span></div></li>
-      <li><span class="check done"></span><div><strong>Keywords updated</strong><span class="desc">"subscription tracker, indian rupee, netflix price"</span></div></li>
-      <li><span class="check done"></span><div><strong>Release notes</strong><span class="desc">v1.1 changelog: iCloud sync, Quick Add, insights</span></div></li>
+      <li><span class="check done"></span><div><strong>Screenshots</strong><span class="desc">9 iPhone 16e captures verified — no system dialogs, no URL scheme popups, all unique</span></div></li>
+      <li><span class="check done"></span><div><strong>Keywords updated</strong><span class="desc">Verified on ASC: emi, loan, credit, card, renewal, reminder, recurring, payments, expense</span></div></li>
+      <li><span class="check done"></span><div><strong>Marketing URL</strong><span class="desc">Verified on ASC: https://thisisprabha.com</span></div></li>
+      <li><span class="check done"></span><div><strong>Release notes</strong><span class="desc">Verified on ASC — v1.1 whatsNew text populated</span></div></li>
+      <li><span class="check done"></span><div><strong>Build uploaded</strong><span class="desc">Build v5 uploaded May 1, 2026 — status VALID on ASC</span></div></li>
+      <li><span class="check done"></span><div><strong>App Review info</strong><span class="desc">No login required — app works without account</span></div></li>
+
+      <li class="pending"><span class="check"></span><div><strong>Version bumped</strong><span class="desc">Need to verify v1.1 build number in Xcode project matches ASC</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>App Icon</strong><span class="desc">Need to verify all required sizes in Assets.xcassets (1024pt marketing)</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>URL scheme bug fixed</strong><span class="desc">Screenshots are clean but code fix not verified in Info.plist / Xcode</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>iCloud sync tested</strong><span class="desc">Not tested — need to reinstall app and verify data persists</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>Privacy manifest</strong><span class="desc">Need to verify PrivacyInfo.xcprivacy exists with required API reasons</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>TestFlight beta</strong><span class="desc">Not tested — need to push to internal testers and confirm</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>App Tracking Transparency</strong><span class="desc">Verify if app uses any analytics / tracking that requires ATT prompt</span></div></li>
+
       <li class="pending"><span class="check hold"></span><div><strong>Submit to App Store</strong><span class="desc">Build uploaded, metadata complete — awaiting manual submission</span></div></li>
     </ul>
   </div>
