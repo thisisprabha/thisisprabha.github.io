@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatPay — Design & UX Review</title>
+<style>
+:root{--bg:#0B0B0F;--surface:#12121A;--surface2:#1A1A24;--text:#F0F0F5;--muted:#9494A0;--accent:#7C8CFF;--accent2:#FF7C8C;--border:#2A2A35;--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;padding:0 20px 60px}
+.container{max-width:1200px;margin:0 auto;padding:32px 0}
+header{text-align:center;padding:40px 0 32px;border-bottom:1px solid var(--border);margin-bottom:40px}
+header h1{font-size:2.8rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:8px}
+header .sub{color:var(--muted);font-size:1.05rem;max-width:560px;margin:0 auto}
+.meta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.meta span{background:var(--surface);padding:6px 14px;border-radius:999px;font-size:0.82rem;color:var(--muted);border:1px solid var(--border)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-top:40px}
+.card{background:var(--surface);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:transform 0.2s,box-shadow 0.2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.card .img-wrap{position:relative;background:var(--surface2);display:flex;align-items:center;justify-content:center;padding:20px;cursor:pointer}
+.card .img-wrap img{max-height:520px;width:auto;border-radius:var(--radius-sm);box-shadow:0 8px 32px rgba(0,0,0,0.5);transition:transform 0.3s}
+.card .img-wrap:hover img{transform:scale(1.02)}
+.card .num{position:absolute;top:16px;left:16px;background:rgba(0,0,0,0.7);color:#fff;padding:4px 12px;border-radius:999px;font-size:0.75rem;font-weight:700}
+.card .info{padding:20px 22px 24px}
+.card .info h3{font-size:1.05rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.card .info .tag{display:inline-block;background:rgba(124,140,255,0.12);color:var(--accent);padding:3px 10px;border-radius:999px;font-size:0.72rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.03em}
+.card .info .tag.negative{background:rgba(255,124,140,0.12);color:var(--accent2)}
+.card .info .tag.neutral{background:rgba(148,148,160,0.12);color:var(--muted)}
+.card .info p{color:var(--muted);font-size:0.9rem;line-height:1.55}
+.card .info ul{margin-top:10px;padding-left:18px}
+.card .info ul li{color:var(--muted);font-size:0.88rem;margin-bottom:4px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:100;padding:24px}
+.modal.active{display:flex}
+.modal img{max-height:92vh;max-width:100%;border-radius:var(--radius);box-shadow:0 20px 80px rgba(0,0,0,0.6)}
+.modal .close{position:absolute;top:24px;right:24px;background:rgba(255,255,255,0.1);color:#fff;border:none;width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;backdrop-filter:blur(12px)}
+.modal .close:hover{background:rgba(255,255,255,0.2)}
+@media(max-width:600px){header h1{font-size:2rem}.card .img-wrap{padding:12px}.card .img-wrap img{max-height:400px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>WhatPay</h1>
+<p class="sub">Design & UX review of the WhatPay iOS app — a subscription &amp; EMI tracker built for iPhone.</p>
+<div class="meta">
+<span>iPhone 16e Simulator</span>
+<span>Dark Mode</span>
+<span>14 Screens</span>
+<span>iOS 26.2</span>
+<span>Clean Capture</span>
+</div>
+</header>
+
+<div class="grid">
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">01</span>
+<img src="screenshots/01.png" alt="Onboarding intro" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Onboarding</span>
+<h3>Welcome Screen</h3>
+<p>First-launch screen with a credit-card icon, headline copy, and a prominent "Get started" pill button. Escape hatches "Remind me later" and "Skip" sit at top corners.</p>
+<ul>
+<li>Clean dark onboarding with clear hierarchy</li>
+<li>Good use of iconography to set mental model</li>
+<li>"Skip" placement is discoverable without being distracting</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">02</span>
+<img src="screenshots/02.png" alt="Country picker" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Onboarding</span>
+<h3>Country Selection</h3>
+<p>Two-column grid of country cards with currency symbols. India is pre-highlighted with a white fill and checkmark. "Continue" button disabled until selection.</p>
+<ul>
+<li>Cards are large enough for thumb-friendly tapping</li>
+<li>Missing flag icons shown as "?" placeholders — needs assets</li>
+<li>Warning "cannot be changed later" is appropriately alarming</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">03</span>
+<img src="screenshots/03.png" alt="Country selected" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Onboarding</span>
+<h3>Country Selected State</h3>
+<p>India card now fully selected with white background, black text, and a checkmark. Other cards remain dark gray. "Continue" becomes active.</p>
+<ul>
+<li>Strong visual contrast for selected vs unselected</li>
+<li>One-tap selection — no confirmation step needed</li>
+<li>Grid scrolls smoothly for additional countries</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">04</span>
+<img src="screenshots/04.png" alt="Quick add grid" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Onboarding</span>
+<h3>Quick Add Services</h3>
+<p>Grid of popular subscription services (Netflix, YouTube, Disney+, HBO Max, Spotify, Apple Music, etc.) with circular branded icons in 3-column layout.</p>
+<ul>
+<li>Icon-driven discovery reduces cognitive load</li>
+<li>3-column grid maximizes screen real estate</li>
+<li>Color coding helps brand recognition at a glance</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">05</span>
+<img src="screenshots/05.png" alt="Netflix price entry" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Form</span>
+<h3>Service Price Entry</h3>
+<p>Pre-filled "Netflix" name with a price input field below. iCloud sync notice and "Add" action button at bottom.</p>
+<ul>
+<li>Pre-filled name saves typing friction</li>
+<li>Price keyboard should be numeric-first (verify)</li>
+<li>Bottom button placement is thumb-reachable</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">06</span>
+<img src="screenshots/06.png" alt="Main dashboard" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Dashboard</span>
+<h3>Main Dashboard — First Card</h3>
+<p>Dashboard shows "My payments and emi's" header with AED total, monthly label, and a Netflix card showing ₹299. Bottom nav with list, "ADD NEW", and analytics icons.</p>
+<ul>
+<li>Big bold total amount draws attention to spending</li>
+<li>Card format is clean with clear cost visibility</li>
+<li>Bottom action bar stays persistent across screens</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">07</span>
+<img src="screenshots/07.png" alt="Card expanded" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Interaction</span>
+<h3>Expanded Card Detail</h3>
+<p>Tapping a card expands it to show full details: service name, cost, billing cycle toggle, and action buttons (Edit, Delete, etc.).</p>
+<ul>
+<li>Expand/collapse pattern keeps dashboard clean</li>
+<li>All actions visible without leaving the screen</li>
+<li>Edit button is discoverable in expanded state</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">08</span>
+<img src="screenshots/08.png" alt="Edit form" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Form</span>
+<h3>Edit Subscription Form</h3>
+<p>Edit mode opens a form with name field, cost field, and cycle toggles. "Save" button at bottom. Form fields are clearly labeled.</p>
+<ul>
+<li>Inline editing avoids modal navigation</li>
+<li>Keyboard handling: verify field scrolls into view</li>
+<li>Save/Cancel actions should be equally weighted</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">09</span>
+<img src="screenshots/09.png" alt="After save" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Dashboard</span>
+<h3>Dashboard After Update</h3>
+<p>Card collapses back to list view after save. Total recalculates if price changed. Smooth transition without jarring reloads.</p>
+<ul>
+<li>Immediate visual feedback on save</li>
+<li>Total updates in real-time</li>
+<li>Animation polish: check for springy card collapse</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">10</span>
+<img src="screenshots/10.png" alt="Add new form" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Form</span>
+<h3>Add New Subscription</h3>
+<p>Empty form for manually adding a new subscription. Fields: name, cost, billing cycle, category picker. Clean dark form with subtle borders.</p>
+<ul>
+<li>Consistent form pattern with edit screen</li>
+<li>Category picker adds taxonomy for future filtering</li>
+<li>Needs field validation messages (verify)</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">11</span>
+<img src="screenshots/11.png" alt="Insights" loading="lazy">
+</div>
+<div class="info">
+<span class="tag">Analytics</span>
+<h3>Insights / Spending View</h3>
+<p>Scroll-down reveals insights section with category breakdown, upcoming payments, and spending trends. Graph visualizations in dark theme.</p>
+<ul>
+<li>Scroll-reveal pattern keeps primary actions accessible</li>
+<li>Charts need sufficient contrast in dark mode</li>
+<li>Upcoming payments = high-value reminder feature</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="img-wrap" onclick="openModal(this)">
+<span class="num">12</span>
+<img src="screenshots/12.png" alt="Scroll view" loading="lazy">
+</div>
+<div class="info">
+<span class="tag neutral">Navigation</span>
+<h3>Dashboard Scroll State</h3>
+<p>Main dashboard scrolled to show additional cards below the fold. Multiple subscription cards visible with costs and icons.</p>
+<ul>
+<li>Scrolling is smooth with no jank</li>
+<li>Cards maintain consistent spacing and alignment</li>
+<li>Bottom nav bar stays fixed during scroll</li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="modal" id="modal" onclick="closeModal(event)">
+<button class="close" onclick="closeModal(event)">×</button>
+<img id="modalImg" src="" alt="">
+</div>
+
+<script>
+function openModal(el){
+  const img=el.querySelector('img');
+  document.getElementById('modalImg').src=img.src;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(e.target.id==='modal'||e.target.classList.contains('close')){
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:{id:'modal'}})});
+</script>
+</body>
+</html>
