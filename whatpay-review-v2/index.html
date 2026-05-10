@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%B1%3C/text%3E%3C/svg%3E">
 <title>WhatPay v1.1 — App Review Gallery</title>
 <style>
-  :root{ --bg:#0a0a0a; --card:#111; --text:#eee; --muted:#999; --accent:#ff3b6f; --green:#34c759; --yellow:#ffcc00; }
+  :root{ --bg:#0a0a0a; --card:#111; --text:#eee; --muted:#999; --accent:#ff3b6f; --green:#34c759; --yellow:#ffcc00; --red:#ff3b30; }
   *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   html{ scroll-behavior:smooth; }
   body{ background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
@@ -23,8 +23,9 @@
   .badge{ display:inline-block; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-top:14px; text-transform:uppercase; letter-spacing:0.3px; }
   .badge.review{ background:var(--yellow); color:#000; }
   .badge.pass{ background:var(--green); color:#000; }
+  .badge.block{ background:var(--red); color:#fff; }
   .progress-bar{ width:min(320px,80%); height:4px; background:#222; border-radius:2px; margin:18px auto 0; overflow:hidden; }
-    .progress-bar .fill{ height:100%; width:50%; background:var(--green); border-radius:2px; transition:width .6s ease; }
+    .progress-bar .fill{ height:100%; width:50%; background:var(--yellow); border-radius:2px; transition:width .6s ease; }
 
   /* Layout */
   .container{ max-width:960px; margin:0 auto; padding:28px 16px 60px; }
@@ -54,13 +55,17 @@
   .checklist li{ padding:14px 0; border-bottom:1px solid #1a1a1a; display:flex; align-items:flex-start; gap:14px; transition:opacity .2s; }
   .checklist li:last-child{ border-bottom:none; }
   .checklist li.pending{ opacity:.55; }
+  .checklist li.blocker{ background:rgba(255,59,48,0.06); border-radius:10px; padding:14px; margin:4px 0; border-bottom:none; }
   .check{ width:22px; height:22px; border-radius:50%; border:2.5px solid var(--muted); flex-shrink:0; margin-top:1px; transition:all .2s ease; position:relative; }
   .check.done{ background:var(--green); border-color:var(--green); }
-  .check.done::after{ content:""; position:absolute; inset:0; background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E\") center/14px no-repeat; }
+  .check.done::after{ content:""; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/14px no-repeat; }
   .check.hold{ border-color:var(--yellow); }
-  .check.hold::after{ content:""; position:absolute; inset:0; background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffcc00' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E\") center/12px no-repeat; }
+  .check.hold::after{ content:""; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffcc00' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='12' y1='5' x2='12' y2='19'/%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3C/svg%3E") center/12px no-repeat; }
+  .check.fail{ background:var(--red); border-color:var(--red); }
+  .check.fail::after{ content:""; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") center/12px no-repeat; }
   .checklist li strong{ display:block; font-size:15px; font-weight:600; margin-bottom:2px; }
   .checklist li span.desc{ font-size:13px; color:var(--muted); }
+  .checklist .section-label{ font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin:20px 0 8px; padding-left:4px; }
 
   /* Footer */
   .footer{ text-align:center; padding:48px 20px; color:#555; font-size:12px; }
@@ -91,7 +96,7 @@
 <header>
   <h1>WhatPay v1.1</h1>
   <p>App Review Gallery — May 10, 2026</p>
-  <span class="badge review">Ready for Submission</span>
+  <span class="badge block">Blocked — 5 Issues</span>
   <div class="progress-bar"><div class="fill"></div></div>
 </header>
 
@@ -156,8 +161,8 @@
     <div class="screen-info">
       <div class="num">Screen 05</div>
       <h3>Dashboard</h3>
-      <p>Main screen showing monthly total ₹153 with stacked subscription cards.</p>
-      <div class="obs">Cards use pink-to-red gradient. Netflix ₹99 visible. Edit icon on each card.</div>
+      <p>Main screen showing monthly total with stacked subscription cards.</p>
+      <div class="obs">Cards use pink-to-red gradient. Netflix visible. Edit icon on each card.</div>
     </div>
   </div>
 
@@ -176,8 +181,8 @@
     <div class="screen-info">
       <div class="num">Screen 07</div>
       <h3>Category Filter Bottom Sheet</h3>
-      <p>Overlay showing 12 categories: Entertainment, Productivity, News, Cloud Storage, Fitness, Education, Shopping, Finance, Gaming, Music, Streaming, All.</p>
-      <div class="obs">Streaming (4) highlighted. Smooth frosted gradient background. Close via drag or tap outside.</div>
+      <p>Overlay showing categories: Entertainment, Productivity, News, Cloud Storage, Fitness, Education, Shopping, Finance, Gaming, Music, Streaming, All.</p>
+      <div class="obs">Streaming highlighted. Smooth frosted gradient background. Close via drag or tap outside.</div>
     </div>
   </div>
 
@@ -204,23 +209,30 @@
   <!-- Checklist -->
   <div class="checklist">
     <h2>App Store Submission Checklist <span class="count">6/12 verified</span></h2>
+
+    <div class="section-label">Blockers — Must fix before submit</div>
     <ul>
-      <li><span class="check done"></span><div><strong>Screenshots</strong><span class="desc">9 iPhone 16e captures verified — no system dialogs, no URL scheme popups, all unique</span></div></li>
-      <li><span class="check done"></span><div><strong>Keywords updated</strong><span class="desc">Verified on ASC: emi, loan, credit, card, renewal, reminder, recurring, payments, expense</span></div></li>
-      <li><span class="check done"></span><div><strong>Marketing URL</strong><span class="desc">Verified on ASC: https://thisisprabha.com</span></div></li>
-      <li><span class="check done"></span><div><strong>Release notes</strong><span class="desc">Verified on ASC — v1.1 whatsNew text populated</span></div></li>
-      <li><span class="check done"></span><div><strong>Build uploaded</strong><span class="desc">Build v5 uploaded May 1, 2026 — status VALID on ASC</span></div></li>
-      <li><span class="check done"></span><div><strong>App Review info</strong><span class="desc">No login required — app works without account</span></div></li>
+      <li class="blocker"><span class="check fail"></span><div><strong>Privacy manifest missing</strong><span class="desc">PrivacyInfo.xcprivacy not found in project. Apple requires since 2024. Add to root with NSPrivacyCollectedDataTypes, NSPrivacyAccessedAPITypes.</span></div></li>
+      <li class="blocker"><span class="check fail"></span><div><strong>Previous review unresolved</strong><span class="desc">Submission bf653db3 (Mar 5, 2026) has UNRESOLVED_ISSUES. Log into ASC → App Review → resolve Apple's feedback before resubmitting.</span></div></li>
+      <li class="blocker"><span class="check fail"></span><div><strong>No screenshots on ASC v1.1</strong><span class="desc">0 screenshot sets uploaded for en-US. Need 5.5" and 6.7" sets before submission.</span></div></li>
+      <li class="blocker"><span class="check fail"></span><div><strong>Version / build mismatch</strong><span class="desc">Xcode MARKETING_VERSION = 1.3.1, ASC version = 1.1. Either create v1.3.1 in ASC or roll Xcode back to 1.1. Build 5 currently unassigned to any version.</span></div></li>
+    </ul>
 
-      <li class="pending"><span class="check"></span><div><strong>Version bumped</strong><span class="desc">Need to verify v1.1 build number in Xcode project matches ASC</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>App Icon</strong><span class="desc">Need to verify all required sizes in Assets.xcassets (1024pt marketing)</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>URL scheme bug fixed</strong><span class="desc">Screenshots are clean but code fix not verified in Info.plist / Xcode</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>iCloud sync tested</strong><span class="desc">Not tested — need to reinstall app and verify data persists</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>Privacy manifest</strong><span class="desc">Need to verify PrivacyInfo.xcprivacy exists with required API reasons</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>TestFlight beta</strong><span class="desc">Not tested — need to push to internal testers and confirm</span></div></li>
-      <li class="pending"><span class="check"></span><div><strong>App Tracking Transparency</strong><span class="desc">Verify if app uses any analytics / tracking that requires ATT prompt</span></div></li>
+    <div class="section-label">Warnings — Fix if time</div>
+    <ul>
+      <li class="pending"><span class="check hold"></span><div><strong>URL scheme registered</strong><span class="desc">CFBundleURLSchemes has "whatpay://" — caused stuck modal in previous test. Fixed for screenshots but verify code doesn't trigger on launch.</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>iCloud container mismatch</strong><span class="desc">Widget uses iCloud.com.prabhakaran.whatimpaying but main bundle is com.whatamipaying.What-am-I-paying. Verify CloudKit container is shared correctly.</span></div></li>
+      <li class="pending"><span class="check"></span><div><strong>TestFlight beta</strong><span class="desc">Not tested. Push Build 5 to internal testers to catch crashes before review.</span></div></li>
+    </ul>
 
-      <li class="pending"><span class="check hold"></span><div><strong>Submit to App Store</strong><span class="desc">Build uploaded, metadata complete — awaiting manual submission</span></div></li>
+    <div class="section-label">Verified — Good to go</div>
+    <ul>
+      <li><span class="check done"></span><div><strong>Build uploaded</strong><span class="desc">Build 5 uploaded May 1, 2026 — status VALID on ASC</span></div></li>
+      <li><span class="check done"></span><div><strong>Metadata complete</strong><span class="desc">Name, subtitle, description (860 chars), keywords (64 chars), marketing URL, support URL, privacy policy URL, whatsNew all populated</span></div></li>
+      <li><span class="check done"></span><div><strong>App icons</strong><span class="desc">1024pt + dark + tinted variants present in Assets.xcassets</span></div></li>
+      <li><span class="check done"></span><div><strong>Entitlements</strong><span class="desc">iCloud, CloudKit, app groups, push dev all configured</span></div></li>
+      <li><span class="check done"></span><div><strong>Xcode build</strong><span class="desc">Clean build on iPhone 16e simulator (iOS 26.3.1). No compile errors.</span></div></li>
+      <li><span class="check done"></span><div><strong>Screenshots clean</strong><span class="desc">9 unique captures — no system dialogs, no duplicates, all distinct flows</span></div></li>
     </ul>
   </div>
 
