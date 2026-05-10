@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Prabha's Design System — Extracted from thisisprabha.com codebase. Colors, typography, layouts, and components.">
+<meta property="og:title" content="Design System — thisisprabha.com">
+<meta property="og:description" content="Colors, typography, layouts, and components extracted from the codebase">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://thisisprabha.com/prabha-taste/design-system.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎨%3C/text%3E%3C/svg%3E">
+<title>Design System — thisisprabha.com</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&display=swap');
+
+  :root {
+    /* Bento Palette */
+    --bg: #F4F4F1;
+    --surface: #FFFFFF;
+    --ink: #111827;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --peach: #FAD4C0;
+    --blue: #80A1C1;
+    --coral: #F2673C;
+    --green: #16A34A;
+    --radius: 16px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+
+    /* Sketch Palette */
+    --paper: #FDFBF7;
+    --ink-sketch: #2B2620;
+    --muted-sketch: #7A7267;
+    --pencil: #B8A99A;
+    --accent-sketch: #F2673C;
+    --blue-sketch: #4A7C9B;
+    --green-sketch: #4A9B6B;
+    --radius-sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    --shadow-sketch: 3px 4px 0 rgba(43,38,32,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    padding: 48px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 620px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  /* Color swatches */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .swatch {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .swatch-color {
+    height: 64px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+  }
+
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .swatch-hex {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'SF Mono', monospace;
+  }
+
+  /* Typography */
+  .type-spec {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+
+  .type-spec h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .type-sample {
+    margin-bottom: 8px;
+  }
+
+  .type-sample:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Card patterns */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .card p {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .card .label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* Sketch block */
+  .sketch-block {
+    background: #fff;
+    border: 2px solid var(--ink-sketch);
+    border-radius: var(--radius-sketch);
+    padding: 24px 28px;
+    box-shadow: var(--shadow-sketch);
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .sketch-block h3 {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .sketch-block p {
+    font-size: 14px;
+    color: var(--muted-sketch);
+    line-height: 1.55;
+  }
+
+  /* Code */
+  pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    font-family: 'SF Mono', monospace;
+    font-size: 12.5px;
+    overflow-x: auto;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  code {
+    font-family: 'SF Mono', monospace;
+    font-size: 13px;
+    background: rgba(0,0,0,0.04);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Bento grid demo */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .bento-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .bento-card.span-2 { grid-column: span 2; }
+  .bento-card.span-4 { grid-column: span 4; }
+
+  .bento-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .bento-card p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .metric {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .bento { grid-template-columns: repeat(2, 1fr); }
+    .bento-card.span-2, .bento-card.span-4 { grid-column: span 2; }
+  }
+
+  @media (max-width: 520px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento-card.span-2, .bento-card.span-4 { grid-column: span 1; }
+    body { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Design System</h1>
+  <p>Extracted reference from thisisprabha.com codebase. Two modes: <strong>Bento</strong> (clean/dashboard) and <strong>Sketch</strong> (organic/hand-drawn).</p>
+</header>
+
+<!-- Color Palette -->
+<div class="section">
+  <h2>Color Palette</h2>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F4F4F1"></div>
+      <div class="swatch-name">bg</div>
+      <div class="swatch-hex">#F4F4F1</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFFFFF;border-color:#E5E7EB"></div>
+      <div class="swatch-name">surface</div>
+      <div class="swatch-hex">#FFFFFF</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#111827"></div>
+      <div class="swatch-name">ink</div>
+      <div class="swatch-hex">#111827</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#6B7280"></div>
+      <div class="swatch-name">muted</div>
+      <div class="swatch-hex">#6B7280</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FAD4C0"></div>
+      <div class="swatch-name">peach</div>
+      <div class="swatch-hex">#FAD4C0</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#80A1C1"></div>
+      <div class="swatch-name">blue</div>
+      <div class="swatch-hex">#80A1C1</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F2673C"></div>
+      <div class="swatch-name">coral</div>
+      <div class="swatch-hex">#F2673C</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#16A34A"></div>
+      <div class="swatch-name">green</div>
+      <div class="swatch-hex">#16A34A</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FDFBF7;border-color:#E5E7EB"></div>
+      <div class="swatch-name">paper</div>
+      <div class="swatch-hex">#FDFBF7</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#B8A99A"></div>
+      <div class="swatch-name">pencil</div>
+      <div class="swatch-hex">#B8A99A</div>
+    </div>
+  </div>
+</div>
+
+<!-- Typography -->
+<div class="section">
+  <h2>Typography</h2>
+  <div class="type-spec">
+    <h3>Bento — Inter</h3>
+    <div class="type-sample" style="font-size:32px;font-weight:700;letter-spacing:-0.02em">Heading 32px / 700</div>
+    <div class="type-sample" style="font-size:22px;font-weight:700;letter-spacing:-0.01em">Section 22px / 700</div>
+    <div class="type-sample" style="font-size:16px;font-weight:600">Subhead 16px / 600</div>
+    <div class="type-sample" style="font-size:14px;color:var(--muted)">Body 14px / 400 — Color: muted</div>
+    <div class="type-sample" style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted)">Label 12px / 600 uppercase</div>
+  </div>
+  <div class="type-spec">
+    <h3>Sketch — Inter + Caveat</h3>
+    <div class="type-sample" style="font-family:'Caveat',cursive;font-size:52px;font-weight:700">Hand-drawn Heading</div>
+    <div class="type-sample" style="font-size:20px;font-weight:700">Block Title 20px / 700</div>
+    <div class="type-sample" style="font-size:14px;color:var(--muted-sketch)">Body 14px / 400 — Color: muted-sketch</div>
+    <div class="type-sample" style="font-family:'Caveat',cursive;font-size:18px;font-weight:600;color:var(--muted-sketch)">Tag — Caveat 18px / 600</div>
+  </div>
+</div>
+
+<!-- Layout Patterns -->
+<div class="section">
+  <h2>Layout Patterns</h2>
+
+  <h3 style="font-size:18px;font-weight:600;margin:24px 0 12px">Bento Grid</h3>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:8px">4-column responsive grid for dashboards and data-dense layouts. Cards with consistent padding, radius, and shadow.</p>
+  <div class="bento">
+    <div class="bento-card span-2">
+      <h4>Span 2</h4>
+      <p>grid-column: span 2</p>
+    </div>
+    <div class="bento-card">
+      <div class="metric">24</div>
+      <p>metric card</p>
+    </div>
+    <div class="bento-card">
+      <div class="metric">8</div>
+      <p>metric card</p>
+    </div>
+    <div class="bento-card span-4">
+      <h4>Full Width</h4>
+      <p>grid-column: span 4 — collapses to 2 on tablet, 1 on mobile</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:18px;font-weight:600;margin:32px 0 12px">Sketch Wall</h3>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:8px">Vertical flex column with irregular, hand-drawn blocks. Each block rotates slightly for organic feel.</p>
+  <div class="sketch-block">
+    <h3>Sketch Block</h3>
+    <p>border: 2px solid ink; border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px; box-shadow: 3px 4px 0 rgba(43,38,32,0.08);</p>
+  </div>
+</div>
+
+<!-- CSS Variables Reference -->
+<div class="section">
+  <h2>CSS Variables</h2>
+  <pre>:root {
+  /* Bento */
+  --bg: #F4F4F1;
+  --surface: #FFFFFF;
+  --ink: #111827;
+  --muted: #6B7280;
+  --border: #E5E7EB;
+  --peach: #FAD4C0;
+  --blue: #80A1C1;
+  --coral: #F2673C;
+  --green: #16A34A;
+  --radius: 16px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
+
+  /* Sketch */
+  --paper: #FDFBF7;
+  --ink-sketch: #2B2620;
+  --muted-sketch: #7A7267;
+  --pencil: #B8A99A;
+  --accent-sketch: #F2673C;
+  --blue-sketch: #4A7C9B;
+  --green-sketch: #4A9B6B;
+  --radius-sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --shadow-sketch: 3px 4px 0 rgba(43,38,32,0.08);
+}</pre>
+</div>
+
+<!-- Folder Conventions -->
+<div class="section">
+  <h2>Folder Conventions</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="label">/bento/</div>
+      <h4>Dashboard layouts</h4>
+      <p>Card grids, metrics, data-dense pages. Clean geometric style with Inter.</p>
+    </div>
+    <div class="card">
+      <div class="label">/sketch/</div>
+      <h4>Organic layouts</h4>
+      <p>Hand-drawn style with Caveat font. Irregular borders, warm paper background.</p>
+    </div>
+    <div class="card">
+      <div class="label">/prabha-taste/</div>
+      <h4>Design system & reference</h4>
+      <p>Style guides, component references, and design tokens.</p>
+    </div>
+    <div class="card">
+      <div class="label">/whatpay-review/</div>
+      <h4>App review galleries</h4>
+      <p>Screenshot galleries with dark theme, lightbox, checklist.</p>
+    </div>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:40px 0 20px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:40px">
+  Generated by Agent Tina · <a href="https://thisisprabha.com" style="color:var(--muted)">thisisprabha.com</a>
+</footer>
+
+</div>
+</body>
+</html>
