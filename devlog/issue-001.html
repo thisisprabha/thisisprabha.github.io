@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue #001 — I Built an AI Agent That Makes My Videos | Prabha Builds</title>
+    <meta name="description" content="The full Hermes stack walkthrough — what I actually run every day, what it costs ($0), where it breaks, and why I retired Kanban for Todoist." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --bg-elevated: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #9a9a9a;
+            --accent: #e85c2b;
+            --accent-light: #fef3ed;
+            --border: #e5e5e3;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Navigation */
+        nav {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Article Header */
+        .article-header {
+            margin-bottom: 48px;
+        }
+        
+        .issue-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        
+        .meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .reading-time::before {
+            content: "•";
+            margin-right: 16px;
+            color: var(--border);
+        }
+        
+        /* Article Content */
+        article {
+            font-size: 17px;
+            line-height: 1.7;
+        }
+        
+        article h2 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin: 48px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        article h3 {
+            font-size: 19px;
+            font-weight: 600;
+            margin: 32px 0 16px;
+        }
+        
+        article p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+        
+        article p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        /* Blockquote / Pull Quote */
+        blockquote {
+            background: var(--bg-elevated);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            margin: 32px 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-style: italic;
+        }
+        
+        blockquote p {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        /* Code / Tech specs */
+        .tech-box {
+            background: #1a1a1a;
+            border-radius: var(--radius-sm);
+            padding: 20px 24px;
+            margin: 32px 0;
+            color: #e8e8e8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .tech-box .label {
+            color: #6b6b6b;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        /* Lists */
+        article ul, article ol {
+            margin: 20px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+        
+        article li {
+            margin-bottom: 8px;
+        }
+        
+        /* Status indicators */
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 32px 0;
+        }
+        
+        .status-item {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 16px 20px;
+        }
+        
+        .status-item .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .status-item .value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .status-item .value.working {
+            color: #2e7d32;
+        }
+        
+        .status-item .value.broken {
+            color: var(--accent);
+        }
+        
+        /* Section: What Worked */
+        .worked-section h2 {
+            border-bottom-color: #2e7d32;
+        }
+        
+        .worked-section h2::before {
+            content: "✓ ";
+        }
+        
+        /* Section: What Broke */
+        .broke-section h2 {
+            border-bottom-color: var(--accent);
+        }
+        
+        .broke-section h2::before {
+            content: "✕ ";
+        }
+        
+        /* Next Sprint */
+        .next-section {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            margin: 48px 0;
+        }
+        
+        .next-section h2 {
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .next-section h2::before {
+            content: "→ ";
+        }
+        
+        /* Ship Status */
+        .ship-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            padding: 8px 16px;
+            border-radius: 100px;
+            margin-top: 48px;
+        }
+        
+        .ship-status.shipped {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .ship-status.draft {
+            background: #fff8e1;
+            color: #f57c00;
+        }
+        
+        .ship-status.paused {
+            background: #f5f5f5;
+            color: var(--text-muted);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 64px;
+            padding: 32px 0 64px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--text-primary);
+        }
+        
+        .issue-nav {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .issue-nav a {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .issue-nav a:hover {
+            color: var(--accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 26px;
+            }
+            
+            article h2 {
+                font-size: 21px;
+            }
+            
+            .tech-box {
+                padding: 16px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <nav>
+            <a href="index.html">← Back to Devlog</a>
+        </nav>
+        
+        <header class="article-header">
+            <div class="issue-label">Issue #001 — May 12, 2026</div>
+            <h1>I Built an AI Agent That Makes My Videos</h1>
+            <div class="meta">
+                <span>Prabha</span>
+                <span class="reading-time">12 min read</span>
+            </div>
+        </header>
+        
+        <article>
+            
+            <p><strong>The pitch:</strong> One Mac Mini M2. Zero SaaS subscriptions. An agent stack that 99% of creators pay $200+/month to approximate. This is how I actually run it — what works, what's broken, and why I retired my own Kanban system.</p>
+            
+            <blockquote>
+                <p>"The goal isn't to automate everything. The goal is to automate the boring parts so I can focus on what actually matters: building shit and telling honest stories about it."</p>
+            </blockquote>
+            
+            <div class="status-grid">
+                <div class="status-item">
+                    <div class="label">Hardware</div>
+                    <div class="value working">Mac Mini M2 16GB</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Agent Stack</div>
+                    <div class="value working">Hermes + 20+ skills</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Monthly Cost</div>
+                    <div class="value working">$0 (local-first)</div>
+                </div>
+                <div class="status-item">
+                    <div class="label">Hours Saved/Week</div>
+                    <div class="value">~15 hrs</div>
+                </div>
+            </div>
+            
+            
+            <h2>What This Actually Is</h2>
+            
+            <p>I'm a Lead Product Designer at SuperOps. I also build iOS apps on the side (WhatPay, Time Left, a few others). I document my builds publicly. That documentation used to take 8+ hours a week.</p>
+            
+            <p>Now it takes 30 minutes of review + approval.</p>
+            
+            <p>The stack:</p>
+            
+            <ul>
+                <li><strong>Hermes</strong> — My agent orchestration layer (Claude Code, cron jobs, skills)</li>
+                <li><strong>Todoist</strong> — Single source of truth for all tasks</li>
+                <li><strong>Honcho</strong> — Persistent memory across agent sessions</li>
+                <li><strong>ComfyUI</key> — Local image generation (no Midjourney subscription)</li>
+                <li><strong>Hyperframes</strong> — Motion/animated content for YouTube intros</li>
+                <li><strong>GitHub Pages</strong> — thisisprabha.com (everything public lives here)</li>
+            </ul>
+            
+            
+            <div class="worked-section">
+                <h2>What Worked</h2>
+                
+                <h3>1. The Daily 6 PM Processor</h3>
+                
+                <p>Every evening at 6 PM, a cron job wakes up and does three things:</p>
+                
+                <ul>
+                    <li>Scans my raw idea files ( scattered notes, screenshots, voice memos)</li>
+                    <li>Extracts structured tasks, links, and references</li>
+                    <li>Creates Todoist tasks with proper labels and priorities</li>
+                </ul>
+                
+                <p>I wake up to a clean, prioritized list. No more digging through 17 notes apps.</p>
+                
+                <div class="tech-box">
+                    <span class="label">The magic</span>
+                    The 6 PM job doesn't just dump tasks. It triages. "Urgent + Professional" vs "Personal + Backlog". It learned my patterns. I rarely have to re-priority anymore.
+                </div>
+                
+                
+                <h3>2. Skills as Disposable Expertise</h3>
+                
+                <p>I used to Google the same shit every 3 weeks. "How do I batch convert these images again?"</p>
+                
+                <p>Now I convert that knowledge into a skill file. Each skill has:</p>
+                
+                <ul>
+                    <li>Trigger conditions (when to use it)</li>
+                    <li>Exact commands (copy-paste ready)</li>
+                    <li>Pitfalls I've already hit</li>
+                </ul>
+                
+                <p>Current skill count: 20+. Some I wrote. Some I downloaded. Each one is reusable expertise.</p>
+                
+                
+                <h3>3. Public-by-Default Documentation</h3>
+                
+                <p>Everything goes to GitHub Pages. Research briefs? HTML. Design explorations? HTML. This devlog? HTML.</p>
+                
+                <p>Benefits I didn't expect:</p>
+                
+                <ul>
+                    <li>Forces clarity — if I can't explain it publicly, I don't understand it</li>
+                    <li>SEO happens automatically</li>
+                    <li>People actually find and reference my work</li>
+                    <li>No "where did I put that doc?" — it's always at thisisprabha.com/[thing]</li>
+                </ul>
+            </div>
+            
+            
+            <div class="broke-section">
+                <h2>What Broke</h2>
+                
+                <h3>1. The Kanban Experiment (RIP)</h3>
+                
+                <p>I built a full Kanban automation with boards, issue tracking, auto-assignment. It was beautiful. It lasted 3 weeks.</p>
+                
+                <p>The problem: It was a system <em>around</em> my work, not <em>in</em> my work. I had to context switch to use it. Todoist is already there. Already connected to everything.</p>
+                
+                <p>Lesson: Automate within existing workflows. Don't invent new workflows just for automation.</p>
+                
+                
+                <h3>2. Google OAuth (Perpetually Broken)</h3>
+                
+                <p>I've set up Google Workspace integration 4 times. It works for 2 weeks, then token expires, then I'm back to manual exports.</p>
+                
+                <p>Current workaround: Python scripts that write directly to Docs via API. Less elegant. More reliable.</p>
+                
+                <div class="tech-box">
+                    <span class="label">Status: Mitigated</span>
+                    Using ~/.hermes/scripts/google_doc_from_text.py for all deliverables. Bypasses the OAuth dance entirely.
+                </div>
+                
+                
+                <h3>3. Context Compression Cost (Surprise)</h3>
+                
+                <p>Hermes compresses long conversations to stay under token limits. I had this routed through a paid API. Forgot about it. $47 bill one month.</p>
+                
+                <p>Fix: Local compression via Kimi K2.6. Slightly slower. Infinitely cheaper.</p>
+            </div>
+            
+            
+            <div class="next-section">
+                <h2>Next Sprint</h2>
+                
+                <ol>
+                    <li><strong>First YouTube Short</strong> — "3 SwiftUI modifiers I actually use daily" (shoot this weekend)</li>
+                    <li><strong>Devlog #002</strong> — How WhatPay App Store submission actually went (the failures)</li>
+                    <li><strong>Hermes Skill Cleanup</strong> — 20 skills, 3 actively used. Archive the dead weight.</li>
+                </ol>
+                
+                <p><strong>Goal for Issue #002:</strong> Have actual video content to embed, not just text.</p>
+            </div>
+            
+            
+            <span class="ship-status draft">Ship Status: Draft — Reviewing</span>
+            
+        </article>
+        
+        <footer>
+            <nav class="footer-nav">
+                <a href="../">Portfolio</a>
+                <a href="https://github.com/thisisprabha">GitHub</a>
+                <a href="https://youtube.com/@prabha">YouTube</a>
+            </nav>
+            <div class="issue-nav">
+                <span>← Prev</span>
+                <a href="index.html">All Issues</a>
+                <span>Next →</span>
+            </div>
+        </footer>
+        
+    </div>
+</body>
+</html>

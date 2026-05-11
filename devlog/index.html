@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devlog — Prabha Builds</title>
+    <meta name="description" content="Raw build logs from a Lead PD building apps and design systems." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #faf9f7;
+            --bg-elevated: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #6b6b6b;
+            --text-muted: #9a9a9a;
+            --accent: #e85c2b;
+            --accent-light: #fef3ed;
+            --border: #e5e5e3;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 48px 0 32px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+        
+        .masthead {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .status-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 4px 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 4px;
+        }
+        
+        .subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 480px;
+        }
+        
+        /* Issue list */
+        .issue-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .issue-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+        
+        .issue-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+        
+        .issue-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .issue-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .issue-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+        
+        .issue-date {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .issue-status {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+        
+        .status-draft {
+            background: #f3f3f3;
+            color: var(--text-secondary);
+        }
+        
+        .status-shipped {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .issue-title {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .issue-summary {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        
+        .issue-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+        
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 64px;
+            padding: 32px 0 48px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Empty state */
+        .empty-state {
+            background: var(--bg-elevated);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 48px;
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
+        .empty-state .icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            header {
+                padding: 32px 0 24px;
+            }
+            
+            .issue-card {
+                padding: 20px;
+            }
+            
+            .issue-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="masthead">
+                <h1>Devlog</h1>
+                <span class="status-badge">WIP</span>
+            </div>
+            <p class="subtitle">
+                Raw build logs from a Lead PD building apps, design systems, and automation stacks. No filters. No growth hacks. Just what worked, what broke, and what's next.
+            </p>
+        </header>
+        
+        <main class="issue-list">
+            <!-- Issue #001 -->
+            <article class="issue-card">
+                <a href="issue-001.html">
+                    <div class="issue-meta">
+                        <span class="issue-number">#001</span>
+                        <span class="issue-date">May 12, 2026</span>
+                        <span class="issue-status status-draft">Draft</span>
+                    </div>
+                    <h2 class="issue-title">I Built an AI Agent That Makes My Videos</h2>
+                    <p class="issue-summary">
+                        The full Hermes stack walkthrough — what I actually run every day, what it costs ($0), where it breaks, and why I retired the Kanban system for Todoist.
+                    </p>
+                    <div class="issue-tags">
+                        <span class="tag">dev-tools</span>
+                        <span class="tag">automation</span>
+                        <span class="tag">hermes</span>
+                        <span class="tag">meta</span>
+                    </div>
+                </a>
+            </article>
+            
+            <!-- Template for next issues -->
+            <!--
+            <article class="issue-card">
+                <a href="issue-002.html">
+                    <div class="issue-meta">
+                        <span class="issue-number">#002</span>
+                        <span class="issue-date">[DATE]</span>
+                        <span class="issue-status status-draft">Draft</span>
+                    </div>
+                    <h2 class="issue-title">[Title]</h2>
+                    <p class="issue-summary">[Summary]</p>
+                    <div class="issue-tags">
+                        <span class="tag">[tag]</span>
+                    </div>
+                </a>
+            </article>
+            -->
+        </main>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="https://thisisprabha.com">Portfolio</a>
+                <a href="https://github.com/thisisprabha">GitHub</a>
+                <a href="https://youtube.com/@prabha">YouTube</a>
+                <a href="mailto:uxcurry@gmail.com">Email</a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
