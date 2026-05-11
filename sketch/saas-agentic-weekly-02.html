@@ -3,19 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agentic SaaS Weekly — Issue #2</title>
+<title>ITSM/MSP Agentic Weekly — Issue #2 — May 11, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#fdfbf6;
-    --ink:#2a2520;
-    --pencil:#6b6560;
-    --highlight:#fff3a8;
-    --sticky-yellow:#fff9c4;
-    --sticky-pink:#ffcdd2;
-    --sticky-blue:#b3e5fc;
-    --sticky-green:#c8e6c9;
+    --paper:#fdfbf6;--ink:#2a2520;--pencil:#6b6560;--highlight:#fff3a8;
+    --sticky-yellow:#fff9c4;--sticky-pink:#ffcdd2;--sticky-blue:#b3e5fc;--sticky-green:#c8e6c9;
     --rule:#e0dcd3;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -28,250 +22,62 @@
     font-size:18px;
     padding-bottom:80px;
   }
-
-  /* Notebook paper lines */
   .paper-lining{
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 31px,
-        var(--rule) 31px,
-        var(--rule) 32px
-      );
+    background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,var(--rule) 31px,var(--rule) 32px);
     background-attachment:local;
   }
-
-  /* Header */
   .header{
     padding:40px 24px 16px;
-    max-width:880px;
-    margin:0 auto;
-    position:relative;
+    max-width:880px;margin:0 auto;position:relative;
   }
   .header::after{
-    content:"";
-    display:block;
-    height:3px;
-    background:var(--ink);
-    margin-top:16px;
-    border-radius:2px;
-    opacity:.8;
+    content:"";display:block;height:3px;background:var(--ink);margin-top:16px;border-radius:2px;opacity:.8;
   }
-  .header h1{
-    font-size:42px;
-    letter-spacing:.5px;
-    transform:rotate(-.5deg);
+  .header h1{font-size:42px;letter-spacing:.5px;transform:rotate(-.5deg);}
+  .meta{font-size:16px;color:var(--pencil);margin-top:8px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+  .badge{display:inline-block;background:var(--highlight);padding:2px 10px;border-radius:4px;transform:rotate(1deg);font-weight:600;color:var(--ink);border:2px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;}
+  .content{max-width:880px;margin:0 auto;padding:24px;}
+  .section{margin-bottom:48px;position:relative;}
+  .section h2{font-size:28px;display:inline-block;position:relative;transform:rotate(-.8deg);margin-bottom:16px;}
+  .section h2::after{
+    content:"";position:absolute;left:-4px;right:-8px;bottom:2px;height:10px;background:rgba(255,200,100,.35);z-index:-1;border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
   }
-  .meta{
-    font-size:16px;
-    color:var(--pencil);
-    margin-top:8px;
-    display:flex;
-    gap:20px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-  .badge{
-    display:inline-block;
-    background:var(--highlight);
-    padding:2px 10px;
-    border-radius:4px;
-    transform:rotate(1deg);
-    font-weight:600;
-    color:var(--ink);
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-  }
-
-  /* Content */
-  .content{
-    max-width:880px;
-    margin:0 auto;
-    padding:24px;
-  }
-
-  /* Hand-drawn section divider */
-  .section{
-    margin-bottom:48px;
-    position:relative;
-  }
-  .section-title{
-    font-size:26px;
-    margin-bottom:16px;
-    display:inline-block;
-    position:relative;
-    transform:rotate(-.8deg);
-  }
-  .section-title::after{
-    content:"";
-    position:absolute;
-    left:-4px;right:-8px;bottom:2px;
-    height:10px;
-    background:rgba(255,200,100,.35);
-    z-index:-1;
-    border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
-  }
-  .doodle-arrow{
-    display:inline-block;
-    margin-left:8px;
-    font-size:22px;
-    color:var(--pencil);
-    transform:rotate(-15deg);
-  }
-
-  /* Sticky notes */
-  .stickies{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:20px;
-    margin-top:12px;
-  }
-  .sticky{
-    padding:20px;
-    border:2px solid var(--ink);
-    box-shadow:4px 4px 0 rgba(42,37,32,.12);
-    position:relative;
-    transition:transform .15s ease;
-  }
-  .sticky:hover{transform:translateY(-3px) rotate(.5deg)}
-  .sticky::before{
-    content:"";
-    position:absolute;
-    top:-10px;left:50%;
-    transform:translateX(-50%);
-    width:40px;height:14px;
-    background:rgba(255,255,255,.6);
-    border:1px solid rgba(0,0,0,.15);
-    border-radius:2px;
-  }
-  .sticky-yellow{background:var(--sticky-yellow);transform:rotate(-1.2deg);border-radius:2px 18px 4px 22px}
-  .sticky-pink{background:var(--sticky-pink);transform:rotate(1deg);border-radius:18px 4px 22px 4px}
-  .sticky-blue{background:var(--sticky-blue);transform:rotate(-.5deg);border-radius:4px 22px 2px 18px}
-  .sticky-green{background:var(--sticky-green);transform:rotate(.8deg);border-radius:22px 4px 18px 2px}
-
-  .sticky h3{
-    font-size:20px;
-    margin-bottom:6px;
-    font-weight:600;
-    letter-spacing:.3px;
-  }
-  .sticky .tag{
-    display:inline-block;
-    font-size:13px;
-    padding:1px 8px;
-    border:1.5px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    margin-bottom:8px;
-    background:rgba(255,255,255,.4);
-  }
-  .sticky p{
-    font-size:16px;
-    line-height:1.5;
-    color:var(--ink);
-  }
-  .sticky .price{
-    font-family:"Inter",sans-serif;
-    font-size:14px;
-    font-weight:600;
-    color:#2e7d32;
-    margin-top:6px;
-  }
-
-  /* Scribbled list */
-  .scribble-list{
-    list-style:none;
-    padding:0;
-    margin-top:12px;
-  }
-  .scribble-list li{
-    position:relative;
-    padding-left:28px;
-    margin-bottom:14px;
-    font-size:18px;
-    line-height:1.5;
-  }
-  .scribble-list li::before{
-    content:"✓";
-    position:absolute;
-    left:0;
-    top:-2px;
-    font-size:20px;
-    color:var(--pencil);
-    font-family:monospace;
-  }
-  .scribble-list li.crossed::before{
-    content:"✗";
-    color:#b71c1c;
-  }
-  .scribble-list li.circle::before{
-    content:"○";
-    color:var(--pencil);
-  }
-  .scribble-list li.star::before{
-    content:"★";
-    color:#f9a825;
-  }
-
-  /* Hand-drawn box */
-  .hand-box{
-    border:2.5px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    padding:20px;
-    margin:20px 0;
-    background:rgba(255,255,255,.5);
-  }
-
-  /* Footer */
-  .footer{
-    max-width:880px;
-    margin:60px auto 0;
-    padding:0 24px;
-    text-align:center;
-    color:var(--pencil);
-    font-size:15px;
-  }
-  .footer-line{
-    display:inline-block;
-    width:120px;
-    height:2px;
-    background:var(--ink);
-    opacity:.3;
-    border-radius:1px;
-    transform:rotate(-1deg);
-    margin-bottom:12px;
-  }
-
-  /* Tape strips */
-  .tape{
-    position:absolute;
-    top:-12px;
-    left:50%;
-    transform:translateX(-50%) rotate(-2deg);
-    width:70px;
-    height:22px;
-    background:rgba(255,255,255,.55);
-    border:1px solid rgba(0,0,0,.12);
-    border-radius:2px;
-    z-index:2;
-  }
-
-  /* Responsive */
+  .card{padding:16px 20px;border:2px solid var(--ink);margin-bottom:16px;transition:transform .15s ease;}
+  .card-yellow{background:var(--sticky-yellow);border-radius:2px 18px 4px 22px;}
+  .card-pink{background:var(--sticky-pink);border-radius:18px 4px 22px 4px;}
+  .card-blue{background:var(--sticky-blue);border-radius:4px 22px 2px 18px;}
+  .card-green{background:var(--sticky-green);border-radius:22px 4px 18px 2px;}
+  .card-top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .card-badge{display:inline-block;font-size:14px;padding:2px 10px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);font-weight:600;}
+  .card-date{font-size:14px;color:var(--pencil);}
+  .card h3{font-size:22px;margin-bottom:6px;font-weight:600;}
+  .card p{font-size:16px;color:var(--pencil);line-height:1.5;margin-bottom:6px;}
+  .card ul{padding-left:20px;margin-top:4px;}
+  .card li{font-size:15px;color:var(--pencil);margin-bottom:3px;}
+  .card strong{color:var(--ink);}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .tags span{font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);}
+  .meta-footer{font-size:14px;color:var(--pencil);margin-top:40px;padding-top:20px;border-top:2px dashed var(--rule);max-width:880px;margin:40px auto 0;padding:20px 24px 0;}
+  .meta-footer a{color:var(--ink);text-decoration:underline;text-decoration-style:wavy;text-decoration-thickness:1.5px;}
+  .benchmark{display:inline-block;font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:var(--highlight);margin-right:4px;}
+  .comp-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px;}
+  .comp-table th,.comp-table td{padding:8px 10px;text-align:left;border-bottom:2px solid var(--rule);}
+  .comp-table th{font-weight:600;color:var(--ink);font-size:14px;border-bottom:2px solid var(--ink);}
+  .comp-table td{color:var(--pencil);}
+  .comp-table tr:last-child td{border-bottom:none;}
   @media(max-width:600px){
-    .header h1{font-size:32px}
-    .stickies{grid-template-columns:1fr}
-    .content{padding:16px}
+    .header h1{font-size:32px}.content{padding:16px}.meta{gap:10px}
   }
 </style>
 </head>
 <body class="paper-lining">
 
 <div class="header">
-  <h1>Agentic SaaS Weekly</h1>
+  <h1>ITSM/MSP Agentic Weekly</h1>
   <div class="meta">
     <span class="badge">Issue #2</span>
     <span>May 11 — May 18, 2026</span>
-    <span style="margin-left:auto;font-size:14px;color:var(--pencil)">Curated by Hermes · Prabha Builds · <a href="saas-agentic-weekly-index.html" style="color:inherit">Archive</a></span>
+    <span style="margin-left:auto;font-size:13px;color:var(--pencil)">Deep Research Edition</span>
   </div>
 </div>
 
@@ -279,74 +85,288 @@
 
   <!-- NEW FINDS -->
   <div class="section">
-    <h2 class="section-title">New Finds <span class="doodle-arrow">→</span></h2>
-    <div class="stickies">
-      <div class="sticky sticky-yellow">
-        <div class="tape"></div>
-        <span class="tag">MSP Platform</span>
-        <h3>Atera AI Copilot</h3>
-        <p>Purpose-built AI for IT technicians. 25-35% ticket reduction reported by users. Auto-generates scripts, command lines, and KB articles from ticket resolutions. Real-time Windows + macOS diagnostics.</p>
-        <p class="price">Add-on bundle; all plans eligible</p>
+    <h2>New Finds</h2>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">ServiceNow</span>
+        <span class="card-date">Now Assist Q1 2026</span>
       </div>
-      <div class="sticky sticky-pink">
-        <div class="tape"></div>
-        <span class="tag">Helpdesk AI</span>
-        <h3>Freshworks Freddy AI Agent</h3>
-        <p>Resolves up to 80% of queries across email, chat, WhatsApp, and social. 50+ pre-built agentic workflows with Shopify, Stripe, PayPal, and FedEx integrations. Vertical AI agents for specific industries.</p>
-        <p class="price">Bundled in Freshdesk Omni tiers</p>
+      <h3>300+ AI Skills, LEAP AIOps Agent, and Observability Hooks</h3>
+      <p>ServiceNow shipped the deepest AI catalog in ITSM. <strong>Over 300 skills</strong> across 30+ product modules. The <strong>LEAP Agent Framework</strong> is a fully autonomous operational-event manager — maps actions, groups alerts, detects topics, generates POVs, and enhances outcomes without human triage.</p>
+      <ul>
+        <li><strong>ITOM Observability Skills:</strong> Native hooks for Datadog, Dynatrace, New Relic, Kentik, and Gemini Cloud Assistant. AI Agents pull live monitoring context directly into incident triage — no context switching.</li>
+        <li><strong>Group-Action Framework (GAF):</strong> Composable multi-step reasoning engine across ITSM, CSM, and HRSD. Powers "Suggested Steps" and "Recommended Actions" everywhere in the platform.</li>
+        <li><strong>Code Assist Suite:</strong> AutoComplete, Edit, Generation, Summarization, Fix — all inside the ServiceNow IDE.</li>
+      </ul>
+      <div class="tags">
+        <span>Now Assist</span>
+        <span>LEAP</span>
+        <span>AIOps</span>
+        <span>GAF</span>
       </div>
-      <div class="sticky sticky-blue">
-        <div class="tape"></div>
-        <span class="tag">Enterprise ITSM</span>
-        <h3>ServiceNow 300+ AI Skills</h3>
-        <p>Now Assist spans 30+ modules. LEAP AIOps agent framework autonomously triages alerts. New observability agents pull context from Datadog, Dynatrace, New Relic, Kentik, and Gemini Cloud.</p>
-        <p class="price">Enterprise consumption-based</p>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Atera</span>
+        <span class="card-date">AI Copilot GA</span>
+      </div>
+      <h3>13 hrs/week saved per tech, 10X ticket resolution speed</h3>
+      <p>Atera’s AI Copilot is rolling out as an <strong>add-on for all plans</strong>. Real numbers from customer stories:</p>
+      <ul>
+        <li><strong>Leeds United:</strong> 25–35% reduction in incoming tickets, 100% automated KB generation from ticket resolutions.</li>
+        <li><strong>Trapp Technology:</strong> 30% decrease in first reply time, +10% annual NPS lift.</li>
+        <li><strong>Mendocino College:</strong> 3 sites, 5,000 endpoints, 24/7 uptime monitoring.</li>
+      </ul>
+      <p>Key capabilities: <strong>Remote session summary</strong>, <strong>real-time device troubleshooting</strong> (Windows + macOS), <strong>instant ticket summaries</strong>, <strong>plain-text → script generation</strong>, <strong>command-line generation</strong> from natural language, and <strong>auto KB article creation</strong> from ticket resolutions.</p>
+      <div class="tags">
+        <span>AI Copilot</span>
+        <span>script generation</span>
+        <span>PSA</span>
+      </div>
+    </div>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge">Freshworks</span>
+        <span class="card-date">Freddy AI Agent</span>
+      </div>
+      <h3>80% resolution rate, 60+ languages, vertical agent marketplace</h3>
+      <p>Freddy AI Agent is not a chatbot — it resolves end-to-end. <strong>Up to 80% of queries</strong> closed without human handoff. <strong>&lt;2 min average</strong> conversational resolution. <strong>60% agent productivity</strong> lift.</p>
+      <ul>
+        <li><strong>Vertical AI Agents:</strong> Pre-loaded with 50+ agentic workflows per industry (Shopify, Stripe, PayPal, FedEx, Wix integrations).</li>
+        <li><strong>Email AI Agent:</strong> Reads inbound email tickets, understands, responds, and auto-resolves — no triage queue.</li>
+        <li><strong>Omnichannel:</strong> One agent across email, webchat, WhatsApp, and social with full context preservation.</li>
+        <li><strong>Takes action:</strong> Refunds, order updates, appointment rescheduling, loyalty points, inventory checks, subscription changes, lead creation.</li>
+      </ul>
+      <div class="tags">
+        <span>Freddy AI</span>
+        <span>vertical agents</span>
+        <span>80% resolution</span>
+      </div>
+    </div>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge">HaloPSA</span>
+        <span class="card-date">50+ integrations + AI Report Builder</span>
+      </div>
+      <h3>The quiet PSA with the widest integration net</h3>
+      <p>HaloPSA is not leading with AI marketing — but its integration depth is competitive. <strong>50+ native integrations</strong> spanning RMM, identity, billing, monitoring, and communication:</p>
+      <ul>
+        <li><strong>RMM:</strong> Atera, ConnectWise Automate, Datto, NinjaOne, Addigy</li>
+        <li><strong>Monitoring:</strong> Datadog, Dynatrace, Azure Monitor, Azure Sentinel</li>
+        <li><strong>Communication:</strong> 3CX, 8x8, Teams, Slack-adjacent via webhooks</li>
+        <li><strong>AI Report Builder:</strong> Natural-language to SQL report generation with charts and dashboards</li>
+        <li><strong>ITIL-native:</strong> Incident, problem, change management out of the box. SLA + OLA with priority matrices.</li>
+      </ul>
+      <p>HaloPSA’s angle: <strong>deep PSA + project management + asset management</strong> rather than agentic AI-first. But the AI Report Builder signals they’re adding intelligence layers.</p>
+      <div class="tags">
+        <span>PSA</span>
+        <span>50+ integrations</span>
+        <span>ITIL</span>
+        <span>AI Report Builder</span>
       </div>
     </div>
   </div>
 
   <!-- PRICING CHANGES -->
   <div class="section">
-    <h2 class="section-title">Pricing Changes <span class="doodle-arrow">↺</span></h2>
-    <ul class="scribble-list">
-      <li class="crossed"><strong>Atera AI Copilot</strong> — Add-on only; no a la carte feature selection. All-inclusive bundle across all plans. Keeps pricing simple but locks MSPs into the full pack.</li>
-      <li class="star"><strong>Freshworks Freddy</strong> — Vertical agents and 50+ workflows bundled into Freshdesk Omni. No separate AI SKU yet, but plan-tier gating means higher tiers unlock more actions.</li>
-      <li class="circle"><strong>ServiceNow Now Assist</strong> — Consumption-based per-skill metering. Enterprise contracts only. GAF (Group-Action Framework) skills likely billed as premium automation tier.</li>
-    </ul>
+    <h2>Pricing Changes</h2>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">ServiceNow</span>
+        <span class="card-date">Now Assist pricing</span>
+      </div>
+      <p><strong>Not included in standard licenses.</strong> Requires Pro Plus or Enterprise Plus SKU. Pricing is <strong>per-user or per-consumption</strong> — every AI action (summarization, generation, etc.) consumes licensed capacity. No public tier list; account team required.</p>
+      <p>Bottom line for MSPs: ServiceNow AI is still enterprise pricing. Not SMB-friendly.</p>
+      <div class="tags">
+        <span>enterprise only</span>
+        <span>per-consumption</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Atera</span>
+        <span class="card-date">AI Copilot add-on</span>
+      </div>
+      <p>AI Copilot is an <strong>all-inclusive add-on</strong> across all Atera plans. Features cannot be purchased individually. No public price disclosed on marketing pages — sales/demo required. Unlike ServiceNow, Atera’s base PSA pricing is already MSP-friendly, so the add-on is likely positioned as a per-technician uplift.</p>
+      <div class="tags">
+        <span>add-on only</span>
+        <span>all-or-nothing</span>
+      </div>
+    </div>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge">Freshworks</span>
+        <span class="card-date">Freddy AI Agent tiers</span>
+      </div>
+      <p>Freddy AI is split into <strong>Freddy AI Agent</strong> (autonomous resolution), <strong>Freddy AI Copilot</strong> (assist for humans), and <strong>Freddy AI Insights</strong> (analytics). Freddy AI Agent is bundled with Freshdesk Omni higher tiers. No à la carte pricing visible — enterprise sales model.</p>
+      <div class="tags">
+        <span>bundled</span>
+        <span>Omni-tier</span>
+      </div>
+    </div>
   </div>
 
   <!-- WORTH WATCHING -->
   <div class="section">
-    <h2 class="section-title">Worth Watching <span class="doodle-arrow">👀</span></h2>
-    <div class="hand-box">
-      <h3 style="font-size:20px;margin-bottom:8px">HaloPSA AI Report Builder</h3>
-      <p>50+ native integrations (Atera RMM, Datto, Azure, AWS, Datadog, and more). ITIL-native with SLA engine, asset management, and project management. AI Report Builder is their first GenAI feature — expect more agentic capabilities soon. Strong PSA contender for MSPs that outgrow basic ticketing.</p>
-      <p style="margin-top:10px;font-size:15px;color:var(--pencil)">🔗 halopsa.com — PSA + RMM bridge play</p>
+    <h2>Worth Watching</h2>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge">Deep Dive</span>
+        <span class="card-date">Competitive matrix</span>
+      </div>
+      <h3>SuperOps vs The Field — Who Owns What</h3>
+      <table class="comp-table">
+        <tr>
+          <th>Capability</th>
+          <th>SuperOps</th>
+          <th>ServiceNow</th>
+          <th>Atera</th>
+          <th>Freshworks</th>
+          <th>HaloPSA</th>
+        </tr>
+        <tr>
+          <td>Autonomous ticket resolution</td>
+          <td>?</td>
+          <td>ITSM Agent (GA)</td>
+          <td>AI Copilot (assist)</td>
+          <td>Freddy Agent (80% auto)</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Script/command generation</td>
+          <td>?</td>
+          <td>Code Assist (IDE)</td>
+          <td>AI Copilot (plain-text)</td>
+          <td>No</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Auto KB from tickets</td>
+          <td>?</td>
+          <td>KB Generation (GA)</td>
+          <td>AI Copilot (100% auto)</td>
+          <td>No</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Device troubleshooting</td>
+          <td>?</td>
+          <td>ITOM Alert Assist</td>
+          <td>AI Copilot (live)</td>
+          <td>No</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Observability hooks</td>
+          <td>?</td>
+          <td>Datadog/Dynatrace/New Relic</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Datadog/Dynatrace/AZ Monitor</td>
+        </tr>
+        <tr>
+          <td>Vertical/retail agents</td>
+          <td>?</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Yes (Shopify/Stripe/ FedEx)</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Pricing model</td>
+          <td>MSP-friendly</td>
+          <td>Enterprise +</td>
+          <td>PSA + add-on</td>
+          <td>CSM-tier bundled</td>
+          <td>Per-agent PSA</td>
+        </tr>
+      </table>
+      <p style="margin-top:10px;font-size:15px;color:var(--pencil);"><em>SuperOps positioning opportunity: ServiceNow and Freshworks are enterprise-CSM priced. Atera has the best MSP technician AI but lacks end-user resolution. HaloPSA has integrations but no agentic layer. If SuperOps builds <strong>autonomous technician assist + end-user self-service resolution</strong> at MSP pricing, it owns a gap.</em></p>
+      <div class="tags">
+        <span>competitive matrix</span>
+        <span>gap analysis</span>
+        <span>SuperOps</span>
+      </div>
     </div>
-    <div class="hand-box" style="transform:rotate(.5deg)">
-      <h3 style="font-size:20px;margin-bottom:8px">ServiceNow Observability Agents</h3>
-      <p>First platform to embed observability context directly into ITSM AI agents. Datadog, Dynatrace, New Relic, Kentik, and Gemini Cloud skills pull live monitoring data during alert triage. This eliminates context-switching for SOC/NOC teams. If this pattern sticks, every ITSM vendor will need observability partnerships.</p>
-      <p style="margin-top:10px;font-size:15px;color:var(--pencil)">🔗 servicenow.com/products/ai-agents — enterprise only</p>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">Trend</span>
+        <span class="card-date">Platform shift</span>
+      </div>
+      <h3>From "AI-enhanced" to "AI-native" PSA</h3>
+      <p>The move from <strong>copilot-style assist</strong> (Atera, ServiceNow Now Assist) to <strong>agentic resolution</strong> (Freshworks Freddy, ServiceNow LEAP) is accelerating. Three patterns emerging:</p>
+      <ul>
+        <li><strong>Assist → Agent:</strong> Copilots that suggest are being replaced by agents that act. Atera’s Copilot is still assist-level. Freshworks Freddy resolves autonomously.</li>
+        <li><strong>Horizontal → Vertical:</strong> Generic ticket AI is giving way to industry-specific agents (retail, healthcare, education). Freshworks leads here with pre-built vertical workflows.</li>
+        <li><strong>PSA + RMM convergence:</strong> Atera bundles both. HaloPSA integrates 6 RMM tools. The line between "management" and "service" is blurring.</li>
+      </ul>
+      <div class="tags">
+        <span>market trend</span>
+        <span>agentic shift</span>
+      </div>
     </div>
   </div>
 
   <!-- ACTION ITEMS -->
   <div class="section">
-    <h2 class="section-title">Action Items <span class="doodle-arrow">⚡</span></h2>
-    <ul class="scribble-list">
-      <li class="star">Benchmark SuperOps ticket deflection rate against Freddy's 80% resolution claim — identify gap</li>
-      <li>Map Atera's script generation + KB auto-gen to SuperOps AI roadmap; gap analysis needed</li>
-      <li class="circle">Monitor ServiceNow observability agent partnerships — potential integration targets for SuperOps</li>
-      <li class="crossed">Don't chase HaloPSA's 50-integration breadth head-on; focus on depth for core MSP workflows</li>
-    </ul>
+    <h2>Action Items for SuperOps</h2>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge">Strategy</span>
+        <span class="card-date">Priority: High</span>
+      </div>
+      <h3>Build the "Atera-gap" story: autonomous end-user resolution</h3>
+      <p>Atera’s AI Copilot is technician-facing only — it helps techs work faster. It does not resolve end-user tickets without human intervention. <strong>Freshworks Freddy resolves 80% autonomously.</strong> SuperOps should position its AI roadmap as <strong>"technician assist + end-user self-service resolution"</strong> — bridging the gap between Atera (assist-only) and Freshworks (resolution-only, enterprise-priced).</p>
+      <div class="tags">
+        <span>positioning</span>
+        <span>product strategy</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Tactical</span>
+        <span class="card-date">Priority: Medium</span>
+      </div>
+      <h3>Publish a "ServiceNow vs SuperOps for MSPs" teardown</h3>
+      <p>ServiceNow’s 300+ skills are impressive but overkill and overpriced for MSPs. A content teardown on <strong>"What MSPs actually need vs what enterprises pay for"</strong> would drive inbound. Compare license cost, deployment time (ServiceNow: months; SuperOps: hours), and technician learning curve.</p>
+      <div class="tags">
+        <span>content</span>
+        <span>compete</span>
+      </div>
+    </div>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge">Research</span>
+        <span class="card-date">Priority: Medium</span>
+      </div>
+      <h3>Deep-dive: Moveworks agent marketplace post-acquisition</h3>
+      <p>ServiceNow acquired Moveworks for <strong>$2.85B</strong> (March 2025). Moveworks ran an AI Agent Marketplace with 1000+ plugins. How is ServiceNow integrating this? What happens to Moveworks customers who are MSPs? Next week’s research target.</p>
+      <div class="tags">
+        <span>Moveworks</span>
+        <span>M&A</span>
+        <span>next week</span>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<div class="footer">
-  <div class="footer-line"></div>
-  <p>Generated by Hermes · thisisprabha.com/sketch</p>
-  <p style="font-size:13px;margin-top:6px">Next issue: May 18, 2026</p>
+<div class="meta-footer">
+  <p>Curated by Agent Tina (Hermes) for SuperOps competitive intelligence</p>
+  <p style="margin-top:6px"><a href="saas-agentic-weekly-index.html">← Archive</a> · <a href="saas-agentic-weekly-01.html">← Previous Issue (#1)</a> · <a href="saas-agentic-weekly-03.html">Next Issue (#3) →</a></p>
+  <p style="font-size:13px;margin-top:6px">Sources: Atera.com, Freshworks.com, HaloPSA guides, Teiva Systems ServiceNow guide (Q1 2026), customer case studies, and direct product documentation.</p>
 </div>
 
 </body>
