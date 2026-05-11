@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic SaaS Weekly — Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fdfbf6;
+    --ink:#2a2520;
+    --pencil:#6b6560;
+    --highlight:#fff3a8;
+    --rule:#e0dcd3;
+    --sticky-yellow:#fff9c4;
+    --sticky-pink:#ffcdd2;
+    --sticky-blue:#b3e5fc;
+    --sticky-green:#c8e6c9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  body{
+    font-family:"Patrick Hand",cursive;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:18px;
+    padding-bottom:80px;
+  }
+  .paper-lining{
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        var(--rule) 31px,
+        var(--rule) 32px
+      );
+    background-attachment:local;
+  }
+  .header{
+    padding:40px 24px 16px;
+    max-width:880px;
+    margin:0 auto;
+    position:relative;
+  }
+  .header::after{
+    content:"";
+    display:block;
+    height:3px;
+    background:var(--ink);
+    margin-top:16px;
+    border-radius:2px;
+    opacity:.8;
+  }
+  .header h1{font-size:42px;letter-spacing:.5px;transform:rotate(-.5deg)}
+  .header p{
+    font-size:20px;
+    color:var(--pencil);
+    margin-top:6px;
+  }
+  .content{
+    max-width:880px;
+    margin:0 auto;
+    padding:24px;
+  }
+
+  /* Year section */
+  .year{
+    margin-bottom:48px;
+    position:relative;
+  }
+  .year h2{
+    font-size:28px;
+    display:inline-block;
+    position:relative;
+    transform:rotate(-.8deg);
+    margin-bottom:16px;
+  }
+  .year h2::after{
+    content:"";
+    position:absolute;
+    left:-4px;right:-8px;bottom:2px;
+    height:10px;
+    background:rgba(255,200,100,.35);
+    z-index:-1;
+    border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
+  }
+
+  /* Issue row */
+  .issue{
+    padding:16px 20px;
+    border:2px solid var(--ink);
+    margin-bottom:16px;
+    transition:transform .15s ease;
+    cursor:pointer;
+    text-decoration:none;
+    color:var(--ink);
+    display:block;
+  }
+  .issue:hover{transform:translateY(-3px) rotate(.5deg)}
+  .issue-yellow{background:var(--sticky-yellow);border-radius:2px 18px 4px 22px}
+  .issue-pink{background:var(--sticky-pink);border-radius:18px 4px 22px 4px}
+  .issue-blue{background:var(--sticky-blue);border-radius:4px 22px 2px 18px}
+  .issue-green{background:var(--sticky-green);border-radius:22px 4px 18px 2px}
+
+  .issue-top{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .issue-badge{
+    display:inline-block;
+    font-size:15px;
+    padding:2px 10px;
+    border:1.5px solid var(--ink);
+    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
+    background:rgba(255,255,255,.4);
+    font-weight:600;
+  }
+  .issue-date{
+    font-size:15px;
+    color:var(--pencil);
+  }
+  .issue h3{
+    font-size:22px;
+    margin-bottom:4px;
+    font-weight:600;
+  }
+  .issue p{
+    font-size:16px;
+    color:var(--pencil);
+    line-height:1.4;
+  }
+  .issue-tags{
+    margin-top:8px;
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+  }
+  .issue-tags span{
+    font-size:13px;
+    padding:1px 8px;
+    border:1.5px solid var(--ink);
+    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
+    background:rgba(255,255,255,.4);
+  }
+
+  /* Empty state */
+  .empty{
+    padding:40px 20px;
+    text-align:center;
+    border:2.5px dashed var(--pencil);
+    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
+    color:var(--pencil);
+  }
+  .empty p{font-size:20px}
+
+  /* Footer */
+  .footer{
+    max-width:880px;
+    margin:60px auto 0;
+    padding:0 24px;
+    text-align:center;
+    color:var(--pencil);
+    font-size:15px;
+  }
+  .footer-line{
+    display:inline-block;
+    width:120px;
+    height:2px;
+    background:var(--ink);
+    opacity:.3;
+    border-radius:1px;
+    transform:rotate(-1deg);
+    margin-bottom:12px;
+  }
+
+  @media(max-width:600px){
+    .header h1{font-size:32px}
+    .content{padding:16px}
+  }
+</style>
+</head>
+<body class="paper-lining">
+
+<div class="header">
+  <h1>Agentic SaaS Weekly</h1>
+  <p>Curated research on launches, pricing, funding, and feature drops.</p>
+</div>
+
+<div class="content">
+
+  <div class="year">
+    <h2>2026</h2>
+
+    <a href="saas-agentic-weekly-01.html" class="issue issue-yellow">
+      <div class="issue-top">
+        <span class="issue-badge">Issue #1</span>
+        <span class="issue-date">May 11 — May 18, 2026</span>
+      </div>
+      <h3>Linear Mobile, Cursor $100M, Zapier AI Actions GA</h3>
+      <p>Linear ships iOS. Cursor raises Series B at $2.6B. Zapier goes full natural language. Notion AI cuts price, Claude Code raises it.</p>
+      <div class="issue-tags">
+        <span>launch</span>
+        <span>funding</span>
+        <span>pricing</span>
+        <span>feature drop</span>
+      </div>
+    </a>
+
+    <!-- Paste new issues below as they ship -->
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-line"></div>
+  <p>Curated by Hermes · thisisprabha.com/sketch</p>
+  <p style="font-size:13px;margin-top:6px">New issues every Monday</p>
+</div>
+
+</body>
+</html>
