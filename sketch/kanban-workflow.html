@@ -1,592 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kanban Workflow — How My Agents Work</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanban — How Agent Tina Runs Work</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
   :root{
-    --paper:#fdfbf6;
-    --ink:#2a2520;
-    --pencil:#6b6560;
-    --highlight:#fff3a8;
-    --rule:#e0dcd3;
-    --sticky-yellow:#fff9c4;
-    --sticky-pink:#ffcdd2;
-    --sticky-blue:#b3e5fc;
-    --sticky-green:#c8e6c9;
-    --sticky-orange:#ffe0b2;
-    --state-ready:#81c784;
-    --state-todo:#64b5f6;
-    --state-blocked:#e57373;
-    --state-done:#a1887f;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{background:var(--paper)}
-  body{
-    font-family:"Patrick Hand",cursive;
-    color:var(--ink);
-    background:var(--paper);
-    line-height:1.6;
-    font-size:18px;
-    padding-bottom:80px;
+    --paper:#fdfbf7;
+    --ink:#2a2a2a;
+    --blue:#3b82f6;
+    --green:#22c55e;
+    --amber:#f59e0b;
+    --red:#ef4444;
+    --purple:#a855f7;
+    --gray:#9ca3af;
+    --line:rgba(0,0,0,0.06);
   }
 
-  /* Notebook paper lines */
-  .paper-lining{
-    background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent,
-        transparent 31px,
-        var(--rule) 31px,
-        var(--rule) 32px
-      );
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Patrick Hand',cursive,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    background-image:repeating-linear-gradient(0deg,transparent,transparent 31px,var(--line) 31px,var(--line) 32px);
     background-attachment:local;
   }
 
-  /* Header */
-  .header{
-    padding:40px 24px 16px;
-    max-width:920px;
+  .page{
+    max-width:880px;
     margin:0 auto;
-    position:relative;
-  }
-  .header::after{
-    content:"";
-    display:block;
-    height:3px;
-    background:var(--ink);
-    margin-top:16px;
-    border-radius:2px;
-    opacity:.8;
-  }
-  .header h1{
-    font-size:46px;
-    letter-spacing:.5px;
-    transform:rotate(-.6deg);
-    line-height:1.1;
-  }
-  .header p{
-    font-size:20px;
-    color:var(--pencil);
-    margin-top:8px;
-    max-width:620px;
-  }
-  .meta{
-    font-size:16px;
-    color:var(--pencil);
-    margin-top:10px;
-    display:flex;
-    gap:16px;
-    align-items:center;
-    flex-wrap:wrap;
-  }
-  .badge{
-    display:inline-block;
-    background:var(--highlight);
-    padding:2px 10px;
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    transform:rotate(1deg);
-    font-weight:600;
-    color:var(--ink);
+    padding:48px 28px 80px;
   }
 
-  /* Content */
-  .content{
-    max-width:920px;
-    margin:0 auto;
-    padding:24px;
-  }
-
-  /* Section */
-  .section{
-    margin-bottom:52px;
-    position:relative;
-  }
-  .section-title{
-    font-size:28px;
-    margin-bottom:16px;
-    display:inline-block;
-    position:relative;
-    transform:rotate(-.8deg);
-  }
-  .section-title::after{
-    content:"";
-    position:absolute;
-    left:-4px;right:-8px;bottom:2px;
-    height:10px;
-    background:rgba(255,200,100,.35);
-    z-index:-1;
-    border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
-  }
-  .doodle-arrow{
-    display:inline-block;
-    margin-left:8px;
-    font-size:22px;
-    color:var(--pencil);
-    transform:rotate(-15deg);
-  }
-
-  /* Hand-drawn box */
-  .hand-box{
-    border:2.5px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    padding:20px 24px;
-    margin:16px 0;
-    background:rgba(255,255,255,.55);
-    position:relative;
-  }
-  .hand-box.wobble-1{transform:rotate(.4deg)}
-  .hand-box.wobble-2{transform:rotate(-.3deg)}
-  .hand-box.wobble-3{transform:rotate(.6deg)}
-
-  /* Sticky notes */
-  .stickies{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:20px;
-    margin-top:12px;
-  }
-  .sticky{
-    padding:18px;
-    border:2px solid var(--ink);
-    box-shadow:4px 4px 0 rgba(42,37,32,.12);
-    position:relative;
-    transition:transform .15s ease;
-  }
-  .sticky:hover{transform:translateY(-3px) rotate(.5deg)}
-  .sticky::before{
-    content:"";
-    position:absolute;
-    top:-10px;left:50%;
-    transform:translateX(-50%);
-    width:40px;height:14px;
-    background:rgba(255,255,255,.6);
-    border:1px solid rgba(0,0,0,.15);
-    border-radius:2px;
-  }
-  .sticky-yellow{background:var(--sticky-yellow);transform:rotate(-1.2deg);border-radius:2px 18px 4px 22px}
-  .sticky-pink{background:var(--sticky-pink);transform:rotate(1deg);border-radius:18px 4px 22px 4px}
-  .sticky-blue{background:var(--sticky-blue);transform:rotate(-.5deg);border-radius:4px 22px 2px 18px}
-  .sticky-green{background:var(--sticky-green);transform:rotate(.8deg);border-radius:22px 4px 18px 2px}
-  .sticky-orange{background:var(--sticky-orange);transform:rotate(-.7deg);border-radius:12px 22px 18px 4px}
-
-  .sticky h3{
-    font-size:20px;
-    margin-bottom:6px;
-    font-weight:600;
-    letter-spacing:.3px;
-  }
-  .sticky .tag{
-    display:inline-block;
-    font-size:13px;
-    padding:1px 8px;
-    border:1.5px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    margin-bottom:8px;
-    background:rgba(255,255,255,.4);
-  }
-  .sticky p{
-    font-size:16px;
-    line-height:1.5;
-    color:var(--ink);
-  }
-  .sticky .rule{
-    font-size:14px;
-    color:var(--pencil);
-    margin-top:8px;
-    border-top:1.5px dashed var(--pencil);
-    padding-top:6px;
-  }
-
-  /* Scribbled list */
-  .scribble-list{
-    list-style:none;
-    padding:0;
-    margin-top:12px;
-  }
-  .scribble-list li{
-    position:relative;
-    padding-left:28px;
-    margin-bottom:14px;
-    font-size:18px;
-    line-height:1.5;
-  }
-  .scribble-list li::before{
-    content:"→";
-    position:absolute;
-    left:0;
-    top:-2px;
-    font-size:20px;
-    color:var(--pencil);
-    font-family:monospace;
-  }
-  .scribble-list li.check::before{content:"✓";color:var(--state-ready)}
-  .scribble-list li.block::before{content:"⊘";color:var(--state-blocked)}
-  .scribble-list li.star::before{content:"★";color:#f9a825}
-
-  /* Flow pipeline */
-  .pipeline{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    align-items:center;
-    justify-content:center;
-    margin:20px 0;
-  }
-  .pipe-step{
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    padding:10px 18px;
-    background:#fff;
-    font-size:17px;
-    font-weight:600;
-    text-align:center;
-    box-shadow:3px 3px 0 rgba(42,37,32,.08);
-    min-width:120px;
-  }
-  .pipe-arrow{
-    font-size:28px;
-    color:var(--pencil);
-    transform:rotate(-5deg);
-    line-height:1;
-  }
-
-  /* Task states */
-  .states{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin:14px 0;
-  }
-  .state-pill{
-    display:inline-block;
-    padding:4px 12px;
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    font-size:15px;
-    font-weight:600;
-    background:#fff;
-  }
-  .pill-ready{border-color:var(--state-ready);color:#2e7d32;background:rgba(129,199,132,.15)}
-  .pill-todo{border-color:var(--state-todo);color:#1565c0;background:rgba(100,181,246,.15)}
-  .pill-blocked{border-color:var(--state-blocked);color:#c62828;background:rgba(229,115,115,.15)}
-  .pill-done{border-color:var(--state-done);color:#5d4037;background:rgba(161,136,127,.15)}
-
-  /* Comparison cards */
-  .compare-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:16px;
-    margin-top:16px;
-  }
-  .compare-card{
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    padding:16px;
-    background:#fff;
-    box-shadow:3px 3px 0 rgba(42,37,32,.08);
-  }
-  .compare-card h4{
-    font-size:18px;
-    margin-bottom:6px;
-    border-bottom:2px solid var(--pencil);
-    padding-bottom:4px;
-    display:inline-block;
-  }
-  .compare-card p{
-    font-size:15px;
-    color:var(--pencil);
-    line-height:1.5;
-  }
-
-  /* CLI blocks */
-  .cli{
-    font-family:"Inter",sans-serif;
-    font-size:13px;
-    background:rgba(42,37,32,.06);
-    border:1.5px dashed var(--pencil);
-    border-radius:8px;
-    padding:12px 16px;
-    margin:10px 0;
-    color:var(--ink);
-    line-height:1.7;
-  }
-  .cli .cmd{color:#1565c0;font-weight:600}
-  .cli .comment{color:var(--pencil);font-style:italic}
-
-  /* Real tasks box */
-  .task-box{
-    border:2px solid var(--ink);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    padding:16px 20px;
-    margin:12px 0;
-    background:#fff;
-    position:relative;
-  }
-  .task-box::after{
-    content:"";
-    position:absolute;
-    top:3px;left:3px;right:-5px;bottom:-5px;
-    border:1.5px solid var(--pencil);
-    border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;
-    z-index:-1;
-    opacity:.4;
-  }
-  .task-item{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:6px 0;
-    font-size:16px;
-    border-bottom:1px dashed var(--rule);
-  }
-  .task-item:last-child{border-bottom:none}
-  .task-id{
-    font-family:"Inter",sans-serif;
-    font-size:11px;
-    background:rgba(184,169,154,.18);
-    padding:1px 6px;
-    border-radius:4px;
-    border:1px solid var(--pencil);
-    white-space:nowrap;
-  }
-
-  /* Marginalia / scribbles */
-  .marginalia{
-    position:absolute;
-    right:-10px;
-    top:10px;
-    font-size:14px;
-    color:var(--pencil);
-    transform:rotate(12deg);
-    opacity:.7;
-  }
-  .pen-scribble{
-    display:inline-block;
-    width:60px;
-    height:2px;
-    background:var(--ink);
-    opacity:.25;
-    border-radius:1px;
-    transform:rotate(-3deg);
-    vertical-align:middle;
-    margin:0 8px;
-  }
-
-  /* Footer */
-  .footer{
-    max-width:920px;
-    margin:60px auto 0;
-    padding:0 24px;
-    text-align:center;
-    color:var(--pencil);
-    font-size:15px;
-  }
-  .footer-line{
-    display:inline-block;
-    width:120px;
-    height:2px;
-    background:var(--ink);
-    opacity:.3;
-    border-radius:1px;
+  h1{
+    font-size:2.4rem;
+    margin-bottom:4px;
     transform:rotate(-1deg);
-    margin-bottom:12px;
+    display:inline-block;
+  }
+  .subtitle{
+    font-size:1.1rem;
+    color:var(--gray);
+    margin-bottom:32px;
+    transform:rotate(0.5deg);
   }
 
-  /* Responsive */
-  @media(max-width:700px){
-    .header h1{font-size:34px}
-    .stickies{grid-template-columns:1fr}
-    .compare-grid{grid-template-columns:1fr}
-    .pipeline{flex-direction:column}
-    .pipe-arrow{transform:rotate(90deg)}
-    .content{padding:16px}
+  .sticky{
+    background:#fef08a;
+    padding:18px 22px;
+    border-radius:2px 18px 2px 18px;
+    box-shadow:3px 3px 0 rgba(0,0,0,0.08);
+    margin-bottom:28px;
+    transform:rotate(-1.2deg);
+    font-size:1.05rem;
   }
+  .sticky.blue{background:#bfdbfe;transform:rotate(0.8deg)}
+  .sticky.green{background:#bbf7d0;transform:rotate(-0.6deg)}
+  .sticky.pink{background:#fecaca;transform:rotate(1deg)}
+
+  h2{
+    font-size:1.6rem;
+    margin:36px 0 14px;
+    border-bottom:2px solid var(--ink);
+    display:inline-block;
+    padding-bottom:2px;
+    transform:rotate(-0.3deg);
+  }
+
+  .board{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin:18px 0 28px;
+  }
+  .col{
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:12px;
+    min-height:140px;
+  }
+  .col h3{
+    font-size:1.05rem;
+    text-align:center;
+    margin-bottom:10px;
+    padding-bottom:6px;
+    border-bottom:1px dashed var(--gray);
+  }
+  .card{
+    background:var(--paper);
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    padding:10px 12px;
+    margin-bottom:8px;
+    font-size:0.95rem;
+    box-shadow:2px 2px 0 rgba(0,0,0,0.05);
+    position:relative;
+  }
+  .card::before{
+    content:'';
+    position:absolute;
+    top:-3px;right:10px;
+    width:18px;height:6px;
+    background:rgba(0,0,0,0.15);
+    border-radius:2px;
+  }
+  .card.ready{border-left:4px solid var(--amber)}
+  .card.todo{border-left:4px solid var(--blue)}
+  .card.blocked{border-left:4px solid var(--red)}
+  .card.done{border-left:4px solid var(--green);opacity:.7}
+  .card .meta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.7rem;
+    color:var(--gray);
+    margin-top:4px;
+    display:block;
+  }
+
+  .flow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin:18px 0;
+    font-size:1.05rem;
+  }
+  .flow .step{
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:10px 16px;
+    box-shadow:2px 2px 0 rgba(0,0,0,0.06);
+  }
+  .flow .arrow{
+    font-size:1.4rem;
+    color:var(--gray);
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0 28px;
+    font-size:0.95rem;
+  }
+  th,td{
+    border:2px solid var(--ink);
+    padding:10px 12px;
+    text-align:left;
+  }
+  th{background:#fff;font-size:1.05rem}
+  tr:nth-child(even){background:rgba(0,0,0,0.02)}
+
+  .cmd{
+    font-family:'IBM Plex Mono',monospace;
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:14px 18px;
+    margin:14px 0;
+    box-shadow:2px 2px 0 rgba(0,0,0,0.05);
+    overflow-x:auto;
+  }
+  .cmd code{
+    color:var(--purple);
+    font-weight:600;
+  }
+
+  .note{
+    border-left:4px solid var(--amber);
+    padding:10px 16px;
+    margin:16px 0;
+    background:rgba(245,158,11,0.06);
+    border-radius:0 8px 8px 0;
+  }
+
+  .scribble{
+    font-size:0.85rem;
+    color:var(--gray);
+    margin-top:6px;
+    font-style:italic;
+  }
+
+  footer{
+    margin-top:60px;
+    text-align:center;
+    color:var(--gray);
+    font-size:0.9rem;
+  }
+  footer a{color:var(--ink)}
 </style>
 </head>
-<body class="paper-lining">
+<body>
+<div class="page">
 
-<div class="header">
-  <h1>Kanban Workflow</h1>
-  <p>How my agents queue, claim, and ship work — a field guide to the board behind the scenes.</p>
-  <div class="meta">
-    <span class="badge">Sketch #04</span>
-    <span>thisisprabha.com/sketch</span>
-    <span style="margin-left:auto;font-size:14px;color:var(--pencil)">Scribbled by Hermes · May 2026</span>
+<h1>Kanban — How Agent Tina Runs Work</h1>
+<p class="subtitle">Sketch notes on multi-agent pipelines vs. human task queues</p>
+
+<div class="sticky blue">
+  <strong>Quick answer:</strong> Kanban inside Hermes is a <em>multi-agent work queue</em>. Not your todo list. It's where autonomous workers claim tasks, run research, and build deliverables while you sleep. Todoist is for <em>your</em> actions. Kanban is for <em>Tina's</em> pipeline.
+</div>
+
+<h2>What It Is</h2>
+<p>Hermes has a built-in Kanban board (SQLite-backed) that lives alongside sessions and cron jobs. Tasks are not reminders — they are <strong>units of work</strong> assigned to agent profiles:</p>
+
+<div class="flow">
+  <div class="step">orchestrator</div>
+  <span class="arrow">→</span>
+  <div class="step">researcher</div>
+  <span class="arrow">→</span>
+  <div class="step">analyst</div>
+  <span class="arrow">→</span>
+  <div class="step">writer</div>
+  <span class="arrow">→</span>
+  <div class="step">deploy</div>
+</div>
+
+<p class="scribble">Each worker is a separate Hermes profile with its own context and toolset. The orchestrator breaks work into cards. Workers claim them, execute, and mark done.</p>
+
+<h2>Live Board (Right Now)</h2>
+<div class="board">
+  <div class="col">
+    <h3 style="color:var(--amber)">Ready</h3>
+    <div class="card ready">
+      Synthesize: Agentic SaaS research findings
+      <span class="meta">t_fcccbeae · analyst</span>
+    </div>
+  </div>
+  <div class="col">
+    <h3 style="color:var(--blue)">Todo</h3>
+    <div class="card todo">
+      Draft: Agentic SaaS research brief
+      <span class="meta">t_82ae71da · writer</span>
+    </div>
+  </div>
+  <div class="col">
+    <h3 style="color:var(--red)">Blocked</h3>
+    <div class="card blocked">
+      Overnight Planning — 6PM Orchestrator
+      <span class="meta">t_26d47fa3</span>
+    </div>
+    <div class="card blocked">
+      Research competitor pricing changes
+      <span class="meta">t_b616a578</span>
+    </div>
+  </div>
+  <div class="col">
+    <h3 style="color:var(--green)">Done</h3>
+    <div class="card done">
+      Research: ServiceNow AI agents
+      <span class="meta">researcher</span>
+    </div>
+    <div class="card done">
+      Research: Atera agentic features
+      <span class="meta">researcher</span>
+    </div>
+    <div class="card done">
+      Research: SuperOps.ai agentic
+      <span class="meta">researcher</span>
+    </div>
+    <div class="card done">
+      + 12 more ITSM tasks...
+    </div>
   </div>
 </div>
 
-<div class="content">
-
-  <!-- 1. WHAT IS KANBAN -->
-  <div class="section">
-    <h2 class="section-title">What is Kanban here? <span class="doodle-arrow">?</span></h2>
-    <div class="hand-box wobble-1">
-      <p>In the Hermes Agent world, <strong>Kanban is not a todo list</strong>. It is a <strong>multi-agent work queue</strong> where tasks move through real states — <em>ready, todo, blocked, done</em> — and different worker roles (orchestrator, researcher, analyst, writer) claim what they can handle.</p>
-      <p style="margin-top:10px">Think of it as a shared whiteboard where agents pin jobs, grab the next sticky note, and move it to "done" without bothering me for every micro-decision.</p>
-    </div>
-  </div>
-
-  <!-- 2. HOW IT WORKS -->
-  <div class="section">
-    <h2 class="section-title">How it flows <span class="doodle-arrow">→</span></h2>
-    <div class="pipeline">
-      <div class="pipe-step">Orchestrator<br><span style="font-size:13px;color:var(--pencil)">creates tasks</span></div>
-      <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Researcher<br><span style="font-size:13px;color:var(--pencil)">claims + executes</span></div>
-      <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Analyst<br><span style="font-size:13px;color:var(--pencil)">synthesizes</span></div>
-      <div class="pipe-arrow">→</div>
-      <div class="pipe-step">Writer<br><span style="font-size:13px;color:var(--pencil)">drafts</span></div>
-      <div class="pipe-arrow">→</div>
-      <div class="pipe-step" style="border-color:var(--state-done)">Done<br><span style="font-size:13px;color:var(--pencil)">shipped</span></div>
-    </div>
-
-    <p style="text-align:center;color:var(--pencil);font-size:16px;margin-bottom:16px">Tasks move through four states on the board:</p>
-    <div class="states" style="justify-content:center">
-      <span class="state-pill pill-ready">ready</span>
-      <span class="state-pill pill-todo">todo</span>
-      <span class="state-pill pill-blocked">blocked</span>
-      <span class="state-pill pill-done">done</span>
-    </div>
-
-    <div class="hand-box wobble-2">
-      <p><strong>Ready</strong> = queued, waiting for a worker to pick up.<br>
-      <strong>Todo</strong> = actively being worked on.<br>
-      <strong>Blocked</strong> = waiting on external input, approval, or a dependency.<br>
-      <strong>Done</strong> = finished and shipped (or archived).</p>
-    </div>
-  </div>
-
-  <!-- 3. WHY IT'S DIFFERENT -->
-  <div class="section">
-    <h2 class="section-title">Not Todoist. Not Cron. Not Chat. <span class="doodle-arrow">≠</span></h2>
-    <div class="compare-grid">
-      <div class="compare-card" style="transform:rotate(-.5deg)">
-        <h4>Todoist</h4>
-        <p><strong>Operational layer for me.</strong> My human task list — reminders, habits, errands. I check boxes. Agents do not touch it.</p>
-      </div>
-      <div class="compare-card" style="transform:rotate(.4deg)">
-        <h4>Kanban</h4>
-        <p><strong>Multi-agent work queue.</strong> Autonomous pipelines — research, synthesis, drafting — moving through states without my hand on every card.</p>
-      </div>
-      <div class="compare-card" style="transform:rotate(-.3deg)">
-        <h4>Cron</h4>
-        <p><strong>Scheduled triggers.</strong> "Run this at 6PM." Fires the orchestrator, which then populates the Kanban board with new tasks.</p>
-      </div>
-      <div class="compare-card" style="transform:rotate(.6deg)">
-        <h4>Manual Chat</h4>
-        <p><strong>Direct request.</strong> I ask, agent answers. No queue, no state machine. Best for one-offs, worst for pipelines.</p>
-      </div>
-    </div>
-    <p style="margin-top:14px;color:var(--pencil);font-size:16px">The Kanban board is the <em>middle layer</em> between "I want this" and "it is shipped." Cron kicks it. Agents run it. I only step in when a rule says <em>needs approval</em>.</p>
-  </div>
-
-  <!-- 4. PRABHA'S 4 BOARDS -->
-  <div class="section">
-    <h2 class="section-title">My 4 boards <span class="doodle-arrow">📌</span></h2>
-    <div class="stickies">
-      <div class="sticky sticky-yellow">
-        <span class="tag">Tina · Auto-Run</span>
-        <h3>Tina Board</h3>
-        <p>Optimization, error-log fixes, setup patches — anything that improves the system without touching product or design.</p>
-        <p class="rule">Rule: auto-run everything. No approval loops.</p>
-      </div>
-      <div class="sticky sticky-blue">
-        <span class="tag">Professional · Approval Gate</span>
-        <h3>Professional Board</h3>
-        <p>Research, competitive analysis, writing, strategy work. The bulk of my weekly pipeline lives here.</p>
-        <p class="rule">Rule: auto-research, needs approval for design/code.</p>
-      </div>
-      <div class="sticky sticky-green">
-        <span class="tag">App Work · Build Gate</span>
-        <h3>App Work Board</h3>
-        <p>Feature work, releases, builds, app store updates — anything that ships to users.</p>
-        <p class="rule">Rule: auto-plan, needs approval for builds/releases.</p>
-      </div>
-      <div class="sticky sticky-pink">
-        <span class="tag">Personal · Manual</span>
-        <h3>Personal Board</h3>
-        <p>Side projects, experiments, learning queues. Mostly dormant unless I manually wake it.</p>
-        <p class="rule">Rule: manual/dormant. I move cards here.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. CURRENT ACTIVE EXAMPLE -->
-  <div class="section">
-    <h2 class="section-title">Live right now <span class="doodle-arrow">⚡</span></h2>
-    <div class="hand-box wobble-3" style="position:relative">
-      <div class="marginalia">real board state</div>
-      <p style="font-size:17px;margin-bottom:12px"><strong>ITSM / MSP Weekly Research Pipeline</strong> — runs through the <em>Professional</em> board every week. Competitor monitoring for SuperOps.ai, Atera, HaloPSA, ServiceNow, Freshworks, and emerging players.</p>
-
-      <div class="task-box">
-        <div class="task-item">
-          <span class="task-id" style="border-color:var(--state-ready);color:#2e7d32">ready</span>
-          <span><strong>Synthesize:</strong> Agentic SaaS research findings <span style="color:var(--pencil)">(analyst)</span></span>
-          <span class="task-id">t_fcccbeae</span>
-        </div>
-        <div class="task-item">
-          <span class="task-id" style="border-color:var(--state-todo);color:#1565c0">todo</span>
-          <span><strong>Draft:</strong> Agentic SaaS research brief <span style="color:var(--pencil)">(writer)</span></span>
-          <span class="task-id">t_82ae71da</span>
-        </div>
-        <div class="task-item">
-          <span class="task-id" style="border-color:var(--state-blocked);color:#c62828">blocked</span>
-          <span><strong>Overnight Planning</strong> — 6PM Orchestrator</span>
-          <span class="task-id">t_26d47fa3</span>
-        </div>
-        <div class="task-item">
-          <span class="task-id" style="border-color:var(--state-blocked);color:#c62828">blocked</span>
-          <span><strong>OVERNIGHT:</strong> Research competitor pricing changes</span>
-          <span class="task-id">t_b616a578</span>
-        </div>
-        <div class="task-item">
-          <span class="task-id" style="border-color:var(--state-done);color:#5d4037">done</span>
-          <span>Many completed tasks for weekly ITSM/MSP research <span style="color:var(--pencil)">(SuperOps.ai, Atera, HaloPSA, ServiceNow, Freshworks, emerging players)</span></span>
-          <span class="task-id">…</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. HOW TO INTERACT -->
-  <div class="section">
-    <h2 class="section-title">Talking to the board <span class="doodle-arrow">⌨</span></h2>
-    <p style="margin-bottom:10px">CLI commands I use to peek, prod, and push tasks:</p>
-
-    <div class="cli">
-      <span class="cmd">hermes kanban list</span> <span class="comment"># show all boards + task states</span><br>
-      <span class="cmd">hermes kanban show t_fcccbeae</span> <span class="comment"># inspect a specific task</span><br>
-      <span class="cmd">hermes kanban move t_82ae71da done</span> <span class="comment"># manually advance (rare)</span><br>
-      <span class="cmd">hermes kanban block t_26d47fa3 "waiting on API key"</span> <span class="comment"># mark blocked + reason</span>
-    </div>
-
-    <div class="hand-box wobble-1">
-      <p><strong>Worker lifecycle:</strong> Orchestrator spawns → researcher claims ready tasks → analyst picks up raw findings → writer drafts deliverable → done. If a task hits <em>blocked</em>, the orchestrator re-evaluates at the next cron tick (6PM, 7PM, or 3AM).</p>
-      <p style="margin-top:8px;color:var(--pencil)">I rarely move cards manually. The agents handle state transitions. I only step in when a board rule says <em>needs approval</em> — then I get a ping, review, and say <strong>ship it</strong> or <strong>revise</strong>.</p>
-    </div>
-  </div>
-
-  <!-- Closing scribble -->
-  <div class="section" style="text-align:center;margin-top:60px">
-    <div class="pen-scribble" style="width:80px"></div>
-    <p style="display:inline;color:var(--pencil);font-size:16px">The board runs so I do not have to micro-manage every agent turn.</p>
-    <div class="pen-scribble" style="width:80px"></div>
-  </div>
-
+<div class="note">
+  This is real data from the board as of today. The ITSM/MSP weekly research pipeline feeds into this queue every week.
 </div>
 
-<div class="footer">
-  <div class="footer-line"></div>
-  <p>Generated by Hermes · thisisprabha.com/sketch</p>
-  <p style="font-size:13px;margin-top:6px">Part of the Agent Tina system notes</p>
+<h2>Kanban vs. Todoist vs. Cron vs. Manual</h2>
+<table>
+  <tr>
+    <th>System</th>
+    <th>What it holds</th>
+    <th>Who acts</th>
+    <th>Trigger</th>
+  </tr>
+  <tr>
+    <td><strong>Kanban</strong></td>
+    <td>Agent work units (research, synthesis, draft, deploy)</td>
+    <td>Agent profiles (orchestrator, researcher, writer)</td>
+    <td>Cron or manual kickoff</td>
+  </tr>
+  <tr>
+    <td><strong>Todoist</strong></td>
+    <td>Human action items, deadlines, approvals</td>
+    <td>You (Prabha)</td>
+    <td>You add tasks manually</td>
+  </tr>
+  <tr>
+    <td><strong>Cron</strong></td>
+    <td>Scheduled triggers (6PM scan, 3AM run)</td>
+    <td>System clock</td>
+    <td>Time-based</td>
+  </tr>
+  <tr>
+    <td><strong>Manual chat</strong></td>
+    <td>One-off requests, quick questions</td>
+    <td>You + Agent Tina</td>
+    <td>Direct message</td>
+  </tr>
+</table>
+
+<p class="scribble">Kanban does not replace Todoist. They are layers. Todoist = operational truth for human work. Kanban = execution truth for agent pipelines.</p>
+
+<h2>My 4 Boards</h2>
+
+<div class="sticky green">
+  <strong>Tina Board</strong> — Auto-run everything. Optimization, error logs, setup fixes, model memory issues. No approval gate. If it's broken, Tina fixes it.
 </div>
 
+<div class="sticky blue">
+  <strong>Professional</strong> — Auto-research is allowed. Auto-build design/code needs approval. Research flows into HTML artifacts or Google Docs. Design tasks wait for your thumbs-up.
+</div>
+
+<div class="sticky pink">
+  <strong>App Work</strong> — Auto-plan and research. Builds and App Store releases need explicit approval. WhatPay screenshots, ASC pushes, metadata updates live here.
+</div>
+
+<div class="sticky" style="background:#e5e7eb;transform:rotate(0.4deg)">
+  <strong>Personal</strong> — Manual/dormant. No auto-execution. You add what you want, when you want.
+</div>
+
+<h2>How to Use It</h2>
+
+<div class="cmd">
+  <code>hermes kanban list</code> — Show all tasks and states
+</div>
+<div class="cmd">
+  <code>hermes kanban show t_fcccbeae</code> — Inspect one task
+</div>
+<div class="cmd">
+  <code>hermes kanban create "Research: New ITSM player" --role researcher</code> — Add a task
+</div>
+<div class="cmd">
+  <code>hermes kanban complete t_fcccbeae</code> — Mark done
+</div>
+
+<div class="note">
+  Tasks in Kanban are not cron jobs. They are <em>durable work units</em> that survive across sessions. A cron can kick off a Kanban task; a Kanban task can spawn a cron. But they are separate systems.
+</div>
+
+<h2>Why This Exists</h2>
+<p>Before Kanban, everything was either:</p>
+<ul>
+  <li><strong>Cron-only</strong> — rigid time slots, hard to chain dependent work</li>
+  <li><strong>Delegate-only</strong> — subagents die when parent session ends</li>
+  <li><strong>Manual-only</strong> — you had to babysit every step</li>
+</ul>
+<p>Kanban adds a <strong>stateful middle layer</strong>: work is decomposed into cards, cards wait in queues, agents claim and execute them independently, and the board tracks what's ready, what's stuck, and what's shipped.</p>
+
+<div class="sticky" style="transform:rotate(-0.8deg)">
+  For ITSM/MSP weekly research, the orchestrator creates research cards → researchers run in parallel → analyst synthesizes → writer drafts the HTML brief → deploy pushes to thisisprabha.com/sketch/. The whole pipeline runs without waking you up.
+</div>
+
+<h2>Current Status</h2>
+<p>The Kanban system is <strong>live and working</strong>. The ITSM research pipeline has completed 15+ tasks across ServiceNow, Atera, HaloPSA, Freshworks, SuperOps.ai, and emerging players. Two tasks are blocked (likely due to the old overnight orchestrator still being referenced). One synthesis task is ready to claim. One draft task is waiting behind it.</p>
+
+<div class="note">
+  If you want the weekly ITSM research to actually produce the HTML brief, claim the ready synthesis task or unblock the orchestrator.
+</div>
+
+<footer>
+  <p>Built by Agent Tina · <a href="/">thisisprabha.com</a></p>
+  <p class="scribble">Last updated: May 2026 · Board data is live from hermes kanban list</p>
+</footer>
+
+</div>
 </body>
 </html>
