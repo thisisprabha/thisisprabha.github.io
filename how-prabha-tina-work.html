@@ -142,7 +142,7 @@
       <div class="flow-step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>6 PM auto-ping.</strong> If raw files exist, Tina sends a Telegram message: *"Found 3 files + 2 task ideas — add to Todoist?"*
+          <strong>6 PM auto-ping.</strong> If raw files exist OR work email has actionable Slack/Linear/GitHub notifications, Tina sends a Telegram message with suggested tasks.
           <span class="step-time">Every day at 6 PM IST — automated, no agent tokens</span>
         </div>
       </div>
@@ -164,13 +164,12 @@
 
     <div class="highlight-box">
       <strong>📨 The 6 PM Ping</strong>
-      <p style="margin-top:8px;">Every evening at 6 PM IST, a lightweight script checks your raw/ folder. If new files exist, it sends a Telegram message with:</p>
+      <p style="margin-top:8px;">Every evening at 6 PM IST, a lightweight script checks two things:</p>
       <ul style="margin:10px 0 0 18px; color:#444; font-size:.88rem;">
-        <li>How many new files</li>
-        <li>Suggested task ideas from synthesis.md</li>
-        <li>A prompt to reply with numbers to add to Todoist</li>
+        <li><strong>Your raw/ folder</strong> — new files and suggested task ideas from synthesis.md</li>
+        <li><strong>Work email</strong> — Slack, Linear, GitHub, Calendar, Ticket, Design review notifications from @superops.com</li>
       </ul>
-      <p style="margin-top:10px; color:#666;"><strong>No files = silent.</strong> No messages, no spam.</p>
+      <p style="margin-top:10px; color:#666;"><strong>No files + no email noise = silent.</strong> No messages, no spam.</p>
     </div>
 
     <!-- The 4 Boards -->
