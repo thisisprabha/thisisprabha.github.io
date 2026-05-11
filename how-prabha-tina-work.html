@@ -103,12 +103,21 @@
     footer {
       text-align:center; margin-top: 50px; font-size:.82rem; color:#999;
     }
+
+    .highlight-box {
+      background:#fff8e1;
+      border:1.5px solid #f5dca0;
+      border-radius:14px;
+      padding:18px 16px;
+      margin-top:16px;
+      font-size:.9rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>How Prabha + Tina Work</h1>
-    <p>One page. No jargon. No cron. Just the daily flow.</p>
+    <p>One page. No jargon. Just the daily flow.</p>
   </header>
 
   <div class="wrap">
@@ -133,8 +142,8 @@
       <div class="flow-step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Tina reads synthesis</strong> and sends you a suggestion list: "Found 3 items — add to Todoist?"
-          <span class="step-time">You trigger this by messaging me, or I notice raw files</span>
+          <strong>6 PM auto-ping.</strong> If raw files exist, Tina sends a Telegram message: *"Found 3 files + 2 task ideas — add to Todoist?"*
+          <span class="step-time">Every day at 6 PM IST — automated, no agent tokens</span>
         </div>
       </div>
       <div class="flow-step">
@@ -151,6 +160,17 @@
           <span class="step-time">Anytime you message "execute X"</span>
         </div>
       </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>📨 The 6 PM Ping</strong>
+      <p style="margin-top:8px;">Every evening at 6 PM IST, a lightweight script checks your raw/ folder. If new files exist, it sends a Telegram message with:</p>
+      <ul style="margin:10px 0 0 18px; color:#444; font-size:.88rem;">
+        <li>How many new files</li>
+        <li>Suggested task ideas from synthesis.md</li>
+        <li>A prompt to reply with numbers to add to Todoist</li>
+      </ul>
+      <p style="margin-top:10px; color:#666;"><strong>No files = silent.</strong> No messages, no spam.</p>
     </div>
 
     <!-- The 4 Boards -->
@@ -209,55 +229,91 @@
       <h2><span class="emoji">🛡️</span> Core Rules</h2>
       <div class="rule">
         <div class="dot dot-g"></div>
-        <div><strong>Tina never auto-creates tasks.</strong> You approve every addition to Todoist. No surprises.</div>
+        <div>
+          <strong>Tina never auto-creates tasks.</strong> You approve every addition to Todoist. No surprises.
+        </div>
       </div>
       <div class="rule">
         <div class="dot dot-g"></div>
-        <div><strong>Tina never executes your work tasks without approval.</strong> Design, code, builds = your gate.</div>
+        <div>
+          <strong>Tina never executes your work tasks without approval.</strong> Design, code, builds = your gate.
+        </div>
       </div>
       <div class="rule">
         <div class="dot dot-g"></div>
-        <div><strong>Email is dead for tasks.</strong> No digests. No reply-to-approve. Todoist is the single queue.</div>
+        <div>
+          <strong>Email is dead for tasks.</strong> No digests. No reply-to-approve. Todoist is the single queue.
+        </div>
       </div>
       <div class="rule">
         <div class="dot dot-y"></div>
-        <div><strong>You can add tasks directly too.</strong> Drop a task in Telegram → I add to board instantly. Paste into Todoist app yourself anytime.</div>
+        <div>
+          <strong>You can add tasks directly too.</strong> Drop a task in Telegram → Tina adds to board instantly. Paste into Todoist app yourself anytime.
+        </div>
       </div>
       <div class="rule">
         <div class="dot dot-r"></div>
-        <div><strong>Deleted tasks stay deleted.</strong> If you delete from Todoist, Tina ignores it. Cancelled = cancelled.</div>
+        <div>
+          <strong>Deleted tasks stay deleted.</strong> If you delete from Todoist, Tina ignores it. Cancelled = cancelled.
+        </div>
       </div>
     </div>
 
-    <!-- Examples -->
+    <!-- How to Trigger -->
     <div class="card">
-      <h2><span class="emoji">💬</span> Example Messages</h2>
+      <h2><span class="emoji">💬</span> How to Add Tasks</h2>
+      <div class="flow-step">
+        <div class="step-num" style="background:#d4c5e8; color:#4a2a6e;">1</div>
+        <div class="step-body">
+          <strong>Auto-ping:</strong> Tina sends a daily 6 PM list if raw files exist. Reply with numbers to add to Todoist.
+          <span class="step-time">Ex: "Add 1,3 to Professional. Add 2 to Tina board, auto."</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#b8d4f0; color:#1a3a5c;">2</div>
+        <div class="step-body">
+          <strong>Manual add:</strong> Message Tina directly. "Put 'Research Atera Copilot' on Tina board, auto."
+          <span class="step-time">→ Task created instantly with right label</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#b5e6c8; color:#1a4a2e;">3</div>
+        <div class="step-body">
+          <strong>Todoist app:</strong> You add manually. Tina sees it when you ask. "What's on Professional?"
+          <span class="step-time">→ Tina reads board and reports status</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#e8c4a8; color:#5a3a1a;">4</div>
+        <div class="step-body">
+          <strong>Detail + execute:</strong> "Add 'Fix ASC screenshots' to App Works with needs-details."
+          <span class="step-time">→ Task created. You edit description later. Then say "execute."</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example Messages -->
+    <div class="card">
+      <h2><span class="emoji">🎯</span> Example Messages</h2>
       <div class="flow-step">
         <div class="step-num" style="background:#b8d4f0; color:#1a3a5c;">A</div>
         <div class="step-body">
-          <strong>Add task:</strong> "Put 'Research Atera Copilot' on Tina board, auto."
-          <span class="step-time">→ Task created with auto label. I may run it tonight or now.</span>
+          <strong>Daily approval:</strong> "Go ahead with 1 to Professional needs-approval, and 2 to Tina board auto."
+          <span class="step-time">→ Tasks created and labeled exactly as you said</span>
         </div>
       </div>
       <div class="flow-step">
         <div class="step-num" style="background:#b5e6c8; color:#1a4a2e;">B</div>
         <div class="step-body">
-          <strong>Execute task:</strong> "Go execute the Arun feedback design task on Professional board."
-          <span class="step-time">→ I read the full description and start the Figma work.</span>
+          <strong>Execute:</strong> "Execute the Arun feedback task on Professional."
+          <span class="step-time">→ Tina reads full description, opens Figma, starts work</span>
         </div>
       </div>
       <div class="flow-step">
-        <div class="step-num" style="background:#e8c4a8; color:#5a3a1a;">C</div>
+        <div class="step-num" style="background:#ddd; color:#444;">C</div>
         <div class="step-body">
-          <strong>Add + detail later:</strong> "Add 'Fix ASC screenshots' to App Works with needs-details label."
-          <span class="step-time">→ Task created. You edit description later. Then say "execute".</span>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="step-num" style="background:#ddd; color:#444;">D</div>
-        <div class="step-body">
-          <strong>Process raw:</strong> "Tina, I dropped 3 files in raw/. What should I do with them?"
-          <span class="step-time">→ I read synthesis, suggest tasks, you pick which ones to add.</span>
+          <strong>Skip all:</strong> "None today, Tina."
+          <span class="step-time">→ Nothing added. Notes stay in wiki archive.</span>
         </div>
       </div>
     </div>
@@ -265,8 +321,8 @@
     <a class="big-btn" href="https://todoist.com" target="_blank">Open Todoist →</a>
 
     <footer>
-      Last updated 11 May 2026 &middot; Prabha + Tina<br />
-      No cron. No orchestrator. Just messages.
+      Last updated 11 May 2026 · Prabha + Tina<br />
+      6 PM auto-ping · Manual approval · Execute on command
     </footer>
 
   </div>
