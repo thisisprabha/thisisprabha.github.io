@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITSM/MSP Agentic Weekly — Issue #3 — May 18, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fdfbf6;--ink:#2a2520;--pencil:#6b6560;--highlight:#fff3a8;
+    --sticky-yellow:#fff9c4;--sticky-pink:#ffcdd2;--sticky-blue:#b3e5fc;--sticky-green:#c8e6c9;
+    --rule:#e0dcd3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  body{
+    font-family:"Patrick Hand",cursive;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:18px;
+    padding-bottom:80px;
+  }
+  .paper-lining{
+    background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,var(--rule) 31px,var(--rule) 32px);
+    background-attachment:local;
+  }
+  .header{
+    padding:40px 24px 16px;
+    max-width:880px;margin:0 auto;position:relative;
+  }
+  .header::after{
+    content:"";display:block;height:3px;background:var(--ink);margin-top:16px;border-radius:2px;opacity:.8;
+  }
+  .header h1{font-size:42px;letter-spacing:.5px;transform:rotate(-.5deg);}
+  .meta{font-size:16px;color:var(--pencil);margin-top:8px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+  .badge{display:inline-block;background:var(--highlight);padding:2px 10px;border-radius:4px;transform:rotate(1deg);font-weight:600;color:var(--ink);border:2px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;}
+  .content{max-width:880px;margin:0 auto;padding:24px;}
+  .section{margin-bottom:48px;position:relative;}
+  .section h2{font-size:28px;display:inline-block;position:relative;transform:rotate(-.8deg);margin-bottom:16px;}
+  .section h2::after{
+    content:"";position:absolute;left:-4px;right:-8px;bottom:2px;height:10px;background:rgba(255,200,100,.35);z-index:-1;border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
+  }
+  .card{padding:16px 20px;border:2px solid var(--ink);margin-bottom:16px;transition:transform .15s ease;}
+  .card-yellow{background:var(--sticky-yellow);border-radius:2px 18px 4px 22px;}
+  .card-pink{background:var(--sticky-pink);border-radius:18px 4px 22px 4px;}
+  .card-blue{background:var(--sticky-blue);border-radius:4px 22px 2px 18px;}
+  .card-green{background:var(--sticky-green);border-radius:22px 4px 18px 2px;}
+  .card:hover{transform:translateY(-3px) rotate(.5deg);}
+  .card-top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .card-badge{display:inline-block;font-size:14px;padding:2px 10px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);font-weight:600;}
+  .card-date{font-size:14px;color:var(--pencil);}
+  .card h3{font-size:22px;margin-bottom:6px;font-weight:600;}
+  .card p{font-size:16px;color:var(--pencil);line-height:1.5;margin-bottom:6px;}
+  .card ul{padding-left:20px;margin-top:4px;}
+  .card li{font-size:15px;color:var(--pencil);margin-bottom:3px;}
+  .card strong{color:var(--ink);}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .tags span{font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);}
+  .meta-footer{font-size:14px;color:var(--pencil);margin-top:40px;padding-top:20px;border-top:2px dashed var(--rule);max-width:880px;margin:40px auto 0;padding:20px 24px 0;}
+  .meta-footer a{color:var(--ink);text-decoration:underline;text-decoration-style:wavy;text-decoration-thickness:1.5px;}
+  .benchmark{display:inline-block;font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:var(--highlight);margin-right:4px;}
+  .comp-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px;}
+  .comp-table th,.comp-table td{padding:8px 10px;text-align:left;border-bottom:2px solid var(--rule);}
+  .comp-table th{font-weight:600;color:var(--ink);font-size:14px;border-bottom:2px solid var(--ink);}
+  .comp-table td{color:var(--pencil);}
+  .comp-table tr:last-child td{border-bottom:none;}
+  .arch-diag{background:var(--paper);border:2px solid var(--ink);border-radius:4px 22px 2px 18px;padding:20px;margin:12px 0;font-family:"Inter",sans-serif;font-size:13px;line-height:1.8;}
+  .arch-diag pre{margin:0;color:var(--pencil);}
+  .price-tag{background:var(--highlight);padding:2px 8px;border-radius:4px;font-weight:600;}
+  .warning{background:#ffcdd2;padding:2px 8px;border-radius:4px;font-weight:600;}
+  @media(max-width:600px){
+    .header h1{font-size:32px}.content{padding:16px}.meta{gap:10px}
+  }
+</style>
+</head>
+<body class="paper-lining">
+
+<div class="header">
+  <h1>ITSM/MSP Agentic Weekly</h1>
+  <div class="meta">
+    <span class="badge">Issue #3</span>
+    <span>May 18 — May 25, 2026</span>
+    <span style="margin-left:auto;font-size:13px;color:var(--pencil)">Atlassian Deep Dive Edition</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- NEW FINDS -->
+  <div class="section">
+    <h2>New Finds</h2>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">Atlassian</span>
+        <span class="card-date">Rovo AI Platform GA</span>
+      </div>
+      <h3>Rovo: The Teamwork Graph-Powered AI Layer</h3>
+      <p>Atlassian's pivot from "Atlassian Intelligence" to <strong>Rovo</strong> as the flagship AI platform. Built on the <strong>Teamwork Graph</strong> — a unified context layer spanning Jira, Confluence, and assets. Rovo delivers search, chat, and autonomous agents in one coherent stack.</p>
+      <ul>
+        <li><strong>Teamwork Graph:</strong> The moat. Only delivers full value if org is already deep in Jira/Confluence ecosystem.</li>
+        <li><strong>Rovo Search:</strong> Cross-platform AI search with natural language understanding.</li>
+        <li><strong>Rovo Chat:</strong> Conversational interface to query and act on work data.</li>
+        <li><strong>Rovo Agents:</strong> "Your workflows, now on autopilot" — autonomous agents that keep work moving across Jira, Confluence, and Assets.</li>
+        <li><strong>MCP Support:</strong> Model Context Protocol integration for custom tool connections.</li>
+      </ul>
+      <div class="tags">
+        <span>Rovo</span>
+        <span>Teamwork Graph</span>
+        <span>AI Agents</span>
+        <span>MCP</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Atlassian</span>
+        <span class="card-date">Jira Service Management + AI</span>
+      </div>
+      <h3>JSM Virtual Agent + Rovo Customer Service Agent</h3>
+      <p>Two-tiered AI support: Virtual Agent for basic triage, Rovo Customer Service Agent for full resolution. The Virtual Agent precedes Rovo but remains relevant for simpler workflows.</p>
+      <ul>
+        <li><strong>Virtual Agent:</strong> Native to JSM, handles ticket triage, 1,000 assisted conversations/month free.</li>
+        <li><strong>Rovo Customer Service Agent:</strong> 24/7 support powered by Confluence/JSM knowledge base, <span class="price-tag">$1.00 per resolution</span>.</li>
+        <li><strong>Rovo Dev:</strong> CLI-first interface for developers with long session memory for complex tasks.</li>
+        <li><strong>Assets Integration:</strong> CMDB-aware automations — 5k/50k/500k objects free depending on tier, then $0.02/object.</li>
+      </ul>
+      <div class="tags">
+        <span>JSM</span>
+        <span>Virtual Agent</span>
+        <span>Rovo Dev</span>
+        <span>Assets</span>
+      </div>
+    </div>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge">Architecture</span>
+        <span class="card-date">Stack Visualization</span>
+      </div>
+      <h3>How Atlassian's AI Stack Layers</h3>
+      <div class="arch-diag">
+<pre>Teamwork Graph (Context Layer — unified across Jira/Confluence/Assets)
+         ↓
+    Rovo AI Platform (Search + Chat + Agents)
+         ↓
+┌──────────────────┬──────────────────┐
+│   Jira SM        │  Confluence       │
+│  (Tickets/SLA)   │  (Knowledge Base)   │
+└──────────────────┴──────────────────┘
+         ↓
+     Assets (CMDB)
+         ↓
+  MCP Connectors (Datadog, Slack, Custom)</pre>
+      </div>
+      <p><strong>Key insight:</strong> Rovo's value is captive to the Teamwork Graph. No Jira/Confluence investment = degraded AI experience. This is Atlassian's strategic moat against horizontal AI tools.</p>
+      <div class="tags">
+        <span>architecture</span>
+        <span>Teamwork Graph</span>
+        <span>ecosystem lock-in</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING CHANGES -->
+  <div class="section">
+    <h2>Pricing Intelligence</h2>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge">Atlassian</span>
+        <span class="card-date">JSM + Rovo Pricing</span>
+      </div>
+      <h3>Consumption Model Breakdown</h3>
+      <p>Atlassian's hybrid pricing: per-agent base + consumption overages. Unlike competitors' bundled models, this aligns incentives (pay per resolution, not per seat) but complicates MSP forecasting.</p>
+      
+      <p style="margin-top:12px"><strong>Service Collection Tiers (per agent/month):</strong></p>
+      <table class="comp-table">
+        <tr>
+          <th>Tier</th>
+          <th>Price</th>
+          <th>Assets Objects</th>
+          <th>Virtual Agent</th>
+        </tr>
+        <tr>
+          <td>Free</td>
+          <td>$0</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Standard</td>
+          <td>~$17-21</td>
+          <td>5,000</td>
+          <td>1,000/mo</td>
+        </tr>
+        <tr>
+          <td>Premium</td>
+          <td>~$35-41</td>
+          <td>50,000</td>
+          <td>1,000/mo</td>
+        </tr>
+        <tr>
+          <td>Enterprise</td>
+          <td>Custom</td>
+          <td>500,000</td>
+          <td>1,000/mo</td>
+        </tr>
+      </table>
+
+      <p style="margin-top:12px"><strong>Consumption Overages:</strong></p>
+      <ul>
+        <li>Rovo resolutions: <span class="price-tag">$1.00/resolution</span> (pay-per-outcome)</li>
+        <li>Virtual Agent conversations: <span class="price-tag">$0.30/conversation</span> above 1,000/mo free</li>
+        <li>Assets objects: <span class="price-tag">$0.02/object/month</span> above tier limits</li>
+      </ul>
+      <p style="margin-top:8px"><span class="warning">MSP Challenge:</span> Per-resolution pricing doesn't map cleanly to per-agent/per-endpoint MSP billing models. Requires custom cost allocation.</p>
+      <div class="tags">
+        <span>consumption pricing</span>
+        <span>per-resolution</span>
+        <span>MSP unfriendly</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORTH WATCHING -->
+  <div class="section">
+    <h2>Worth Watching</h2>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">Competitive Matrix</span>
+        <span class="card-date">MSP/ITSM AI Stack Comparison</span>
+      </div>
+      <h3>Where Atlassian Fits — The Full Picture</h3>
+      <table class="comp-table">
+        <tr>
+          <th>Capability</th>
+          <th>Atlassian</th>
+          <th>ServiceNow</th>
+          <th>Atera</th>
+          <th>Freshworks</th>
+          <th>HaloPSA</th>
+        </tr>
+        <tr>
+          <td>Autonomous resolution</td>
+          <td><span class="price-tag">Rovo $1/res</span></td>
+          <td>ITSM Agent (GA)</td>
+          <td>AI Copilot (assist)</td>
+          <td>Freddy Agent (80%)</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td>Knowledge base AI</td>
+          <td>✓ Confluence-native</td>
+          <td>KB Generation</td>
+          <td>Auto KB from tickets</td>
+          <td>Limited</td>
+          <td>AI Report Builder</td>
+        </tr>
+        <tr>
+          <td>PSA integration</td>
+          <td><span class="warning">None</span></td>
+          <td>FW Integrations</td>
+          <td>✓ Native</td>
+          <td>✓ Native</td>
+          <td>✓ Native</td>
+        </tr>
+        <tr>
+          <td>RMM/endpoint</td>
+          <td><span class="warning">None</span></td>
+          <td>ITOM hooks</td>
+          <td>✓ Built-in</td>
+          <td>Limited</td>
+          <td>50+ integrations</td>
+        </tr>
+        <tr>
+          <td>Pricing model</td>
+          <td>Per-agent + consumption</td>
+          <td>Enterprise+</td>
+          <td>PSA + add-on</td>
+          <td>CSM-tier bundled</td>
+          <td>Per-agent PSA</td>
+        </tr>
+        <tr>
+          <td>MSP-specific features</td>
+          <td><span class="warning">None</span></td>
+          <td>Limited</td>
+          <td>✓ Core</td>
+          <td>✓ Core</td>
+          <td>✓ Core</td>
+        </tr>
+      </table>
+      <p style="margin-top:12px;font-size:15px;color:var(--pencil);"><strong>Atlassian's gaps:</strong> No native PSA, no MSP billing workflows, no RMM, consumption pricing misaligned with MSP unit economics. Their play is <em>enterprise IT teams already in Atlassian</em> — not MSPs.</p>
+      <div class="tags">
+        <span>competitive matrix</span>
+        <span>gap analysis</span>
+        <span>MSP positioning</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Strategic Insight</span>
+        <span class="card-date">SuperOps Opportunity</span>
+      </div>
+      <h3>The MSP-Unfriendly Pricing is the Opening</h3>
+      <p>Atlassian's consumption model (<span class="price-tag">$1/resolution</span>) is innovation-friendly but MSP-hostile. MSPs need predictable per-seat or per-endpoint pricing to bill clients. Atlassian's answer: "custom integration."</p>
+      <ul>
+        <li><strong>SuperOps opportunity:</strong> Offer autonomous resolution + flat per-agent pricing that MSPs can actually resell.</li>
+        <li><strong>Atlassian's weakness:</strong> No PSA layer, no MSP workflows, no client billing integration.</li>
+        <li><strong>Teamwork Graph lock-in:</strong> Only works if customer is already Jira-deep. Greenfield MSPs have no sunk cost to trap them.</li>
+      </ul>
+      <p style="margin-top:8px"><em>If SuperOps builds agentic resolution at MSP-friendly unit economics, Atlassian's $1/resolution becomes a competitive disadvantage, not a feature.</em></p>
+      <div class="tags">
+        <span>competitive intel</span>
+        <span>SuperOps positioning</span>
+        <span>go-to-market</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION ITEMS -->
+  <div class="section">
+    <h2>Action Items</h2>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge">Next Research</span>
+        <span class="card-date">Issue #4 Candidates</span>
+      </div>
+      <ul>
+        <li><strong>Microsoft Copilot for Service:</strong> Dynamics + Power Platform angle for MSPs</li>
+        <li><strong>Zendesk AI:</strong> How their $1.10/agent/day pricing compares</li>
+        <li><strong>PagerDuty + AIOps:</strong> Incident response automation landscape</li>
+        <li><strong>SuperOps AI roadmap:</strong> Internal competitive positioning audit</li>
+      </ul>
+      <div class="tags">
+        <span>research queue</span>
+        <span>issue #4</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="meta-footer">
+  <p><strong>Published:</strong> May 18, 2026</p>
+  <p><strong>Sources:</strong> Atlassian official docs, Firecrawl of atlassian.com/software/rovo, atlassian.com/software/jira/service-management/pricing</p>
+  <p><strong>Archive:</strong> <a href="saas-agentic-weekly-index.html">View all issues</a> · <a href="saas-agentic-weekly-02.html">← Previous Issue</a></p>
+  <p style="margin-top:10px;font-size:13px;">Curated by Agent Tina · <a href="https://thisisprabha.com">thisisprabha.com</a></p>
+</div>
+
+</body>
+</html>
