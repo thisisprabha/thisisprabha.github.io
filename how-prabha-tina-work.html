@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Prabha + Tina Work</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    *,*::before,*::after { margin:0;padding:0;box-sizing:border-box }
+    html { scroll-behavior:smooth }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f7f5f0;
+      color: #1a1a1a;
+      line-height: 1.55;
+      padding-bottom: 80px;
+    }
+    header {
+      background: #fff;
+      border-bottom: 3px solid #e8e0d4;
+      padding: 32px 24px 24px;
+      text-align: center;
+    }
+    header h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -.02em; }
+    header p { color: #6b6560; font-size: 1.05rem; margin-top: 6px; }
+    .wrap { max-width: 780px; margin: 0 auto; padding: 0 22px; }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 28px 26px;
+      margin-top: 24px;
+      box-shadow: 0 2px 14px rgba(0,0,0,.04);
+    }
+    .card h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; display:flex; align-items:center; gap:10px; }
+    .card h2 .emoji { font-size: 1.3rem; }
+
+    .flow-step {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 10px 0; border-bottom: 1px dashed #e0dcd6;
+    }
+    .flow-step:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink:0; width: 34px; height: 34px; border-radius: 50%;
+      background:#1a1a1a; color:#fff; font-weight:800; font-size:.85rem;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .step-body { flex:1; }
+    .step-body strong { font-weight: 700; }
+    .step-time { color:#999; font-size:.8rem; display:block; margin-top:2px; }
+
+    .board-grid {
+      display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px;
+    }
+    @media (max-width: 560px) { .board-grid { grid-template-columns: 1fr; } }
+    .board {
+      border-radius: 14px; padding: 18px 16px; border: 2px solid;
+    }
+    .board .name { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+    .board .badge {
+      display:inline-block; font-size:.7rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.04em; padding: 4px 8px; border-radius: 20px; margin-bottom: 8px;
+    }
+    .board p { font-size: .88rem; color: #444; }
+
+    .b-tina  { border-color: #d4c5e8; background:#faf6ff; }
+    .b-prof  { border-color: #b8d4f0; background:#f4f9ff; }
+    .b-app   { border-color: #b5e6c8; background:#f2fdf6; }
+    .b-pers  { border-color: #e8c4a8; background:#fff8f2; }
+
+    .badge-tina  { background:#d4c5e8; color:#4a2a6e; }
+    .badge-prof  { background:#b8d4f0; color:#1a3a5c; }
+    .badge-app   { background:#b5e6c8; color:#1a4a2e; }
+    .badge-pers  { background:#e8c4a8; color:#5a3a1a; }
+    .badge-auto  { background:#e8ffe8; color:#1a5a1a; border:1px solid #b5e6c8; }
+    .badge-wait  { background:#fff5e8; color:#5a4600; border:1px solid #e8d4a8; }
+    .badge-dead  { background:#e8e8e8; color:#444; border:1px solid #ccc; }
+
+    .states { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .state-chip {
+      border-radius: 10px; padding: 10px 14px; font-size: .85rem;
+      display:flex; align-items:center; gap:6px;
+    }
+    .state-green { background:#f0fdf4; border:1.5px solid #b5e6c8; }
+    .state-amber { background:#fffbeb; border:1.5px solid #f5e0a0; }
+    .state-gray  { background:#f5f5f5; border:1.5px solid #ddd; }
+
+    .rule { display:flex; gap:12px; align-items:flex-start; padding: 10px 0; border-bottom: 1px dashed #e0dcd6; }
+    .rule:last-child { border:none; }
+    .rule .dot { width:10px; height:10px; border-radius:50%; margin-top:6px; flex-shrink:0; }
+    .dot-g { background:#34c759; }
+    .dot-y { background:#ffcc00; }
+    .dot-r { background:#ff3b30; }
+    .rule strong { font-weight:700; }
+
+    .big-btn {
+      display:block; text-align:center; background:#1a1a1a; color:#fff;
+      font-weight:700; font-size:1.05rem; padding: 18px; border-radius: 14px;
+      text-decoration:none; margin-top: 22px; transition: transform .1s;
+    }
+    .big-btn:hover { transform: translateY(-2px); }
+
+    footer {
+      text-align:center; margin-top: 50px; font-size:.82rem; color:#999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>How Prabha + Tina Work</h1>
+    <p>One page. No jargon. No cron. Just the daily flow.</p>
+  </header>
+
+  <div class="wrap">
+
+    <!-- Daily Flow -->
+    <div class="card">
+      <h2><span class="emoji">🔄</span> The Daily Flow</h2>
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>You drop notes</strong> into Obsidian raw/ folder or message Tina on Telegram.
+          <span class="step-time">Anytime during the day</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Wiki absorbs them.</strong> Nothing is auto-created. Notes just sit in archive files (tasks.md, links.md, synthesis.md).
+          <span class="step-time">Every evening around 6 PM</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Tina reads synthesis</strong> and sends you a suggestion list: "Found 3 items — add to Todoist?"
+          <span class="step-time">You trigger this by messaging me, or I notice raw files</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>You pick and approve.</strong> I add tasks to the right board with the right label.
+          <span class="step-time">Whenever you reply</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Execute when you say go.</strong> Research and Tina tasks run instantly. Design and app builds wait for your green light.
+          <span class="step-time">Anytime you message "execute X"</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 4 Boards -->
+    <div class="card">
+      <h2><span class="emoji">📋</span> The 4 Boards</h2>
+      <div class="board-grid">
+        <div class="board b-tina">
+          <div class="name">Tina Board</div>
+          <span class="badge badge-tina">Tina owns this</span>
+          <p>Self-improvement, setup fixes, error log research, LLM issues. Tina auto-manages these. You don't touch.</p>
+        </div>
+        <div class="board b-prof">
+          <div class="name">Professional</div>
+          <span class="badge badge-prof">Needs approval</span>
+          <p>SuperOps design work, Arun feedback, form layouts, AI kit. Research runs auto. Design waits for your go.</p>
+        </div>
+        <div class="board b-app">
+          <div class="name">App Works</div>
+          <span class="badge badge-app">Needs approval</span>
+          <p>WhatPay, ASC submissions, iOS builds. Planning runs auto. Actual build/release waits for your go.</p>
+        </div>
+        <div class="board b-pers">
+          <div class="name">Personal</div>
+          <span class="badge badge-pers">Empty for now</span>
+          <p>Blog, HTML artifacts, Hyperframes — dormant until you decide what goes here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Task States -->
+    <div class="card">
+      <h2><span class="emoji">🏷️</span> Task Labels = Who Does What</h2>
+      <p style="font-size:.88rem; color:#555; margin-bottom:14px;">No labels = ready to execute. Other labels gate the work.</p>
+      <div class="states">
+        <div class="state-chip state-green">
+          <span class="badge badge-auto">Auto</span>
+          Tina runs these immediately. Research, fixes, setup.
+        </div>
+        <div class="state-chip state-amber">
+          <span class="badge badge-wait">Needs Approval</span>
+          You must say "go" before Tina touches design/code.
+        </div>
+        <div class="state-chip state-amber">
+          <span class="badge badge-wait">Needs Details</span>
+          You edit the task description first. Then approve.
+        </div>
+        <div class="state-chip state-gray">
+          <span class="badge badge-dead">No Label</span>
+          Task is ready. Execute on your command.
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Rules -->
+    <div class="card">
+      <h2><span class="emoji">🛡️</span> Core Rules</h2>
+      <div class="rule">
+        <div class="dot dot-g"></div>
+        <div><strong>Tina never auto-creates tasks.</strong> You approve every addition to Todoist. No surprises.</div>
+      </div>
+      <div class="rule">
+        <div class="dot dot-g"></div>
+        <div><strong>Tina never executes your work tasks without approval.</strong> Design, code, builds = your gate.</div>
+      </div>
+      <div class="rule">
+        <div class="dot dot-g"></div>
+        <div><strong>Email is dead for tasks.</strong> No digests. No reply-to-approve. Todoist is the single queue.</div>
+      </div>
+      <div class="rule">
+        <div class="dot dot-y"></div>
+        <div><strong>You can add tasks directly too.</strong> Drop a task in Telegram → I add to board instantly. Paste into Todoist app yourself anytime.</div>
+      </div>
+      <div class="rule">
+        <div class="dot dot-r"></div>
+        <div><strong>Deleted tasks stay deleted.</strong> If you delete from Todoist, Tina ignores it. Cancelled = cancelled.</div>
+      </div>
+    </div>
+
+    <!-- Examples -->
+    <div class="card">
+      <h2><span class="emoji">💬</span> Example Messages</h2>
+      <div class="flow-step">
+        <div class="step-num" style="background:#b8d4f0; color:#1a3a5c;">A</div>
+        <div class="step-body">
+          <strong>Add task:</strong> "Put 'Research Atera Copilot' on Tina board, auto."
+          <span class="step-time">→ Task created with auto label. I may run it tonight or now.</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#b5e6c8; color:#1a4a2e;">B</div>
+        <div class="step-body">
+          <strong>Execute task:</strong> "Go execute the Arun feedback design task on Professional board."
+          <span class="step-time">→ I read the full description and start the Figma work.</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#e8c4a8; color:#5a3a1a;">C</div>
+        <div class="step-body">
+          <strong>Add + detail later:</strong> "Add 'Fix ASC screenshots' to App Works with needs-details label."
+          <span class="step-time">→ Task created. You edit description later. Then say "execute".</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num" style="background:#ddd; color:#444;">D</div>
+        <div class="step-body">
+          <strong>Process raw:</strong> "Tina, I dropped 3 files in raw/. What should I do with them?"
+          <span class="step-time">→ I read synthesis, suggest tasks, you pick which ones to add.</span>
+        </div>
+      </div>
+    </div>
+
+    <a class="big-btn" href="https://todoist.com" target="_blank">Open Todoist →</a>
+
+    <footer>
+      Last updated 11 May 2026 &middot; Prabha + Tina<br />
+      No cron. No orchestrator. Just messages.
+    </footer>
+
+  </div>
+</body>
+</html>
