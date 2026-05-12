@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Native IT | Built Different</title>
+  <title>AI-Native IT | SuperOps</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,8 +13,10 @@
       --bg-dark: #E8E5DF;
       --text: #1A1A1A;
       --text-muted: #6B6B6B;
-      --accent: #C4785A;
-      --accent-light: #D99A7F;
+      /* SuperOps violet/pink theme */
+      --accent: #8B5CF6;
+      --accent-light: #A78BFA;
+      --accent-dark: #7C3AED;
       --border: #D4D0C8;
       --white: #FFFFFF;
     }
@@ -77,7 +79,7 @@
     }
     
     h1 .accent {
-      color: var(--accent);
+      color: var(--accent-dark);
       font-style: italic;
     }
     
@@ -136,7 +138,7 @@
       font-weight: 500;
     }
     
-    /* USP Section */
+    /* USP Section - Layman Style */
     .usp-section {
       padding: 6rem 4rem;
       max-width: 1400px;
@@ -189,7 +191,7 @@
     
     .usp-card:hover {
       border-color: var(--accent);
-      box-shadow: 0 10px 40px rgba(196, 120, 90, 0.1);
+      box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);
     }
     
     .usp-number {
@@ -213,10 +215,165 @@
       line-height: 1.7;
     }
     
+    /* Example Section - How It Works */
+    .example-section {
+      padding: 6rem 4rem;
+      background: var(--bg-dark);
+    }
+    
+    .example-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .example-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .example-scenario {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .scenario-alert {
+      background: #FEE2E2;
+      border-left: 4px solid #EF4444;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .alert-icon {
+      width: 40px;
+      height: 40px;
+      background: #EF4444;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    
+    .alert-text {
+      flex: 1;
+    }
+    
+    .alert-title {
+      font-weight: 600;
+      color: #991B1B;
+      margin-bottom: 0.25rem;
+    }
+    
+    .alert-time {
+      font-size: 0.85rem;
+      color: #7F1D1D;
+    }
+    
+    .scenario-flow {
+      padding: 2rem;
+    }
+    
+    .flow-step {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .flow-step:last-child {
+      margin-bottom: 0;
+    }
+    
+    .flow-step::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 50px;
+      width: 2px;
+      height: calc(100% - 30px);
+      background: var(--border);
+    }
+    
+    .flow-step:last-child::before {
+      display: none;
+    }
+    
+    .step-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    
+    .step-badge.agent {
+      background: var(--accent);
+      color: white;
+    }
+    
+    .step-badge.human {
+      background: var(--bg-dark);
+      color: var(--text);
+      border: 2px solid var(--border);
+    }
+    
+    .step-content {
+      flex: 1;
+      padding-top: 0.5rem;
+    }
+    
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .step-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .step-meta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .scenario-result {
+      background: #ECFDF5;
+      border-left: 4px solid #10B981;
+      padding: 1.5rem 2rem;
+      margin: 0 2rem 2rem;
+      border-radius: 4px;
+    }
+    
+    .result-title {
+      font-weight: 600;
+      color: #065F46;
+      margin-bottom: 0.5rem;
+    }
+    
+    .result-text {
+      color: #047857;
+      font-size: 0.95rem;
+    }
+    
     /* Testimonial Quote Section */
     .testimonial {
       padding: 6rem 4rem;
-      background: var(--bg-dark);
+      background: var(--white);
     }
     
     .testimonial-inner {
@@ -253,7 +410,7 @@
     }
     
     blockquote .highlight {
-      color: var(--accent);
+      color: var(--accent-dark);
       font-weight: 600;
     }
     
@@ -429,7 +586,7 @@
         padding: 1rem 1.5rem;
       }
       
-      .hero, .why-exists, .usp-section, .testimonial, .comparison, .taglines {
+      .hero, .why-exists, .usp-section, .testimonial, .comparison, .taglines, .example-section {
         padding: 3rem 1.5rem;
       }
     }
@@ -464,7 +621,7 @@
       </div>
       <div class="why-content">
         <p>
-          Every MSP has been there:警报 fires at 3 AM. Your on-call engineer wakes up, VPNs in, runs the same diagnostic script they've run a hundred times. <strong>20 minutes later:</strong> disk space issue. Delete logs. Back to bed.
+          Every MSP has been there: an alert fires at 3 AM. Your on-call engineer wakes up, VPNs in, runs the same diagnostic script they've run a hundred times. <strong>20 minutes later:</strong> disk space issue. Delete logs. Back to bed.
         </p>
         <p>
           The real cost isn't the alert. It's the <strong>interrupted sleep, the context switching, the repetitive work</strong> that burns through engineers until they quit.
@@ -476,7 +633,7 @@
     </div>
   </section>
 
-  <!-- USP Section -->
+  <!-- USP Section - Layman Style -->
   <section class="usp-section">
     <div class="section-header">
       <div class="section-label">What Makes It Different</div>
@@ -486,26 +643,100 @@
     <div class="usp-grid">
       <div class="usp-card">
         <div class="usp-number">01</div>
-        <h3 class="usp-title">ReAct Reasoning Loop</h3>
+        <h3 class="usp-title">It Actually Thinks First</h3>
         <p class="usp-desc">
-          Doesn't just execute commands. <strong>Thinks</strong> about the problem, plans steps, asks clarifying questions, then acts. Like a senior engineer who actually reads the ticket first.
+          Most "AI" tools just pattern-match and guess. Our agent <strong>reasons through problems</strong> — plans steps, asks clarifying questions, then acts. Like a senior engineer who reads the ticket carefully before touching anything.
         </p>
       </div>
       
       <div class="usp-card">
         <div class="usp-number">02</div>
-        <h3 class="usp-title">Machine-Legible Playbooks</h3>
+        <h3 class="usp-title">Knowledge Lives in Code, Not Docs</h3>
         <p class="usp-desc">
-          Your tribal knowledge codified in YAML, not Confluence. Agents read them natively. No "I would've fixed it if I'd known about that doc."
+          Your team's expertise gets trapped in Confluence and Slack. We turn it into <strong>version-controlled playbooks</strong> that the AI understands natively. No more "I would've fixed it if I'd seen that doc."
         </p>
       </div>
       
       <div class="usp-card">
         <div class="usp-number">03</div>
-        <h3 class="usp-title">Async Resume Capability</h3>
+        <h3 class="usp-title">Picks Up Where It Left Off</h3>
         <p class="usp-desc">
-          Agent gets stuck? It stops, asks, waits. When your engineer responds at 9 AM, it <strong>resumes exactly where it left off</strong> — full context intact. No "start over from the beginning."
+          Agent gets stuck on something complex? It pauses, asks for help, then <strong>resumes exactly where it stopped</strong> when your engineer responds. Full context intact. No starting over from scratch.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example: How It Works -->
+  <section class="example-section">
+    <div class="example-inner">
+      <div class="example-header">
+        <div class="section-label">Simple Example</div>
+        <h2 class="section-title">3 AM. Server disk full. Here's what happens.</h2>
+      </div>
+      
+      <div class="example-scenario">
+        <div class="scenario-alert">
+          <div class="alert-icon">⚠</div>
+          <div class="alert-text">
+            <div class="alert-title">ALERT: disk_usage > 90% on prod-web-03</div>
+            <div class="alert-time">3:14 AM — PagerDuty > MSPclaw Agent</div>
+          </div>
+        </div>
+        
+        <div class="scenario-flow">
+          <div class="flow-step">
+            <div class="step-badge agent">AI</div>
+            <div class="step-content">
+              <div class="step-title">Reads the alert</div>
+              <div class="step-desc">
+                "Disk usage at 94%. This matches the 'disk_cleanup' playbook pattern. I've seen this before on web servers."
+              </div>
+              <div class="step-meta">T + 0 seconds</div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent">AI</div>
+            <div class="step-content">
+              <div class="step-title">Checks what's eating space</div>
+              <div class="step-desc">
+                Runs du -sh /var/log/*. Finds 47GB of old nginx logs. Checks playbook: "Safe to rotate logs older than 7 days."
+              </div>
+              <div class="step-meta">T + 8 seconds</div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent">AI</div>
+            <div class="step-content">
+              <div class="step-title">Takes action</div>
+              <div class="step-desc">
+                Rotates logs > 7 days. Disk usage drops to 62%. Sends confirmation to Slack. Creates incident log.
+              </div>
+              <div class="step-meta">T + 15 seconds</div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge human">👤</div>
+            <div class="step-content">
+              <div class="step-title">Human reviews in the morning</div>
+              <div class="step-desc">
+                Engineer sees "Resolved: disk_cleanup on prod-web-03" with full logs. No wake-up call. No context loss.
+              </div>
+              <div class="step-meta">9:00 AM — Next business day</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="scenario-result">
+          <div class="result-title">✓ Resolved automatically</div>
+          <div class="result-text">
+            <strong>Time saved:</strong> 20 minutes of engineer work + uninterrupted sleep.<br>
+            <strong>What the engineer did:</strong> Nothing. They slept through it.
+          </div>
+        </div>
       </div>
     </div>
   </section>
