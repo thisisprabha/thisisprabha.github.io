@@ -667,6 +667,191 @@
     </div>
   </section>
 
+  <!-- How the Brain Thinks -->
+  <section class="example-section" style="background: var(--white);">
+    <div class="example-inner">
+      <div class="example-header">
+        <div class="section-label">The Architecture</div>
+        <h2 class="section-title">How the brain actually thinks</h2>
+      </div>
+      
+      <div class="example-scenario" style="border: none; box-shadow: 0 2px 20px rgba(0,0,0,0.05);">
+        <div style="padding: 2.5rem; border-bottom: 1px solid var(--border);">
+          <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">
+            <strong>The ReAct Loop:</strong> Think → Ask/Act → Verify. Not a script. A conversation the agent has with itself.
+          </p>
+          
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: #1E293B;">1</div>
+            <div class="step-content">
+              <div class="step-title">What does the user need?</div>
+              <div class="step-desc">
+                Parses the ticket: "printer not working" → user needs working print function. Not a specific printer.
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: #1E293B;">2</div>
+            <div class="step-content">
+              <div class="step-title">What do I already know?</div>
+              <div class="step-desc">
+                "I know their floor. I don't know which printer. I don't get to guess — that's how you print to the wrong printer."
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: #1E293B;">3</div>
+            <div class="step-content">
+              <div class="step-title">Can I discover it with a tool?</div>
+              <div class="step-desc">
+                Checks available tools. No tool returns "user's preferred printer." That's tribal knowledge only the user knows.
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step" style="margin-bottom: 0;">
+            <div class="step-badge agent" style="background: var(--accent);">4</div>
+            <div class="step-content">
+              <div class="step-title">Decision: Ask the user</div>
+              <div class="step-desc">
+                "Which floor is the printer on?" → Agent collects info, resumes loop, now has everything to execute.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="padding: 2rem 2.5rem; background: var(--bg);">
+          <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 1rem;">
+            Contrast: "my mac is slow"
+          </div>
+          <p style="font-size: 1rem; color: var(--text);">
+            Same loop. But this time: <em>get_system_info</em> and <em>list_top_processes</em> exist. Agent discovers everything needed. <strong class="accent">Acts immediately, no questions asked.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Playbooks Explained -->
+  <section class="example-section">
+    <div class="example-inner">
+      <div class="example-header">
+        <div class="section-label">Knowledge Engineering</div>
+        <h2 class="section-title">Playbooks: machine-legible, human-editable</h2>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+        <div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 1rem; font-weight: 600;">Why YAML?</h3>
+          <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem;">
+            Playbooks aren't scripts. They're <strong>intent definitions</strong>. The AI reads the description, understands what tools are allowed, and figures out the steps.
+          </p>
+          <ul style="list-style: none; color: var(--text-muted);">
+            <li style="padding: 0.5rem 0;">→ Version controlled (git history)</li>
+            <li style="padding: 0.5rem 0;">→ Human-readable without a manual</li>
+            <li style="padding: 0.5rem 0;">→ LLM-native structure</li>
+            <li style="padding: 0.5rem 0;">→ No proprietary vendor lock-in</li>
+          </ul>
+        </div>
+        
+        <div style="background: #1E293B; border-radius: 8px; padding: 1.5rem; font-family: 'SF Mono', monospace; font-size: 0.85rem; color: #94A3B8;">
+          <div style="color: #64748B; margin-bottom: 0.5rem;"># playbook: disk_cleanup.yml</div>
+          <div><span style="color: #F472B6;">name</span>: <span style="color: #A5F3FC;">"Low disk space remediation"</span></div>
+          <div><span style="color: #F472B6;">description</span>: |</div>
+          <div style="padding-left: 1rem; color: #A5F3FC;">Diagnose disk usage, identify large</div>
+          <div style="padding-left: 1rem; color: #A5F3FC;">files, rotate old logs safely.</div>
+          <div style="margin-top: 1rem;"><span style="color: #F472B6;">trigger</span>:</div>
+          <div style="padding-left: 1rem;"><span style="color: #F472B6;">keywords</span>: [<span style="color: #A5F3FC;">"disk full"</span>, <span style="color: #A5F3FC;">"low space"</span>]</div>
+          <div style="padding-left: 1rem;"><span style="color: #F472B6;">threshold_pct</span>: <span style="color: #FBBF24;">90</span></div>
+          <div style="margin-top: 1rem;"><span style="color: #F472B6;">tools_allowed</span>:</div>
+          <div style="padding-left: 1rem;">- <span style="color: #A5F3FC;">get_disk_usage</span></div>
+          <div style="padding-left: 1rem;">- <span style="color: #A5F3FC;">find_large_files</span></div>
+          <div style="padding-left: 1rem;">- <span style="color: #A5F3FC;">rotate_logs</span></div>
+          <div style="margin-top: 1rem;"><span style="color: #F472B6;">approval_required</span>: <span style="color: #FBBF24;">false</span></div>
+          <div style="padding-left: 1rem; color: #64748B;"># Agent decides execution order</div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 3rem; padding: 2rem; background: var(--white); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1rem; font-weight: 600;">
+          The Shift
+        </div>
+        <p style="font-size: 1.15rem; line-height: 1.7;">
+          <strong>Old way:</strong> Write step-by-step scripts. Breaks when anything unexpected happens. <br>
+          <strong>New way:</strong> Describe the goal. <em>The agent figures out the steps.</em> "I need disk space back" is enough.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Error Handling & Retry -->
+  <section class="example-section" style="background: var(--white);">
+    <div class="example-inner">
+      <div class="example-header">
+        <div class="section-label">Resilience</div>
+        <h2 class="section-title">When things break, it doesn't just die</h2>
+      </div>
+      
+      <div class="example-scenario" style="border: none; box-shadow: 0 2px 20px rgba(0,0,0,0.05);">
+        <div style="padding: 2.5rem;">
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: var(--accent);">◇</div>
+            <div class="step-content">
+              <div class="step-title">Detect failure</div>
+              <div class="step-desc">
+                Tool returns non-zero exit. Agent doesn't panic. It asks: was this expected? Is there a fallback in the playbook?
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: #F59E0B;">↻</div>
+            <div class="step-content">
+              <div class="step-title">Retry with backoff</div>
+              <div class="step-desc">
+                Network hiccup? Retries up to 3x with exponential delay. Transient failures fix themselves. No 3 AM wake-up for temporary blips.
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step">
+            <div class="step-badge agent" style="background: #EF4444;">!</div>
+            <div class="step-content">
+              <div class="step-title">Escalate if needed</div>
+              <div class="step-desc">
+                Retry exhausted? No matching playbook? <strong>Pauses and asks.</strong> Stores full context. Engineer resumes with single command: <code>mspclaw reply &lt;job_id&gt; "try sudo"</code>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flow-step" style="margin-bottom: 0;">
+            <div class="step-badge agent" style="background: #10B981;">✓</div>
+            <div class="step-content">
+              <div class="step-title">Resumes where it stopped</div>
+              <div class="step-desc">
+                WebSocket dropped? Conversation persists to SQLite. Reconnect and it's like nothing happened. No "start over from the beginning."
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background: #FEF3C7; padding: 1.5rem 2.5rem; border-top: 1px solid #FDE68A;">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="font-size: 1.5rem;">💡</div>
+            <div>
+              <div style="font-weight: 600; color: #92400E; margin-bottom: 0.25rem;">The Philosophy</div>
+              <div style="color: #B45309; font-size: 0.95rem;">
+                <strong>Fail graceful, not silent.</strong> Agents should get stuck <em>loudly</em> — with full context — not fail quietly and leave you guessing.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Example: How It Works -->
   <section class="example-section">
     <div class="example-inner">
