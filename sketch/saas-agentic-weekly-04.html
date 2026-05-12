@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITSM/MSP Agentic Weekly — Issue #4 — PagerDuty + AIOps Deep Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fdfbf6;--ink:#2a2520;--pencil:#6b6560;--highlight:#fff3a8;
+    --sticky-yellow:#fff9c4;--sticky-pink:#ffcdd2;--sticky-blue:#b3e5fc;--sticky-green:#c8e6c9;
+    --rule:#e0dcd3;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background:var(--paper)}
+  body{
+    font-family:"Patrick Hand",cursive;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:18px;
+    padding-bottom:80px;
+  }
+  .paper-lining{
+    background-image:repeating-linear-gradient(to bottom,transparent,transparent 31px,var(--rule) 31px,var(--rule) 32px);
+    background-attachment:local;
+  }
+  .header{
+    padding:40px 24px 16px;
+    max-width:880px;margin:0 auto;position:relative;
+  }
+  .header::after{
+    content:"";display:block;height:3px;background:var(--ink);margin-top:16px;border-radius:2px;opacity:.8;
+  }
+  .header h1{font-size:42px;letter-spacing:.5px;transform:rotate(-.5deg);}
+  .meta{font-size:16px;color:var(--pencil);margin-top:8px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+  .badge{display:inline-block;background:var(--highlight);padding:2px 10px;border-radius:4px;transform:rotate(1deg);font-weight:600;color:var(--ink);border:2px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;}
+  .badge-agentic{background:#81d4fa;}
+  .content{max-width:880px;margin:0 auto;padding:24px;}
+  .section{margin-bottom:48px;position:relative;}
+  .section h2{font-size:28px;display:inline-block;position:relative;transform:rotate(-.8deg);margin-bottom:16px;}
+  .section h2::after{
+    content:"";position:absolute;left:-4px;right:-8px;bottom:2px;height:10px;background:rgba(255,200,100,.35);z-index:-1;border-radius:40% 60% 50% 50% / 50% 40% 60% 50%;
+  }
+  .card{padding:16px 20px;border:2px solid var(--ink);margin-bottom:16px;transition:transform .15s ease;}
+  .card-yellow{background:var(--sticky-yellow);border-radius:2px 18px 4px 22px;}
+  .card-pink{background:var(--sticky-pink);border-radius:18px 4px 22px 4px;}
+  .card-blue{background:var(--sticky-blue);border-radius:4px 22px 2px 18px;}
+  .card-green{background:var(--sticky-green);border-radius:22px 4px 18px 2px;}
+  .card-red{background:#ffccbc;border-radius:12px 4px 18px 8px;}
+  .card-top{display:flex;align-items:center;gap:12px;margin-bottom:6px;}
+  .card-badge{display:inline-block;font-size:14px;padding:2px 10px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);font-weight:600;}
+  .card-date{font-size:14px;color:var(--pencil);}
+  .card h3{font-size:22px;margin-bottom:6px;font-weight:600;}
+  .card p{font-size:16px;color:var(--pencil);line-height:1.5;margin-bottom:6px;}
+  .card ul{padding-left:20px;margin-top:4px;}
+  .card li{font-size:15px;color:var(--pencil);margin-bottom:3px;}
+  .card strong{color:var(--ink);}
+  .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .tags span{font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:rgba(255,255,255,.4);}
+  .meta-footer{font-size:14px;color:var(--pencil);margin-top:40px;padding-top:20px;border-top:2px dashed var(--rule);max-width:880px;margin:40px auto 0;padding:20px 24px 0;}
+  .meta-footer a{color:var(--ink);text-decoration:underline;text-decoration-style:wavy;text-decoration-thickness:1.5px;}
+  .benchmark{display:inline-block;font-size:13px;padding:1px 8px;border:1.5px solid var(--ink);border-radius:255px 15px 225px 15px / 15px 225px 15px 255px;background:var(--highlight);margin-right:4px;}
+  .comp-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:15px;}
+  .comp-table th,.comp-table td{padding:8px 10px;text-align:left;border-bottom:2px solid var(--rule);}
+  .comp-table th{font-weight:600;color:var(--ink);font-size:14px;border-bottom:2px solid var(--ink);}
+  .comp-table td{color:var(--pencil);}
+  .comp-table tr:last-child td{border-bottom:none;}
+  .highlight-box{background:var(--highlight);padding:12px 16px;border:2px solid var(--ink);border-radius:8px;margin:16px 0;font-weight:600;}
+  @media(max-width:600px){
+    .header h1{font-size:32px}.content{padding:16px}.meta{gap:10px}
+  }
+</style>
+</head>
+<body class="paper-lining">
+
+<div class="header">
+  <h1>ITSM/MSP Agentic Weekly</h1>
+  <div class="meta">
+    <span class="badge">Issue #4</span>
+    <span>May 12 — May 18, 2026</span>
+    <span class="badge badge-agentic">AGENTIC AI LIVE</span>
+    <span style="margin-left:auto;font-size:13px;color:var(--pencil)">Deep Research Edition</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- TOP LINE -->
+  <div class="section">
+    <div class="highlight-box" style="transform:rotate(-.3deg)">
+      🚨 <strong>MAJOR FIND:</strong> PagerDuty has shipped the first <strong>TRULY AUTONOMOUS</strong> AI agent for IT operations — the SRE Agent works machine-first, human-escalated. This is the benchmark everyone else is chasing.
+    </div>
+  </div>
+
+  <!-- NEW FINDS -->
+  <div class="section">
+    <h2>New Finds</h2>
+
+    <div class="card card-red">
+      <div class="card-top">
+        <span class="card-badge" style="background:#ff8a65;color:#fff">PagerDuty</span>
+        <span class="card-badge badge-agentic">AGENTIC AI — GA</span>
+        <span class="card-date">Spring 2025/2026</span>
+      </div>
+      <h3>SRE Agent: The First Autonomous Incident Responder</h3>
+      <p>Not chatbot. Not copilot. <strong>Autonomous SRE.</strong> The SRE Agent detects incidents, triages, diagnoses, and performs approved remediation actions — all without waiting for human input.</p>
+      <ul>
+        <li><strong>Memory:</strong> Learns from past incidents, diagnostics, knowledge base entries, and user interactions</li>
+        <li><strong>Actions:</strong> Executes approved remediation actions automatically (not just suggests)</li>
+        <li><strong>Escalation:</strong> Machine-first, human-escalated — only pings humans when stuck</li>
+      </ul>
+      <div class="tags">
+        <span>game-changer</span>
+        <span>autonomous</span>
+        <span>generally-available</span>
+        <span>competitive-threat</span>
+      </div>
+    </div>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge">PagerDuty</span>
+        <span class="card-badge">GenAI Suite</span>
+        <span class="card-date">Now Live</span>
+      </div>
+      <h3>PagerDuty Advance: GenAI Layer Across Everything</h3>
+      <p>PagerDuty Advance is the coordinator that manages both human responders and AI agents. Key components:</p>
+      <ul>
+        <li><strong>Advance Assistant:</strong> GenAI chat sidekick for Slack/Teams with smart summaries and diagnostic suggestions</li>
+        <li><strong>AI-Generated Runbooks:</strong> Plain English → working automation (Early Access)</li>
+        <li><strong>Advance for Status Updates:</strong> Auto-generates tailored stakeholder communications</li>
+        <li><strong>Advance for Automation Actions:</strong> Displays job results and enables dynamic orchestration</li>
+      </ul>
+      <div class="tags">
+        <span>generative-ai</span>
+        <span>slack-integration</span>
+        <span>orchestration</span>
+      </div>
+    </div>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge" style="background:#5c6bc0;color:#fff">Agent Fleet</span>
+        <span class="card-date">Multi-Agent System</span>
+      </div>
+      <h3>Four AI Agents Working Together</h3>
+      <ul>
+        <li><strong>SRE Agent</strong> (GA) — Autonomous incident resolution</li>
+        <li><strong>Scribe Agent</strong> — Auto-captures incident meetings and channel conversations</li>
+        <li><strong>Shift Agent</strong> — Detects on-call conflicts and finds replacements automatically</li>
+        <li><strong>Insights Agent</strong> (Coming Soon) — Proactive recommendations with one-click implementation</li>
+      </ul>
+      <p><strong>Pattern:</strong> PagerDuty thinks in "agent fleets" not single chatbots. Each agent has a specialized role.</p>
+    </div>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge">AIOps Core</span>
+        <span class="card-date">ML-Powered</span>
+      </div>
+      <h3>Noise Reduction: 90% Alert Compression</h3>
+      <ul>
+        <li><strong>Intelligent Alert Grouping:</strong> ML-based correlation that learns from team responses</li>
+        <li><strong>Global Alert Grouping:</strong> Cross-service consolidation</li>
+        <li><strong>Event Correlation:</strong> Pattern recognition across entire infrastructure</li>
+        <li><strong>Predictive Insights:</strong> Anticipates issues before customer impact</li>
+      </ul>
+      <p><strong>Key Advantage:</strong> System continuously improves based on how teams actually respond.</p>
+    </div>
+  </div>
+
+  <!-- PRICING INTEL -->
+  <div class="section">
+    <h2>Pricing Intelligence</h2>
+
+    <div class="card card-pink">
+      <div class="card-top">
+        <span class="card-badge" style="background:#ab47bc;color:#fff">$$$</span>
+        <span class="card-badge">Consumption Model</span>
+      </div>
+      <h3>AI Credits + Tiered Access</h3>
+      <ul>
+        <li>AIOps available as add-on to <strong>Professional, Business, and Enterprise</strong> plans</li>
+        <li><strong>AI Credits:</strong> Consumption-based pricing (not publicly disclosed)</li>
+        <li>Credit add-ons for additional AI consumption</li>
+        <li>14-day free trial available</li>
+        <li>Some features require AIOps product subscription</li>
+      </ul>
+      <p><strong>Estimation:</strong> Enterprise deals likely $50K-200K+ annually based on consumption + seat count.</p>
+    </div>
+  </div>
+
+  <!-- INTEGRATION MAP -->
+  <div class="section">
+    <h2>Integration Ecosystem</h2>
+
+    <div class="card card-yellow">
+      <div class="card-top">
+        <span class="card-badge" style="background:#43a047;color:#fff">750+ Integrations</span>
+        <span class="card-date">Major Advantage</span>
+      </div>
+      <h3>ITSM + AI Platform + Monitoring</h3>
+      <p><strong>ITSM Integrations:</strong> ServiceNow (bi-directional), Jira Service Management, Zendesk, Freshdesk</p>
+      <p><strong>AI/ML Platforms:</strong> Databricks (Mosaic AI), Anthropic Claude, Microsoft Copilot, Cursor AI, Fiddler AI, Maxim AI</p>
+      <p><strong>Monitoring:</strong> Datadog, New Relic, Dynatrace, Splunk, Elastic, AWS CloudWatch, Azure Monitor, Prometheus, Grafana</p>
+      <p><strong>Collaboration:</strong> Deep Slack integration (Assistant lives here), Teams, Zoom</p>
+      <div class="tags">
+        <span>ecosystem-moat</span>
+        <span>msp-ready</span>
+        <span>api-rich</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE MATRIX -->
+  <div class="section">
+    <h2>Competitive Position</h2>
+
+    <div class="card card-blue">
+      <div class="card-top">
+        <span class="card-badge">Benchmark vs Peers</span>
+      </div>
+      <table class="comp-table">
+        <tr>
+          <th>Capability</th>
+          <th>PagerDuty</th>
+          <th>ServiceNow</th>
+          <th>Atlassian</th>
+          <th>Atera</th>
+        </tr>
+        <tr>
+          <td><strong>Agentic AI</strong></td>
+          <td>🟢 <strong>GA — SRE Agent</strong></td>
+          <td>🟡 LEAP (Emerging)</td>
+          <td>🟡 Rovo (Assistant)</td>
+          <td>🔴 Rules-based</td>
+        </tr>
+        <tr>
+          <td><strong>Auto-Remediation</strong></td>
+          <td>🟢 <strong>Agent-based</strong></td>
+          <td>🟡 Workflow-based</td>
+          <td>🟡 Limited</td>
+          <td>🟡 Script-based</td>
+        </tr>
+        <tr>
+          <td><strong>Noise Reduction</strong></td>
+          <td>🟢 ML-based learning</td>
+          <td>🟡 Rules + some ML</td>
+          <td>🟡 Limited</td>
+          <td>🔴 Rules-based</td>
+        </tr>
+        <tr>
+          <td><strong>Integrations</strong></td>
+          <td>🟢 <strong>750+</strong></td>
+          <td>🟢 Strong</td>
+          <td>🟡 Moderate</td>
+          <td>🟡 MSP-focused</td>
+        </tr>
+        <tr>
+          <td><strong>Scope</strong></td>
+          <td>🟢 Unified Ops Cloud</td>
+          <td>🟢 ITSM Platform</td>
+          <td>🟡 Dev + IT</td>
+          <td>🟡 MSP-only</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card card-red">
+      <div class="card-top">
+        <span class="card-badge" style="background:#d32f2f;color:#fff">⚠️ Competitive Threat</span>
+      </div>
+      <h3>What PagerDuty Does That Others Don't</h3>
+      <ul>
+        <li><strong>True Autonomy:</strong> Not human-in-the-loop — machine-first, human-escalated</li>
+        <li><strong>Agent Fleet:</strong> Multiple specialized agents vs. single chatbot</li>
+        <li><strong>Memory + Learning:</strong> System improves from every incident</li>
+        <li><strong>Unified Platform:</strong> Incident management + AIOps + automation in one</li>
+      </ul>
+      <p><strong>For SuperOps:</strong> The bar just moved. Rovo Customer Service Agent ($1/resolution) is now competing with an agent that truly works autonomously.</p>
+    </div>
+  </div>
+
+  <!-- STRATEGIC IMPLICATIONS -->
+  <div class="section">
+    <h2>Strategic Implications for SuperOps</h2>
+
+    <div class="card card-green">
+      <div class="card-top">
+        <span class="card-badge" style="background:#2e7d32;color:#fff">🎯 Takeaways</span>
+      </div>
+      <h3>What This Means</h3>
+      <ul>
+        <li><strong>Agentic AI is the new baseline.</strong> Copilots and assistants are table stakes — autonomy is the differentiator.</li>
+        <li><strong>Memory matters.</strong> Systems that learn from past incidents will outperform rules-based automation.</li>
+        <li><strong>Multi-agent > single agent.</strong> Specialized agents working together beats one general-purpose chatbot.</li>
+        <li><strong>Pricing pressure.</strong> PagerDuty's consumption model + seat pricing means SuperOps can compete on value, not just cost.</li>
+        <li><strong>Integration gap exists.</strong> No PSA/billing native to PagerDuty — MSPs still need separate tools.</li>
+      </ul>
+      <p><strong>Opportunity:</strong> PagerDuty doesn't natively serve MSPs. The agentic capabilities + PSA integration gap = room for SuperOps AI Service Desk.</p>
+    </div>
+  </div>
+
+  <!-- DATA SOURCES -->
+  <div class="section">
+    <h2>Sources</h2>
+    <div class="card" style="background:rgba(255,255,255,.6);font-size:14px;color:var(--pencil)">
+      <p><strong>Primary:</strong> PagerDuty Official Website, PagerDuty Advance Documentation, Spring 2025/2026 Release Announcements</p>
+      <p><strong>Key Pages:</strong> AI Agents Overview, AIOps Product Page, PagerDuty Advance Features, Integration Directory</p>
+      <p><strong>Research Date:</strong> May 12, 2026</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="meta-footer">
+  <p>
+    ← <a href="saas-agentic-weekly-index.html">Archive Index</a> | 
+    Previous: <a href="saas-agentic-weekly-03.html">Issue #3: Atlassian Jira + Rovo</a> | 
+    Issue #4: PagerDuty + AIOps Deep Dive
+  </p>
+  <p style="margin-top:8px;font-size:12px">Research curated for SuperOps AI Service Desk | ITSM/MSP competitive intelligence</p>
+</div>
+
+</body>
+</html>
