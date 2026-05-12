@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Native IT: Built Different | SuperOps</title>
+  <style>
+    :root {
+      --dark: #0a0a0a;
+      --light: #f5f5f5;
+      --accent: #22c55e;
+      --accent-dim: #15803d;
+      --gray: #737373;
+      --border: #262626;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      background: radial-gradient(ellipse at top right, #1a1a1a 0%, var(--dark) 50%);
+    }
+    
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.5;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+      background: rgba(34, 197, 94, 0.05);
+    }
+    
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    
+    h1 .highlight {
+      color: var(--accent);
+      position: relative;
+    }
+    
+    .tagline {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--gray);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      max-width: 800px;
+    }
+    
+    .tagline strong {
+      color: var(--light);
+      font-weight: 600;
+    }
+    
+    .hook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    
+    .hook-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.3s ease;
+    }
+    
+    .hook-card:hover {
+      border-color: var(--accent);
+      background: rgba(34, 197, 94, 0.05);
+    }
+    
+    .hook-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    
+    .section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-header {
+      margin-bottom: 4rem;
+    }
+    
+    .section-label {
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+    
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    
+    .lead {
+      font-size: 1.25rem;
+      color: var(--gray);
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+    
+    .comparison {
+      display: grid;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    
+    .comparison-divider {
+      background: var(--border);
+      height: 100%;
+    }
+    
+    .comparison-col {
+      padding: 2rem;
+    }
+    
+    .comparison-col.assisted {
+      border-left: 3px solid #525252;
+    }
+    
+    .comparison-col.native {
+      border-left: 3px solid var(--accent);
+    }
+    
+    .col-header {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      color: var(--gray);
+    }
+    
+    .comparison-col.assisted .col-header {
+      color: #737373;
+    }
+    
+    .comparison-col.native .col-header {
+      color: var(--accent);
+    }
+    
+    h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .comparison-col.assisted h4 {
+      color: #a3a3a3;
+    }
+    
+    .comparison-col.native h4 {
+      color: var(--light);
+    }
+    
+    .comparison-col p {
+      color: var(--gray);
+      font-size: 1rem;
+    }
+    
+    .manifesto {
+      background: linear-gradient(180deg, transparent, rgba(34, 197, 94, 0.03), transparent);
+      padding: 6rem 2rem;
+    }
+    
+    .manifesto-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .quote {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 300;
+      line-height: 1.4;
+      margin: 3rem 0;
+      padding-left: 2rem;
+      border-left: 3px solid var(--accent);
+    }
+    
+    .quote cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: var(--gray);
+      font-style: normal;
+    }
+    
+    .taglines {
+      margin: 4rem 0;
+    }
+    
+    .tagline-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .tagline-text {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    
+    .tagline-text span {
+      color: var(--accent);
+    }
+    
+    .tagline-explanation {
+      color: var(--gray);
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    
+    .difference-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    
+    .diff-card {
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+    
+    .diff-card h4 {
+      font-size: 1.125rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .diff-card .product {
+      color: var(--gray);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    
+    .diff-card .vs {
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    .verdict {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid var(--accent);
+      padding: 2rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    
+    .verdict h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .verdict p {
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta {
+      text-align: center;
+      padding: 6rem 2rem;
+      background: radial-gradient(ellipse at bottom, var(--accent-dim) 0%, var(--dark) 60%);
+    }
+    
+    .cta h2 {
+      margin-bottom: 2rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--accent);
+      color: var(--dark);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.3);
+    }
+    
+    footer {
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 0.875rem;
+    }
+    
+    .footer-brand {
+      font-weight: 700;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+      .comparison-row {
+        grid-template-columns: 1fr;
+      }
+      .comparison-divider {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <section class="hero">
+    <div class="badge">Built for SuperOps</div>
+    <h1>IT Problems<br><span class="highlight">Never Sleep</span></h1>
+    <p class="tagline">1 MSP. <strong>0 technicians on call.</strong> Agents that actually work — not assistants that pretend to help.</p>
+    
+    <div class="hook-grid">
+      <div class="hook-card">
+        <h3>Atera tried AI. We built something that thinks.</h3>
+        <p>Every other IT platform bolted a chatbot onto their ticketing system. We started with the agent. The product grew around it.</p>
+      </div>
+      <div class="hook-card">
+        <h3>ServiceNow spent billions on Workflow. We did it in YAML.</h3>
+        <p>Structured playbooks the AI can actually reason about. Not just document storage with better search.</p>
+      </div>
+      <div class="hook-card">
+        <h3>Serval raised millions. We raised the bar.</h3>
+        <p>Conversational workflows are easy. Agentic workflows that actually act — that's the hard part. And we're not running out of money doing it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">The Definition</div>
+      <h2>AI-Native Doesn't Mean "Has AI." It Means <em>Rebuilt for It.</em></h2>
+      <p class="lead">Most tools are AI-assisted. A technician uses them. A few are different. The agent uses <em>the tool itself.</em> That's the gap. That's what we're building at SuperOps.</p>
+    </div>
+    
+    <div class="comparison">
+      <div class="comparison-row">
+        <div class="comparison-col assisted">
+          <div class="col-header">Vendors Call It AI</div>
+          <h4>AI-Assisted IT</h4>
+          <p>You file a ticket. A copilot suggests knowledge base articles. A human still reads it, routes it, fixes it. The AI is a widget on a dashboard. It writes your email drafts. It summarizes your meetings. It doesn't touch anything real.</p>
+        </div>
+        <div class="comparison-divider"></div>
+        <div class="comparison-col native">
+          <div class="col-header">This Is Different</div>
+          <h4>AI-Native IT</h4>
+          <p>You slack the agent. It asks what it needs to know. It figures out what's wrong. It resets your password, installs your software, provisions your account, updates your ticket. Then it tells you what it did. The human reviews. The agent executes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="manifesto">
+    <div class="manifesto-content">
+      <div class="section-label">Greg Isenberg's Framework</div>
+      <h2>What "AI-Native" Actually Means</h2>
+      
+      <blockquote class="quote">
+        "A company rebuilt so AI can operate inside it. Structured, documented, permissioned, and instrumented in a way that agents can understand."
+        <cite>— Greg Isenberg, May 2025</cite>
+      </blockquote>
+      
+      <p class="lead">That's the difference between marketing and product. Most vendors bought the t-shirt. We built the infrastructure.</p>
+      
+      <p>When your business is <em>legible to machines</em>, agents don't just respond — they participate. They have tool access with proper guardrails. They can read state, make decisions, act, and report back. The human isn't doing the work anymore. The human is supervising.</p>
+      
+      <p>The 80/20 split is the goal. Agents handle the first 80%. Humans handle edge cases, exceptions, judgment calls. That's where a small team becomes massive. That's where 3 people do what 30 used to do. That's the promise.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Competitive Reality</div>
+      <h2>They Called It AI-Native. We Actually Built It.</h2>
+    </div>
+    
+    <div class="difference-grid">
+      <div class="diff-card">
+        <h4>Scripts With Smarter Search</h4>
+        <div class="product">Traditional RMMs (Ninja, ConnectWise, Kaseya)</div>
+        <p>Run-this-script, wait-for-alert, human-takes-over. AI is a bolt-on. It suggests what to do. It doesn't do it.</p>
+        <div class="vs">vs</div>
+        <p><strong>Reasoning Loop → Structured Playbooks → Agent Execution.</strong> The AI decides what to run. The playbooks are legible to machines. The agent actually executes.</p>
+      </div>
+      
+      <div class="diff-card">
+        <h4>Chatbot Ticketing</h4>
+        <div class="product">ITSM Copilots (ServiceNow, Freshworks)</div>
+        <p>Natural language interface over the same old workflows. Creates tickets faster. Still needs humans for literally everything else.</p>
+        <div class="vs">vs</div>
+        <p><strong>Agent acts first, asks when needed.</strong> Conversational flow with real tool execution. The agent resets passwords, provisions accounts, runs diagnostics. Then reports what it did.</p>
+      </div>
+      
+      <div class="diff-card">
+        <h4>Workflow Builders</h4>
+        <div class="product">Conversational SaaS (Serval)</div>
+        <p>Point-and-click workflow designers. AI suggests steps. Human clicks through. Technically "agentic." Actually assisted.</p>
+        <div class="vs">vs</div>
+        <p><strong>Goal-driven execution with reasoning.</strong> Don't tell it the steps. Tell it the outcome. The ReAct loop figures out the path. Only asks humans for what agents can't know.</p>
+      </div>
+    </div>
+    
+    <div class="verdict">
+      <h3>Why MSPclaw Passes the Isenberg Test</h3>
+      <p>The architecture is instrumented for agents. YAML playbooks define goals, not scripts. WebSocket agents maintain state across sessions. Humans review results, not run playbooks. This isn't AI-assisted. It's an AI-native RMM that humans supervise.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Messaging</div>
+      <h2>Taglines That Don't Sound Like ChatGPT</h2>
+      <p class="lead">Straight from the whiteboard. No filler, no fluff. Just the thing said clean.</p>
+    </div>
+    
+    <div class="taglines">
+      <div class="tagline-item">
+        <p class="tagline-text">One MSP. <span>Zero people</span> watching alerts.</p>
+        <p class="tagline-explanation">The "unattended" promise. Agents work 24/7. Humans only intervene on edge cases.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">Serval <span>raised millions.</span> MSPclaw raised the bar.</p>
+        <p class="tagline-explanation">Competitive framing: they got funding, we got functionality. Build vs buy and build lost.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">SuperOps <span>solved</span> what Atera <span>spec'd out.</span></p>
+        <p class="tagline-explanation">Execution > Roadmap. They're promising AI features. We shipped them.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">Your <span>AI assistant</span> takes tickets.<br>Our <span>AI agent</span> takes action.</p>
+        <p class="tagline-explanation">The category distinction. Assisted = helps you do. Native = does, you review.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">IT doesn't sleep.<br><span>Neither do we.</span> Literally.</p>
+        <p class="tagline-explanation">24/7 coverage without 24/7 humans. The practical value prop.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">Built for the <span>3 AM incident.</span><br>Not the demo deck.</p>
+        <p class="tagline-explanation">Anti-marketing honesty. Real products handle real failure states.</p>
+      </div>
+      
+      <div class="tagline-item">
+        <p class="tagline-text">Open source.<br><span>Closed for business</span> with vendor lock-in.</p>
+        <p class="tagline-explanation">Values + positioning. Self-hosted, LLM-agnostic, no proprietary black boxes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">The Technical Divide</div>
+      <h2>What "Native" Actually Looks Like</h2>
+    </div>
+    
+    <p class="lead">Here's the architecture conversation when someone asks "but couldn't X add AI too?"</p>
+    
+    <div class="comparison">
+      <div class="comparison-row">
+        <div class="comparison-col assisted">
+          <div class="col-header">Their Architecture</div>
+          <h4>Assisted Model</h4>
+          <p><strong>Human → UI → LLM → Suggestion</strong><br><br>
+          The human decides whether to act. The LLM is a consultant in the loop. Workflows are designed for human execution. AI is a layer on top.</p>
+        </div>
+        <div class="comparison-divider"></div>
+        <div class="comparison-col native">
+          <div class="col-header">Our Architecture</div>
+          <h4>Native Model</h4>
+          <p><strong>Human Goal → LLM (ReAct Loop) → Tool Execution → Result Audit</strong><br><br>
+          The human sets the goal. The LLM reasons through the approach. The agent executes. The human audits. The playbook structure is designed for machine consumption.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="verdict">
+      <h3>The Test: Can a Human Walk Away?</h3>
+      <p>If you can step away from the keyboard and the system keeps working — diagnosis, action, reporting — it's native. If you have to babysit every suggestion, it's assisted. Most "AI" IT products fail this test. MSPclaw doesn't.</p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Less Theater. More Agent.</h2>
+    <p class="lead">See what happens when you start with the agent instead of bolting it on.</p>
+    <a href="#" class="cta-button">Read the Architecture</a>
+  </section>
+
+  <footer>
+    <div class="footer-brand">SuperOps / MSPclaw</div>
+    <p>Open-source AI-native RMM for MSPs. Built by people who actually ran MSPs.</p>
+    <p style="margin-top: 2rem; opacity: 0.5;">Made for superops.com · This isn't marketing copy. This is how we built it.</p>
+  </footer>
+</body>
+</html>
