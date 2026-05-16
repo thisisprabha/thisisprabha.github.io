@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevenueGuard | MSP Billing Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #0d0d0d;
+            --color-text-secondary: #333333;
+            --color-text-muted: #666666;
+            --color-text-tertiary: #888888;
+            --color-brand: #18E299;
+            --color-brand-light: #d4fae8;
+            --color-brand-deep: #0fa76e;
+            --color-amber: #f59e0b;
+            --color-amber-light: #fef3c7;
+            --color-red: #ef4444;
+            --color-red-light: #fef2f2;
+            --color-border: rgba(0,0,0,0.05);
+            --color-border-medium: rgba(0,0,0,0.08);
+            --color-surface: #fafafa;
+            --color-surface-hover: #f5f5f5;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-pill: 9999px;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 100;
+            padding: 1rem 2rem;
+        }
+        
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            color: var(--color-text);
+        }
+        
+        .nav-brand-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-brand);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--color-brand);
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-pill);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-muted);
+        }
+        
+        /* Main Layout */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+        
+        .page-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.64px;
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+        
+        .page-subtitle {
+            font-size: 15px;
+            color: var(--color-text-muted);
+        }
+        
+        .btn-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .btn-primary {
+            background: var(--color-text);
+            color: var(--color-bg);
+            box-shadow: rgba(0,0,0,0.06) 0px 1px 2px;
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-ghost {
+            background: var(--color-bg);
+            color: var(--color-text);
+            border: 1px solid var(--color-border-medium);
+        }
+        
+        .btn-ghost:hover {
+            border-color: var(--color-brand);
+            color: var(--color-brand);
+        }
+        
+        .btn-brand {
+            background: var(--color-brand-light);
+            color: var(--color-brand-deep);
+        }
+        
+        .btn-brand:hover {
+            background: var(--color-brand);
+            color: var(--color-text);
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 1px;
+        }
+        
+        .tab {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: var(--color-text);
+        }
+        
+        .tab.active {
+            color: var(--color-text);
+            border-bottom-color: var(--color-brand);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        
+        .card:hover {
+            border-color: var(--color-border-medium);
+        }
+        
+        /* Stat Card */
+        .stat-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        
+        .stat-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .stat-icon.green { background: var(--color-brand-light); }
+        .stat-icon.amber { background: var(--color-amber-light); }
+        .stat-icon.red { background: var(--color-red-light); }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--color-text);
+        }
+        
+        .stat-change {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .stat-change.positive { color: var(--color-brand-deep); }
+        .stat-change.negative { color: var(--color-red); }
+        
+        /* Alert Banner */
+        .alert-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: var(--radius-md);
+            margin-bottom: 24px;
+        }
+        
+        .alert-banner.warning {
+            background: var(--color-amber-light);
+            border: 1px solid rgba(245,158,11,0.2);
+        }
+        
+        .alert-banner.danger {
+            background: var(--color-red-light);
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        
+        .alert-icon {
+            font-size: 18px;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        
+        .alert-text {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+        
+        /* Two Column Layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 24px;
+        }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .section-action {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-brand-deep);
+            text-decoration: none;
+        }
+        
+        .section-action:hover {
+            text-decoration: underline;
+        }
+        
+        /* Subscriptions Table */
+        .table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 14px;
+        }
+        
+        .table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-muted);
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .table th:first-child {
+            border-top-left-radius: var(--radius-sm);
+        }
+        
+        .table th:last-child {
+            border-top-right-radius: var(--radius-sm);
+        }
+        
+        .table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+        }
+        
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .table tr:last-child td:first-child {
+            border-bottom-left-radius: var(--radius-sm);
+        }
+        
+        .table tr:last-child td:last-child {
+            border-bottom-right-radius: var(--radius-sm);
+        }
+        
+        .table tr:hover td {
+            background: var(--color-surface-hover);
+        }
+        
+        .customer-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .customer-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-pill);
+            background: var(--color-brand-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--color-brand-deep);
+        }
+        
+        .customer-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .customer-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .customer-email {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        
+        .amount {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'Geist Mono', ui-monospace, monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        
+        .status-badge.active {
+            background: var(--color-brand-light);
+            color: var(--color-brand-deep);
+        }
+        
+        .status-badge.warning {
+            background: var(--color-amber-light);
+            color: #92400e;
+        }
+        
+        .status-badge.danger {
+            background: var(--color-red-light);
+            color: var(--color-red);
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: var(--radius-pill);
+        }
+        
+        .status-dot.active { background: var(--color-brand); }
+        .status-dot.warning { background: var(--color-amber); }
+        .status-dot.danger { background: var(--color-red); }
+        
+        /* Churn Risk Panel */
+        .risk-card {
+            background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+        }
+        
+        .risk-score {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .risk-number {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--color-amber);
+        }
+        
+        .risk-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+        }
+        
+        .risk-bar {
+            height: 8px;
+            background: var(--color-border);
+            border-radius: var(--radius-pill);
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        
+        .risk-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-brand) 0%, var(--color-amber) 50%, var(--color-red) 100%);
+            border-radius: var(--radius-pill);
+            transition: width 0.3s ease;
+        }
+        
+        .risk-legend {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 24px;
+        }
+        
+        .risk-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            background: var(--color-surface);
+        }
+        
+        .risk-item-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        
+        .risk-item-content {
+            flex: 1;
+        }
+        
+        .risk-item-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        
+        .risk-item-subtitle {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+        
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        
+        .activity-icon.success { background: var(--color-brand-light); }
+        .activity-icon.warning { background: var(--color-amber-light); }
+        .activity-icon.error { background: var(--color-red-light); }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-text {
+            font-size: 14px;
+            color: var(--color-text);
+            margin-bottom: 2px;
+        }
+        
+        .activity-text strong {
+            font-weight: 600;
+        }
+        
+        .activity-time {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-left {
+            font-size: 13px;
+            color: var(--color-text-muted);
+        }
+        
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-link {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover {
+            color: var(--color-brand-deep);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header-top {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .table {
+                font-size: 12px;
+            }
+            
+            .table th, .table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <div class="nav-brand-icon">🛡️</div>
+                RevenueGuard
+            </div>
+            <div class="nav-links">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#subscriptions" class="nav-link">Subscriptions</a>
+                <a href="#alerts" class="nav-link">Alerts</a>
+                <a href="#reconciliation" class="nav-link">Reconciliation</a>
+                <a href="#settings" class="nav-link">Settings</a>
+                <div class="user-avatar">PR</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-header-top">
+                <div>
+                    <h1 class="page-title">Dashboard</h1>
+                    <div class="page-subtitle">Billing overview for AcmeMSP • Connected to ConnectWise + Stripe</div>
+                </div>
+                <button class="btn-pill btn-primary">
+                    <span>🔄</span> Sync Now
+                </button>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active">Overview</div>
+                <div class="tab">Revenue</div>
+                <div class="tab">Churn</div>
+                <div class="tab">Failed Payments</div>
+            </div>
+        </div>
+
+        <!-- Alert Banner -->
+        <div class="alert-banner warning">
+            <div class="alert-icon">⚡</div>
+            <div class="alert-content">
+                <div class="alert-title">$8,400 at risk this month</div>
+                <div class="alert-text">3 subscriptions show churn indicators. 1 payment failed 3 days ago. Review recommended.</div>
+            </div>
+            <button class="btn-pill btn-ghost">Review</button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <!-- MRR -->
+            <div class="card stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Monthly Recurring Revenue</div>
+                    <div class="stat-icon green">💰</div>
+                </div>
+                <div class="stat-value">$47,500</div>
+                <div class="stat-change positive">
+                    <span>↑</span>
+                    <span>+$3,200 vs last month</span>
+                </div>
+            </div>
+            
+            <!-- Active Subs -->
+            <div class="card stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Active Subscriptions</div>
+                    <div class="stat-icon green">👥</div>
+                </div>
+                <div class="stat-value">23</div>
+                <div class="stat-change positive">
+                    <span>↑</span>
+                    <span>+2 new this week</span>
+                </div>
+            </div>
+            
+            <!-- Failed Payments -->
+            <div class="card stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Failed Payments</div>
+                    <div class="stat-icon amber">⚠️</div>
+                </div>
+                <div class="stat-value">$3,200</div>
+                <div class="stat-change negative">
+                    <span>↓</span>
+                    <span>1 customer needs attention</span>
+                </div>
+            </div>
+            
+            <!-- Revenue at Risk -->
+            <div class="card stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Revenue at Risk</div>
+                    <div class="stat-icon red">🚨</div>
+                </div>
+                <div class="stat-value" style="color: var(--color-amber);">$8,400</div>
+                <div class="stat-change negative">
+                    <span>3 customers flagged</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Layout -->
+        <div class="two-column">
+            <!-- Left Column: Subscriptions -->
+            <div class="column-left">
+                <div class="card">
+                    <div class="section-header">
+                        <div class="section-title">Recent Subscriptions</div>
+                        <a href="#" class="section-action">View all →</a>
+                    </div>
+                    
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Renewal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar">TC</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">TechCorp Industries</div>
+                                            <div class="customer-email">billing@techcorp.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="amount">$8,500/mo</div></td>
+                                <td>
+                                    <span class="status-badge active">
+                                        <span class="status-dot active"></span>
+                                        Active
+                                    </span>
+                                </td>
+                                <td>May 28, 2026</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar" style="background: #e0e7ff; color: #4f46e5;">NS</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">NextGen Solutions</div>
+                                            <div class="customer-email">afinance@nextgen.io</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="amount">$6,200/mo</div></td>
+                                <td>
+                                    <span class="status-badge active">
+                                        <span class="status-dot active"></span>
+                                        Active
+                                    </span>
+                                </td>
+                                <td>Jun 15, 2026</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar" style="background: var(--color-amber-light); color: #92400e;">DR</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">DataRise Analytics</div>
+                                            <div class="customer-email">pay@datarise.io</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="amount">$4,800/mo</div></td>
+                                <td>
+                                    <span class="status-badge warning">
+                                        <span class="status-dot warning"></span>
+                                        At Risk
+                                    </span>
+                                </td>
+                                <td>May 22, 2026 ⚠️</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar" style="background: var(--color-red-light); color: var(--color-red);">CB</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">CloudBridges Ltd</div>
+                                            <div class="customer-email">invoice@cloudbridges.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="amount">$3,200/mo</div></td>
+                                <td>
+                                    <span class="status-badge danger">
+                                        <span class="status-dot danger"></span>
+                                        Past Due
+                                    </span>
+                                </td>
+                                <td>May 13, 2026 🔴</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="customer-avatar" style="background: #fce7f3; color: #be185d;">SV</div>
+                                        <div class="customer-info">
+                                            <div class="customer-name">SecureVault MSP</div>
+                                            <div class="customer-email">billing@securevault.net</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><div class="amount">$2,900/mo</div></td>
+                                <td>
+                                    <span class="status-badge warning">
+                                        <span class="status-dot warning"></span>
+                                        At Risk
+                                    </span>
+                                </td>
+                                <td>Jun 01, 2026 ⚠️</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+                <!-- Recent Activity -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="section-header">
+                        <div class="section-title">Recent Activity</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">✓</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Sync completed — <strong>ConnectWise → Stripe</strong></div>
+                            <div class="activity-time">12 minutes ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon error">✕</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Payment failed — <strong>CloudBridges Ltd</strong> ($3,200)</div>
+                            <div class="activity-time">3 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon warning">⚠️</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Churn risk detected — <strong>3 customers</strong> flagged</div>
+                            <div class="activity-time">5 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">+</div>
+                        <div class="activity-content">
+                            <div class="activity-text">New subscription — <strong>GreenTech Solutions</strong> ($5,400/mo)</div>
+                            <div class="activity-time">2 days ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">↻</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Auto-reconciliation completed — <strong>$47,500</strong> matched</div>
+                            <div class="activity-time">1 week ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Churn Risk -->
+            <div class="column-right">
+                <div class="card risk-card">
+                    <div class="section-header">
+                        <div class="section-title">Churn Risk Score</div>
+                    </div>
+                    
+                    <div class="risk-score">
+                        <div class="risk-number">67%</div>
+                        <div class="risk-label">Elevated Risk</div>
+                    </div>
+                    
+                    <div class="risk-bar">
+                        <div class="risk-fill" style="width: 67%;"></div>
+                    </div>
+                    
+                    <div class="risk-legend">
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+                    </div>
+                    
+                    <div style="margin-top: 16px;">
+                        <div class="risk-item">
+                            <div class="risk-item-icon" style="background: var(--color-red-light);">🔴</div>
+                            <div class="risk-item-content">
+                                <div class="risk-item-title">High Risk</div>
+                                <div class="risk-item-subtitle">1 subscription</div>
+                            </div>
+                        </div>
+                        
+                        <div class="risk-item">
+                            <div class="risk-item-icon" style="background: var(--color-amber-light);">🟡</div>
+                            <div class="risk-item-content">
+                                <div class="risk-item-title">Medium Risk</div>
+                                <div class="risk-item-subtitle">2 subscriptions</div>
+                            </div>
+                        </div>
+                        
+                        <div class="risk-item">
+                            <div class="risk-item-icon" style="background: var(--color-brand-light);">🟢</div>
+                            <div class="risk-item-content">
+                                <div class="risk-item-title">Low Risk</div>
+                                <div class="risk-item-subtitle">20 subscriptions</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <!-- Quick Actions -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="section-header">
+                        <div class="section-title">Quick Actions</div>
+                    </div>
+                    
+                    <button class="btn-pill btn-brand" style="width: 100%; margin-bottom: 10px; justify-content: center;">
+                        📧 Send Dunning Email
+                    </button>
+                    
+                    <button class="btn-pill btn-ghost" style="width: 100%; margin-bottom: 10px; justify-content: center;">
+                        🔔 Review Alerts
+                    </button>
+                    
+                    <button class="btn-pill btn-ghost" style="width: 100%; justify-content: center;">
+                        📊 Export Report
+                    </button>
+                </div>
+                
+                
+                <!-- Integration Status -->
+                <div class="card" style="margin-top: 24px;">
+                    <div class="section-header">
+                        <div class="section-title">Integrations</div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">✓</div>
+                        <div class="activity-content">
+                            <div class="activity-text"><strong>ConnectWise</strong></div>
+                            <div class="activity-time">Last sync: 12 min ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon success">✓</div>
+                        <div class="activity-content">
+                            <div class="activity-text"><strong>Stripe</strong></div>
+                            <div class="activity-time">Real-time webhooks active</div>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item" style="border-bottom: none;">
+                        <div class="activity-icon success">✓</div>
+                        <div class="activity-content">
+                            <div class="activity-text"><strong>Datto RMM</strong></div>
+                            <div class="activity-time">Last sync: 2 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <div class="nav-brand-icon" style="width: 24px; height: 24px; font-size: 12px;">🛡️</div>
+                    RevenueGuard
+                </div>
+                <div style="margin-top: 4px;">Billing automation for MSPs. Built for ConnectWise, Stripe, HaloPSA.</div>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link">Docs</a>
+                <a href="#" class="footer-link">API</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">Status</a>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
