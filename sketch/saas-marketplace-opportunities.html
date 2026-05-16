@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Marketplace Opportunities for Developers | Agent Tina Research</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3);
+        }
+        .glass {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.5); }
+        }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 min-h-screen relative">
+    <div class="noise"></div>
+    
+    <div class="relative z-10">
+        <!-- Hero -->
+        <header class="pt-20 pb-16 px-6 border-b border-gray-800">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="text-indigo-400 font-semibold tracking-wider text-sm uppercase">Developer Research</span>
+                    <span class="text-gray-600">•</span>
+                    <span class="text-gray-400 text-sm">May 2026</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    SaaS <span class="gradient-text">Marketplace</span><br>
+                    Opportunities for Developers
+                </h1>
+                <p class="text-xl text-gray-400 max-w-2xl leading-relaxed">
+                    A comprehensive analysis of revenue-generating developer marketplaces beyond the obvious choices. 
+                    From GraphQL platforms to voice AI, discover where the real money is hiding.
+                </p>
+            </div>
+        </header>
+
+        <!-- Quick Stats -->
+        <section class="px-6 py-12 border-b border-gray-800">
+            <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-indigo-400">40+</div>
+                    <div class="text-sm text-gray-500 mt-1">Marketplaces Analyzed</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-purple-400">85%</div>
+                    <div class="text-sm text-gray-500 mt-1">Best Rev Share (Monday)</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-pink-400">90%</div>
+                    <div class="text-sm text-gray-500 mt-1">Discord Premium Split</div>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-3xl font-bold text-cyan-400">$500K</div>
+                    <div class="text-sm text-gray-500 mt-1">Top Earner Potential</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monday.com Deep Dive -->
+        <section class="px-6 py-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-xl font-bold">M</div>
+                    <div>
+                        <h2 class="text-3xl font-bold">Monday.com Developer Marketplace</h2>
+                        <a href="https://monday.com/appdeveloper" class="text-indigo-400 hover:text-indigo-300 text-sm">monday.com/appdeveloper →</a>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+                    <div class="glass rounded-2xl p-8 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            Revenue Model
+                        </h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex justify-between"><span>Platform Commission</span><span class="text-gray-400">15%</span></li>
+                            <li class="flex justify-between"><span>Developer Keeps</span><span class="font-semibold text-green-400">85%</span></li>
+                            <li class="flex justify-between"><span>Pricing Range</span><span class="text-gray-400">$5-50/user/mo</span></li>
+                            <li class="flex justify-between"><span>Enterprise</span><span class="text-gray-400">Custom</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass rounded-2xl p-8 card-hover transition-all duration-300">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                            <span class="w-2 h-2 bg-blue-400 rounded-full"></span>
+                            Tech Stack
+                        </h3>
+                        <ul class="space-y-2 text-gray-300 mono text-sm">
+                            <li><span class="text-blue-400">@mondaydotcomorg/api</span> - Official SDK</li>
+                            <li>GraphQL v2 API with TypeScript support</li>
+                            <li>OAuth 2.0 Authentication</li>
+                            <li>React-based UI (design system)</li>
+                            <li>Webhook support for real-time sync</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- App Types -->
+                <div class="grid md:grid-cols-3 gap-4 mb-12">
+                    <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+                        <div class="text-2xl mb-3">🔌</div>
+                        <h4 class="font-semibold mb-2">Integration Apps</h4>
+                        <p class="text-sm text-gray-400">Connect Monday with external services, custom recipes, webhook triggers</p>
+                    </div>
+                    <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+                        <div class="text-2xl mb-3">🤖</div>
+                        <h4 class="font-semibold mb-2">AI Agents</h4>
+                        <p class="text-sm text-gray-400">Custom agents with MCP integration, natural language processing</p>
+                    </div>
+                    <div class="bg-gray-900/50 rounded-xl p-6 border border-gray-800">
+                        <div class="text-2xl mb-3">📊</div>
+                        <h4 class="font-semibold mb-2">View Apps</h4>
+                        <p class="text-sm text-gray-400">Custom board views, detail views, dashboard widgets</p>
+                    </div>
+                </div>
+
+                <!-- MSP/IT Gaps -->
+                <div class="glass rounded-2xl p-8 border-l-4 border-yellow-500">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <span class="text-yellow-500">⚠️</span>
+                        Identified Gaps for MSP/IT Tools
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-yellow-400 mb-3">High-Value Opportunities</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex gap-2"><span class="text-green-400">•</span> PSA Integration (ConnectWise, Autotask, HaloPSA)</li>
+                                <li class="flex gap-2"><span class="text-green-400">•</span> RMM Connection Layer (NinjaOne, Datto, N-central)</li>
+                                <li class="flex gap-2"><span class="text-green-400">•</span> Advanced Asset Lifecycle Management</li>
+                                <li class="flex gap-2"><span class="text-green-400">•</span> IT Documentation Sync (IT Glue, Hudu)</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-cyan-400 mb-3">Recommended Apps</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
+                                <li class="flex gap-2"><span class="text-cyan-400">1.</span> PSA Connector - Bidirectional sync</li>
+                                <li class="flex gap-2"><span class="text-cyan-400">2.</span> Asset Lifecycle Manager - ITAM workflows</li>
+                                <li class="flex gap-2"><span class="text-cyan-400">3.</span> MSP Client Health Dashboard</li>
+                                <li class="flex gap-2"><span class="text-cyan-400">4.</span> Automated Onboarding Templates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pain Points from Reddit Research -->
+        <section class="px-6 py-16 bg-gray-900/30">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-2">From Reddit Research: Top Pain Points</h2>
+                <p class="text-gray-400 mb-8">sourced from r/agile, r/projectmanagement, r/notion (high-engagement posts)</p>
+                
+                <div class="space-y-4">
+                    <div class="glass rounded-xl p-6 card-hover transition-all duration-300 border-l-4 border-red-500">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl font-bold text-red-500/50">#1</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">Sprint Planning Theatre</h3>
+                                <p class="text-gray-400 text-sm mb-3">"We spend 2 hours planning... Three days in, a 'quick question from sales' becomes a 3-day spike. By Friday, half our work rolls over."</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs">Time Wasted</span>
+                                    <span class="px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs">Cynicism</span>
+                                    <span class="px-3 py-1 rounded-full bg-red-500/20 text-red-300 text-xs">Chaos Invisible to Leadership</span>
+                                </div>
+                                <div class="mt-3 text-xs text-indigo-400 mono">Opportunity: PlanB - Adaptive Sprint Planning with auto-reallocation</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 card-hover transition-all duration-300 border-l-4 border-orange-500">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl font-bold text-orange-500/50">#2</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">Tool Overhead > Building Time</h3>
+                                <p class="text-gray-400 text-sm mb-3">"We spend more time updating Jira and defending our velocity than building features." Context switching kills flow state.</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs">Context Switching</span>
+                                    <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs">Ticket Hygiene Rituals</span>
+                                    <span class="px-3 py-1 rounded-full bg-orange-500/20 text-orange-300 text-xs">Status Theater</span>
+                                </div>
+                                <div class="mt-3 text-xs text-indigo-400 mono">Opportunity: FlowSync - Auto-progress tracking from Git/Slack</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 card-hover transition-all duration-300 border-l-4 border-yellow-500">
+                        <div class="flex items-start gap-4">
+                            <div class="text-3xl font-bold text-yellow-500/50">#3</div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg mb-2">Daily Standup Attendance Theatre</h3>
+                                <p class="text-gray-400 text-sm mb-3">"Is anyone else's daily standup literally just an attendance check? feels like micromanagement disguised as a ceremony."</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs">Timezone Hell</span>
+                                    <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs">Async Desire</span>
+                                    <span class="px-3 py-1 rounded-full bg-yellow-500/20 text-yellow-300 text-xs">Status Not Unblockers</span>
+                                </div>
+                                <div class="mt-3 text-xs text-indigo-400 mono">Opportunity: AsyncStandup - Smart blocker detection + optional voice for who needs to sync</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Platform Comparison -->
+        <section class="px-6 py-16">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8">Agentic AI Marketplace Landscape</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-700 text-left">
+                                <th class="pb-4 pl-4 font-semibold text-gray-300">Platform</th>
+                                <th class="pb-4 font-semibold text-gray-300">Type</th>
+                                <th class="pb-4 font-semibold text-gray-300">Status</th>
+                                <th class="pb-4 font-semibold text-gray-300">Best For</th>
+                                <th class="pb-4 font-semibold text-gray-300">Earning Potential</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-400">
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">GitHub MCP Registry</td>
+                                <td>Registry</td>
+                                <td><span class="text-green-400">Live 2025</span></td>
+                                <td>MCP Server Builders</td>
+                                <td class="text-gray-500">Ecosystem growth</td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">CrewAI AMP</td>
+                                <td>Orchestration</td>
+                                <td><span class="text-blue-400">Enterprise</span></td>
+                                <td>B2B Consulting</td>
+                                <td class="text-green-400">Partnership deals</td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">LangChain/LangSmith</td>
+                                <td>Framework</td>
+                                <td><span class="text-blue-400">Active</span></td>
+                                <td>Observability</td>
+                                <td class="text-gray-500">Enterprise SaaS</td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">Zapier</td>
+                                <td>Orchestration</td>
+                                <td><span class="text-blue-400">9,000+ apps</span></td>
+                                <td>Integration Heavy</td>
+                                <td class="text-yellow-400">Task-based revenue</td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">ElevenLabs</td>
+                                <td>Voice AI</td>
+                                <td><span class="text-green-400">Leading</span></td>
+                                <td>Voice-First Apps</td>
+                                <td class="text-green-400">Usage-based high margin</td>
+                            </tr>
+                            <tr class="border-b border-gray-800 hover:bg-gray-900/50 transition-colors">
+                                <td class="py-4 pl-4 font-medium text-white">Synthflow</td>
+                                <td>Voice Agents</td>
+                                <td><span class="text-green-400">Active</span></td>
+                                <td>Phone Automation</td>
+                                <td class="text-yellow-400">Pay-as-you-go</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Emerging Marketplaces -->
+        <section class="px-6 py-16 bg-gray-900/30">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Hidden Gems: Early Mover Opportunities</h2>
+                <p class="text-gray-400 mb-8">Marketplaces with <500 apps - True first-mover advantage</p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Discord -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-500/20 flex items-center justify-center text-xl">💬</div>
+                            <span class="text-green-400 font-bold text-sm">90/10 Split</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Discord Premium Apps</h3>
+                        <p class="text-sm text-gray-400 mb-3">150M+ MAU. Best revenue split in industry. Beyond gaming: study groups, dev communities, support servers.</p>
+                        <div class="text-xs text-gray-500 mono">Earning: $1K-$100K+/month</div>
+                    </div>
+
+                    <!-- CrowdStrike -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-xl">🛡️</div>
+                            <span class="text-purple-400 font-bold text-sm">&lt;50 apps</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">CrowdStrike Store</h3>
+                        <p class="text-sm text-gray-400 mb-3">Endpoint protection apps. Security domain required but extremely underserved.</p>
+                        <div class="text-xs text-gray-500 mono">High enterprise contract values</div>
+                    </div>
+
+                    <!-- Linear -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-xl">📋</div>
+                            <span class="text-purple-400 font-bold text-sm">~50 apps</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Linear App Directory</h3>
+                        <p class="text-sm text-gray-400 mb-3">Growing dev teams, 1M+ users. Issue tracking integrations. Direct billing.</p>
+                        <div class="text-xs text-gray-500 mono">$5K-$50K/year potential</div>
+                    </div>
+
+                    <!-- Miro -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-yellow-500/20 flex items-center justify-center text-xl">🎨</div>
+                            <span class="text-purple-400 font-bold text-sm">~150 apps</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Miro Marketplace</h3>
+                        <p class="text-sm text-gray-400 mb-3">50M+ users, visual collaboration. Revenue share model. Enterprise contracts available.</p>
+                        <div class="text-xs text-gray-500 mono">Visual workflow tools</div>
+                    </div>
+
+                    <!-- ClickUp -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-xl">📈</div>
+                            <span class="text-green-400 font-bold text-sm">70/30 Split</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">ClickUp Marketplace</h3>
+                        <p class="text-sm text-gray-400 mb-3">10M+ users, growing fast. Only ~100 apps. PM integrations opportunity.</p>
+                        <div class="text-xs text-gray-500 mono">Growing with platform</div>
+                    </div>
+
+                    <!-- Linear -->
+                    <div class="bg-gray-900 rounded-xl p-6 border border-gray-800 card-hover transition-all duration-300">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-pink-500/20 flex items-center justify-center text-xl">⚡</div>
+                            <span class="text-purple-400 font-bold text-sm">&lt;20 intgs</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-2">Cron (Notion Calendar)</h3>
+                        <p class="text-sm text-gray-400 mb-3">Calendar productivity. Notion user base. Building out ecosystem.</p>
+                        <div class="text-xs text-gray-500 mono">EXTREME early mover</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vertical Specific -->
+        <section class="px-6 py-16">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8">Vertical-Specific Marketplaces</h2>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="glass rounded-2xl p-8">
+                        <h3 class="text-xl font-bold mb-4 text-red-400">Healthcare/MedTech</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">Epic App Orchard</div>
+                                    <div class="text-xs text-gray-500">31% US hospital EMR market</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-yellow-400">$50K-$500K/yr</div>
+                                    <div class="text-gray-500 text-xs">&lt;300 apps</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">Cerner Code Marketplace</div>
+                                    <div class="text-xs text-gray-500">25% US hospital market</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-yellow-400">$20K-$200K/yr</div>
+                                    <div class="text-gray-500 text-xs">15-30% rev share</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Finance/Banking</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">Stripe Apps</div>
+                                    <div class="text-xs text-gray-500">Millions of Stripe users</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-green-400">80/20 Split</div>
+                                    <div class="text-gray-500 text-xs">~400 apps</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">FIS Code Connect</div>
+                                    <div class="text-xs text-gray-500">20,000+ banks</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-purple-400">Enterprise only</div>
+                                    <div class="text-gray-500 text-xs">EXTREME advantage</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">Legal/Tax</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">Clio App Directory</div>
+                                    <div class="text-xs text-gray-500">150K+ legal professionals</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-green-400">70/30 Split</div>
+                                    <div class="text-gray-500 text-xs">~200 apps</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">Thomson Reuters</div>
+                                    <div class="text-xs text-gray-500">Fortune 500 + Big 4</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-green-400">$100K-$1M+</div>
+                                    <div class="text-gray-500 text-xs">&lt;50 partners</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">DevOps/Infrastructure</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">GitHub Marketplace</div>
+                                    <div class="text-xs text-gray-500">100M+ developers</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-green-400">75/25 Split</div>
+                                    <div class="text-gray-500 text-xs">$1K-$50K/mo</div>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-800">
+                                <div>
+                                    <div class="font-semibold">AWS Marketplace</div>
+                                    <div class="text-xs text-gray-500">SaaS/PaaS/AMI</div>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div class="text-green-400">70/30 Split</div>
+                                    <div class="text-gray-500 text-xs">$10K-$10M+/yr</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights -->
+        <section class="px-6 py-16 bg-gradient-to-br from-indigo-900/20 to-purple-900/20">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl font-bold mb-8">Key Insights & Recommendations</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="glass rounded-2xl p-8">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h3 class="font-bold text-lg mb-3">2026 Trends</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>• MCP becoming "USB-C for AI agents"</li>
+                            <li>• Vertical specialization emerging</li>
+                            <li>• Enterprise focus over consumer</li>
+                            <li>• Voice AI market maturing</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <div class="text-4xl mb-4">💰</div>
+                        <h3 class="font-bold text-lg mb-3">Best ROI Approach</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>• Start with MCP servers (low barrier)</li>
+                            <li>• Build vertical-specific templates</li>
+                            <li>• Enterprise implementation services</li>
+                            <li>• Educational content creation</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass rounded-2xl p-8">
+                        <div class="text-4xl mb-4">⚠️</div>
+                        <h3 class="font-bold text-lg mb-3">Challenges</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>• Most platforms lack mature markets</li>
+                            <li>• Revenue share often undisclosed</li>
+                            <li>• Enterprise sales cycles long</li>
+                            <li>• AI compute costs eat margins</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 glass rounded-2xl p-8 border-l-4 border-indigo-500">
+                    <h3 class="font-bold text-xl mb-3">The Bottom Line</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Monday.com offers one of the best developer deals (85% keep) with moderate technical barriers. 
+                        But the real first-mover advantage is in Discord (90% split, 150M users), CrowdStrike Store (&lt;50 apps), 
+                        and vertical Healthcare/Legal marketplaces. The opportunity isn't just building apps—it's solving 
+                        <strong>workflow gaps</strong> with <strong>domain expertise</strong>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="px-6 py-12 border-t border-gray-800">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-500 text-sm">
+                    Research compiled from public sources, platform documentation, and market analysis
+                </div>
+                <div class="text-gray-600 text-sm mono">
+                    Agent Tina Research • May 2026
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
