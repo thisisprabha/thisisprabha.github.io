@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Service Desk — Ticket Details Design Review</title>
+<style>
+  :root {
+    --bg: #F5F4F0;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #6B6B6B;
+    --text-muted: #9B9B9B;
+    --border: #E5E4E0;
+    --accent: #2D6A4F;
+    --accent-light: #E8F5E9;
+    --high: #C62828;
+    --high-bg: #FFEBEE;
+    --medium: #E65100;
+    --medium-bg: #FFF3E0;
+    --missing: #F9A825;
+    --missing-bg: #FFFDE7;
+    --radius: 12px;
+    --radius-sm: 6px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06);
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+    padding: 40px 24px;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+
+  /* Header */
+  header {
+    margin-bottom: 36px;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .meta {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+  .meta span { margin-right: 16px; }
+
+  /* Screenshot */
+  .screenshot-wrap {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+  }
+  .screenshot-wrap img {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    display: block;
+  }
+  .screenshot-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  /* Sections */
+  section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  section h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.2px;
+  }
+  section .section-desc {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .stat.high .stat-num { color: var(--high); }
+  .stat.medium .stat-num { color: var(--medium); }
+  .stat.missing .stat-num { color: var(--missing); }
+  .stat.ok .stat-num { color: var(--accent); }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .severity {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .severity.high { background: var(--high-bg); color: var(--high); }
+  .severity.medium { background: var(--medium-bg); color: var(--medium); }
+  .severity.missing { background: var(--missing-bg); color: var(--missing); }
+  .type-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    background: var(--bg);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .original {
+    color: var(--high);
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 13px;
+    background: var(--high-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .correct {
+    color: var(--accent);
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 13px;
+    background: var(--accent-light);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* Recommendations */
+  .rec-list {
+    list-style: none;
+  }
+  .rec-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .rec-list li:last-child { border-bottom: none; }
+  .rec-num {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .rec-text { flex: 1; }
+  .rec-text strong { display: block; margin-bottom: 2px; }
+  .rec-text span {
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+
+  /* UX Notes */
+  .ux-note {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    border-left: 3px solid var(--accent);
+  }
+  .ux-note h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .ux-note p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+  .ux-note.issue { border-left-color: var(--high); }
+  .ux-note.warn { border-left-color: var(--medium); }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    th, td { padding: 8px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="badge">Design Review</span>
+  <h1>AI Service Desk — Ticket Details</h1>
+  <div class="meta">
+    <span>🎨 Figma node 6745:91886</span>
+    <span>📐 1800 × 2644 px</span>
+    <span>📅 30 May 2026</span>
+    <span>🔍 Agent Tina</span>
+  </div>
+</header>
+
+<div class="screenshot-wrap">
+  <div class="screenshot-label">Artboard Screenshot</div>
+  <img src="screenshots/ticket-details-ai-review.png" alt="Ticket Details artboard screenshot">
+</div>
+
+<!-- Summary Stats -->
+<section>
+  <h2>Review Summary</h2>
+  <p class="section-desc">Breakdown of issues found across grammar, data consistency, UX, and missing states.</p>
+  <div class="stats">
+    <div class="stat high">
+      <div class="stat-num">7</div>
+      <div class="stat-label">High Severity</div>
+    </div>
+    <div class="stat medium">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Medium Severity</div>
+    </div>
+    <div class="stat missing">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Missing States</div>
+    </div>
+    <div class="stat ok">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Critical Blockers</div>
+    </div>
+  </div>
+</section>
+
+<!-- Grammar & Copy -->
+<section>
+  <h2>Grammar, Spelling & Copy Issues</h2>
+  <p class="section-desc">Text-level errors that degrade trust in an AI-powered product.</p>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Original</th>
+      <th>Problem</th>
+      <th>Suggested Fix</th>
+      <th>Type</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><span class="original">"Map this fields"</span></td>
+      <td>Subject-verb disagreement. "this" (singular) + "fields" (plural).</td>
+      <td><span class="correct">"Map these fields"</span> or <span class="correct">"Map this field"</span></td>
+      <td><span class="type-tag">Grammar</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><span class="original">"I will re propose a solution"</span></td>
+      <td>"re propose" is not standard English. Should be "repropose" (one word) or "re-propose" (hyphenated).</td>
+      <td><span class="correct">"I will repropose a solution"</span></td>
+      <td><span class="type-tag">Spelling</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><span class="original">"share your feedbacks"</span></td>
+      <td>"Feedback" is uncountable in English — no plural "feedbacks".</td>
+      <td><span class="correct">"share your feedback"</span></td>
+      <td><span class="type-tag">Grammar</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><span class="original">"Finally, Send this email"</span></td>
+      <td>Inconsistent sentence-case vs title-case. "Send" is capitalized mid-sentence.</td>
+      <td><span class="correct">"Finally, send this email"</span></td>
+      <td><span class="type-tag">Capitalization</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><span class="original">"Next add this internal note"</span></td>
+      <td>Missing comma after "Next". Also title-case drift with "add" lowercase while "Send" uppercase above.</td>
+      <td><span class="correct">"Next, add this internal note"</span></td>
+      <td><span class="type-tag">Punctuation</span></td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><span class="original">"Michel jordan"</span></td>
+      <td>Double error: "Michel" should be "Michael". "jordan" should be "Jordan" (proper noun capitalization).</td>
+      <td><span class="correct">"Michael Jordan"</span></td>
+      <td><span class="type-tag">Spelling</span></td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><span class="original">"Hello Priya This is Mike..."</span></td>
+      <td>Email body is missing punctuation after salutation ("Hello Priya,"). Missing line breaks. Reads as one run-on paragraph.</td>
+      <td><span class="correct">"Hello Priya,↵↵This is Mike from Apex IT. I've picked up..."</span></td>
+      <td><span class="type-tag">Punctuation</span></td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><span class="original">"Z_Cleanup-pro windows cleanup"</span></td>
+      <td>Inconsistent casing. "pro" and "windows" should be capitalized or the whole string should be lowercase kebab-case.</td>
+      <td><span class="correct">"Z_Cleanup-Pro Windows Cleanup"</span> or <span class="correct">"z_cleanup-pro windows cleanup"</span></td>
+      <td><span class="type-tag">Casing</span></td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><span class="original">"at the across dallas site"</span></td>
+      <td>Garbled preposition stack. "at the across" makes no sense. Likely meant "at the Dallas site" or "across the Dallas site".</td>
+      <td><span class="correct">"at the Dallas site"</span></td>
+      <td><span class="type-tag">Grammar</span></td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><span class="original">"Use this space to share your feedback and inputs"</span></td>
+      <td>"inputs" is awkward in this context. "Input" as uncountable is more natural for feedback text.</td>
+      <td><span class="correct">"Use this space to share your feedback and input"</span></td>
+      <td><span class="type-tag">Wording</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- Data Consistency -->
+<section>
+  <h2>Data Consistency & Content Mismatches</h2>
+  <p class="section-desc">Test data that contradicts itself across sections — breaks technician trust in AI output.</p>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Location</th>
+      <th>Inconsistency</th>
+      <th>Severity</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>AI Summary → Internal Note</td>
+      <td>Ticket is for <strong>Javier</strong> (requester), but internal note mentions <strong>Mallory Jenkins</strong> and <strong>Aurora Z9000</strong> laptop. These are clearly wrong person/device names pulled from wrong context.</td>
+      <td><span class="severity high">🔴 High</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Email Section</td>
+      <td>Email addressed to <strong>Michael Scott</strong> and says <strong>"Hello Priya"</strong>, but ticket is for <strong>Javier</strong>. Three different names in one section. Also email talks about <strong>VPN issue</strong> while ticket is about <strong>laptop slowness</strong>.</td>
+      <td><span class="severity high">🔴 High</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Quick Fix Section</td>
+      <td>"Free Chrome's runaway memory" — ticket body says Chrome is the issue, but <strong>Aether Suite</strong> update is cited as the suspected cause. The fix steps don't address the root cause the AI itself identified.</td>
+      <td><span class="severity medium">🟡 Medium</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Asset Sidebar</td>
+      <td>Asset shows <strong>webcam HD - Sentinel</strong> for a laptop performance ticket. Wrong asset type mapped.</td>
+      <td><span class="severity medium">🟡 Medium</span></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Header Ticket ID</td>
+      <td>Header shows <strong>#240820-0001</strong> but email references <strong>VPN</strong> and different context. The test data feels copy-pasted from a different ticket scenario.</td>
+      <td><span class="severity medium">🟡 Medium</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- UX & Design -->
+<section>
+  <h2>UX & Design Review</h2>
+  <p class="section-desc">Hierarchy, density, affordance, and AI integration patterns.</p>
+
+  <div class="ux-note issue">
+    <h4>🔴 Missing "AI-Generated" Disclosure</h4>
+    <p>The AI summary, suggestions, internal note, and email draft all look like they were written by a human technician. There's no visual cue (badge, border, icon) indicating AI-generated content. In an MSP context where technicians make real decisions based on this, lack of disclosure is a trust risk.</p>
+  </div>
+
+  <div class="ux-note issue">
+    <h4>🔴 Four Competing Primary Actions</h4>
+    <p>The page presents "Quick fix", "Root cause fix", "Map fields", "Add internal note", and "Send email" all with equal visual weight. Technicians will freeze on which to pick first. The AI should <strong>rank and recommend one primary action</strong> with secondary actions de-emphasized.</p>
+  </div>
+
+  <div class="ux-note warn">
+    <h4>🟡 No Confidence Indicators</h4>
+    <p>The AI says "13 requesters in 10 days" and "84 similar tickets" — but there's no percentage, confidence score, or data freshness indicator. Technicians can't assess whether these stats are current, stale, or hallucinated.</p>
+  </div>
+
+  <div class="ux-note warn">
+    <h4>🟡 Feedback Mechanism Buried</h4>
+    <p>"Morning, this made my easier" / "No, I'm not finding it useful" feedback UI sits at the bottom of a 2644px tall page. By the time a technician scrolls here, they've already acted (or ignored) the AI. Feedback should be inline with each AI block.</p>
+  </div>
+
+  <div class="ux-note">
+    <h4>🟢 Good: Structured Suggestion Cards</h4>
+    <p>The side-by-side "Quick fix · unblock now" vs "Root cause fix · prevent it recurring" pattern is strong. Time tradeoff (-30 min vs +40 min) is visible. Keep this pattern — just add a recommended default.</p>
+  </div>
+
+  <div class="ux-note">
+    <h4>🟢 Good: Inline Asset Context</h4>
+    <p>Showing CPU/RAM/device status inline in the right sidebar gives technicians hardware context without leaving the ticket. This is a valuable AI insight integration.</p>
+  </div>
+
+  <div class="ux-note warn">
+    <h4>🟡 Script Action Without Confirmation</h4>
+    <p>"Run script" button for <code>Z_Cleanup-pro</code> is prominent and purple (high emphasis). Running cleanup scripts on a production machine is a destructive action — it needs a confirmation step or "Preview what this does" affordance.</p>
+  </div>
+
+  <div class="ux-note warn">
+    <h4>🟡 Suggested Script Description Weak</h4>
+    <p>"Removes unwanted data from the device to improve performance" is vague for a technician about to run a script. What files? What scope? What if it deletes something needed?</p>
+  </div>
+</section>
+
+<!-- Missing States -->
+<section>
+  <h2>Missing States & Edge Cases</h2>
+  <p class="section-desc">What happens when things don't go perfectly — these are not designed but should be.</p>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Missing State</th>
+      <th>Why It Matters</th>
+      <th>Severity</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td><strong>AI Loading State</strong></td>
+      <td>When AI is summarizing or generating suggestions, what does the technician see? Skeleton? Progress steps? Currently jumps from empty to full content.</td>
+      <td><span class="severity missing">🟠 Missing</span></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>AI Error / Low Confidence</strong></td>
+      <td>What if the AI can't find similar tickets? Or asset data is stale? The design assumes AI always returns rich insights.</td>
+      <td><span class="severity missing">🟠 Missing</span></td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>Overflow: Long Ticket Title</strong></td>
+      <td>"My Laptop is slow this morning" is short. What happens with "Critical: Exchange server down affecting all Dallas office — 47 users unable to access email"?</td>
+      <td><span class="severity missing">🟠 Missing</span></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>Overflow: Many Suggestion Steps</strong></td>
+      <td>Current suggestions have 3-4 steps. What if the AI generates 8 steps? The card will break layout.</td>
+      <td><span class="severity missing">🟠 Missing</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- Recommendations -->
+<section>
+  <h2>Recommendations</h2>
+  <p class="section-desc">Prioritized actions to fix before this ships.</p>
+  <ol class="rec-list">
+    <li>
+      <span class="rec-num">1</span>
+      <div class="rec-text">
+        <strong>Fix all test data to be internally consistent</strong>
+        <span>Javier is the requester, his laptop is the asset, and the email is to Javier about laptop slowness. Remove Michael Scott, Priya, Mallory Jenkins, and VPN references from this scenario.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">2</span>
+      <div class="rec-text">
+        <strong>Add "AI-generated" visual markers to every AI block</strong>
+        <span>Use a subtle left border (4px purple/blue), a "🤖 AI-generated" badge, or both. Technicians must know which content is human vs machine.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">3</span>
+      <div class="rec-text">
+        <strong>Fix grammar across all copy strings</strong>
+        <span>"Map this fields" → "Map these fields", "re propose" → "repropose", "feedbacks" → "feedback". Run a copy audit pass.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">4</span>
+      <div class="rec-text">
+        <strong>Design a single primary action with ranked secondary options</strong>
+        <span>The AI should highlight its top recommendation (e.g., "Quick fix recommended — addresses immediate blocker") and show root cause as secondary. Don't make technicians choose equally.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">5</span>
+      <div class="rec-text">
+        <strong>Add confidence metadata to AI claims</strong>
+        <span>"84 similar tickets (last 30 days, 92% match confidence)" reads very differently from "84 similar tickets". Add recency and match quality indicators.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">6</span>
+      <div class="rec-text">
+        <strong>Add inline feedback per AI block</strong>
+        <span>Move thumbs up/down from the page bottom to each suggestion card and summary block. Capture feedback at decision time, not scroll time.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">7</span>
+      <div class="rec-text">
+        <strong>Add script confirmation / preview step</strong>
+        <span>"Run script" should open a modal showing: what files will be touched, estimated time, rollback option, and "Are you sure?" confirmation.</span>
+      </div>
+    </li>
+    <li>
+      <span class="rec-num">8</span>
+      <div class="rec-text">
+        <strong>Design loading and error states for AI content</strong>
+        <span>Show skeleton placeholders while AI generates. If AI fails or returns low confidence, display a graceful fallback with "AI insights unavailable — manual triage".</span>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<footer>
+  Generated by Agent Tina · Local Figma MCP · SuperOps AI Service Desk · Node 6745:91886
+</footer>
+
+</div>
+</body>
+</html>
+# Sat May 30 11:15:24 IST 2026
