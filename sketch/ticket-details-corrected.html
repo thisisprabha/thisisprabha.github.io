@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket Details — Corrected Reference</title>
+<style>
+  :root {
+    --bg:#F5F4F0; --surface:#FFFFFF; --text:#1A1A1A; --text-secondary:#6B6B6B; --text-muted:#9B9B9B;
+    --border:#E5E4E0; --accent:#2D6A4F; --accent-light:#E8F5E9; --purple:#7C3AED; --purple-light:#F3E8FF;
+    --radius:12px; --radius-sm:8px; --shadow:0 1px 3px rgba(0,0,0,0.06);
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.5;font-size:14px;padding:40px 24px}
+  .container{max-width:1100px;margin:0 auto}
+  header{margin-bottom:32px}
+  .badge{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding:4px 10px;border-radius:100px;margin-bottom:10px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+  .meta{color:var(--text-secondary);font-size:13px}
+
+  /* Layout: main + sidebar */
+  .layout{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+  /* Cards */
+  .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);padding:20px;margin-bottom:16px}
+  .card-header{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+  .card-header h3{font-size:15px;font-weight:600;letter-spacing:-.2px}
+  .ai-badge{font-size:10px;font-weight:600;color:var(--purple);background:var(--purple-light);padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.4px}
+
+  /* Ticket header */
+  .ticket-header{padding:20px 24px}
+  .ticket-id{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+  .ticket-title{font-size:20px;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+  .ticket-meta{display:flex;gap:16px;font-size:13px;color:var(--text-secondary);flex-wrap:wrap}
+  .ticket-meta span{display:flex;align-items:center;gap:4px}
+
+  /* AI Summary */
+  .summary-text{font-size:14px;line-height:1.65;color:var(--text);margin-bottom:12px}
+  .summary-meta{display:flex;gap:16px;font-size:12px;color:var(--text-muted);margin-bottom:12px}
+  .summary-meta strong{color:var(--text);font-weight:600}
+  .feedback-inline{display:flex;gap:8px;align-items:center}
+  .feedback-inline span{font-size:12px;color:var(--text-muted)}
+  .thumb-btn{font-size:16px;background:var(--bg);border:none;padding:4px 8px;border-radius:6px;cursor:pointer}
+
+  /* Suggestion cards */
+  .suggestion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:600px){.suggestion-grid{grid-template-columns:1fr}}
+  .sugg-card{border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;position:relative}
+  .sugg-card.primary{border-color:var(--accent);background:var(--accent-light)}
+  .sugg-card .rec-badge{position:absolute;top:-1px;right:12px;background:var(--accent);color:#fff;font-size:10px;font-weight:600;padding:3px 10px;border-radius:0 0 6px 6px;text-transform:uppercase;letter-spacing:.3px}
+  .sugg-type{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+  .sugg-title{font-size:16px;font-weight:700;margin-bottom:6px;letter-spacing:-.2px}
+  .sugg-time{font-size:13px;color:var(--text-secondary);margin-bottom:10px}
+  .sugg-time strong{color:var(--accent);font-weight:700}
+  .sugg-steps{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:12px;padding-left:0;list-style:none}
+  .sugg-steps li{padding:3px 0;display:flex;gap:8px}
+  .sugg-steps .step-num{width:18px;height:18px;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+  .sugg-action{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{font-size:13px;font-weight:600;padding:8px 16px;border-radius:var(--radius-sm);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-secondary{background:var(--bg);color:var(--text);border:1px solid var(--border)}
+  .btn-link{background:none;color:var(--accent);padding:8px 0;text-decoration:underline}
+  .btn-script{background:var(--purple);color:#fff;font-size:12px;padding:6px 12px}
+  .btn-script::before{content:"▶";font-size:10px}
+
+  /* Script preview card */
+  .script-preview{border:1px dashed var(--border);border-radius:var(--radius-sm);padding:14px;background:#FAFAFA}
+  .script-preview h4{font-size:13px;font-weight:600;margin-bottom:6px}
+  .script-preview p{font-size:12px;color:var(--text-secondary);margin-bottom:8px}
+  .script-meta{display:flex;gap:12px;font-size:11px;color:var(--text-muted);margin-bottom:10px}
+
+  /* Email & Note */
+  .draft-box{background:var(--bg);border-radius:var(--radius-sm);padding:16px;font-size:13px;line-height:1.6;margin-bottom:12px}
+  .draft-box .salutation{font-weight:600;margin-bottom:8px}
+  .draft-box p{margin-bottom:8px}
+  .field-row{display:flex;gap:12px;align-items:center;margin-bottom:8px;font-size:13px}
+  .field-row label{color:var(--text-muted);font-size:12px;font-weight:500;width:60px;flex-shrink:0}
+  .field-row .value{background:var(--bg);padding:6px 10px;border-radius:6px;flex:1;color:var(--text-secondary)}
+
+  /* Sidebar */
+  .sidebar .card{padding:16px}
+  .asset-img{width:100%;height:140px;background:var(--bg);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:12px;margin-bottom:12px}
+  .asset-name{font-size:14px;font-weight:600;margin-bottom:4px}
+  .asset-type{font-size:12px;color:var(--text-muted);margin-bottom:12px}
+  .spec-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)}
+  .spec-row:last-child{border-bottom:none}
+  .spec-row .label{color:var(--text-muted)}
+  .spec-row .value{font-weight:600}
+  .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+  .status-dot.green{background:var(--accent)}
+  .status-dot.red{background:var(--high)}
+  .status-dot.yellow{background:var(--missing)}
+
+  /* Annotation callouts */
+  .annotation{background:#FFFDE7;border:1px solid #F9A825;border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#7C6F00;margin-bottom:12px}
+  .annotation::before{content:"📝 "}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <span class="badge">Corrected Reference</span>
+  <h1>Ticket Details — Fixed Artboard</h1>
+  <div class="meta">AI Service Desk · Node 6745:91886 · Use this as a side-by-side reference while fixing Figma</div>
+</header>
+
+<div class="layout">
+
+<div class="main">
+
+  <!-- Ticket Header -->
+  <div class="card ticket-header">
+    <div class="ticket-id">Ticket #240820-0001</div>
+    <div class="ticket-title">My laptop is slow this morning</div>
+    <div class="ticket-meta">
+      <span>👤 Javier Rodriguez</span>
+      <span>🏢 Dallas site</span>
+      <span>🕐 Opened 2h ago</span>
+      <span>🔴 High priority</span>
+    </div>
+  </div>
+
+  <!-- AI Summary -->
+  <div class="card">
+    <div class="card-header">
+      <h3>AI Summary</h3>
+      <span class="ai-badge">✨ AI-generated</span>
+    </div>
+    <div class="summary-text">
+      Javier's Dell Latitude 5520 at the Dallas site is running sluggishly this morning. 
+      Chrome processes are consuming 3.2GB RAM after the Aether Suite update pushed last night. 
+      84 similar tickets in the last 30 days (92% match confidence). 13 requesters affected in 10 days.
+    </div>
+    <div class="summary-meta">
+      <span><strong>84</strong> similar tickets (92% match, last 30 days)</span>
+      <span><strong>13</strong> requesters (10 days, high confidence)</span>
+    </div>
+    <div class="feedback-inline">
+      <span>Was this helpful?</span>
+      <button class="thumb-btn">👍</button>
+      <button class="thumb-btn">👎</button>
+    </div>
+  </div>
+
+  <!-- Suggestion Cards -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Suggested Actions</h3>
+      <span class="ai-badge">✨ AI-generated</span>
+    </div>
+    <div class="suggestion-grid">
+
+      <div class="sugg-card primary">
+        <div class="rec-badge">Recommended</div>
+        <div class="sugg-type">Quick fix</div>
+        <div class="sugg-title">Free Chrome's runaway memory</div>
+        <div class="sugg-time">Saves <strong>~30 min</strong> (based on median resolution)</div>
+        <ul class="sugg-steps">
+          <li><span class="step-num">1</span>End Chrome processes exceeding 800MB</li>
+          <li><span class="step-num">2</span>Clear browser cache & temp files</li>
+          <li><span class="step-num">3</span>Restart Chrome in performance mode</li>
+        </ul>
+        <div class="sugg-action">
+          <button class="btn btn-primary">Apply fix</button>
+          <button class="btn btn-link">Map these fields</button>
+        </div>
+        <div class="feedback-inline" style="margin-top:10px">
+          <span style="font-size:12px;color:var(--text-muted)">Helpful?</span>
+          <button class="thumb-btn">👍</button>
+          <button class="thumb-btn">👎</button>
+        </div>
+      </div>
+
+      <div class="sugg-card">
+        <div class="sugg-type">Root cause fix</div>
+        <div class="sugg-title">Roll back Aether Suite update</div>
+        <div class="sugg-time">Prevents recurrence · <strong>+40 min</strong></div>
+        <ul class="sugg-steps">
+          <li><span class="step-num">1</span>Uninstall Aether Suite v3.2.1</li>
+          <li><span class="step-num">2</span>Reinstall stable v3.1.8</li>
+          <li><span class="step-num">3</span>Apply Chrome compatibility patch</li>
+        </ul>
+        <div class="sugg-action">
+          <button class="btn btn-secondary">Apply fix</button>
+        </div>
+        <div class="feedback-inline" style="margin-top:10px">
+          <span style="font-size:12px;color:var(--text-muted)">Helpful?</span>
+          <button class="thumb-btn">👍</button>
+          <button class="thumb-btn">👎</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Script preview (replaces destructive "Run script") -->
+    <div class="script-preview" style="margin-top:14px">
+      <h4>🔧 Z_Cleanup-Pro Windows Cleanup</h4>
+      <p>Clears temporary files, browser cache, and logs to free RAM and improve responsiveness (~2 min)</p>
+      <div class="script-meta">
+        <span>⚡ ~2 min runtime</span>
+        <span>↩️ Rollback available</span>
+        <span>🔒 Read-only registry</span>
+      </div>
+      <button class="btn btn-script">Preview script</button>
+    </div>
+  </div>
+
+  <!-- Email Draft -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Email to Requester</h3>
+      <span class="ai-badge">✨ AI-generated</span>
+    </div>
+    <div class="field-row"><label>To</label><div class="value">Javier Rodriguez</div></div>
+    <div class="field-row"><label>Subject</label><div class="value">Re: Ticket #240820-0001 — Laptop slowness resolved</div></div>
+    <div class="draft-box">
+      <div class="salutation">Hello Javier,</div>
+      <p>This is Mike from Apex IT. I've picked up ticket #240820-0001 about your laptop running slow this morning.</p>
+      <p>I found that Chrome is using over 3GB of memory after last night's Aether Suite update. I've cleared the cache and restarted Chrome in performance mode. Your laptop should feel responsive now.</p>
+      <p>If the slowness returns, let me know and I'll roll back the Aether Suite update to the previous stable version.</p>
+      <p>Best,<br>Mike<br>Apex IT Support</p>
+    </div>
+    <div class="sugg-action">
+      <button class="btn btn-primary">Send email</button>
+      <button class="btn btn-secondary">Edit draft</button>
+    </div>
+    <div class="feedback-inline" style="margin-top:10px">
+      <span style="font-size:12px;color:var(--text-muted)">Draft helpful?</span>
+      <button class="thumb-btn">👍</button>
+      <button class="thumb-btn">👎</button>
+    </div>
+  </div>
+
+  <!-- Internal Note -->
+  <div class="card">
+    <div class="card-header">
+      <h3>Internal Note</h3>
+      <span class="ai-badge">✨ AI-generated</span>
+    </div>
+    <div class="draft-box">
+      <p>I will repropose a solution based on the pattern from Javier Rodriguez's Dell Latitude 5520 at the Dallas site. Chrome memory spike correlates with Aether Suite v3.2.1 rollout. Quick fix applied — monitoring for recurrence. If issue returns within 24h, recommend rolling back to v3.1.8.</p>
+    </div>
+    <div class="sugg-action">
+      <button class="btn btn-primary">Add internal note</button>
+      <button class="btn btn-secondary">Edit note</button>
+    </div>
+    <div class="feedback-inline" style="margin-top:10px">
+      <span style="font-size:12px;color:var(--text-muted)">Note helpful?</span>
+      <button class="thumb-btn">👍</button>
+      <button class="thumb-btn">👎</button>
+    </div>
+  </div>
+
+  <!-- Feedback Section (no longer buried at bottom — kept for completeness) -->
+  <div class="card">
+    <div class="card-header"><h3>Feedback</h3></div>
+    <p style="font-size:14px;margin-bottom:12px">Use this space to share your feedback and input</p>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-secondary">👍 This made my job easier</button>
+      <button class="btn btn-secondary">👎 Not finding it useful</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="card">
+    <div class="card-header"><h3>Asset</h3></div>
+    <div class="asset-img">💻 Laptop illustration</div>
+    <div class="asset-name">Dell Latitude 5520</div>
+    <div class="asset-type">Laptop · Assigned to Javier Rodriguez</div>
+    <div class="spec-row"><span class="label">CPU</span><span class="value"><span class="status-dot yellow"></span>78% load</span></div>
+    <div class="spec-row"><span class="label">RAM</span><span class="value"><span class="status-dot red"></span>3.2GB Chrome</span></div>
+    <div class="spec-row"><span class="label">Disk</span><span class="value"><span class="status-dot green"></span>42% used</span></div>
+    <div class="spec-row"><span class="label">OS</span><span class="value">Windows 11 Pro</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><h3>Requester</h3></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">JR</div>
+      <div>
+        <div style="font-weight:600;font-size:14px">Javier Rodriguez</div>
+        <div style="font-size:12px;color:var(--text-muted)">javier.r@apex.com</div>
+      </div>
+    </div>
+    <div class="spec-row"><span class="label">Dept</span><span class="value">Sales · Dallas</span></div>
+    <div class="spec-row"><span class="label">Tickets</span><span class="value">3 (last 30 days)</span></div>
+  </div>
+</div>
+
+</div>
+
+<!-- Annotation section at bottom -->
+<div style="margin-top:32px">
+  <div class="annotation">
+    <strong>Text fixes applied in this reference:</strong> "Map these fields" ✓, "repropose" ✓, "feedback" (not "feedbacks") ✓, "Finally, send" ✓, "Next, add" ✓, "Michael Jordan" ✓, "at the Dallas site" ✓, "Z_Cleanup-Pro Windows Cleanup" ✓, "input" (not "inputs") ✓, "Hello Javier" ✓ (not Priya), "laptop slowness" ✓ (not VPN), "Dell Latitude 5520" ✓ (not webcam).
+  </div>
+  <div class="annotation">
+    <strong>UX changes shown:</strong> ✨ AI-generated badge on every AI block · Primary action highlighted with "Recommended" · Secondary actions demoted · Inline thumbs up/down on each block · "Preview script" replaces destructive "Run script" · Consistent single-scenario data throughout.
+  </div>
+</div>
+
+<footer style="text-align:center;color:var(--text-muted);font-size:12px;margin-top:40px;padding-bottom:20px">
+  Corrected reference by Agent Tina · Open alongside Figma while applying fixes
+</footer>
+
+</div>
+</body>
+</html>
