@@ -4,39 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FeaturePing — Product Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #f7f8fc;
-    --ink: #141a26;
-    --muted: #5a6376;
-    --accent: #2563eb;
-    --accent-ink: #1d4fc4;
-    --accent-soft: #e3ecfe;
-    --line: #d9deea;
-    --card: #ffffff;
-    --good: #188a4c;
-    --display: "Avenir Next", "Avenir", "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, sans-serif;
-    --body: "Avenir Next", "Segoe UI", system-ui, -apple-system, sans-serif;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --paper: #faf9f6;
+    --surface: #ffffff;
+    --ink: #1a1b23;
+    --muted: #5f6270;
+    --line: #e8e6df;
+    --accent: #2148ff;
+    --accent-ink: #1734c9;
+    --accent-soft: #e9ecff;
+    --amber: #f5a623;
+    --amber-soft: #fdf0d6;
+    --good: #158a52;
+    --display: "Zodiak", Georgia, "Times New Roman", serif;
+    --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #0e1320; --ink: #eef1f8; --muted: #98a1b5;
-      --accent: #5c8cf5; --accent-ink: #85aaf8; --accent-soft: #1b2c55;
-      --line: #2a3350; --card: #161d30; --good: #3fbf7f;
-    }
-  }
-  :root[data-theme="light"] {
-    --paper: #f7f8fc; --ink: #141a26; --muted: #5a6376;
-    --accent: #2563eb; --accent-ink: #1d4fc4; --accent-soft: #e3ecfe;
-    --line: #d9deea; --card: #ffffff; --good: #188a4c;
-  }
-  :root[data-theme="dark"] {
-    --paper: #0e1320; --ink: #eef1f8; --muted: #98a1b5;
-    --accent: #5c8cf5; --accent-ink: #85aaf8; --accent-soft: #1b2c55;
-    --line: #2a3350; --card: #161d30; --good: #3fbf7f;
-  }
-
   * { box-sizing: border-box; margin: 0; }
   html, body { height: 100%; }
   body {
@@ -46,265 +33,216 @@
     font-size: 16px;
     line-height: 1.55;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
   button { font: inherit; cursor: pointer; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
-  /* ---------- deck chrome ---------- */
   #progress {
     position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-    background: var(--accent); z-index: 50;
-    transition: width .35s ease;
+    background: var(--accent); z-index: 50; transition: width .35s ease;
   }
   #deck { position: relative; height: 100dvh; }
   .slide {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
-    padding: clamp(20px, 5vw, 72px);
-    opacity: 0; visibility: hidden;
-    transform: translateY(14px);
+    padding: clamp(20px, 5vw, 76px);
+    opacity: 0; visibility: hidden; transform: translateY(14px);
     transition: opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
     overflow-y: auto;
   }
   .slide.active {
     opacity: 1; visibility: visible; transform: none;
-    transition: opacity .4s ease, transform .4s ease;
-    z-index: 1;
+    transition: opacity .4s ease, transform .4s ease; z-index: 1;
   }
-  .inner { width: min(1020px, 100%); margin: auto; }
+  .inner { width: min(1040px, 100%); margin: auto; }
 
   .eyebrow {
-    font-family: var(--mono);
-    font-size: .74rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: .74rem; font-weight: 600; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent-ink); margin-bottom: 20px;
   }
+  .ping {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--amber);
+    position: relative; flex: none;
+  }
+  .slide.active .ping::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: var(--amber); animation: ping 1.8s ease-out infinite;
+  }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: .7; }
+    70%,100% { transform: scale(3.2); opacity: 0; }
+  }
+
   h1, h2 {
-    font-family: var(--display);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.08;
-    text-wrap: balance;
+    font-family: var(--display); font-weight: 700;
+    letter-spacing: -0.015em; line-height: 1.04; text-wrap: balance;
   }
-  h1 { font-size: clamp(2.2rem, 5.6vw, 4.2rem); }
-  h2 { font-size: clamp(1.7rem, 3.8vw, 2.9rem); margin-bottom: 22px; }
-  .lede {
-    font-size: clamp(1.02rem, 1.6vw, 1.25rem);
-    color: var(--muted);
-    max-width: 34em;
-    margin-top: 20px;
-  }
-  .mono { font-family: var(--mono); font-size: .92em; }
+  h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
+  h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 22px; }
+  .lede { font-size: clamp(1.05rem, 1.7vw, 1.3rem); color: var(--muted); max-width: 34em; margin-top: 22px; }
+  .mono { font-family: var(--body); font-weight: 500; background: var(--accent-soft); color: var(--accent-ink); padding: 1px 7px; border-radius: 5px; font-size: .92em; }
 
-  /* the product's own highlight ring, used as the deck motif */
-  .ring { position: relative; white-space: nowrap; }
+  .ring { position: relative; white-space: nowrap; color: var(--accent); }
   .ring::after {
-    content: ""; position: absolute; inset: -6px -10px;
-    border: 3px solid var(--accent); border-radius: 6px;
-    opacity: 0; transform: scale(1.15);
+    content: ""; position: absolute; inset: -5px -12px;
+    border: 3px solid var(--amber); border-radius: 8px; opacity: 0; transform: scale(1.12);
   }
-  .slide.active .ring::after { animation: ringIn .6s ease .5s forwards; }
-  @keyframes ringIn {
-    from { opacity: 0; transform: scale(1.15); }
-    to   { opacity: 1; transform: scale(1); }
-  }
+  .slide.active .ring::after { animation: ringIn .6s cubic-bezier(.2,.8,.2,1) .5s forwards; }
+  @keyframes ringIn { to { opacity: 1; transform: scale(1); } }
 
-  /* ---------- cards & grids ---------- */
-  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
-  @media (max-width: 780px) { .grid3, .grid2 { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 22px;
-  }
-  .card h3 { font-family: var(--display); font-size: 1.06rem; margin-bottom: 8px; letter-spacing: -0.01em; }
+  @media (max-width: 800px) { .grid3, .grid2 { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 24px; }
+  .card h3 { font-family: var(--display); font-size: 1.15rem; margin-bottom: 8px; letter-spacing: -0.01em; }
   .card p { color: var(--muted); font-size: .95rem; }
 
-  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
-  @media (max-width: 780px) { .steps { grid-template-columns: 1fr 1fr; } }
-  .step { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
-  .step b { display: block; font-family: var(--display); margin: 10px 0 6px; }
-  .step p { color: var(--muted); font-size: .88rem; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 36px; }
+  @media (max-width: 800px) { .steps { grid-template-columns: 1fr 1fr; } }
+  .step { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
   .step .n {
     display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--accent-soft); color: var(--accent-ink);
-    font-family: var(--mono); font-size: .78rem;
+    width: 30px; height: 30px; border-radius: 9px;
+    background: var(--ink); color: #fff; font-family: var(--display); font-size: .95rem;
   }
+  .step b { display: block; font-family: var(--display); font-weight: 700; margin: 12px 0 6px; font-size: 1.02rem; }
+  .step p { color: var(--muted); font-size: .88rem; }
 
-  ul.plain { list-style: none; padding: 0; display: grid; gap: 10px; }
-  ul.plain li { padding-left: 26px; position: relative; font-size: .97rem; }
-  ul.plain li::before { position: absolute; left: 0; }
-  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
-  ul.dash li::before { content: "—"; color: var(--muted); }
+  ul.plain { list-style: none; padding: 0; display: grid; gap: 11px; }
+  ul.plain li { padding-left: 28px; position: relative; font-size: .97rem; }
+  ul.plain li::before { position: absolute; left: 0; top: -1px; font-weight: 700; }
+  ul.check li::before { content: "→"; color: var(--good); }
+  ul.dash li::before { content: "·"; color: var(--muted); font-size: 1.4em; top: -6px; }
   ul.plain li .why { color: var(--muted); }
 
-  table { width: 100%; border-collapse: collapse; margin-top: 26px; font-size: .95rem; }
+  table { width: 100%; border-collapse: collapse; margin-top: 28px; font-size: .96rem; }
   th {
-    text-align: left; font-family: var(--mono); font-size: .72rem;
-    text-transform: uppercase; letter-spacing: .12em; color: var(--muted);
-    padding: 0 14px 10px; border-bottom: 2px solid var(--line);
+    text-align: left; font-size: .72rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: .1em; color: var(--muted); padding: 0 16px 12px; border-bottom: 2px solid var(--line);
   }
-  td { padding: 13px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  td:first-child { font-weight: 600; }
+  td { padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { font-weight: 600; font-family: var(--display); }
   td:last-child { color: var(--muted); }
   .tablewrap { overflow-x: auto; }
 
-  /* ---------- persona tabs ---------- */
-  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+  .tabs { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 30px; }
   .tab {
-    border: 1px solid var(--line); background: var(--card); color: var(--ink);
-    border-radius: 999px; padding: 9px 18px; font-size: .92rem; font-weight: 600;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 999px; padding: 10px 20px; font-size: .92rem; font-weight: 500;
   }
-  .tab[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
   .panel { display: none; margin-top: 22px; }
   .panel.show { display: block; }
-  .panel .card { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; align-items: start; padding: 26px; }
-  @media (max-width: 780px) { .panel .card { grid-template-columns: 1fr; } }
-  .panel .pain b, .panel .gain b {
-    display: block; font-family: var(--mono); font-size: .7rem;
-    text-transform: uppercase; letter-spacing: .14em; margin-bottom: 8px;
+  .panel .card { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; padding: 28px; }
+  @media (max-width: 800px) { .panel .card { grid-template-columns: 1fr; } }
+  .panel b {
+    display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .13em; margin-bottom: 8px;
   }
   .panel .pain b { color: var(--muted); }
   .panel .gain b { color: var(--accent-ink); }
-  .panel p { font-size: 1rem; color: var(--ink); }
+  .panel p { font-size: 1.02rem; }
 
-  /* ---------- live demo ---------- */
   .mock {
-    position: relative; margin-top: 26px;
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    box-shadow: 0 12px 40px rgba(20, 26, 38, .10);
-    overflow: hidden;
+    position: relative; margin-top: 28px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(26,27,35,.08); overflow: hidden;
   }
   .mock-bar {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 16px; border-bottom: 1px solid var(--line);
-    font-family: var(--mono); font-size: .74rem; color: var(--muted);
+    display: flex; align-items: center; gap: 8px; padding: 12px 18px;
+    border-bottom: 1px solid var(--line); font-size: .78rem; color: var(--muted); font-weight: 500;
   }
   .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
-  .mock-body { padding: 22px; min-height: 300px; position: relative; }
-  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
-  .toolbar h3 { font-family: var(--display); font-size: 1.15rem; margin-right: auto; }
+  .mock-body { padding: 24px; min-height: 300px; position: relative; }
+  .toolbar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+  .toolbar h3 { font-family: var(--display); font-size: 1.3rem; margin-right: auto; }
   .btn {
-    border: 1px solid var(--line); background: var(--card); color: var(--ink);
-    border-radius: 8px; padding: 8px 14px; font-size: .86rem; font-weight: 600;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    border-radius: 9px; padding: 9px 15px; font-size: .86rem; font-weight: 500;
   }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .rows { display: grid; gap: 8px; }
+  .rows { display: grid; gap: 9px; }
   .row {
     display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px;
-    padding: 11px 14px; border: 1px solid var(--line); border-radius: 8px;
-    font-size: .88rem; color: var(--muted);
+    padding: 12px 15px; border: 1px solid var(--line); border-radius: 10px; font-size: .88rem; color: var(--muted);
   }
-  .row span:first-child { color: var(--ink); font-weight: 600; }
-  .pill {
-    justify-self: start; font-family: var(--mono); font-size: .7rem;
-    padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-ink);
-  }
+  .row span:first-child { color: var(--ink); font-weight: 500; }
+  .pill { justify-self: start; font-size: .72rem; font-weight: 500; padding: 2px 11px; border-radius: 999px; background: var(--amber-soft); color: #9a6a12; }
 
   #fp-launcher {
-    position: absolute; bottom: 18px; right: 18px;
-    border: none; border-radius: 999px; padding: 11px 20px;
-    background: var(--accent); color: #fff; font-weight: 700; font-size: .9rem;
-    box-shadow: 0 4px 14px rgba(37, 99, 235, .35);
+    position: absolute; bottom: 20px; right: 20px; border: none; border-radius: 999px;
+    padding: 12px 22px; background: var(--accent); color: #fff; font-weight: 600; font-size: .9rem;
+    box-shadow: 0 6px 18px rgba(33,72,255,.32); display: flex; align-items: center; gap: 9px;
   }
-  #fp-launcher .ping {
-    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
-    background: #fff; margin-right: 8px; animation: ping 1.6s ease-out infinite;
-  }
-  @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.7); } 70% { box-shadow: 0 0 0 9px rgba(255,255,255,0); } 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } }
+  #fp-launcher .pg { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
   #fp-card {
-    position: absolute; bottom: 66px; right: 18px; width: min(320px, 84%);
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(20, 26, 38, .18);
-    padding: 18px; display: none; z-index: 5; text-align: left;
+    position: absolute; bottom: 70px; right: 20px; width: min(330px, 84%); background: var(--surface);
+    border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 16px 40px rgba(26,27,35,.16);
+    padding: 20px; display: none; z-index: 5; text-align: left;
   }
   #fp-card.open { display: block; animation: cardIn .25s ease; }
   @keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  #fp-card h4 { font-family: var(--display); font-size: .98rem; margin-bottom: 4px; }
-  #fp-card .why { color: var(--muted); font-size: .85rem; margin-bottom: 10px; }
-  #fp-card .tip {
-    background: var(--accent-soft); color: var(--ink);
-    border-radius: 8px; padding: 8px 12px; font-size: .8rem; margin-bottom: 14px;
-  }
+  #fp-card h4 { font-family: var(--display); font-size: 1.05rem; margin-bottom: 4px; }
+  #fp-card .why { color: var(--muted); font-size: .86rem; margin-bottom: 10px; }
+  #fp-card .tip { background: var(--accent-soft); color: var(--accent-ink); border-radius: 9px; padding: 9px 13px; font-size: .8rem; margin-bottom: 14px; }
   #fp-card .actions { display: flex; gap: 8px; }
-  #fp-card .actions .btn { flex: 1; font-size: .8rem; padding: 8px 10px; }
-  .highlighted { outline: 3px solid var(--accent) !important; outline-offset: 4px; border-radius: 8px; }
-  #demo-reset { margin-top: 14px; background: none; border: none; color: var(--accent-ink); font-size: .85rem; text-decoration: underline; display: none; }
+  #fp-card .actions .btn { flex: 1; font-size: .8rem; }
+  #fp-card .actions .primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .highlighted { outline: 3px solid var(--accent) !important; outline-offset: 4px; border-radius: 10px; }
+  #demo-reset { margin-top: 16px; background: none; border: none; color: var(--accent-ink); font-size: .85rem; text-decoration: underline; display: none; font-weight: 500; }
   #demo-reset.show { display: inline-block; }
-  .demo-hint { margin-top: 14px; color: var(--muted); font-size: .88rem; }
-  .demo-hint .mono { color: var(--accent-ink); }
+  .demo-hint { margin-top: 16px; color: var(--muted); font-size: .88rem; }
 
-  /* ---------- gate / ask ---------- */
-  .gate {
-    margin-top: 30px; display: flex; gap: 18px; align-items: center;
-    background: var(--accent-soft); border-radius: 12px; padding: 20px 24px;
-  }
-  .gate .big { font-family: var(--display); font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+  .gate { margin-top: 32px; display: flex; gap: 20px; align-items: center; background: var(--amber-soft); border-radius: 16px; padding: 22px 26px; }
+  .gate .big { font-family: var(--display); font-size: clamp(1.9rem, 3.6vw, 2.6rem); font-weight: 700; color: #9a6a12; }
   .gate p { color: var(--ink); font-size: .95rem; max-width: 34em; }
-  .ask {
-    margin-top: 34px; font-family: var(--display); font-weight: 700;
-    font-size: clamp(1.3rem, 2.6vw, 1.9rem); letter-spacing: -0.01em; text-wrap: balance;
-  }
+  .ask { margin-top: 36px; font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 2.8vw, 2rem); letter-spacing: -0.01em; text-wrap: balance; }
+  .ask a { color: var(--accent); }
 
-  /* ---------- nav ---------- */
-  #nav {
-    position: fixed; bottom: 18px; right: 22px; z-index: 50;
-    display: flex; align-items: center; gap: 14px;
-  }
+  #nav { position: fixed; bottom: 20px; right: 24px; z-index: 50; display: flex; align-items: center; gap: 14px; }
   #dots { display: flex; gap: 7px; }
-  #dots button {
-    width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0;
-    background: var(--line);
-  }
-  #dots button.on { background: var(--accent); transform: scale(1.25); }
-  .arrow {
-    border: 1px solid var(--line); background: var(--card); color: var(--ink);
-    width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; line-height: 1;
-  }
-  #counter { font-family: var(--mono); font-size: .74rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-  .keyhint {
-    position: fixed; bottom: 22px; left: 24px; z-index: 50;
-    font-family: var(--mono); font-size: .72rem; color: var(--muted);
-  }
-  @media (max-width: 640px) { .keyhint { display: none; } }
+  #dots button { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: var(--line); }
+  #dots button.on { background: var(--accent); transform: scale(1.3); }
+  .arrow { border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: 40px; height: 40px; border-radius: 50%; font-size: 1rem; }
+  #counter { font-size: .74rem; color: var(--muted); font-weight: 500; }
+  .brandmark { position: fixed; top: 22px; left: 26px; z-index: 40; font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .brandmark span { color: var(--accent); }
+  .keyhint { position: fixed; bottom: 24px; left: 26px; z-index: 40; font-size: .72rem; color: var(--muted); }
+  @media (max-width: 680px) { .keyhint, .brandmark { display: none; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .slide, #progress, #fp-card, .ring::after { transition: none !important; animation: none !important; }
+    .slide, #progress, #fp-card, .ring::after, .ping::after { transition: none !important; animation: none !important; }
     .slide.active .ring::after { opacity: 1; transform: none; }
-    #fp-launcher .ping { animation: none; }
   }
 </style>
 </head>
 <body>
 
 <div id="progress"></div>
+<div class="brandmark">feature<span>ping</span></div>
 
 <main id="deck">
 
   <!-- 1 · title -->
   <section class="slide active" aria-label="Title">
     <div class="inner">
-      <p class="eyebrow">FeaturePing · Product story</p>
+      <p class="eyebrow"><span class="ping"></span>Product story</p>
       <h1>You shipped it.<br>Did anyone <span class="ring">notice?</span></h1>
-      <p class="lede">FeaturePing turns every release into in-product education — explain what changed, show exactly where it lives.</p>
+      <p class="lede">FeaturePing turns every release into in-product education — explain what changed, and show people exactly where it lives.</p>
     </div>
   </section>
 
   <!-- 2 · pain -->
   <section class="slide" aria-label="The pain">
     <div class="inner">
-      <p class="eyebrow">The pain</p>
-      <h2>One monthly release. Seven modules. Users who never read the forum post.</h2>
-      <p class="lede">SuperOps ships across RMM, PSA, patching, MDM, service desk, and billing. The release lands — the education doesn't.</p>
+      <p class="eyebrow"><span class="ping"></span>The pain</p>
+      <h2>You ship every week. Your users find out… eventually.</h2>
+      <p class="lede">A growing product ships across billing, reports, dashboards, settings, and mobile. The release lands — the education doesn't.</p>
       <div class="grid3">
-        <div class="card"><h3>Release notes live outside the product</h3><p>Forum posts and emails can say what changed. They can't meet the user inside the workflow.</p></div>
-        <div class="card"><h3>Every role gets every announcement</h3><p>A billing admin doesn't care about Apple MDM. A technician never reads patch notes. Noise trains people to ignore all of it.</p></div>
-        <div class="card"><h3>Support answers the same question</h3><p>"Where is this? How do I enable it? Is it on my plan?" — repeated after every single release.</p></div>
+        <div class="card"><h3>Changelogs live outside the product</h3><p>A forum post or email can say what changed. It can't meet the user inside the workflow where the change actually is.</p></div>
+        <div class="card"><h3>Every role gets every announcement</h3><p>A billing admin doesn't care about a mobile tweak. Noise trains people to ignore all of it, including the updates that matter to them.</p></div>
+        <div class="card"><h3>Support answers the same question</h3><p>"Where is this? How do I turn it on? Is it on my plan?" — repeated after every single release.</p></div>
       </div>
     </div>
   </section>
@@ -312,25 +250,25 @@
   <!-- 3 · what it is -->
   <section class="slide" aria-label="What FeaturePing does">
     <div class="inner">
-      <p class="eyebrow">What FeaturePing does</p>
+      <p class="eyebrow"><span class="ping"></span>What FeaturePing does</p>
       <h2>Release note in. In-product explainer out.</h2>
       <div class="steps">
-        <div class="step"><span class="n">1</span><b>Paste the release note</b><p>Raw engineering or PM notes — whatever you have.</p></div>
-        <div class="step"><span class="n">2</span><b>AI drafts the user copy</b><p>Announcement, why it matters, tooltip, help snippet. Always editable, never auto-published.</p></div>
-        <div class="step"><span class="n">3</span><b>Target the exact spot</b><p>Page + element, e.g. <span class="mono">button[data-action='bulk-export']</span>. Verified before publish.</p></div>
-        <div class="step"><span class="n">4</span><b>User clicks “Show me”</b><p>The widget navigates to the feature and highlights it — even across pages.</p></div>
+        <div class="step"><span class="n">1</span><b>Paste the release note</b><p>Raw engineering or PM notes — whatever you already have.</p></div>
+        <div class="step"><span class="n">2</span><b>AI drafts the user copy</b><p>Announcement, why it matters, tooltip, help text. Always editable, never auto-published.</p></div>
+        <div class="step"><span class="n">3</span><b>Point at the feature</b><p>A page and an element, e.g. <span class="mono">button[data-action='export']</span>. Verified before publish.</p></div>
+        <div class="step"><span class="n">4</span><b>User clicks "Show me"</b><p>The widget walks them to the feature and highlights it — across pages if needed.</p></div>
       </div>
-      <p class="lede" style="margin-top:26px">A human approves every update before it reaches users.</p>
+      <p class="lede" style="margin-top:28px">A human approves every update before a single user sees it.</p>
     </div>
   </section>
 
   <!-- 4 · live demo -->
   <section class="slide" aria-label="Live demo">
     <div class="inner">
-      <p class="eyebrow">Live demo — this deck runs the real flow</p>
-      <h2>Try it. Click <span style="color:var(--accent-ink)">What's New</span>, then <span style="color:var(--accent-ink)">Show me</span>.</h2>
+      <p class="eyebrow"><span class="ping"></span>Live — this slide runs the real flow</p>
+      <h2>Try it. Click <span style="color:var(--accent)">What's New</span>, then <span style="color:var(--accent)">Show me</span>.</h2>
       <div class="mock">
-        <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;app.superops.com/invoices</div>
+        <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;app.yourproduct.com/invoices</div>
         <div class="mock-body">
           <div class="toolbar">
             <h3>Invoices</h3>
@@ -339,16 +277,15 @@
             <button class="btn primary" id="bulk-export" type="button">Bulk Export</button>
           </div>
           <div class="rows">
-            <div class="row"><span>Acme MSP — June services</span><span>$4,820</span><span class="pill">due</span></div>
-            <div class="row"><span>Northwind IT — patching retainer</span><span>$2,150</span><span class="pill">paid</span></div>
-            <div class="row"><span>Globex — endpoint licenses</span><span>$7,300</span><span class="pill">due</span></div>
+            <div class="row"><span>Acme Corp — June services</span><span>$4,820</span><span class="pill">due</span></div>
+            <div class="row"><span>Globex Inc — retainer</span><span>$2,150</span><span class="pill">paid</span></div>
+            <div class="row"><span>Initech — licenses</span><span>$7,300</span><span class="pill">due</span></div>
           </div>
-
-          <button id="fp-launcher" type="button"><span class="ping"></span>What's New</button>
+          <button id="fp-launcher" type="button"><span class="pg"></span>What's New</button>
           <div id="fp-card" role="dialog" aria-label="What's new">
             <h4>Bulk export invoices in one click.</h4>
-            <p class="why">Billing admins finish month-end reporting faster.</p>
-            <p class="tip">💡 Select invoices, then click Bulk Export.</p>
+            <p class="why">Finish month-end reporting faster — no more one-by-one downloads.</p>
+            <p class="tip">Select invoices, then click Bulk Export.</p>
             <div class="actions">
               <button class="btn primary" id="fp-show-me" type="button">Show me</button>
               <button class="btn" id="fp-dismiss" type="button">Dismiss</button>
@@ -357,91 +294,79 @@
         </div>
       </div>
       <button id="demo-reset" type="button">Reset demo</button>
-      <p class="demo-hint">This is the actual widget behavior — dismiss persistence, cross-page navigation, and element highlighting are already built and tested.</p>
+      <p class="demo-hint">This is the actual widget behavior — dismiss persistence, cross-page navigation, and element highlighting are built and tested.</p>
     </div>
   </section>
 
   <!-- 5 · personas -->
   <section class="slide" aria-label="Who it serves">
     <div class="inner">
-      <p class="eyebrow">Who it serves</p>
-      <h2>Same release. Different job for each of us.</h2>
-      <div class="tabs" role="tablist" aria-label="Personas">
+      <p class="eyebrow"><span class="ping"></span>Who it serves</p>
+      <h2>Same release. A different job for each of us.</h2>
+      <div class="tabs" role="tablist" aria-label="Roles">
         <button class="tab" role="tab" aria-selected="true" data-panel="p-pm" type="button">Product</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="p-mkt" type="button">Marketing</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="p-cs" type="button">Support &amp; CS</button>
         <button class="tab" role="tab" aria-selected="false" data-panel="p-emp" type="button">Every employee</button>
       </div>
       <div class="panel show" id="p-pm" role="tabpanel">
-        <div class="card">
-          <div class="pain"><b>Today</b><p>We ship features that users never find. Adoption is a guess.</p></div>
-          <div class="gain"><b>With FeaturePing</b><p>Role-targeted announcements land inside the workflow, and Show-me clicks tell you which releases actually got tried.</p></div>
-        </div>
+        <div class="card"><div class="pain"><b>Today</b><p>We ship features users never find. Adoption is a guess.</p></div><div class="gain"><b>With FeaturePing</b><p>Role-targeted announcements land inside the workflow, and Show-me clicks tell you which releases actually got tried.</p></div></div>
       </div>
       <div class="panel" id="p-mkt" role="tabpanel">
-        <div class="card">
-          <div class="pain"><b>Today</b><p>Every launch means rewriting the same story for changelog, email, and in-app banner.</p></div>
-          <div class="gain"><b>With FeaturePing</b><p>One release note becomes announcement, help text, changelog, and email variants — consistent copy, one source.</p></div>
-        </div>
+        <div class="card"><div class="pain"><b>Today</b><p>Every launch means rewriting the same story for changelog, email, and in-app banner.</p></div><div class="gain"><b>With FeaturePing</b><p>One release note becomes announcement, help text, and email variants — consistent copy, one source.</p></div></div>
       </div>
       <div class="panel" id="p-cs" role="tabpanel">
-        <div class="card">
-          <div class="pain"><b>Today</b><p>After every release, the same "where is this?" tickets — answered one at a time.</p></div>
-          <div class="gain"><b>With FeaturePing</b><p>Answer once. The update package works in-product, in docs, and in support macros. Show-me deflects the ticket before it exists.</p></div>
-        </div>
+        <div class="card"><div class="pain"><b>Today</b><p>After every release, the same "where is this?" tickets — answered one at a time.</p></div><div class="gain"><b>With FeaturePing</b><p>Answer once. The update works in-product, in docs, and in support macros. Show-me deflects the ticket before it's filed.</p></div></div>
       </div>
       <div class="panel" id="p-emp" role="tabpanel">
-        <div class="card">
-          <div class="pain"><b>Today</b><p>The tool changed under you. You find out from a confused customer — or never.</p></div>
-          <div class="gain"><b>With FeaturePing</b><p>A 20-second explainer, only for changes in modules you use, exactly where you use them. Dismiss it and it stays gone.</p></div>
-        </div>
+        <div class="card"><div class="pain"><b>Today</b><p>The tool changed under you. You find out from a confused customer — or never.</p></div><div class="gain"><b>With FeaturePing</b><p>A 20-second explainer, only for changes in the areas you use, right where you use them. Dismiss it and it stays gone.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- 6 · superops example -->
-  <section class="slide" aria-label="SuperOps example">
+  <!-- 6 · example -->
+  <section class="slide" aria-label="One release, split by role">
     <div class="inner">
-      <p class="eyebrow">A real SuperOps release, split by role</p>
-      <h2>One release note becomes four targeted cards.</h2>
+      <p class="eyebrow"><span class="ping"></span>One release, split by role</p>
+      <h2>A single release note becomes four targeted cards.</h2>
       <div class="tablewrap">
         <table>
-          <thead><tr><th>Shipped in June</th><th>Who cares</th><th>Where the card lands</th></tr></thead>
+          <thead><tr><th>Shipped this month</th><th>Who cares</th><th>Where the card lands</th></tr></thead>
           <tbody>
-            <tr><td>Apple MDM custom payloads</td><td>Endpoint admin</td><td>MDM policy builder</td></tr>
-            <tr><td>Windows patch categories</td><td>Patch admin</td><td>Approval matrix &amp; filters</td></tr>
-            <tr><td>Hidden ticket conversations</td><td>Technician</td><td>Ticket thread controls</td></tr>
-            <tr><td>Dashboard chart persistence</td><td>Ops manager</td><td>Dashboard editor</td></tr>
+            <tr><td>Bulk invoice export</td><td>Billing admin</td><td>Invoices toolbar</td></tr>
+            <tr><td>Scheduled report emails</td><td>Ops manager</td><td>Reports tab</td></tr>
+            <tr><td>Saved dashboard filters</td><td>Analyst</td><td>Dashboard editor</td></tr>
+            <tr><td>Mobile approvals</td><td>Team manager</td><td>Approvals screen</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="lede" style="margin-top:24px">The patch admin never sees the MDM card. The technician never sees the dashboard one. Signal, not noise.</p>
+      <p class="lede" style="margin-top:26px">The billing admin never sees the mobile card. The analyst never sees the invoicing one. Signal, not noise.</p>
     </div>
   </section>
 
   <!-- 7 · status -->
   <section class="slide" aria-label="Where it stands">
     <div class="inner">
-      <p class="eyebrow">Where it stands</p>
-      <h2>Working prototype. Built, tested, honest about the gaps.</h2>
+      <p class="eyebrow"><span class="ping"></span>Where it stands</p>
+      <h2>A working product. Built, tested, honest about the edges.</h2>
       <div class="grid2">
         <div class="card">
           <h3 style="color:var(--good)">Works today</h3>
           <ul class="plain check">
             <li>Framework-agnostic widget — one script tag, any stack</li>
-            <li>“Show me” highlight, including cross-page navigation</li>
-            <li>Admin composer with preview &amp; target verification</li>
-            <li>Schema-validated update contract + exports</li>
-            <li>API prototype, unit tests across the whole flow</li>
+            <li>"Show me" highlight, including cross-page navigation</li>
+            <li>Admin composer with AI copy draft, preview &amp; target check</li>
+            <li>Publish → live feed → view / dismiss / show-me counters</li>
+            <li>Branding (color, icon, label, placement) + 42 passing tests</li>
           </ul>
         </div>
         <div class="card">
-          <h3 style="color:var(--muted)">Deliberately not yet</h3>
+          <h3 style="color:var(--muted)">Not yet</h3>
           <ul class="plain dash">
-            <li>Auth &amp; multi-tenancy <span class="why">— pilot first</span></li>
-            <li>Database <span class="why">— JSON files until CRUD matters</span></li>
-            <li>Live AI provider <span class="why">— prompt contract ready, adapter pending</span></li>
-            <li>Analytics <span class="why">— counters designed, not collected</span></li>
+            <li>Hosted deployment <span class="why">— runs locally today</span></li>
+            <li>Accounts &amp; multi-tenant billing <span class="why">— pilot first</span></li>
+            <li>Automatic release ingestion <span class="why">— agent roadmap</span></li>
+            <li>A real pilot's numbers <span class="why">— the next milestone</span></li>
           </ul>
         </div>
       </div>
@@ -449,20 +374,16 @@
   </section>
 
   <!-- 8 · ask -->
-  <section class="slide" aria-label="The ask">
+  <section class="slide" aria-label="Try it">
     <div class="inner">
-      <p class="eyebrow">Next step</p>
-      <h2>Pilot it internally before deciding anything bigger.</h2>
-      <div class="steps" style="grid-template-columns: repeat(3, 1fr);">
-        <div class="step"><span class="n">1</span><b>Wire it up</b><p>Real storage, publish-from-composer, live AI copy drafts.</p></div>
-        <div class="step"><span class="n">2</span><b>Instrument it</b><p>Views, dismissals, Show-me clicks per update.</p></div>
-        <div class="step"><span class="n">3</span><b>Run one cycle</b><p>One module, one release cycle, real users.</p></div>
-      </div>
+      <p class="eyebrow"><span class="ping"></span>Your turn</p>
+      <h2>Kick the tires in 30 seconds.</h2>
+      <p class="lede">The live demo runs the real widget inside a sample app — open the feed, hit Show me, recolor it, break it. No signup, nothing to install.</p>
       <div class="gate">
         <span class="big">30%</span>
-        <p>Show-me click rate is the decision gate. Above it, we invest further. Below it, we keep a useful internal release-education tool.</p>
+        <p>A 30% Show-me click rate is the bar that says this is worth building further. That's the number a first pilot exists to find.</p>
       </div>
-      <p class="ask">The ask: one module, one release cycle. <span class="ring">Let's ping it.</span></p>
+      <p class="ask">So: would you put this in your product? <a href="./featureping-demo.html">Try the demo →</a></p>
     </div>
   </section>
 
@@ -506,13 +427,11 @@
 
   document.getElementById('next').addEventListener('click', function () { go(current + 1); });
   document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
-
   document.addEventListener('keydown', function (e) {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
     else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
-    else if (e.key === 'Home') { go(0); }
-    else if (e.key === 'End') { go(slides.length - 1); }
+    else if (e.key === 'Home') { go(0); } else if (e.key === 'End') { go(slides.length - 1); }
   });
 
   var touchX = null;
@@ -527,7 +446,6 @@
   var hash = parseInt(location.hash.slice(1), 10);
   if (hash >= 1 && hash <= slides.length) { go(hash - 1); } else { go(0); }
 
-  /* ---- persona tabs ---- */
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
   tabs.forEach(function (t) {
     t.addEventListener('click', function () {
@@ -539,33 +457,22 @@
     });
   });
 
-  /* ---- live widget demo (mirrors src/widget behavior) ---- */
   var launcher = document.getElementById('fp-launcher');
   var card = document.getElementById('fp-card');
-  var showMe = document.getElementById('fp-show-me');
-  var dismiss = document.getElementById('fp-dismiss');
   var target = document.getElementById('bulk-export');
   var reset = document.getElementById('demo-reset');
-
   launcher.addEventListener('click', function () { card.classList.toggle('open'); });
-
-  showMe.addEventListener('click', function () {
+  document.getElementById('fp-show-me').addEventListener('click', function () {
     card.classList.remove('open');
     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     target.classList.add('highlighted');
     setTimeout(function () { target.classList.remove('highlighted'); }, 3000);
   });
-
-  dismiss.addEventListener('click', function () {
-    card.classList.remove('open');
-    launcher.style.display = 'none';
-    reset.classList.add('show');
+  document.getElementById('fp-dismiss').addEventListener('click', function () {
+    card.classList.remove('open'); launcher.style.display = 'none'; reset.classList.add('show');
   });
-
   reset.addEventListener('click', function () {
-    launcher.style.display = '';
-    reset.classList.remove('show');
-    target.classList.remove('highlighted');
+    launcher.style.display = ''; reset.classList.remove('show'); target.classList.remove('highlighted');
   });
 })();
 </script>
