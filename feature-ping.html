@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FeaturePing — Live Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #2148ff; --accent-ink: #1734c9; --accent-soft: #e9ecff;
+    --amber: #f5a623; --amber-soft: #fdf0d6;
+    --ink: #1a1b23; --muted: #5f6270; --line: #e8e6df; --paper: #faf9f6; --card: #ffffff;
+    --display: "Zodiak", Georgia, "Times New Roman", serif;
+    --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: var(--body);
+    background: var(--paper); color: var(--ink); line-height: 1.55; font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent-ink); }
+  h1, h2, h3 { font-family: var(--display); letter-spacing: -0.01em; }
+
+  /* ---- explainer band (light) ---- */
+  .hero { background: var(--card); border-bottom: 1px solid var(--line); padding: 40px clamp(16px, 5vw, 56px); }
+  .hero .tag {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: .74rem; font-weight: 600; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--accent-ink); margin-bottom: 16px;
+  }
+  .hero .tag .pg {
+    width: 9px; height: 9px; border-radius: 50%; background: var(--amber); position: relative; flex: none;
+  }
+  .hero .tag .pg::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--amber);
+    animation: pgpulse 1.8s ease-out infinite;
+  }
+  @keyframes pgpulse { 0% { transform: scale(1); opacity: .7; } 70%,100% { transform: scale(3); opacity: 0; } }
+  .hero h1 { font-size: clamp(1.9rem, 4.4vw, 3rem); font-weight: 700; line-height: 1.05; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { color: var(--muted); max-width: 46em; margin-top: 12px; font-size: 1.02rem; }
+  .hero .steps { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; font-size: .85rem; }
+  .hero .steps span { background: var(--accent-soft); color: var(--accent-ink); border-radius: 999px; padding: 6px 15px; font-weight: 500; }
+
+  /* ---- mock product ---- */
+  .stage { padding: clamp(16px, 4vw, 40px); max-width: 1080px; margin: 0 auto; }
+  .app {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    box-shadow: 0 18px 48px rgba(26,27,35,.08); overflow: hidden; position: relative;
+  }
+  .app-nav {
+    display: flex; align-items: center; gap: 20px; padding: 12px 22px;
+    border-bottom: 1px solid var(--line); font-size: .9rem;
+  }
+  .app-nav .brand { font-weight: 700; margin-right: 8px; }
+  .app-nav .brand em { color: var(--accent); font-style: normal; }
+  .app-nav a { color: var(--muted); text-decoration: none; padding: 4px 2px; }
+  .app-nav a.active { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--accent); }
+  .app-nav input {
+    margin-left: auto; border: 1px solid var(--line); border-radius: 8px;
+    padding: 7px 12px; font-size: .85rem; width: 180px;
+  }
+  .app-body { padding: 22px; min-height: 380px; }
+  .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 18px; }
+  .toolbar h2 { font-size: 1.2rem; margin-right: auto; }
+  .btn {
+    border: 1px solid var(--line); background: #fff; color: var(--ink); font-family: var(--body);
+    border-radius: 9px; padding: 9px 15px; font-size: .86rem; font-weight: 500; cursor: pointer;
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th { text-align: left; color: var(--muted); font-size: .72rem; text-transform: uppercase;
+       letter-spacing: .1em; padding: 0 12px 10px; border-bottom: 2px solid var(--line); }
+  td { padding: 12px; border-bottom: 1px solid var(--line); }
+  .pill { font-size: .72rem; font-weight: 500; padding: 2px 11px; border-radius: 999px; background: var(--amber-soft); color: #9a6a12; }
+
+  /* ---- try it / controls ---- */
+  .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+  @media (max-width: 760px) { .panel-grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; }
+  .panel h3 { font-size: 1rem; margin-bottom: 6px; }
+  .panel p { color: var(--muted); font-size: .86rem; margin-bottom: 12px; }
+  .panel label { display: block; font-size: .74rem; font-weight: 700; text-transform: uppercase;
+                 letter-spacing: .08em; color: var(--muted); margin: 10px 0 4px; }
+  .panel input {
+    width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: .88rem;
+  }
+  .panel input.mono { font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
+  .panel .row { display: flex; gap: 8px; margin-top: 14px; }
+  .hint { font-size: .8rem; color: var(--muted); margin-top: 10px; }
+  .hint code { background: var(--accent-soft); padding: 1px 6px; border-radius: 4px;
+               font-size: .75rem; color: var(--accent-ink); }
+
+  footer { text-align: center; color: var(--muted); font-size: .8rem; padding: 24px 16px 40px; }
+  .brandmark { font-family: var(--display); font-weight: 700; }
+  .brandmark em { font-style: normal; color: var(--accent); }
+
+  /* widget host — positioning is handled by the widget's branding.placement */
+  .brand-row { display: grid; grid-template-columns: 64px 1fr 1fr 1fr; gap: 8px; align-items: end; }
+  .brand-row .cell label { margin-top: 0; }
+  .panel select {
+    width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px;
+    font-size: .85rem; background: #fff;
+  }
+  .panel input[type="color"] {
+    width: 100%; height: 38px; padding: 3px; border: 1px solid var(--line);
+    border-radius: 8px; background: #fff; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tag"><span class="pg"></span>Live demo · the widget below is the real product</div>
+  <h1>You shipped it. Did anyone <em>notice?</em></h1>
+  <p>FeaturePing announces product updates <strong>inside</strong> your app and walks users to the exact
+     feature with a "Show me" highlight. Everything on this page is a sample app — except the
+     What's New widget in the corner, which is the actual 2.4&nbsp;kB embeddable bundle.</p>
+  <div class="steps">
+    <span>1 · Click <strong>What's New</strong> (bottom-right)</span>
+    <span>2 · Hit <strong>Show me</strong> on any update</span>
+    <span>3 · Watch it walk you to the feature</span>
+  </div>
+</div>
+
+<div class="stage">
+  <div class="app">
+    <nav class="app-nav">
+      <span class="brand brandmark">nova<em>tick</em></span>
+      <a href="#" class="active">Invoices</a>
+      <a href="#" data-nav="reports">Reports</a>
+      <a href="#">Customers</a>
+      <a href="#">Settings</a>
+      <input data-role="search" type="search" placeholder="Search…">
+    </nav>
+    <div class="app-body">
+      <div class="toolbar">
+        <h2>Invoices</h2>
+        <button class="btn" type="button">Filter</button>
+        <button class="btn" type="button">Export</button>
+        <button class="btn primary" data-action="bulk-export" type="button">Bulk Export</button>
+      </div>
+      <table>
+        <thead><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>INV-001</td><td>Acme Corp</td><td>$1,200.00</td><td>2026-07-01</td><td><span class="pill">Paid</span></td></tr>
+          <tr><td>INV-002</td><td>Globex Inc</td><td>$3,450.00</td><td>2026-07-02</td><td><span class="pill">Pending</span></td></tr>
+          <tr><td>INV-003</td><td>Initech</td><td>$890.00</td><td>2026-07-03</td><td><span class="pill">Overdue</span></td></tr>
+          <tr><td>INV-004</td><td>Umbrella Co</td><td>$2,100.00</td><td>2026-07-04</td><td><span class="pill">Paid</span></td></tr>
+          <tr><td>INV-005</td><td>Stark Industries</td><td>$5,600.00</td><td>2026-07-05</td><td><span class="pill">Pending</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel-grid">
+    <div class="panel">
+      <h3>Try composing your own update</h3>
+      <p>This is what the admin composer does — write an announcement, point it at any element on the page, and it appears in the widget instantly.</p>
+      <label for="try-text">Announcement</label>
+      <input id="try-text" value="Search just got 3x faster.">
+      <label for="try-selector">Target selector (the element “Show me” highlights)</label>
+      <input id="try-selector" class="mono" value="input[data-role='search']">
+      <div class="row">
+        <button class="btn primary" id="try-add" type="button">Add to widget</button>
+        <button class="btn" id="demo-reset" type="button">Reset demo</button>
+      </div>
+      <p class="hint">Other addresses to try: <code>button[data-action='bulk-export']</code>,
+        <code>a[data-nav='reports']</code>, <code>.brand</code></p>
+
+      <h3 style="margin-top:18px">Make it yours</h3>
+      <p>The widget takes a branding config — color, icon, launcher text, placement. Change anything; it applies instantly.</p>
+      <div class="brand-row">
+        <div class="cell">
+          <label for="brand-color">Color</label>
+          <input id="brand-color" type="color" value="#2148ff">
+        </div>
+        <div class="cell">
+          <label for="brand-icon">Icon</label>
+          <input id="brand-icon" value="✨" maxlength="4">
+        </div>
+        <div class="cell">
+          <label for="brand-label">Launcher text</label>
+          <input id="brand-label" value="What's New">
+        </div>
+        <div class="cell">
+          <label for="brand-placement">Placement</label>
+          <select id="brand-placement">
+            <option value="bottom-right" selected>Bottom right</option>
+            <option value="bottom-left">Bottom left</option>
+            <option value="top-right">Top right</option>
+            <option value="top-left">Top left</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>What you're looking at</h3>
+      <p>The widget is framework-agnostic vanilla JS — it works in React, Vue, Angular, Rails, Django, or plain HTML, because it only touches what every stack produces: the DOM.</p>
+      <p>In the full product, an admin pastes a raw release note, AI drafts the user-facing copy, the admin verifies the target and publishes — and the update reaches only the users whose plan/role match. Views, dismissals, and “Show me” clicks are counted so you know which releases actually landed.</p>
+      <p style="margin-bottom:0"><strong>Feedback wanted:</strong> would you embed this in your product? What's missing?</p>
+    </div>
+  </div>
+</div>
+
+<footer>FeaturePing · MIT licensed · dismissals persist in your browser's localStorage — “Reset demo” brings everything back</footer>
+
+<div id="fp-root"></div>
+
+<script>var FeaturePing=(function(c){"use strict";function S(e){return localStorage.getItem(`fp_dismiss_${e}`)==="1"}function $(e){localStorage.setItem(`fp_dismiss_${e}`,"1")}const x="#2563eb";function f(e,t,o,r=x){const n=document.querySelector(e);if(!n){o?window.location.href=o:C("Target element not found on this page.");return}n.scrollIntoView({behavior:"smooth",block:"center"});const s=n.style.outline,a=n.style.outlineOffset,p=n.style.transition;n.style.transition="outline 0.15s ease-in-out",n.style.outline=`3px solid ${r}`,n.style.outlineOffset="4px",setTimeout(()=>{n.style.outline=s,n.style.outlineOffset=a,n.style.transition=p},t)}function T(e,t=x){if(!e.target_url){f(e.target_selector??"",3e3,void 0,t);return}if(e.target_url===window.location.pathname){f(e.target_selector??"",3e3,void 0,t);return}sessionStorage.setItem("fp_highlight",JSON.stringify({selector:e.target_selector,duration:8e3,color:t})),window.location.href=e.target_url}function E(){const e=sessionStorage.getItem("fp_highlight");if(!e)return!1;sessionStorage.removeItem("fp_highlight");try{const t=JSON.parse(e);if(t.selector)return f(t.selector,t.duration??3e3,void 0,t.color),!0}catch{}return!1}function C(e){const t=document.querySelector(".fp-toast");t&&t.remove();const o=document.createElement("div");o.className="fp-toast",o.textContent=e,document.body.appendChild(o),setTimeout(()=>{o.style.opacity="0",setTimeout(()=>o.remove(),300)},3e3)}function b(e,t,o){if(e)try{fetch(`${e}/events`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({update_id:t,type:o}),keepalive:!0}).catch(()=>{})}catch{}}function O(e){return{color:e?.color||x,textColor:e?.textColor||"#fff",icon:e?.icon??"✨",label:e?.label||"What's New",placement:e?.placement}}const A={"bottom-right":{position:"fixed",bottom:"22px",right:"22px",top:"auto",left:"auto"},"bottom-left":{position:"fixed",bottom:"22px",left:"22px",top:"auto",right:"auto"},"top-right":{position:"fixed",top:"22px",right:"22px",bottom:"auto",left:"auto"},"top-left":{position:"fixed",top:"22px",left:"22px",bottom:"auto",right:"auto"}};function I(e){return[...e].sort((t,o)=>String(o.published_at??o.created_at??"").localeCompare(String(t.published_at??t.created_at??"")))}function k(e,t,o){let r=I(t.filter(i=>!S(i.id)));if(r.length===0)return{destroy:()=>{}};const n=O(o?.branding);n.placement&&Object.assign(e.style,A[n.placement],{zIndex:"9999"});const s=document.createElement("button");s.id="fp-launcher",Object.assign(s.style,{padding:"10px 18px",border:"none",borderRadius:"8px",background:n.color,color:n.textColor,fontSize:"0.875rem",fontWeight:"600",cursor:"pointer",boxShadow:"0 2px 8px rgba(0,0,0,0.15)"});let a=null;function p(){const i=n.icon?`${n.icon} `:"";s.textContent=`${i}${n.label}${r.length>1?` (${r.length})`:""}`}p();function N(i){const l=document.createElement("div");l.className="fp-item",l.setAttribute("data-fp-update",i.id),Object.assign(l.style,{padding:"16px 0",borderBottom:"1px solid #eee"}),l.innerHTML=`
+      <h3 style="margin:0 0 4px;font-size:1rem;">${u(i.copy.announcement)}</h3>
+      <p style="margin:0 0 8px;color:#666;">${u(i.copy.why_it_matters)}</p>
+      <p style="margin:0 0 12px;background:#f0f7ff;padding:8px 12px;border-radius:6px;font-size:0.8rem;">
+        💡 ${u(i.copy.tooltip)}
+      </p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button data-fp-action="show-me" style="
+          flex:1;padding:8px 12px;border:none;border-radius:6px;
+          background:${d(n.color)};color:${d(n.textColor)};font-weight:600;cursor:pointer;font-size:0.8rem;
+        ">Show me</button>
+        ${i.read_more_url?`<a data-fp-action="read-more" href="${d(i.read_more_url)}" target="_blank" rel="noopener noreferrer" style="
+          flex:1;text-align:center;padding:8px 12px;border:1px solid ${d(n.color)};border-radius:6px;
+          background:#fff;color:${d(n.color)};font-weight:600;cursor:pointer;font-size:0.8rem;text-decoration:none;
+        ">Read more</a>`:""}
+        <button data-fp-action="dismiss" style="
+          padding:8px 12px;border:1px solid #ddd;border-radius:6px;
+          background:#fff;cursor:pointer;font-size:0.8rem;
+        ">Dismiss</button>
+      </div>
+    `;const g=l.querySelector('[data-fp-action="show-me"]'),h=l.querySelector('[data-fp-action="dismiss"]');return g.addEventListener("click",()=>{b(o?.apiBase,i.id,"show_me_click"),new URLSearchParams(window.location.search).has("featurepingDemo")||!i.target_url||i.target_url===window.location.pathname?f(i.target_selector??"",3e3,i.target_url,n.color):T(i,n.color),m()}),h.addEventListener("click",()=>{$(i.id),b(o?.apiBase,i.id,"dismiss"),r=r.filter(v=>v.id!==i.id),l.remove(),r.length===0?(m(),s.parentNode&&s.parentNode.removeChild(s)):p()}),l}function R(){if(a)return;a=document.createElement("div"),a.id="fp-card";const i=n.placement?.startsWith("top"),l=n.placement?.endsWith("left");Object.assign(a.style,{position:"absolute",[i?"top":"bottom"]:"52px",[l?"left":"right"]:"0",width:"320px",maxHeight:"420px",overflowY:"auto",background:"#fff",borderRadius:"10px",boxShadow:"0 4px 20px rgba(0,0,0,0.15)",padding:"4px 20px",fontSize:"0.875rem",lineHeight:"1.5",color:"#1a1a1a"});for(const h of r)a.appendChild(N(h)),b(o?.apiBase,h.id,"view");const g=a.lastElementChild;g&&(g.style.borderBottom="none"),e.appendChild(a)}function m(){a&&(a.remove(),a=null)}return s.addEventListener("click",()=>{a?m():R()}),e.appendChild(s),{destroy(){m(),s.parentNode&&s.parentNode.removeChild(s)}}}function u(e){const t=document.createElement("div");return t.textContent=e,t.innerHTML}function d(e){return u(e).replace(/"/g,"&quot;")}function y(e,t){const o=e.audience?.plans??[],r=e.audience?.roles??[];return o.length===0&&r.length===0?!0:!(o.length>0&&(!t?.plan||!o.includes(t.plan))||r.length>0&&(!t?.role||!r.includes(t.role)))}function w(e,t){return e.filter(o=>y(o,t))}function _(e,t,o){E();const r=Array.isArray(t)?t:[t];return k(e,w(r,o?.user),o)}async function L(e,t,o){try{const r=await fetch(`${o.apiBase}/products/${t}/updates`);if(!r.ok)throw new Error(`API returned ${r.status}`);const n=await r.json();return _(e,n.updates??[],o)}catch{return{destroy:()=>{}}}}return c.filterByAudience=w,c.initWidget=_,c.initWidgetFromApi=L,c.matchesAudience=y,Object.defineProperty(c,Symbol.toStringTag,{value:"Module"}),c})({});
+</script>
+<script>
+(function () {
+  // Demo updates. target_url is '' so "Show me" highlights on this page
+  // instead of navigating (the widget treats a missing URL as same-page).
+  var updates = [
+    {
+      id: 'upd_demo_bulk_export',
+      product_id: 'prod_demo',
+      title: 'Bulk invoice export',
+      raw_note: 'Billing admins can select multiple invoices and export one CSV.',
+      status: 'published',
+      target_url: '',
+      target_selector: "button[data-action='bulk-export']",
+      read_more_url: null,
+      copy: {
+        announcement: 'Export multiple invoices at once.',
+        why_it_matters: 'Finish month-end reporting faster — no more one-by-one downloads.',
+        tooltip: 'Select invoices, then click Bulk Export.',
+        help_snippet: 'Open the invoice list, select the invoices you need, and click Bulk Export.'
+      },
+      created_at: '2026-07-12T00:00:00Z',
+      published_at: '2026-07-12T00:00:00Z'
+    },
+    {
+      id: 'upd_demo_scheduled_reports',
+      product_id: 'prod_demo',
+      title: 'Scheduled report emails',
+      raw_note: 'Reports can now be emailed on a schedule.',
+      status: 'published',
+      target_url: '',
+      target_selector: "a[data-nav='reports']",
+      read_more_url: null,
+      copy: {
+        announcement: 'Reports can now email themselves.',
+        why_it_matters: 'Stakeholders get the numbers weekly without you exporting anything.',
+        tooltip: 'Open Reports and pick a schedule.',
+        help_snippet: 'From the Reports tab, choose any report and set a delivery schedule.'
+      },
+      created_at: '2026-07-10T00:00:00Z',
+      published_at: '2026-07-10T00:00:00Z'
+    },
+    {
+      id: 'upd_demo_search',
+      product_id: 'prod_demo',
+      title: 'Global search',
+      raw_note: 'Search now covers invoices, customers, and reports.',
+      status: 'published',
+      target_url: '',
+      target_selector: "input[data-role='search']",
+      read_more_url: null,
+      copy: {
+        announcement: 'Search everything from one box.',
+        why_it_matters: 'Invoices, customers, and reports — one search, no tab hunting.',
+        tooltip: 'Press the search box and type anything.',
+        help_snippet: 'The search box in the top bar now looks across invoices, customers, and reports.'
+      },
+      created_at: '2026-07-08T00:00:00Z',
+      published_at: '2026-07-08T00:00:00Z'
+    }
+  ];
+
+  var custom = [];
+  var root = document.getElementById('fp-root');
+  var widget = { destroy: function () {} };
+
+  function branding() {
+    return {
+      color: document.getElementById('brand-color').value,
+      icon: document.getElementById('brand-icon').value,
+      label: document.getElementById('brand-label').value || "What's New",
+      placement: document.getElementById('brand-placement').value,
+    };
+  }
+
+  function render() {
+    widget.destroy();
+    widget = FeaturePing.initWidget(root, updates.concat(custom), { branding: branding() });
+  }
+
+  // 'input' only for text/color fields ('change' also fires on blur and would
+  // re-render underneath the user's next click); 'change' for the select.
+  ['brand-color', 'brand-icon', 'brand-label'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', render);
+  });
+  document.getElementById('brand-placement').addEventListener('change', render);
+
+  document.getElementById('try-add').addEventListener('click', function () {
+    var text = document.getElementById('try-text').value.trim() || 'Something new shipped.';
+    var selector = document.getElementById('try-selector').value.trim();
+    custom.push({
+      id: 'upd_custom_' + (custom.length + 1),
+      product_id: 'prod_demo',
+      title: text,
+      raw_note: text,
+      status: 'published',
+      target_url: '',
+      target_selector: selector || null,
+      read_more_url: null,
+      copy: {
+        announcement: text,
+        why_it_matters: 'You just composed this update yourself.',
+        tooltip: selector ? 'Show me highlights: ' + selector : 'No target set — announcement only.',
+        help_snippet: 'This update was created from the “Try it yourself” panel on this demo page.'
+      },
+      created_at: new Date().toISOString(),
+      published_at: new Date().toISOString()
+    });
+    render();
+    setTimeout(function () {
+      var launcher = document.getElementById('fp-launcher');
+      if (launcher && !document.getElementById('fp-card')) launcher.click();
+    }, 60);
+  });
+
+  document.getElementById('demo-reset').addEventListener('click', function () {
+    var kill = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      if (k && k.indexOf('fp_dismiss_') === 0) kill.push(k);
+    }
+    kill.forEach(function (k) { localStorage.removeItem(k); });
+    custom = [];
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
