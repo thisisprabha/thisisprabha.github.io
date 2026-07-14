@@ -227,22 +227,22 @@
   <!-- 1 · title -->
   <section class="slide active" aria-label="Title">
     <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>Product story</p>
+      <p class="eyebrow"><span class="ping"></span>The problem</p>
       <h1>You shipped it.<br>Did anyone <span class="ring">notice?</span></h1>
-      <p class="lede">FeaturePing turns every release into in-product education — explain what changed, and show people exactly where it lives.</p>
+      <p class="lede">Every week you ship. Every week most users never find out. The work gets done — the value never lands.</p>
     </div>
   </section>
 
   <!-- 2 · pain -->
   <section class="slide" aria-label="The pain">
     <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>The pain</p>
-      <h2>You ship every week. Your users find out… eventually.</h2>
-      <p class="lede">A growing product ships across billing, reports, dashboards, settings, and mobile. The release lands — the education doesn't.</p>
+      <p class="eyebrow"><span class="ping"></span>Why it hurts</p>
+      <h2>A feature nobody finds might as well not exist.</h2>
+      <p class="lede">You paid to build it. When users don't discover it, you pay again — in churn, in support load, and in a roadmap that looks like it's standing still.</p>
       <div class="grid3">
-        <div class="card"><h3>Changelogs live outside the product</h3><p>A forum post or email can say what changed. It can't meet the user inside the workflow where the change actually is.</p></div>
-        <div class="card"><h3>Every role gets every announcement</h3><p>A billing admin doesn't care about a mobile tweak. Noise trains people to ignore all of it, including the updates that matter to them.</p></div>
-        <div class="card"><h3>Support answers the same question</h3><p>"Where is this? How do I turn it on? Is it on my plan?" — repeated after every single release.</p></div>
+        <div class="card"><h3>Users miss what you built</h3><p>They ask for features you already shipped — or churn believing the product can't do the thing it does.</p></div>
+        <div class="card"><h3>Support repeats itself</h3><p>Every release brings the same "where is this?" tickets. Your team answers one question a hundred times.</p></div>
+        <div class="card"><h3>Adoption stalls quietly</h3><p>Announcements sit in a changelog nobody opens. Genuinely good releases land in silence.</p></div>
       </div>
     </div>
   </section>
@@ -250,23 +250,18 @@
   <!-- 3 · what it is -->
   <section class="slide" aria-label="What FeaturePing does">
     <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>What FeaturePing does</p>
-      <h2>Release note in. In-product explainer out.</h2>
-      <div class="steps">
-        <div class="step"><span class="n">1</span><b>Paste the release note</b><p>Raw engineering or PM notes — whatever you already have.</p></div>
-        <div class="step"><span class="n">2</span><b>AI drafts the user copy</b><p>Announcement, why it matters, tooltip, help text. Always editable, never auto-published.</p></div>
-        <div class="step"><span class="n">3</span><b>Point at the feature</b><p>A page and an element, e.g. <span class="mono">button[data-action='export']</span>. Verified before publish.</p></div>
-        <div class="step"><span class="n">4</span><b>User clicks "Show me"</b><p>The widget walks them to the feature and highlights it — across pages if needed.</p></div>
-      </div>
-      <p class="lede" style="margin-top:28px">A human approves every update before a single user sees it.</p>
+      <p class="eyebrow"><span class="ping"></span>The real problem</p>
+      <h2>Announcing isn't the hard part. <span class="ring">Location</span> is.</h2>
+      <p class="lede">You already announce — emails, changelogs, banners. They all live <em>outside</em> the product, far from the button that changed. The one moment a user could act on the news is the one moment nothing is there to tell them.</p>
+      <p class="lede" style="margin-top:16px">Close that gap — put the news next to the feature, at the moment it's relevant — and the thing you shipped finally gets found.</p>
     </div>
   </section>
 
   <!-- 4 · live demo -->
   <section class="slide" aria-label="Live demo">
     <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>Live — this slide runs the real flow</p>
-      <h2>Try it. Click <span style="color:var(--accent)">What's New</span>, then <span style="color:var(--accent)">Show me</span>.</h2>
+      <p class="eyebrow"><span class="ping"></span>Closing the gap — try it live</p>
+      <h2>Meet the user at the feature, not in an inbox.</h2>
       <div class="mock">
         <div class="mock-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span>&nbsp;app.yourproduct.com/invoices</div>
         <div class="mock-body">
@@ -298,77 +293,16 @@
     </div>
   </section>
 
-  <!-- 5 · personas -->
-  <section class="slide" aria-label="Who it serves">
+  <!-- 5 · outcome -->
+  <section class="slide" aria-label="What changes">
     <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>Who it serves</p>
-      <h2>Same release. A different job for each of us.</h2>
-      <div class="tabs" role="tablist" aria-label="Roles">
-        <button class="tab" role="tab" aria-selected="true" data-panel="p-pm" type="button">Product</button>
-        <button class="tab" role="tab" aria-selected="false" data-panel="p-mkt" type="button">Marketing</button>
-        <button class="tab" role="tab" aria-selected="false" data-panel="p-cs" type="button">Support &amp; CS</button>
-        <button class="tab" role="tab" aria-selected="false" data-panel="p-emp" type="button">Every employee</button>
-      </div>
-      <div class="panel show" id="p-pm" role="tabpanel">
-        <div class="card"><div class="pain"><b>Today</b><p>We ship features users never find. Adoption is a guess.</p></div><div class="gain"><b>With FeaturePing</b><p>Role-targeted announcements land inside the workflow, and Show-me clicks tell you which releases actually got tried.</p></div></div>
-      </div>
-      <div class="panel" id="p-mkt" role="tabpanel">
-        <div class="card"><div class="pain"><b>Today</b><p>Every launch means rewriting the same story for changelog, email, and in-app banner.</p></div><div class="gain"><b>With FeaturePing</b><p>One release note becomes announcement, help text, and email variants — consistent copy, one source.</p></div></div>
-      </div>
-      <div class="panel" id="p-cs" role="tabpanel">
-        <div class="card"><div class="pain"><b>Today</b><p>After every release, the same "where is this?" tickets — answered one at a time.</p></div><div class="gain"><b>With FeaturePing</b><p>Answer once. The update works in-product, in docs, and in support macros. Show-me deflects the ticket before it's filed.</p></div></div>
-      </div>
-      <div class="panel" id="p-emp" role="tabpanel">
-        <div class="card"><div class="pain"><b>Today</b><p>The tool changed under you. You find out from a confused customer — or never.</p></div><div class="gain"><b>With FeaturePing</b><p>A 20-second explainer, only for changes in the areas you use, right where you use them. Dismiss it and it stays gone.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · example -->
-  <section class="slide" aria-label="One release, split by role">
-    <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>One release, split by role</p>
-      <h2>A single release note becomes four targeted cards.</h2>
-      <div class="tablewrap">
-        <table>
-          <thead><tr><th>Shipped this month</th><th>Who cares</th><th>Where the card lands</th></tr></thead>
-          <tbody>
-            <tr><td>Bulk invoice export</td><td>Billing admin</td><td>Invoices toolbar</td></tr>
-            <tr><td>Scheduled report emails</td><td>Ops manager</td><td>Reports tab</td></tr>
-            <tr><td>Saved dashboard filters</td><td>Analyst</td><td>Dashboard editor</td></tr>
-            <tr><td>Mobile approvals</td><td>Team manager</td><td>Approvals screen</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="lede" style="margin-top:26px">The billing admin never sees the mobile card. The analyst never sees the invoicing one. Signal, not noise.</p>
-    </div>
-  </section>
-
-  <!-- 7 · status -->
-  <section class="slide" aria-label="Where it stands">
-    <div class="inner">
-      <p class="eyebrow"><span class="ping"></span>Where it stands</p>
-      <h2>A working product. Built, tested, honest about the edges.</h2>
-      <div class="grid2">
-        <div class="card">
-          <h3 style="color:var(--good)">Works today</h3>
-          <ul class="plain check">
-            <li>Framework-agnostic widget — one script tag, any stack</li>
-            <li>"Show me" highlight, including cross-page navigation</li>
-            <li>Admin composer with AI copy draft, preview &amp; target check</li>
-            <li>Publish → live feed → view / dismiss / show-me counters</li>
-            <li>Branding (color, icon, label, placement) + 42 passing tests</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3 style="color:var(--muted)">Not yet</h3>
-          <ul class="plain dash">
-            <li>Hosted deployment <span class="why">— runs locally today</span></li>
-            <li>Accounts &amp; multi-tenant billing <span class="why">— pilot first</span></li>
-            <li>Automatic release ingestion <span class="why">— agent roadmap</span></li>
-            <li>A real pilot's numbers <span class="why">— the next milestone</span></li>
-          </ul>
-        </div>
+      <p class="eyebrow"><span class="ping"></span>What changes</p>
+      <h2>The feature gets found. Support stops repeating itself.</h2>
+      <p class="lede">Paste a release note; minutes later there's an in-product explainer that takes each user straight to the thing that changed — and only the users it's actually for.</p>
+      <div class="grid3">
+        <div class="card"><h3>Users act on the news</h3><p>They see what changed, where it changed, and try it on the spot — instead of never knowing it exists.</p></div>
+        <div class="card"><h3>Fewer "where is this?" tickets</h3><p>"Show me" walks people to the exact button, so your support team doesn't have to — again and again.</p></div>
+        <div class="card"><h3>You finally see what landed</h3><p>Views and Show-me clicks tell you which releases users actually tried — adoption stops being a guess.</p></div>
       </div>
     </div>
   </section>
@@ -377,13 +311,9 @@
   <section class="slide" aria-label="Try it">
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>Your turn</p>
-      <h2>Kick the tires in 30 seconds.</h2>
-      <p class="lede">The live demo runs the real widget inside a sample app — open the feed, hit Show me, recolor it, break it. No signup, nothing to install.</p>
-      <div class="gate">
-        <span class="big">30%</span>
-        <p>A 30% Show-me click rate is the bar that says this is worth building further. That's the number a first pilot exists to find.</p>
-      </div>
-      <p class="ask">So: would you put this in your product? <a href="./featureping-demo.html">Try the demo →</a></p>
+      <h2>Does this problem sound familiar?</h2>
+      <p class="lede">If your users miss the features you ship, and your team keeps answering "where is this?", that's the gap FeaturePing closes. Try the live demo — open the widget, hit Show me, watch it walk you to the feature. No signup, nothing to install.</p>
+      <p class="ask"><a href="./feature-ping.html">Try the demo →</a></p>
     </div>
   </section>
 
@@ -391,7 +321,7 @@
 
 <p class="keyhint">← → to navigate · swipe on touch</p>
 <nav id="nav" aria-label="Slides">
-  <span id="counter">1 / 8</span>
+  <span id="counter">1 / 6</span>
   <div id="dots"></div>
   <button class="arrow" id="prev" type="button" aria-label="Previous slide">←</button>
   <button class="arrow" id="next" type="button" aria-label="Next slide">→</button>
