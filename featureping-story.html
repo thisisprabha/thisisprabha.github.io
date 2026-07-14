@@ -200,6 +200,16 @@
   .ask { margin-top: 36px; font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 2.8vw, 2rem); letter-spacing: -0.01em; text-wrap: balance; }
   .ask a { color: var(--accent); }
 
+  /* contact CTA on final slide */
+  .contact { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .contact .btn-mail {
+    display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+    background: var(--accent); color: #fff; font-weight: 600; font-size: .95rem;
+    padding: 13px 24px; border-radius: 11px; box-shadow: 0 8px 20px rgba(33,72,255,.26);
+  }
+  .contact .btn-mail .pg { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+  .contact .note { color: var(--muted); font-size: .92rem; max-width: 26em; }
+
   #nav { position: fixed; bottom: 20px; right: 24px; z-index: 50; display: flex; align-items: center; gap: 14px; }
   #dots { display: flex; gap: 7px; }
   #dots button { width: 8px; height: 8px; border-radius: 50%; border: none; padding: 0; background: var(--line); }
@@ -314,6 +324,12 @@
       <h2>Does this problem sound familiar?</h2>
       <p class="lede">If your users miss the features you ship, and your team keeps answering "where is this?", that's the gap FeaturePing closes. Try the live demo — open the widget, hit Show me, watch it walk you to the feature. No signup, nothing to install.</p>
       <p class="ask"><a href="./feature-ping.html">Try the demo →</a></p>
+      <div class="contact">
+        <a class="btn-mail" href="mailto:prabhakaran.r91@gmail.com?subject=FeaturePing%20%E2%80%94%20interested&body=Hi%20Prabha%2C%0A%0AI%20saw%20the%20FeaturePing%20story.%20My%20product%20is%20________%20(built%20with%20________).%0AToday%20we%20announce%20features%20by%20________.%0A%0AWould%20like%20to%20try%20it%20with%20our%20team.">
+          <span class="pg"></span>Email me &rarr;
+        </a>
+        <span class="note">Early access — I'm looking for a few products to try it with. Tell me your stack and how you announce features today, and I'll help you set it up.</span>
+      </div>
     </div>
   </section>
 
