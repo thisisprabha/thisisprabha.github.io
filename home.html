@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <title>Prabhakaran • Start</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Pixel font: Press Start 2P -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050608;
+      --bg-panel: #101118;
+      --bg-panel-soft: #151724;
+      --accent: #35f0c5;
+      --accent-soft: #163831;
+      --text: #f5f5f7;
+      --text-muted: #8b8ca0;
+      --border: #252738;
+      --danger: #ff5c7b;
+
+      --radius: 10px;
+      --gap: 1rem;
+      --shadow: 0 0 0 2px #000, 0 10px 0 #000;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #16182b 0, #050608 55%);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .frame {
+      width: min(960px, 100%);
+      background: var(--bg-panel);
+      border-radius: var(--radius);
+      border: 2px solid #000;
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* retro scanlines */
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        rgba(255,255,255,0.03) 1px,
+        transparent 1px
+      );
+      background-size: 100% 3px;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .logo-word {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-shadow: 0 0 8px rgba(53,240,197,0.6);
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(0,0,0,0.45);
+      color: var(--text-muted);
+    }
+
+    .chip--accent {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .clock {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .clock-time {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(53,240,197,0.6);
+    }
+
+    .clock-date {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    .divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+      );
+      position: relative;
+      overflow: hidden;
+    }
+
+    .divider::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(53,240,197,0.4),
+        transparent
+      );
+      mix-blend-mode: screen;
+      opacity: 0.4;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .frame {
+        padding: 1.1rem;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .clock {
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .panel {
+      background: var(--bg-panel-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 0.9rem;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .panel-title {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .panel-pill {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.55rem;
+      padding: 0.17rem 0.4rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .panel-pill--danger {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .link-item a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+      transition:
+        background 140ms ease-out,
+        transform 90ms ease-out,
+        border-color 140ms ease-out,
+        box-shadow 140ms ease-out;
+    }
+
+    .link-item a::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(53,240,197,0.16),
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 140ms ease-out;
+      pointer-events: none;
+    }
+
+    .link-item a span.label {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .link-item a span.hint {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .link-item a:hover {
+      background: rgba(10,40,40,0.9);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(53,240,197,0.5);
+      transform: translateY(-1px);
+    }
+
+    .link-item a:hover::before {
+      opacity: 1;
+    }
+
+    .link-item a:active {
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    .footer {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer span {
+      opacity: 0.9;
+    }
+
+    .footer-code {
+      font-family: "Press Start 2P", system-ui, sans-serif;
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* small CRT glow at corners */
+    .corner-glow {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(53,240,197,0.2), transparent 70%);
+      pointer-events: none;
+      filter: blur(4px);
+    }
+
+    .corner-glow--tl { top: -60px; left: -40px; }
+    .corner-glow--br { bottom: -70px; right: -40px; }
+  </style>
+</head>
+<body>
+  <main class="frame">
+    <div class="corner-glow corner-glow--tl"></div>
+    <div class="corner-glow corner-glow--br"></div>
+
+    <header class="header">
+      <div class="title-block">
+        <div class="logo-word">Prabhakaran.exe</div>
+        <div class="subtitle">Daily launch pad</div>
+        <div class="chip-row">
+          <div class="chip chip--accent">Pixel mode</div>
+          <div class="chip">iOS · AI · Design</div>
+        </div>
+      </div>
+      <section class="clock" aria-label="Current time and date">
+        <div id="clock-time" class="clock-time">--:--</div>
+        <div id="clock-date" class="clock-date">Loading…</div>
+      </section>
+    </header>
+
+    <div class="divider"></div>
+
+    <section class="grid" aria-label="Quick launch sections">
+      <!-- Superops Links -->
+      <section class="panel" aria-label="Superops links">
+        <div class="panel-header">
+          <h2 class="panel-title">Superops</h2>
+          <div class="panel-pill">Work</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="https://dev.superopsalpha.com/" target="_blank" rel="noopener noreferrer">
+              <span class="label">Dev</span>
+              <span class="hint">superopsalpha</span>
+            </a>
+          </div>
+          <div class="link-item">
+            <a href="https://atom.superops.ai/" target="_blank" rel="noopener noreferrer">
+              <span class="label">Atom</span>
+              <span class="hint">superops</span>
+            </a>
+          </div>
+          <div class="link-item">
+            <a href="https://superops.keka.com/#/home/dashboard" target="_blank" rel="noopener noreferrer">
+              <span class="label">Keka</span>
+              <span class="hint">payroll · hr</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mailbox -->
+      <section class="panel" aria-label="Mailbox">
+        <div class="panel-header">
+          <h2 class="panel-title">Mailbox</h2>
+          <div class="panel-pill">Inbox 1P</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener noreferrer">
+              <span class="label">Gmail</span>
+              <span class="hint">u/0</span>
+            </a>
+          </div>
+          <div class="link-item">
+            <a href="https://keep.google.com/u/1/" target="_blank" rel="noopener noreferrer">
+              <span class="label">Google notes</span>
+              <span class="hint">Keep u/1</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Personal chat -->
+      <section class="panel" aria-label="Personal chat">
+        <div class="panel-header">
+          <h2 class="panel-title">Personal chat</h2>
+          <div class="panel-pill">Cozy</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="https://discord.com/channels/@me" target="_blank" rel="noopener noreferrer">
+              <span class="label">Discord</span>
+              <span class="hint">DMs</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chat models -->
+      <section class="panel" aria-label="Chat models">
+        <div class="panel-header">
+          <h2 class="panel-title">Chat · AI</h2>
+          <div class="panel-pill panel-pill--danger">LLM</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">
+              <span class="label">ChatGPT</span>
+              <span class="hint">OpenAI</span>
+            </a>
+          </div>
+          <div class="link-item">
+            <a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">
+              <span class="label">Gemini</span>
+              <span class="hint">Google</span>
+            </a>
+          </div>
+          <div class="link-item">
+            <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">
+              <span class="label">Claude</span>
+              <span class="hint">Anthropic</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spare slots for future stuff -->
+      <section class="panel" aria-label="Spare slot one">
+        <div class="panel-header">
+          <h2 class="panel-title">Slot · A</h2>
+          <div class="panel-pill">Empty</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="#" onclick="return false;">
+              <span class="label">Add link</span>
+              <span class="hint">edit HTML</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-label="Spare slot two">
+        <div class="panel-header">
+          <h2 class="panel-title">Slot · B</h2>
+          <div class="panel-pill">Empty</div>
+        </div>
+        <div class="link-list">
+          <div class="link-item">
+            <a href="#" onclick="return false;">
+              <span class="label">Add link</span>
+              <span class="hint">edit HTML</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <span>Built for fast launch · Chennai timezone</span>
+      <span class="footer-code">Press any link to start</span>
+    </footer>
+  </main>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeEl = document.getElementById("clock-time");
+      const dateEl = document.getElementById("clock-date");
+
+      const hours = now.getHours().toString().padStart(2, "0");
+      const mins = now.getMinutes().toString().padStart(2, "0");
+      timeEl.textContent = `${hours}:${mins}`;
+
+      const dayName = now.toLocaleDateString(undefined, { weekday: "short" });
+      const dateNum = now.getDate().toString().padStart(2, "0");
+      const monthName = now.toLocaleDateString(undefined, { month: "short" });
+      const year = now.getFullYear();
+
+      dateEl.textContent = `${dayName} · ${dateNum} ${monthName} ${year}`;
+    }
+
+    updateClock();
+    setInterval(updateClock, 30 * 1000);
+  </script>
+</body>
+</html>
