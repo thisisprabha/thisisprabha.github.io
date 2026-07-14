@@ -200,15 +200,20 @@
   .ask { margin-top: 36px; font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 2.8vw, 2rem); letter-spacing: -0.01em; text-wrap: balance; }
   .ask a { color: var(--accent); }
 
-  /* contact CTA on final slide */
-  .contact { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .contact .btn-mail {
-    display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
+  .card .sub { font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 10px; }
+  .card.pick { border-color: var(--accent); background: var(--accent-soft); }
+  .card.pick .sub { color: var(--accent-ink); }
+  .card.pick h3 { color: var(--accent-ink); }
+
+  .foundernote { margin-top: 26px; padding-left: 16px; border-left: 3px solid var(--amber);
+    font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--ink); font-style: italic; max-width: 40em; }
+
+  .contact { margin-top: 30px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .contact .btn-mail { display: inline-flex; align-items: center; gap: 9px; text-decoration: none;
     background: var(--accent); color: #fff; font-weight: 600; font-size: .95rem;
-    padding: 13px 24px; border-radius: 11px; box-shadow: 0 8px 20px rgba(33,72,255,.26);
-  }
+    padding: 13px 24px; border-radius: 11px; box-shadow: 0 8px 20px rgba(33,72,255,.26); }
   .contact .btn-mail .pg { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
-  .contact .note { color: var(--muted); font-size: .92rem; max-width: 26em; }
+  .contact .note { color: var(--muted); font-size: .92rem; max-width: 24em; }
 
   #nav { position: fixed; bottom: 20px; right: 24px; z-index: 50; display: flex; align-items: center; gap: 14px; }
   #dots { display: flex; gap: 7px; }
@@ -238,8 +243,8 @@
   <section class="slide active" aria-label="Title">
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>The problem</p>
-      <h1>You shipped it.<br>Did anyone <span class="ring">notice?</span></h1>
-      <p class="lede">Every week you ship. Every week most users never find out. The work gets done — the value never lands.</p>
+      <h1>You shipped the feature.<br>Most users never <span class="ring">saw it.</span></h1>
+      <p class="lede">The work got done. The release went out. The value still didn't land.</p>
     </div>
   </section>
 
@@ -247,12 +252,12 @@
   <section class="slide" aria-label="The pain">
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>Why it hurts</p>
-      <h2>A feature nobody finds might as well not exist.</h2>
-      <p class="lede">You paid to build it. When users don't discover it, you pay again — in churn, in support load, and in a roadmap that looks like it's standing still.</p>
+      <h2>A feature nobody finds still costs you.</h2>
+      <p class="lede">Users ask for things you already built. Support answers the same question again and again. Good releases land quietly, and adoption never catches up.</p>
       <div class="grid3">
-        <div class="card"><h3>Users miss what you built</h3><p>They ask for features you already shipped — or churn believing the product can't do the thing it does.</p></div>
-        <div class="card"><h3>Support repeats itself</h3><p>Every release brings the same "where is this?" tickets. Your team answers one question a hundred times.</p></div>
-        <div class="card"><h3>Adoption stalls quietly</h3><p>Announcements sit in a changelog nobody opens. Genuinely good releases land in silence.</p></div>
+        <div class="card"><h3>Users miss what you built</h3><p>They keep hunting for value that's already there — or churn, sure the product can't do the thing it does.</p></div>
+        <div class="card"><h3>Support repeats itself</h3><p>Your team re-explains what the product already does — the same "where is this?" ticket, a hundred times over.</p></div>
+        <div class="card"><h3>Adoption stalls quietly</h3><p>Good work ships, but discovery never really starts. The changelog sits in a tab nobody opens.</p></div>
       </div>
     </div>
   </section>
@@ -261,9 +266,9 @@
   <section class="slide" aria-label="What FeaturePing does">
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>The real problem</p>
-      <h2>Announcing isn't the hard part. <span class="ring">Location</span> is.</h2>
-      <p class="lede">You already announce — emails, changelogs, banners. They all live <em>outside</em> the product, far from the button that changed. The one moment a user could act on the news is the one moment nothing is there to tell them.</p>
-      <p class="lede" style="margin-top:16px">Close that gap — put the news next to the feature, at the moment it's relevant — and the thing you shipped finally gets found.</p>
+      <h2>Announcing isn't the hard part. <span class="ring">Placement</span> is.</h2>
+      <p class="lede">Your release notes live <em>outside</em> the product — in an email, a changelog, a banner people scroll past. The feature lives somewhere else entirely. So the one moment a user could act on the news is the one moment the message isn't there.</p>
+      <p class="lede" style="margin-top:16px">Put the explanation next to the change, at the moment it matters, and the thing you shipped finally gets found.</p>
     </div>
   </section>
 
@@ -299,7 +304,7 @@
         </div>
       </div>
       <button id="demo-reset" type="button">Reset demo</button>
-      <p class="demo-hint">This is the actual widget behavior — dismiss persistence, cross-page navigation, and element highlighting are built and tested.</p>
+      <p class="demo-hint">Not a mockup — that's the real widget. Dismiss persistence, cross-page navigation, and element highlighting all work.</p>
     </div>
   </section>
 
@@ -308,27 +313,54 @@
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>What changes</p>
       <h2>The feature gets found. Support stops repeating itself.</h2>
-      <p class="lede">Paste a release note; minutes later there's an in-product explainer that takes each user straight to the thing that changed — and only the users it's actually for.</p>
+      <p class="lede">Paste a raw release note. Minutes later there's an in-product explainer that walks each user straight to what changed — and shows only the users it's actually for.</p>
       <div class="grid3">
-        <div class="card"><h3>Users act on the news</h3><p>They see what changed, where it changed, and try it on the spot — instead of never knowing it exists.</p></div>
-        <div class="card"><h3>Fewer "where is this?" tickets</h3><p>"Show me" walks people to the exact button, so your support team doesn't have to — again and again.</p></div>
-        <div class="card"><h3>You finally see what landed</h3><p>Views and Show-me clicks tell you which releases users actually tried — adoption stops being a guess.</p></div>
+        <div class="card"><h3>Users act on the news</h3><p>They try it while the feature is right in front of them, instead of never knowing it exists.</p></div>
+        <div class="card"><h3>Fewer "where is this?" tickets</h3><p>"Show me" walks people to the exact button, so support doesn't have to — again and again.</p></div>
+        <div class="card"><h3>You see what actually landed</h3><p>Views and Show-me clicks tell you which releases got noticed and tried. Adoption stops being a guess.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- 8 · ask -->
+  <!-- 6 · positioning -->
+  <section class="slide" aria-label="Why FeaturePing">
+    <div class="inner">
+      <p class="eyebrow"><span class="ping"></span>Why FeaturePing</p>
+      <h2>Two kinds of tools exist. Neither does <span class="ring">this</span> job.</h2>
+      <div class="grid3">
+        <div class="card">
+          <div class="sub">Changelog widgets · Beamer, Canny, AnnounceKit</div>
+          <h3>Announce, then leave you</h3>
+          <p>Drop a notifications feed in the corner. They tell users something shipped — then leave them to go find it. It's the inbox, moved inside the app.</p>
+        </div>
+        <div class="card">
+          <div class="sub">Adoption platforms · Pendo, WalkMe, Appcues</div>
+          <h3>Powerful, heavy, pricey</h3>
+          <p>They can guide users to a feature — but they're built for multi-step onboarding, priced in the thousands a year, and take weeks plus a dedicated owner to set up.</p>
+        </div>
+        <div class="card pick">
+          <div class="sub">FeaturePing · the piece in between</div>
+          <h3>Announce, then walk them there</h3>
+          <p>Does the one job at the intersection: announces the change and walks the user to the exact button. A 2.4&nbsp;kB script, no visual editor, no per-user contract — live in an afternoon.</p>
+        </div>
+      </div>
+      <p class="foundernote">I hit this building my own product. One camp announced without helping; the other charged enterprise money to do one small thing. So I built the piece that was missing.</p>
+    </div>
+  </section>
+
+  <!-- 7 · ask -->
   <section class="slide" aria-label="Try it">
     <div class="inner">
       <p class="eyebrow"><span class="ping"></span>Your turn</p>
-      <h2>Does this problem sound familiar?</h2>
-      <p class="lede">If your users miss the features you ship, and your team keeps answering "where is this?", that's the gap FeaturePing closes. Try the live demo — open the widget, hit Show me, watch it walk you to the feature. No signup, nothing to install.</p>
+      <h2>If your releases keep going unseen, this is the gap to close.</h2>
+      <p class="lede">Try the live demo — open the widget, hit Show me, and watch the release lead you to the feature. No signup, nothing to install.</p>
       <p class="ask"><a href="./feature-ping.html">Try the demo →</a></p>
+      <p class="foundernote">I'm Prabha — I design and build these tools solo. FeaturePing is early, and I'm looking for a few products to be design partners. If your users miss what you ship, I'd love to set it up with you.</p>
       <div class="contact">
         <a class="btn-mail" href="mailto:prabhakaran.r91@gmail.com?subject=FeaturePing%20%E2%80%94%20interested&body=Hi%20Prabha%2C%0A%0AI%20saw%20the%20FeaturePing%20story.%20My%20product%20is%20________%20(built%20with%20________).%0AToday%20we%20announce%20features%20by%20________.%0A%0AWould%20like%20to%20try%20it%20with%20our%20team.">
           <span class="pg"></span>Email me &rarr;
         </a>
-        <span class="note">Early access — I'm looking for a few products to try it with. Tell me your stack and how you announce features today, and I'll help you set it up.</span>
+        <span class="note">Tell me your stack and how you announce features today — I'll help you set it up.</span>
       </div>
     </div>
   </section>
@@ -337,7 +369,7 @@
 
 <p class="keyhint">← → to navigate · swipe on touch</p>
 <nav id="nav" aria-label="Slides">
-  <span id="counter">1 / 6</span>
+  <span id="counter">1 / 7</span>
   <div id="dots"></div>
   <button class="arrow" id="prev" type="button" aria-label="Previous slide">←</button>
   <button class="arrow" id="next" type="button" aria-label="Next slide">→</button>
@@ -368,7 +400,8 @@
     dotEls.forEach(function (d, j) { d.classList.toggle('on', j === current); });
     counter.textContent = (current + 1) + ' / ' + slides.length;
     progress.style.width = ((current + 1) / slides.length * 100) + '%';
-    if (history.replaceState) history.replaceState(null, '', '#' + (current + 1));
+    // Sandboxed preview (about:srcdoc) blocks replaceState; harmless to skip there.
+    try { if (history.replaceState) history.replaceState(null, '', '#' + (current + 1)); } catch (e) {}
   }
 
   document.getElementById('next').addEventListener('click', function () { go(current + 1); });
