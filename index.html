@@ -1,163 +1,343 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prabhakar's Portfolio</title>
+  <meta charset="utf-8">
+  <title>Prabhakaran - Lead Product Designer &amp; Indie Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prabhakaran is a Lead Product Designer and indie builder in Chennai. AI product design, agentic interfaces, iOS apps, and SaaS workflows.">
+  <meta name="color-scheme" content="dark">
   <style>
+    :root {
+      --bg: #000000;
+      --bg-elevated: #0d0d0f;
+      --panel: #16161a;
+      --panel-soft: #1d1d21;
+      --text: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --muted: #6e6e73;
+      --line: rgba(255, 255, 255, 0.10);
+      --accent: #2997ff;
+      --radius: 18px;
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     body {
-      background-color: #121212;
-      color: #f5f5f5;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      height: 100vh;
-      text-align: center;
-      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41, 151, 255, 0.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.47;
     }
 
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 2px solid #f5f5f5;
-      margin-bottom: 20px;
-    }
-
-    .bio {
-      max-width: 600px;
+    .wrap {
+      max-width: 980px;
       margin: 0 auto;
-      line-height: 1.6;
+      padding: 0 48px;
+    }
+
+    header.hero {
+      padding: 120px 0 72px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 24px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 0 0 28px;
+      max-width: 16ch;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: var(--text-secondary);
+      max-width: 62ch;
+      margin: 0 0 20px;
+    }
+
+    .hero p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 999px;
+      padding: 8px 14px;
+    }
+
+    section {
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 34px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0 0 28px;
+    }
+
+    .about p {
       font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 62ch;
+      margin: 0 0 20px;
     }
 
-    .linkedin {
-      margin-top: 20px;
+    .about p strong {
+      color: var(--text);
+      font-weight: 600;
     }
 
-    .linkedin a {
-      color: #0a66c2;
-      text-decoration: none;
-      font-weight: bold;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
-    .reading {
-      margin-top: 40px;
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 12px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .short {
+      background: var(--bg-elevated);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      padding: 40px;
+    }
+
+    .short p {
+      font-size: 22px;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 48ch;
+      color: var(--text);
+    }
+
+    .short p span {
+      color: var(--text-secondary);
+    }
+
+    .cta {
+      text-align: left;
+    }
+
+    .cta p {
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 52ch;
+      margin: 0 0 32px;
+    }
+
+    .cta p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
       font-size: 16px;
-      color: #c7c7c7;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      transition: opacity 160ms ease, transform 160ms ease;
     }
 
-    .highlight {
-      color: #f5f5f5;
-      font-weight: bold;
+    .btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
     }
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    footer {
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 720px) {
+      .wrap { padding: 0 22px; }
+      header.hero { padding: 80px 0 48px; }
+      h1 { font-size: 38px; }
+      .grid { grid-template-columns: 1fr; }
+      .short p { font-size: 19px; }
+      footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
-  <canvas id="particleCanvas"></canvas>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">Product Design / AI / iOS</p>
+      <h1>Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.</h1>
+      <p>I design clear, capable software for complex workflows, with a focus on <strong>AI-powered products, IT operations, and mobile experiences</strong>. At SuperOps, I help simplify the day-to-day work of MSP teams through thoughtful product strategy, interaction design, and close collaboration with engineering and product teams.</p>
+      <p>Alongside my design work, I build and experiment with <strong>iOS apps, LLM-powered automations, agentic AI systems, and open-source tools</strong>. I enjoy turning emerging technology into useful, well-crafted experiences, not just demos.</p>
+      <div class="meta">
+        <span class="tag">Chennai, India</span>
+        <span class="tag">10+ years</span>
+        <span class="tag">SwiftUI</span>
+        <span class="tag">Agentic UX</span>
+        <span class="tag">Design Systems</span>
+      </div>
+    </header>
 
-  <img src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakar's Picture" class="profile-pic">
+    <section class="about">
+      <p class="section-label">About</p>
+      <h2>Designer who also builds.</h2>
+      <p>With 10+ years across graphic design, web, and product design, I've worked in startups and SaaS teams to make complicated products feel understandable and efficient. My experience includes contributing to products at <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>.</p>
+      <p>Today, my work sits at the intersection of product design, AI, and software craftsmanship. I design workflows for operational SaaS products, explore agent interfaces and multi-agent systems, and ship mobile projects with SwiftUI and modern AI APIs.</p>
+      <p>I care about the details that make products feel reliable: information architecture, empty states, onboarding, localization, design systems, and the small interaction decisions that reduce effort for real users.</p>
+    </section>
 
-  <div class="bio">
-    <p>Hi, I’m Prabhakaran — Lead Product Designer at SuperOps.
-With 10+ years of experience across graphic, web, and product design, I design products that simplify complex workflows. Previously, I've contributed to Subex and startups like IndiaProperty (acquired by Quikr) and Fantain (backed by BookMyShow).
-At SuperOps, I focus on streamlining MSP operations through clean, intuitive design. I also mentor designers, review UI, and collaborate closely with cross-functional teams to deliver better product experiences.
-Passionate about Vibecoding, retro gaming, and reading books.</p>
+    <section>
+      <p class="section-label">What I work on</p>
+      <h2>Design, code, ship.</h2>
+      <div class="grid">
+        <div class="card">
+          <p class="card-title">B2B SaaS &amp; IT Ops</p>
+          <p>Designing intuitive workflows for complex MSP and service-management products.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">AI Product Experiences</p>
+          <p>Agentic interfaces, LLM workflows, AI-assisted automation, and human-in-the-loop controls.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Mobile Apps</p>
+          <p>Building and shipping iOS experiences with SwiftUI, subscriptions, in-app purchases, and App Store workflows.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Design Systems</p>
+          <p>Creating scalable UI patterns that improve consistency and speed up product delivery.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Prototyping</p>
+          <p>Turning ideas into functional prototypes using code, APIs, and open-source AI tools.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Developer Collaboration</p>
+          <p>Working closely with engineers through clear specs, prototypes, documentation, and iterative reviews.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <p class="section-label">In one line</p>
+      <div class="short">
+        <p>Lead Product Designer at SuperOps, designing AI-powered SaaS experiences for complex operational workflows. <span>I also build iOS apps, experiment with agentic AI systems, and turn emerging technology into practical, polished products.</span></p>
+      </div>
+    </section>
+
+    <section class="cta">
+      <p class="section-label">Let's talk</p>
+      <h2>Thoughtful conversations welcome.</h2>
+      <p>I'm always interested in conversations about <strong>AI product design, agent interfaces, iOS apps, SaaS workflows, and building useful tools</strong>.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
+        <a class="btn btn-ghost" href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">Explore what I build</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>&copy; 2026 Prabhakaran. Chennai, India.</span>
+      <span><a href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">GitHub</a> / <a href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
+    </footer>
   </div>
-
-  <div class="linkedin">
-    <a href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank">Connect with me on LinkedIn</a>
-  </div>
-
-  <div class="reading">
-    Currently reading: <span class="highlight">[Art of persuasion]</span>
-  </div>
-
-  <script>
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-
-    function createParticle() {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: canvas.height + Math.random() * 100,
-        size: Math.random() * 1.0 + 0.2, // Smaller particles
-        speedY: Math.random() * -0.8 - 0.2, // Slower particles
-        alpha: Math.random() * 0.5 + 0.5
-      });
-    }
-
-    function initParticles() {
-      for (let i = 0; i < 150; i++) {
-        createParticle();
-      }
-    }
-
-    function updateParticles() {
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.y += p.speedY;
-        if (p.y < -10) {
-          particles.splice(i, 1);
-          createParticle();
-        }
-      }
-    }
-
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const p of particles) {
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function animate() {
-      updateParticles();
-      drawParticles();
-      requestAnimationFrame(animate);
-    }
-
-    canvas.addEventListener('mousemove', (e) => {
-      for (let i = 0; i < 5; i++) { // Fewer particles on mousemove
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          size: Math.random() * 1.5 + 0.5,
-          speedY: Math.random() * -0.8 - 0.2,
-          alpha: Math.random() * 0.5 + 0.5
-        });
-      }
-    });
-
-    initParticles();
-    animate();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    });
-  </script>
 </body>
 </html>
