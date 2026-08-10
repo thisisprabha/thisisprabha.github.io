@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Time Left — Countdown &amp; Days Left Widget for iPhone</title>
   <meta name="description" content="Time Left puts your countdowns on the Lock Screen and Home Screen. Track the days left until birthdays, exams, trips, and deadlines — no account needed, private by design.">
-  <meta name="theme-color" content="#4f46e5">
+  <meta name="theme-color" content="#f4eee0">
   <link rel="canonical" href="https://thisisprabha.com/iosapps/time-left/">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f46e5'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='9' stroke-linecap='round' stroke-dasharray='188.5 188.5' transform='rotate(-90 50 50)'/%3E%3Ccircle cx='50' cy='50' r='12' fill='white'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23f4eee0'/%3E%3Ccircle cx='50' cy='50' r='34' fill='none' stroke='%2333302b' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M50 30v20l13 8' fill='none' stroke='%23c1553b' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%2333302b'/%3E%3C/svg%3E">
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
@@ -35,15 +35,21 @@
 
   <style>
     :root {
-      --bg: #f7f8fc;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #5b6478;
-      --accent: #2563eb;
-      --accent-2: #0f766e;
-      --border: #e5e9f2;
-      --radius: 8px;
-      --shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.18);
+      --paper: #f4eee0;
+      --paper-card: #fbf6ea;
+      --paper-note: #f6e6a8;
+      --ink: #33302b;
+      --ink-soft: #6f6a5d;
+      --red: #c1553b;
+      --blue: #4a6fa5;
+      --green: #6d8a55;
+      --amber: #b97f2d;
+      --line: rgba(122, 104, 74, 0.12);
+      --font-hand: "Bradley Hand", "Chalkboard SE", "Marker Felt", "Comic Sans MS", "Segoe Print", "Apple Chancery", "URW Chancery L", cursive, sans-serif;
+      --sketch: 255px 15px 225px 15px / 15px 225px 15px 255px;
+      --sketch-2: 15px 225px 15px 255px / 225px 15px 255px 15px;
+      --shadow-sketch: 4px 4px 0 rgba(51, 48, 43, 0.10);
+      --wavy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='12' viewBox='0 0 56 12'%3E%3Cpath d='M0 8c7-5 14 5 21 0s14-5 21 0 14 5 21 0' fill='none' stroke='%23c1553b' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,15 +57,17 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      font-family: var(--font-hand);
+      background: var(--paper);
+      background-image: repeating-linear-gradient(0deg, transparent 0 30px, var(--line) 30px 31px);
+      color: var(--ink);
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
     }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline wavy 2px var(--red); }
 
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
 
@@ -68,51 +76,63 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(247, 248, 252, 0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
+      background: rgba(244, 238, 224, 0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 2px dashed transparent;
       transition: border-color 0.2s ease;
     }
-    .site-header.scrolled { border-color: var(--border); }
+    .site-header.scrolled { border-bottom-color: rgba(51, 48, 43, 0.28); }
     .header-inner {
       max-width: 1080px;
       margin: 0 auto;
-      padding: 14px 20px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); }
     .brand:hover { text-decoration: none; }
     .brand-mark {
-      width: 30px; height: 30px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      width: 34px; height: 34px;
+      border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+      background: var(--paper-card);
+      border: 2px solid var(--ink);
       display: grid; place-items: center;
+      transform: rotate(-5deg);
+      box-shadow: 2px 2px 0 rgba(51, 48, 43, 0.12);
     }
-    .brand-mark svg { width: 17px; height: 17px; }
-    .nav { display: flex; gap: 22px; font-size: 0.92rem; font-weight: 500; }
-    .nav a { color: var(--muted); }
-    .nav a:hover { color: var(--text); text-decoration: none; }
+    .brand-mark svg { width: 20px; height: 20px; color: var(--ink); }
+    .nav { display: flex; gap: 22px; font-size: 0.98rem; font-weight: 500; }
+    .nav a { color: var(--ink-soft); }
+    .nav a:hover { color: var(--ink); text-decoration: underline wavy 2px var(--red); }
     .nav-link { display: none; }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 18px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #fff;
+      padding: 9px 18px;
+      border-radius: var(--sketch);
+      background: var(--ink);
+      color: var(--paper);
       font-weight: 600;
-      font-size: 0.95rem;
-      box-shadow: 0 10px 22px -10px rgba(79, 70, 229, 0.55);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      font-size: 0.98rem;
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 rgba(51, 48, 43, 0.18);
+      transform: rotate(-1deg);
+      transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 14px 26px -10px rgba(79, 70, 229, 0.6); }
+    .btn:hover {
+      text-decoration: none;
+      transform: rotate(0deg) translateY(-1px);
+      background: var(--red);
+      border-color: var(--red);
+      box-shadow: 4px 5px 0 rgba(51, 48, 43, 0.18);
+    }
 
     /* ---------- Hero ---------- */
-    .hero { padding: 72px 0 56px; }
+    .hero { padding: 64px 0 56px; }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -122,65 +142,99 @@
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
+      gap: 10px;
+      font-size: 0.86rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(79, 70, 229, 0.08);
-      border: 1px solid rgba(79, 70, 229, 0.18);
-      padding: 6px 12px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
-      font-weight: 800;
+      color: var(--ink-soft);
       margin-bottom: 18px;
     }
-    h1 .grad {
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .eyebrow::before {
+      content: "";
+      width: 24px;
+      border-top: 2px dashed var(--ink-soft);
     }
-    .hero-sub { font-size: 1.12rem; color: var(--muted); max-width: 46ch; margin-bottom: 28px; }
-    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
-    .hero-note { margin-top: 16px; font-size: 0.88rem; color: var(--muted); }
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 3.3rem);
+      line-height: 1.12;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1 .hl { position: relative; color: var(--red); white-space: nowrap; }
+    h1 .hl::after {
+      content: "";
+      position: absolute;
+      left: -4px; right: -4px; bottom: 0.02em;
+      height: 0.16em;
+      background: var(--wavy) repeat-x;
+      background-size: 56px 100%;
+    }
+    .hero-sub { font-size: 1.12rem; color: var(--ink-soft); max-width: 46ch; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+    .hero-note { margin-top: 18px; font-size: 0.95rem; color: var(--ink-soft); transform: rotate(-0.4deg); }
 
     .app-store-badge {
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 22px;
-      border-radius: 8px;
-      background: #0b1020;
-      color: #fff;
-      box-shadow: var(--shadow);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      padding: 10px 22px;
+      border-radius: var(--sketch-2);
+      background: var(--ink);
+      border: 2px solid var(--ink);
+      color: var(--paper);
+      box-shadow: var(--shadow-sketch);
+      transform: rotate(0.5deg);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
-    .app-store-badge:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 22px 44px -18px rgba(11, 16, 32, 0.45); }
-    .app-store-badge svg { width: 28px; height: 28px; }
-    .app-store-badge small { display: block; font-size: 0.68rem; line-height: 1.1; color: #b6c0d4; letter-spacing: 0.02em; }
-    .app-store-badge strong { display: block; font-size: 1.05rem; line-height: 1.15; font-weight: 600; }
-    .link-more { font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); padding-bottom: 2px; }
-    .link-more:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+    .app-store-badge:hover { text-decoration: none; transform: rotate(0) translateY(-1px); box-shadow: 5px 6px 0 rgba(51, 48, 43, 0.16); background: var(--red); border-color: var(--red); }
+    .app-store-badge svg { width: 26px; height: 26px; }
+    .app-store-badge small { display: block; font-size: 0.7rem; line-height: 1.1; color: rgba(244, 238, 224, 0.72); letter-spacing: 0.05em; }
+    .app-store-badge strong { display: block; font-size: 1.06rem; line-height: 1.15; font-weight: 600; }
+    .link-more { font-weight: 600; color: var(--ink); text-decoration: underline wavy 2px var(--amber); text-underline-offset: 4px; }
+    .link-more:hover { color: var(--red); text-decoration: underline wavy 2px var(--red); }
 
     /* ---------- Phone mockup ---------- */
     .phone-wrap { display: flex; justify-content: center; }
+    .phone-sketch { position: relative; }
+    .phone-sketch::before {
+      content: "";
+      position: absolute;
+      inset: -12px -14px;
+      border: 2px dashed rgba(51, 48, 43, 0.35);
+      border-radius: 46% 54% 50% 50% / 54% 46% 54% 46%;
+      transform: rotate(1.5deg);
+      pointer-events: none;
+    }
+    .sketch-note {
+      position: absolute;
+      top: -40px;
+      right: -34px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      color: var(--red);
+      font-size: 1.05rem;
+      font-weight: 600;
+      transform: rotate(5deg);
+      z-index: 3;
+    }
+    .sketch-note svg { width: 52px; height: 26px; }
     .phone {
       position: relative;
       width: min(280px, 72vw);
       aspect-ratio: 1206 / 2622;
       border-radius: 44px;
-      background: #0b1020;
+      background: #23201c;
       padding: 10px;
       box-shadow:
-        0 40px 80px -24px rgba(15, 23, 42, 0.4),
-        0 0 0 1px rgba(15, 23, 42, 0.08);
+        6px 8px 0 rgba(51, 48, 43, 0.12),
+        0 30px 60px -24px rgba(51, 48, 43, 0.35);
+    }
+    .phone-float { animation: float 6s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+      50% { transform: translateY(-10px) rotate(-1.5deg); }
     }
     .phone-screen {
       position: relative;
@@ -199,180 +253,208 @@
       width: 86px;
       height: 22px;
       border-radius: 999px;
-      background: #0b1020;
+      background: #23201c;
       z-index: 2;
-    }
-    .phone-float { animation: float 6s ease-in-out infinite; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
     }
 
     /* ---------- Sections ---------- */
     section { padding: 56px 0; }
     .sec-head { max-width: 640px; margin-bottom: 36px; }
     .sec-tag {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--ink-soft);
       margin-bottom: 10px;
     }
-    h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1.15; letter-spacing: -0.015em; font-weight: 800; margin-bottom: 12px; }
-    .sec-head p { color: var(--muted); font-size: 1.05rem; }
+    h2 { font-size: clamp(1.55rem, 3.4vw, 2.15rem); line-height: 1.18; font-weight: 600; margin-bottom: 12px; }
+    .sec-head p { color: var(--ink-soft); font-size: 1.05rem; }
 
-    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      background: var(--paper-card);
+      border: 2px solid var(--ink);
+      border-radius: var(--sketch);
       padding: 22px;
-      box-shadow: 0 10px 26px -18px rgba(15, 23, 42, 0.16);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: var(--shadow-sketch);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -20px rgba(15, 23, 42, 0.22); }
+    .card:nth-child(odd) { --tilt: -0.9deg; }
+    .card:nth-child(even) { --tilt: 0.8deg; }
+    .card:nth-child(3n) { border-radius: var(--sketch-2); }
+    .card:hover { transform: translateY(-3px) rotate(0deg); box-shadow: 6px 8px 0 rgba(51, 48, 43, 0.14); }
     .card .icon {
-      width: 42px; height: 42px;
+      width: 46px; height: 46px;
       display: grid; place-items: center;
-      font-size: 1.35rem;
-      border-radius: 12px;
-      background: rgba(79, 70, 229, 0.09);
+      border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      transform: rotate(-4deg);
       margin-bottom: 14px;
+      box-shadow: 2px 2px 0 rgba(51, 48, 43, 0.12);
     }
-    .card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 6px; }
-    .card p { font-size: 0.92rem; color: var(--muted); }
+    .card .icon svg { width: 26px; height: 26px; }
+    .icon--red { color: var(--red); background: rgba(193, 85, 59, 0.08); }
+    .icon--blue { color: var(--blue); background: rgba(74, 111, 165, 0.08); }
+    .icon--green { color: var(--green); background: rgba(109, 138, 85, 0.10); }
+    .icon--amber { color: var(--amber); background: rgba(185, 127, 45, 0.10); }
+    .card h3 { font-size: 1.06rem; font-weight: 600; margin-bottom: 6px; }
+    .card p { font-size: 0.96rem; color: var(--ink-soft); }
 
     /* ---------- Widgets section ---------- */
     .widgets-bg {
-      background: linear-gradient(180deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #efe7d1, var(--paper));
+      border-top: 2px dashed rgba(51, 48, 43, 0.22);
+      border-bottom: 2px dashed rgba(51, 48, 43, 0.22);
     }
-    .two-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
-    .feature-row { display: flex; gap: 16px; }
+    .two-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-bottom: 40px; }
+    .feature-row { display: flex; gap: 16px; align-items: flex-start; }
     .feature-row .icon { flex-shrink: 0; margin-bottom: 0; }
     .feature-row h3 { margin-bottom: 4px; }
-    .feature-row p { font-size: 0.94rem; }
+    .feature-row p { font-size: 0.97rem; }
 
-    .shot-strip { display: flex; justify-content: center; gap: 22px; }
+    .shot-strip { display: flex; justify-content: center; gap: 24px; }
+    .shot-pad {
+      position: relative;
+      width: min(200px, 30vw);
+      padding: 10px;
+      background: var(--paper-card);
+      border: 2px solid var(--ink);
+      border-radius: var(--sketch-2);
+      box-shadow: var(--shadow-sketch);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .shot-pad:nth-child(odd) { --tilt: -1deg; }
+    .shot-pad:nth-child(even) { --tilt: 0.9deg; }
+    .shot-pad:hover { transform: translateY(-4px) rotate(0deg); box-shadow: 6px 8px 0 rgba(51, 48, 43, 0.14); }
     .shot {
       position: relative;
-      width: min(190px, 30vw);
       aspect-ratio: 1206 / 2622;
-      border-radius: 30px;
-      background: #0b1020;
-      padding: 8px;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease;
+      border-radius: 26px;
+      background: #23201c;
+      padding: 6px;
     }
-    .shot:hover { transform: translateY(-4px); }
-    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
-    .shot-caption { text-align: center; margin-top: 22px; color: var(--muted); font-size: 0.92rem; }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 21px; }
+    .shot-caption { text-align: center; margin-top: 26px; color: var(--ink-soft); font-size: 0.98rem; transform: rotate(-0.3deg); }
 
     /* ---------- Privacy ---------- */
     .privacy-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 40px;
+      background:
+        repeating-linear-gradient(0deg, transparent 0 30px, var(--line) 30px 31px),
+        var(--paper-card);
+      border: 2px solid var(--ink);
+      border-radius: var(--sketch);
+      padding: 44px 40px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      box-shadow: var(--shadow);
+      gap: 44px;
+      box-shadow: 5px 5px 0 rgba(51, 48, 43, 0.10);
     }
-    .privacy-points { display: grid; gap: 14px; align-content: start; }
-    .privacy-point { display: flex; gap: 12px; align-items: flex-start; font-size: 0.98rem; }
+    .privacy-points { display: grid; gap: 16px; align-content: start; }
+    .privacy-point { display: flex; gap: 12px; align-items: flex-start; font-size: 1rem; }
     .privacy-point .tick {
       flex-shrink: 0;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: rgba(79, 70, 229, 0.12);
-      color: var(--accent);
+      width: 24px; height: 24px;
+      border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+      border: 2px solid var(--green);
+      background: rgba(109, 138, 85, 0.10);
+      color: var(--green);
       display: grid; place-items: center;
-      font-size: 0.75rem;
-      font-weight: 800;
       margin-top: 3px;
+      transform: rotate(-3deg);
     }
-    .privacy-small { margin-top: 18px; font-size: 0.88rem; color: var(--muted); }
+    .privacy-point .tick svg { width: 14px; height: 14px; }
+    .privacy-small { margin-top: 20px; font-size: 0.92rem; color: var(--ink-soft); }
 
     /* ---------- FAQ ---------- */
     .faq { max-width: 720px; margin: 0 auto; }
     .faq-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-bottom: 12px;
+      background: var(--paper-card);
+      border: 2px solid var(--ink);
+      border-radius: var(--sketch);
+      margin-bottom: 14px;
       overflow: hidden;
+      box-shadow: 3px 3px 0 rgba(51, 48, 43, 0.08);
       transition: border-color 0.2s ease;
     }
-    .faq-item.open { border-color: rgba(79, 70, 229, 0.35); }
+    .faq-item:nth-child(even) { border-radius: var(--sketch-2); transform: rotate(0.2deg); }
+    .faq-item.open { border-color: var(--red); }
     .faq-question {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 18px 20px;
+      padding: 17px 20px;
       background: none;
       border: 0;
       font: inherit;
       font-weight: 600;
-      font-size: 1rem;
-      color: var(--text);
+      font-size: 1.02rem;
+      color: var(--ink);
       text-align: left;
       cursor: pointer;
     }
     .faq-question .chev {
       flex-shrink: 0;
-      width: 26px; height: 26px;
-      border-radius: 8px;
-      background: rgba(79, 70, 229, 0.09);
-      color: var(--accent);
+      width: 28px; height: 28px;
+      border-radius: 52% 48% 44% 56% / 46% 54% 46% 54%;
+      border: 2px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
       display: grid; place-items: center;
-      font-size: 0.8rem;
-      transition: transform 0.2s ease;
+      transform: rotate(-3deg);
     }
-    .faq-item.open .chev { transform: rotate(45deg); }
+    .faq-question .chev svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+    .faq-item.open .chev svg { transform: rotate(45deg); }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
-    .faq-answer p { padding: 0 20px 18px; font-size: 0.95rem; color: var(--muted); }
+    .faq-answer p { padding: 0 20px 18px; font-size: 0.98rem; color: var(--ink-soft); }
 
     /* ---------- CTA ---------- */
     .cta-panel {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      border-radius: 12px;
-      color: #fff;
-      text-align: center;
-      padding: 64px 28px;
-      box-shadow: 0 30px 60px -24px rgba(79, 70, 229, 0.5);
       position: relative;
+      background: var(--paper-note);
+      border: 2px solid var(--ink);
+      border-radius: 12px 42px 16px 46px / 46px 12px 42px 16px;
+      color: var(--ink);
+      text-align: center;
+      padding: 58px 28px 66px;
+      box-shadow: 6px 6px 0 rgba(51, 48, 43, 0.12), 0 22px 34px -22px rgba(51, 48, 43, 0.35);
+      transform: rotate(-0.6deg);
       overflow: hidden;
     }
-    .cta-panel::after {
+    .cta-panel::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(600px 300px at 50% 0%, rgba(255, 255, 255, 0.14), transparent 65%);
-      pointer-events: none;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 150px;
+      height: 30px;
+      background: rgba(193, 85, 59, 0.16);
+      border: 1px dashed rgba(193, 85, 59, 0.45);
     }
-    .cta-panel h2 { color: #fff; }
-    .cta-panel p { color: rgba(255, 255, 255, 0.85); max-width: 46ch; margin: 0 auto 26px; }
+    .cta-panel h2 { color: var(--ink); }
+    .cta-panel p { color: var(--ink-soft); max-width: 46ch; margin: 0 auto 26px; }
     .cta-panel .app-store-badge {
-      background: #fff;
-      color: #0b1020;
-      box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.35);
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+      box-shadow: 3px 3px 0 rgba(51, 48, 43, 0.2);
+      transform: rotate(0.4deg);
     }
-    .cta-panel .app-store-badge small { color: #4b5563; }
+    .cta-panel .app-store-badge small { color: rgba(244, 238, 224, 0.7); }
 
     /* ---------- Footer ---------- */
-    footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: 0.9rem; }
-    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-bottom: 14px; }
-    .footer-links a { color: var(--muted); }
-    .footer-links a:hover { color: var(--text); }
+    footer { padding: 40px 0 56px; text-align: center; color: var(--ink-soft); font-size: 0.95rem; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 14px; }
+    .footer-links a { color: var(--ink-soft); }
+    .footer-links a:hover { color: var(--ink); }
 
     /* ---------- Reveal ---------- */
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: none; }
+    .reveal { opacity: 0; transform: translateY(18px) rotate(var(--tilt, 0deg)); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0) rotate(var(--tilt, 0deg)); }
 
     /* ---------- Responsive ---------- */
     @media (min-width: 861px) {
@@ -380,24 +462,26 @@
     }
     @media (max-width: 860px) {
       .hero { padding: 48px 0 40px; }
-      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
       .hero-sub { max-width: none; }
+      .sketch-note { display: none; }
       .grid { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; }
       .privacy-card { grid-template-columns: 1fr; padding: 30px; }
-      .shot-strip { gap: 14px; }
+      .shot-strip { gap: 16px; }
     }
     @media (max-width: 480px) {
       .grid { grid-template-columns: 1fr; }
       .nav { display: none; }
       .header-cta { display: none; }
-      .shot { width: min(150px, 40vw); }
+      .shot-pad { width: min(160px, 40vw); }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .phone-float { animation: none; }
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal { opacity: 1; transform: translateY(0) rotate(var(--tilt, 0deg)); transition: none; }
+      .card, .shot-pad, .cta-panel, .app-store-badge { transition: none; }
     }
   </style>
 </head>
@@ -407,7 +491,11 @@
     <div class="header-inner">
       <a class="brand" href="#top" aria-label="Time Left home">
         <span class="brand-mark">
-          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-dasharray="119 120" transform="rotate(-90 50 50)"/><circle cx="50" cy="50" r="14" fill="#fff"/></svg>
+          <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="24" cy="24" r="17"/>
+            <path d="M24 14v10l8 5"/>
+            <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+          </svg>
         </span>
         Time Left
       </a>
@@ -427,7 +515,7 @@
       <div class="wrap hero-grid">
         <div>
           <span class="eyebrow">iPhone app · Countdown widget</span>
-          <h1>See how much time is <span class="grad">left</span>, at a glance.</h1>
+          <h1>See how much time is <span class="hl">left</span>, at a glance.</h1>
           <p class="hero-sub">
             Time Left turns your countdowns into beautiful Lock Screen and Home Screen widgets —
             so birthdays, exams, trips, and deadlines are always one glance away.
@@ -437,15 +525,24 @@
               <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               <span><small>Download on the</small><strong>App Store</strong></span>
             </a>
-            <a class="link-more" href="#widgets">See it on your Lock Screen ↓</a>
+            <a class="link-more" href="#widgets">See it on your Lock Screen</a>
           </div>
           <p class="hero-note">Free to start · No account needed · Your data stays on your iPhone</p>
         </div>
         <div class="phone-wrap">
-          <div class="phone phone-float">
-            <div class="phone-screen">
-              <div class="phone-island" aria-hidden="true"></div>
-              <img src="assets/time-left-v2-01.png" alt="Time Left showing a countdown on iPhone" width="1206" height="2622">
+          <div class="phone-sketch">
+            <div class="sketch-note" aria-hidden="true">
+              <svg viewBox="0 0 50 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12c11 0 21 0 34 2"/>
+                <path d="M32 8l7 6-9 4"/>
+              </svg>
+              days left!
+            </div>
+            <div class="phone phone-float">
+              <div class="phone-screen">
+                <div class="phone-island" aria-hidden="true"></div>
+                <img src="assets/time-left-v2-01.png" alt="Time Left showing a countdown on iPhone" width="1206" height="2622">
+              </div>
             </div>
           </div>
         </div>
@@ -462,22 +559,47 @@
         </div>
         <div class="grid">
           <div class="card reveal">
-            <div class="icon">🎂</div>
+            <div class="icon icon--red">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 9c1.7 1.5 1.7 3.7 0 5.2s-1.7-3.7 0-5.2z"/>
+                <path d="M24 14v12"/>
+                <path d="M15 32h18"/>
+                <path d="M15 32c1.6-2.2 3.2-2.2 4.8 0s3.2 2.2 4.8 0 3.2-2.2 4.8 0 3.2 2.2 4.8 0"/>
+                <path d="M13 32v6a4 4 0 0 0 4 4h14a4 4 0 0 0 4-4v-6"/>
+                <path d="M9 44h30"/>
+              </svg>
+            </div>
             <h3>Birthdays</h3>
             <p>Never lose track — see exactly how many days until the next birthday, and keep counting up after the day arrives.</p>
           </div>
           <div class="card reveal">
-            <div class="icon">📚</div>
+            <div class="icon icon--blue">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 15c-3.2-3.2-8-4.4-14-3.4v26.5c6-.9 10.8.3 14 3.4 3.2-3.1 8-4.3 14-3.4v-26.5c-6-.9-10.8.2-14 3.4z"/>
+                <path d="M24 15v26.5"/>
+              </svg>
+            </div>
             <h3>Exams</h3>
             <p>Pin the big date. A countdown to exam day keeps your prep honest and your schedule in view.</p>
           </div>
           <div class="card reveal">
-            <div class="icon">✈️</div>
+            <div class="icon icon--green">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 27l22-5 9-13"/>
+                <path d="M10 27l4 8 14-5"/>
+                <path d="M22 22l18-13"/>
+              </svg>
+            </div>
             <h3>Trips</h3>
             <p>From departure day to the count-up after you land — the whole trip lives right on your widgets.</p>
           </div>
           <div class="card reveal">
-            <div class="icon">📌</div>
+            <div class="icon icon--amber">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M24 8c-7 0-12 5.2-12 11.8 0 8.9 12 24.2 12 24.2s12-15.3 12-24.2C36 13.2 31 8 24 8z"/>
+                <circle cx="24" cy="19" r="4"/>
+              </svg>
+            </div>
             <h3>Deadlines</h3>
             <p>Projects, renewals, and dates that can't slip. Days left, front and center, every time you glance.</p>
           </div>
@@ -495,14 +617,26 @@
         </div>
         <div class="two-col">
           <div class="card feature-row reveal">
-            <div class="icon">🕘</div>
+            <div class="icon icon--blue">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="24" cy="24" r="18"/>
+                <path d="M24 14v10l7 5"/>
+                <circle cx="24" cy="24" r="2.4" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
             <div>
               <h3>Lock Screen widgets</h3>
               <p>Glance at the time that's left without unlocking your phone. Add a compact countdown around the clock in a few taps.</p>
             </div>
           </div>
           <div class="card feature-row reveal">
-            <div class="icon">🏠</div>
+            <div class="icon icon--green">
+              <svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 22L24 10l13 12"/>
+                <path d="M15 20v18h18V20"/>
+                <path d="M21 38v-8h6v8"/>
+              </svg>
+            </div>
             <div>
               <h3>Home Screen widgets</h3>
               <p>Choose a size that fits your screen and keep your next milestone always visible — refreshed throughout the day.</p>
@@ -510,14 +644,20 @@
           </div>
         </div>
         <div class="shot-strip reveal">
-          <div class="shot">
-            <img src="assets/time-left-v2-02.png" alt="Time Left Home Screen widget" loading="lazy" width="1206" height="2622">
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/time-left-v2-02.png" alt="Time Left Home Screen widget" loading="lazy" width="1206" height="2622">
+            </div>
           </div>
-          <div class="shot">
-            <img src="assets/time-left-v2-03.png" alt="Time Left Lock Screen countdown widget" loading="lazy" width="1206" height="2622">
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/time-left-v2-03.png" alt="Time Left Lock Screen countdown widget" loading="lazy" width="1206" height="2622">
+            </div>
           </div>
-          <div class="shot">
-            <img src="assets/time-left-v2-04.png" alt="Time Left countdown cards" loading="lazy" width="1206" height="2622">
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/time-left-v2-04.png" alt="Time Left countdown cards" loading="lazy" width="1206" height="2622">
+            </div>
           </div>
         </div>
         <p class="shot-caption">Time Left on your iPhone — widgets, countdowns, and count-ups.</p>
@@ -531,16 +671,16 @@
           <div>
             <p class="sec-tag">Private by design</p>
             <h2 style="margin-bottom: 14px;">Your countdowns stay on your iPhone.</h2>
-            <p style="color: var(--muted); font-size: 1.02rem;">
+            <p style="color: var(--ink-soft); font-size: 1.02rem;">
               Time Left is built around a simple idea: your schedule is your business. There's no account to create and
               no server holding your dates.
             </p>
           </div>
           <div class="privacy-points">
-            <div class="privacy-point"><span class="tick">✓</span> No account, no sign-up, no login — ever.</div>
-            <div class="privacy-point"><span class="tick">✓</span> Events and settings are stored locally on your device.</div>
-            <div class="privacy-point"><span class="tick">✓</span> No analytics, no ad trackers, no data selling.</div>
-            <div class="privacy-point"><span class="tick">✓</span> Optional iCloud Sync is handled entirely by Apple.</div>
+            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> No account, no sign-up, no login — ever.</div>
+            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> Events and settings are stored locally on your device.</div>
+            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> No analytics, no ad trackers, no data selling.</div>
+            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> Optional iCloud Sync is handled entirely by Apple.</div>
             <p class="privacy-small">
               Read the full policy at
               <a href="https://thisisprabha.com/time-left-privacy-policy.html" target="_blank" rel="noopener noreferrer">time-left-privacy-policy.html</a>.
@@ -561,35 +701,35 @@
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
               How do I add a Time Left widget?
-              <span class="chev" aria-hidden="true">+</span>
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
             <div class="faq-answer"><p>Press and hold the Lock Screen or Home Screen, tap the <strong>+</strong> button, search for Time Left, and choose a widget size. On the Lock Screen, tap <strong>Customize</strong> to place widgets around the clock.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
               Do I need an account?
-              <span class="chev" aria-hidden="true">+</span>
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
             <div class="faq-answer"><p>No. Time Left works entirely on your device — there's no sign-up, no login, and no account to create. Just download and start counting down.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
               Where is my data stored?
-              <span class="chev" aria-hidden="true">+</span>
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
             <div class="faq-answer"><p>Locally on your iPhone. Your events, habits, and settings never leave your device. iCloud Sync is optional and, if you enable it, is handled through Apple's iCloud tied to your Apple ID.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
               Can I get reminders for events?
-              <span class="chev" aria-hidden="true">+</span>
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
             <div class="faq-answer"><p>Yes. Allow notification access and set a reminder for any event or habit. Reminders are scheduled on your device, and you control them in the app.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
               Can I count up too, not just down?
-              <span class="chev" aria-hidden="true">+</span>
+              <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
             <div class="faq-answer"><p>Absolutely. Count down to a future date or count up from one that's passed — days, hours, and more. Birthdays after the party and trips after the flight keep going on their own.</p></div>
           </div>
