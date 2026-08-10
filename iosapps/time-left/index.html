@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Left — Countdown &amp; Days Left Widget for iPhone</title>
+  <meta name="description" content="Time Left puts your countdowns on the Lock Screen and Home Screen. Track the days left until birthdays, exams, trips, and deadlines — no account needed, private by design.">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="canonical" href="https://thisisprabha.com/iosapps/time-left/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f46e5'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='9' stroke-linecap='round' stroke-dasharray='188.5 188.5' transform='rotate(-90 50 50)'/%3E%3Ccircle cx='50' cy='50' r='12' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thisisprabha.com/iosapps/time-left/">
+  <meta property="og:title" content="Time Left — Countdown &amp; Days Left Widget for iPhone">
+  <meta property="og:description" content="Birthdays, exams, trips, deadlines. See exactly how much time is left — right on your Lock Screen and Home Screen. No account needed.">
+  <meta property="og:image" content="https://thisisprabha.com/iosapps/time-left/assets/time-left-v2-01.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Time Left — Countdown &amp; Days Left Widget for iPhone">
+  <meta name="twitter:description" content="Your countdowns, right on the Lock Screen. Birthdays, exams, trips, deadlines — no account needed.">
+  <meta name="twitter:image" content="https://thisisprabha.com/iosapps/time-left/assets/time-left-v2-01.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Time Left",
+    "operatingSystem": "iOS",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Countdown and days-left widget app for iPhone. Track birthdays, exams, trips, and deadlines on your Lock Screen and Home Screen. Private by design — no account needed.",
+    "url": "https://apps.apple.com/app/id6755923528",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #5b6478;
+      --accent: #2563eb;
+      --accent-2: #0f766e;
+      --border: #e5e9f2;
+      --radius: 8px;
+      --shadow: 0 18px 40px -18px rgba(15, 23, 42, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(247, 248, 252, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    .site-header.scrolled { border-color: var(--border); }
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .brand-mark {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: grid; place-items: center;
+    }
+    .brand-mark svg { width: 17px; height: 17px; }
+    .nav { display: flex; gap: 22px; font-size: 0.92rem; font-weight: 500; }
+    .nav a { color: var(--muted); }
+    .nav a:hover { color: var(--text); text-decoration: none; }
+    .nav-link { display: none; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 22px -10px rgba(79, 70, 229, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 14px 26px -10px rgba(79, 70, 229, 0.6); }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 72px 0 56px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.18);
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+    h1 .grad {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub { font-size: 1.12rem; color: var(--muted); max-width: 46ch; margin-bottom: 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .hero-note { margin-top: 16px; font-size: 0.88rem; color: var(--muted); }
+
+    .app-store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 22px;
+      border-radius: 8px;
+      background: #0b1020;
+      color: #fff;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .app-store-badge:hover { text-decoration: none; transform: translateY(-1px); box-shadow: 0 22px 44px -18px rgba(11, 16, 32, 0.45); }
+    .app-store-badge svg { width: 28px; height: 28px; }
+    .app-store-badge small { display: block; font-size: 0.68rem; line-height: 1.1; color: #b6c0d4; letter-spacing: 0.02em; }
+    .app-store-badge strong { display: block; font-size: 1.05rem; line-height: 1.15; font-weight: 600; }
+    .link-more { font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); padding-bottom: 2px; }
+    .link-more:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+
+    /* ---------- Phone mockup ---------- */
+    .phone-wrap { display: flex; justify-content: center; }
+    .phone {
+      position: relative;
+      width: min(280px, 72vw);
+      aspect-ratio: 1206 / 2622;
+      border-radius: 44px;
+      background: #0b1020;
+      padding: 10px;
+      box-shadow:
+        0 40px 80px -24px rgba(15, 23, 42, 0.4),
+        0 0 0 1px rgba(15, 23, 42, 0.08);
+    }
+    .phone-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .phone-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .phone-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 86px;
+      height: 22px;
+      border-radius: 999px;
+      background: #0b1020;
+      z-index: 2;
+    }
+    .phone-float { animation: float 6s ease-in-out infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* ---------- Sections ---------- */
+    section { padding: 56px 0; }
+    .sec-head { max-width: 640px; margin-bottom: 36px; }
+    .sec-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1.15; letter-spacing: -0.015em; font-weight: 800; margin-bottom: 12px; }
+    .sec-head p { color: var(--muted); font-size: 1.05rem; }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 10px 26px -18px rgba(15, 23, 42, 0.16);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -20px rgba(15, 23, 42, 0.22); }
+    .card .icon {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      font-size: 1.35rem;
+      border-radius: 12px;
+      background: rgba(79, 70, 229, 0.09);
+      margin-bottom: 14px;
+    }
+    .card h3 { font-size: 1.02rem; font-weight: 700; margin-bottom: 6px; }
+    .card p { font-size: 0.92rem; color: var(--muted); }
+
+    /* ---------- Widgets section ---------- */
+    .widgets-bg {
+      background: linear-gradient(180deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .two-col { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
+    .feature-row { display: flex; gap: 16px; }
+    .feature-row .icon { flex-shrink: 0; margin-bottom: 0; }
+    .feature-row h3 { margin-bottom: 4px; }
+    .feature-row p { font-size: 0.94rem; }
+
+    .shot-strip { display: flex; justify-content: center; gap: 22px; }
+    .shot {
+      position: relative;
+      width: min(190px, 30vw);
+      aspect-ratio: 1206 / 2622;
+      border-radius: 30px;
+      background: #0b1020;
+      padding: 8px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease;
+    }
+    .shot:hover { transform: translateY(-4px); }
+    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+    .shot-caption { text-align: center; margin-top: 22px; color: var(--muted); font-size: 0.92rem; }
+
+    /* ---------- Privacy ---------- */
+    .privacy-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      box-shadow: var(--shadow);
+    }
+    .privacy-points { display: grid; gap: 14px; align-content: start; }
+    .privacy-point { display: flex; gap: 12px; align-items: flex-start; font-size: 0.98rem; }
+    .privacy-point .tick {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(79, 70, 229, 0.12);
+      color: var(--accent);
+      display: grid; place-items: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      margin-top: 3px;
+    }
+    .privacy-small { margin-top: 18px; font-size: 0.88rem; color: var(--muted); }
+
+    /* ---------- FAQ ---------- */
+    .faq { max-width: 720px; margin: 0 auto; }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .faq-item.open { border-color: rgba(79, 70, 229, 0.35); }
+    .faq-question {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      background: none;
+      border: 0;
+      font: inherit;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+    }
+    .faq-question .chev {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 8px;
+      background: rgba(79, 70, 229, 0.09);
+      color: var(--accent);
+      display: grid; place-items: center;
+      font-size: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.open .chev { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.28s ease; }
+    .faq-answer p { padding: 0 20px 18px; font-size: 0.95rem; color: var(--muted); }
+
+    /* ---------- CTA ---------- */
+    .cta-panel {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-radius: 12px;
+      color: #fff;
+      text-align: center;
+      padding: 64px 28px;
+      box-shadow: 0 30px 60px -24px rgba(79, 70, 229, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(600px 300px at 50% 0%, rgba(255, 255, 255, 0.14), transparent 65%);
+      pointer-events: none;
+    }
+    .cta-panel h2 { color: #fff; }
+    .cta-panel p { color: rgba(255, 255, 255, 0.85); max-width: 46ch; margin: 0 auto 26px; }
+    .cta-panel .app-store-badge {
+      background: #fff;
+      color: #0b1020;
+      box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.35);
+    }
+    .cta-panel .app-store-badge small { color: #4b5563; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 40px 0 56px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 22px; margin-bottom: 14px; }
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ---------- Reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (min-width: 861px) {
+      .nav-link { display: inline; }
+    }
+    @media (max-width: 860px) {
+      .hero { padding: 48px 0 40px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero-sub { max-width: none; }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .privacy-card { grid-template-columns: 1fr; padding: 30px; }
+      .shot-strip { gap: 14px; }
+    }
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+      .header-cta { display: none; }
+      .shot { width: min(150px, 40vw); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .phone-float { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Time Left home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-dasharray="119 120" transform="rotate(-90 50 50)"/><circle cx="50" cy="50" r="14" fill="#fff"/></svg>
+        </span>
+        Time Left
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a class="nav-link" href="#widgets">Widgets</a>
+        <a class="nav-link" href="#countdowns">Track anything</a>
+        <a class="nav-link" href="#privacy">Privacy</a>
+        <a class="nav-link" href="#faq">FAQ</a>
+      </nav>
+      <a class="btn header-cta" href="https://apps.apple.com/app/id6755923528">Get the app</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">iPhone app · Countdown widget</span>
+          <h1>See how much time is <span class="grad">left</span>, at a glance.</h1>
+          <p class="hero-sub">
+            Time Left turns your countdowns into beautiful Lock Screen and Home Screen widgets —
+            so birthdays, exams, trips, and deadlines are always one glance away.
+          </p>
+          <div class="hero-actions">
+            <a class="app-store-badge" href="https://apps.apple.com/app/id6755923528" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span><small>Download on the</small><strong>App Store</strong></span>
+            </a>
+            <a class="link-more" href="#widgets">See it on your Lock Screen ↓</a>
+          </div>
+          <p class="hero-note">Free to start · No account needed · Your data stays on your iPhone</p>
+        </div>
+        <div class="phone-wrap">
+          <div class="phone phone-float">
+            <div class="phone-screen">
+              <div class="phone-island" aria-hidden="true"></div>
+              <img src="assets/time-left-v2-01.png" alt="Time Left showing a countdown on iPhone" width="1206" height="2622">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Count down to anything -->
+    <section id="countdowns">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="sec-tag">Count down to anything</p>
+          <h2>The days that matter, front and center</h2>
+          <p>Whatever you're waiting for, Time Left keeps the days left honest and visible.</p>
+        </div>
+        <div class="grid">
+          <div class="card reveal">
+            <div class="icon">🎂</div>
+            <h3>Birthdays</h3>
+            <p>Never lose track — see exactly how many days until the next birthday, and keep counting up after the day arrives.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">📚</div>
+            <h3>Exams</h3>
+            <p>Pin the big date. A countdown to exam day keeps your prep honest and your schedule in view.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">✈️</div>
+            <h3>Trips</h3>
+            <p>From departure day to the count-up after you land — the whole trip lives right on your widgets.</p>
+          </div>
+          <div class="card reveal">
+            <div class="icon">📌</div>
+            <h3>Deadlines</h3>
+            <p>Projects, renewals, and dates that can't slip. Days left, front and center, every time you glance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Widgets -->
+    <section id="widgets" class="widgets-bg">
+      <div class="wrap">
+        <div class="sec-head" style="margin-bottom: 32px;">
+          <p class="sec-tag">Widgets</p>
+          <h2>Made for your Lock Screen &amp; Home Screen</h2>
+          <p>Your countdowns where you actually look — no opening the app, no digging around.</p>
+        </div>
+        <div class="two-col">
+          <div class="card feature-row reveal">
+            <div class="icon">🕘</div>
+            <div>
+              <h3>Lock Screen widgets</h3>
+              <p>Glance at the time that's left without unlocking your phone. Add a compact countdown around the clock in a few taps.</p>
+            </div>
+          </div>
+          <div class="card feature-row reveal">
+            <div class="icon">🏠</div>
+            <div>
+              <h3>Home Screen widgets</h3>
+              <p>Choose a size that fits your screen and keep your next milestone always visible — refreshed throughout the day.</p>
+            </div>
+          </div>
+        </div>
+        <div class="shot-strip reveal">
+          <div class="shot">
+            <img src="assets/time-left-v2-02.png" alt="Time Left Home Screen widget" loading="lazy" width="1206" height="2622">
+          </div>
+          <div class="shot">
+            <img src="assets/time-left-v2-03.png" alt="Time Left Lock Screen countdown widget" loading="lazy" width="1206" height="2622">
+          </div>
+          <div class="shot">
+            <img src="assets/time-left-v2-04.png" alt="Time Left countdown cards" loading="lazy" width="1206" height="2622">
+          </div>
+        </div>
+        <p class="shot-caption">Time Left on your iPhone — widgets, countdowns, and count-ups.</p>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy">
+      <div class="wrap">
+        <div class="privacy-card reveal">
+          <div>
+            <p class="sec-tag">Private by design</p>
+            <h2 style="margin-bottom: 14px;">Your countdowns stay on your iPhone.</h2>
+            <p style="color: var(--muted); font-size: 1.02rem;">
+              Time Left is built around a simple idea: your schedule is your business. There's no account to create and
+              no server holding your dates.
+            </p>
+          </div>
+          <div class="privacy-points">
+            <div class="privacy-point"><span class="tick">✓</span> No account, no sign-up, no login — ever.</div>
+            <div class="privacy-point"><span class="tick">✓</span> Events and settings are stored locally on your device.</div>
+            <div class="privacy-point"><span class="tick">✓</span> No analytics, no ad trackers, no data selling.</div>
+            <div class="privacy-point"><span class="tick">✓</span> Optional iCloud Sync is handled entirely by Apple.</div>
+            <p class="privacy-small">
+              Read the full policy at
+              <a href="https://thisisprabha.com/time-left-privacy-policy.html" target="_blank" rel="noopener noreferrer">time-left-privacy-policy.html</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <div class="sec-head" style="margin: 0 auto 32px; text-align: center;">
+          <p class="sec-tag">FAQ</p>
+          <h2>Questions, answered</h2>
+        </div>
+        <div class="faq">
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              How do I add a Time Left widget?
+              <span class="chev" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Press and hold the Lock Screen or Home Screen, tap the <strong>+</strong> button, search for Time Left, and choose a widget size. On the Lock Screen, tap <strong>Customize</strong> to place widgets around the clock.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Do I need an account?
+              <span class="chev" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>No. Time Left works entirely on your device — there's no sign-up, no login, and no account to create. Just download and start counting down.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Where is my data stored?
+              <span class="chev" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Locally on your iPhone. Your events, habits, and settings never leave your device. iCloud Sync is optional and, if you enable it, is handled through Apple's iCloud tied to your Apple ID.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Can I get reminders for events?
+              <span class="chev" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Yes. Allow notification access and set a reminder for any event or habit. Reminders are scheduled on your device, and you control them in the app.</p></div>
+          </div>
+          <div class="faq-item reveal">
+            <button class="faq-question" type="button" aria-expanded="false">
+              Can I count up too, not just down?
+              <span class="chev" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Absolutely. Count down to a future date or count up from one that's passed — days, hours, and more. Birthdays after the party and trips after the flight keep going on their own.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section style="padding-top: 0;">
+      <div class="wrap">
+        <div class="cta-panel reveal">
+          <h2>Start counting down today</h2>
+          <p>Put the days left for your next big moment on the Lock Screen. It takes seconds to set up.</p>
+          <a class="app-store-badge" href="https://apps.apple.com/app/id6755923528" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 384 512" aria-hidden="true"><path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            <span><small>Download on the</small><strong>App Store</strong></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://thisisprabha.com/time-left-privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+      <a href="https://thisisprabha.com/time-left-support.html" target="_blank" rel="noopener noreferrer">Support</a>
+      <a href="mailto:uxcurry@gmail.com">Contact</a>
+    </div>
+    <p>© 2026 Time Left. All rights reserved.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Sticky header shadow
+      var header = document.querySelector('.site-header');
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 8);
+      }, { passive: true });
+
+      // Reveal on scroll
+      var reveals = document.querySelectorAll('.reveal');
+      if (reduceMotion) {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+      } else if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+      }
+
+      // FAQ accordion
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function (item) {
+        var btn = item.querySelector('.faq-question');
+        var answer = item.querySelector('.faq-answer');
+        btn.addEventListener('click', function () {
+          var wasOpen = item.classList.contains('open');
+          items.forEach(function (other) {
+            other.classList.remove('open');
+            other.querySelector('.faq-answer').style.maxHeight = null;
+            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          });
+          if (!wasOpen) {
+            item.classList.add('open');
+            answer.style.maxHeight = answer.scrollHeight + 'px';
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
