@@ -39,10 +39,33 @@
       max-width: 980px;
       margin: 0 auto;
       padding: 0 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #particleCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
     }
 
     header.hero {
       padding: 120px 0 72px;
+    }
+
+    .avatar {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.03);
+      margin-bottom: 32px;
+      object-fit: cover;
+      display: block;
     }
 
     .eyebrow {
@@ -265,6 +288,7 @@
 <body>
   <div class="wrap">
     <header class="hero">
+      <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
       <p class="eyebrow">Product Design / AI / iOS</p>
       <h1>Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.</h1>
       <p>I design clear, capable software for complex workflows, with a focus on <strong>AI-powered products, IT operations, and mobile experiences</strong>. At SuperOps, I help simplify the day-to-day work of MSP teams through thoughtful product strategy, interaction design, and close collaboration with engineering and product teams.</p>
@@ -339,5 +363,78 @@
       <span><a href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">GitHub</a> / <a href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
     </footer>
   </div>
+
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('particleCanvas');
+      const ctx = canvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let particles = [];
+      let w, h;
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function spawn(x, y, count) {
+        for (let i = 0; i < count; i++) {
+          particles.push({
+            x: x !== undefined ? x : Math.random() * w,
+            y: y !== undefined ? y : h + Math.random() * 100,
+            size: Math.random() * 1.6 + 0.4,
+            speedY: -(Math.random() * 0.7 + 0.25),
+            drift: Math.random() * 0.4 - 0.2,
+            alpha: Math.random() * 0.35 + 0.25
+          });
+        }
+      }
+
+      function step() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.y += p.speedY;
+          p.x += p.drift;
+          if (p.y < -10) {
+            particles.splice(i, 1);
+            spawn(undefined, undefined, 1);
+            continue;
+          }
+          ctx.beginPath();
+          ctx.fillStyle = 'rgba(245, 245, 247, ' + p.alpha + ')';
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function loop() {
+        step();
+        requestAnimationFrame(loop);
+      }
+
+      resize();
+      spawn(undefined, undefined, 90);
+      if (!reduceMotion) {
+        loop();
+      } else {
+        step();
+      }
+
+      window.addEventListener('resize', () => {
+        resize();
+        particles = [];
+        spawn(undefined, undefined, 90);
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (reduceMotion) return;
+        spawn(e.clientX, e.clientY, 4);
+      });
+    })();
+  </script>
 </body>
 </html>
