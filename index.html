@@ -275,6 +275,197 @@
       color: var(--text);
     }
 
+    .apps-intro {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 58ch;
+      margin: -8px 0 36px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .app-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 160ms ease, transform 160ms ease;
+    }
+
+    .app-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .app-card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .app-card--featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      min-height: 400px;
+    }
+
+    .app-feature-media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 38%, rgba(41, 151, 255, 0.09), transparent 72%),
+        var(--bg-elevated);
+      border-right: 1px solid var(--line);
+    }
+
+    .app-feature-media img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 360px;
+      object-fit: contain;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      box-shadow: 0 28px 60px -32px rgba(0, 0, 0, 0.85);
+    }
+
+    .app-feature-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      padding: 36px 40px;
+    }
+
+    .app-flag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .app-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .app-card:not(.app-card--featured) .app-name {
+      font-size: 22px;
+    }
+
+    .app-tagline {
+      font-size: 17px;
+      line-height: 1.45;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .app-role {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .app-cta {
+      margin-top: auto;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .app-visual {
+      display: grid;
+      gap: 14px;
+      padding: 22px;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 30%, rgba(41, 151, 255, 0.08), transparent 72%),
+        var(--bg-elevated);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .app-visual-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--text-secondary);
+    }
+
+    .app-visual-toolbar span:last-child {
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+    }
+
+    .app-glyph-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 7px;
+    }
+
+    .app-glyph {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .app-glyph.is-empty {
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .app-body {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding: 24px;
+      flex: 1;
+    }
+
+    @media (max-width: 720px) {
+      .apps-grid { grid-template-columns: 1fr; }
+      .app-card--featured { grid-template-columns: 1fr; min-height: 0; }
+      .app-feature-media { border-right: 0; border-bottom: 1px solid var(--line); padding: 22px; }
+      .app-feature-media img { max-height: 300px; }
+      .app-feature-body { padding: 26px 24px; }
+      .app-visual { padding: 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .app-card { transition: none; }
+      .app-card:hover { transform: none; }
+    }
+
     @media (max-width: 720px) {
       .wrap { padding: 0 22px; }
       header.hero { padding: 80px 0 48px; }
@@ -308,6 +499,62 @@
       <p>I've been designing for a while. Started in graphic design, moved through web, landed in product. About 10+ years across <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>. Same thread throughout: take something messy and make it make sense.</p>
       <p>These days: B2B SaaS workflows at SuperOps. On the side I explore how AI agents should interact with people (honestly, nobody's figured this out yet), and I ship SwiftUI apps when there's something worth shipping.</p>
       <p>The stuff I geek out on: information architecture that stays out of the way. Empty states that don't look broken. Onboarding that feels like one smooth motion. Localization done properly. Design systems engineers actually use. The small decisions, the ones nobody notices unless they're wrong.</p>
+    </section>
+
+    <section aria-labelledby="selected-ios-apps">
+      <p class="section-label">Selected iOS Apps</p>
+      <h2 id="selected-ios-apps">Shipped to the App Store.</h2>
+      <p class="apps-intro">A few native products I've designed and built end to end — product thinking, interaction design, and SwiftUI shipped as real apps.</p>
+      <div class="apps-grid">
+        <a class="app-card app-card--featured" href="iosapps/time-left/" aria-label="Time Left — countdown and days-left widgets for iPhone. View landing page.">
+          <div class="app-feature-media">
+            <img src="iosapps/time-left/assets/time-left-v2-01.png" alt="Time Left on iPhone showing a countdown at a glance" loading="lazy" width="1206" height="2622">
+          </div>
+          <div class="app-feature-body">
+            <p class="app-flag">iPhone · Widgets</p>
+            <h3 class="app-name">Time Left</h3>
+            <p class="app-tagline">Your countdowns on the Lock Screen and Home Screen — birthdays, exams, trips, and deadlines at a glance.</p>
+            <p class="app-role">Designed the product, UX, and iOS widgets; built in SwiftUI with no account, no analytics, and data staying on-device.</p>
+            <span class="app-cta">View the app →</span>
+          </div>
+        </a>
+        <a class="app-card" href="iosapps/tamil-typo/" aria-label="Tamil Typo — turn Tamil handwriting into an OpenType font on iPad. View landing page.">
+          <div class="app-visual" aria-hidden="true">
+            <div class="app-visual-toolbar"><span>Tamil Typo</span><span>35 characters</span></div>
+            <div class="app-glyph-grid">
+              <span class="app-glyph">அ</span><span class="app-glyph">ஆ</span><span class="app-glyph">இ</span><span class="app-glyph">ஈ</span><span class="app-glyph">உ</span><span class="app-glyph">ஊ</span>
+              <span class="app-glyph">க</span><span class="app-glyph">ங</span><span class="app-glyph">ச</span><span class="app-glyph">ஞ</span><span class="app-glyph">ட</span><span class="app-glyph">ண</span>
+              <span class="app-glyph">த</span><span class="app-glyph">ந</span><span class="app-glyph">ப</span><span class="app-glyph">ம</span><span class="app-glyph">ய</span><span class="app-glyph">ர</span>
+              <span class="app-glyph is-empty">ல</span><span class="app-glyph is-empty">வ</span><span class="app-glyph is-empty">ழ</span><span class="app-glyph is-empty">ள</span><span class="app-glyph is-empty">ற</span><span class="app-glyph is-empty">ன</span>
+            </div>
+          </div>
+          <div class="app-body">
+            <p class="app-flag">iPad · Font maker</p>
+            <h3 class="app-name">Tamil Typo</h3>
+            <p class="app-tagline">Draw Tamil characters with Apple Pencil and export your own working OpenType font.</p>
+            <p class="app-role">Designed the glyph workflow and Tamil-aware UX; built as a native iPad app with on-device font creation and OTF export.</p>
+            <span class="app-cta">View the app →</span>
+          </div>
+        </a>
+        <a class="app-card" href="iosapps/thats-my-font/" aria-label="That's My Font — turn your handwriting into a real OpenType font on iPad. View landing page.">
+          <div class="app-visual" aria-hidden="true">
+            <div class="app-visual-toolbar"><span>That's My Font</span><span>18 of 62 drawn</span></div>
+            <div class="app-glyph-grid">
+              <span class="app-glyph">A</span><span class="app-glyph">B</span><span class="app-glyph">C</span><span class="app-glyph">D</span><span class="app-glyph">E</span><span class="app-glyph">F</span>
+              <span class="app-glyph">G</span><span class="app-glyph">H</span><span class="app-glyph">I</span><span class="app-glyph">J</span><span class="app-glyph">K</span><span class="app-glyph">L</span>
+              <span class="app-glyph">M</span><span class="app-glyph">N</span><span class="app-glyph">O</span><span class="app-glyph">P</span><span class="app-glyph">Q</span><span class="app-glyph">R</span>
+              <span class="app-glyph is-empty">S</span><span class="app-glyph is-empty">T</span><span class="app-glyph is-empty">U</span><span class="app-glyph is-empty">V</span><span class="app-glyph is-empty">W</span><span class="app-glyph is-empty">X</span>
+            </div>
+          </div>
+          <div class="app-body">
+            <p class="app-flag">iPad · Font maker</p>
+            <h3 class="app-name">That's My Font</h3>
+            <p class="app-tagline">Draw, refine, preview, and export your handwriting as a real OpenType font.</p>
+            <p class="app-role">Designed the draw-and-refine loop; built as a native iPad app with on-device font creation and OTF export.</p>
+            <span class="app-cta">View the app →</span>
+          </div>
+        </a>
+      </div>
     </section>
 
     <section>
