@@ -1,0 +1,19 @@
+@import url("../thats-my-font/styles.css");
+
+.tamil-hero-title {
+  max-width: 12ch;
+  font-family: "Tamil Sangam MN", "Noto Sans Tamil", system-ui, sans-serif;
+  font-size: clamp(2.5rem, 4.6vw, 3.9rem);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.tamil-hero-title .highlight {
+  white-space: normal;
+}
+
+@media (max-width: 820px) {
+  .tamil-hero-title {
+    max-width: 14ch;
+  }
+}
