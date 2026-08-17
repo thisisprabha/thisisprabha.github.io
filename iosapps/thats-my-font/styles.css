@@ -124,8 +124,8 @@ h3 { margin-bottom: 6px; font-size: 1.15rem; }
 .letter:nth-child(3n) { --tilt: -2deg; }
 .letter:nth-child(4n) { --tilt: 2deg; }
 .letter.empty { color: #c8c0b4; font-family: var(--font-body); font-size: 0.8rem; }
-.pencil-line { position: absolute; right: -24px; bottom: 36px; width: 190px; height: 12px; border-radius: 999px; background: linear-gradient(90deg, #eee 0 86%, #b7aca0 86% 94%, #2e2a25 94%); box-shadow: 0 5px 10px rgba(47,44,40,.18); transform: rotate(-23deg); }
-.scribble-note { position: absolute; top: 7px; right: 4px; color: var(--red); font-weight: 700; transform: rotate(5deg); }
+.pencil-line { position: absolute; right: -24px; bottom: 36px; width: 190px; height: 12px; background: linear-gradient(90deg, #eee 0 84%, #b7aca0 84% 93%, #2e2a25 93% 100%); clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%); filter: drop-shadow(0 4px 6px rgba(47, 44, 40, 0.25)); transform: rotate(-23deg); }
+.scribble-note { position: absolute; top: 10px; right: 0; z-index: 3; color: var(--red); font-weight: 700; transform: rotate(5deg); background: var(--paper-card); padding: 5px 12px; border-radius: var(--sketch); box-shadow: 2px 3px 0 rgba(47, 44, 40, 0.12); }
 
 section { padding: 64px 0; }
 .section-tinted { border-block: 2px dashed rgba(47,44,40,.2); background: rgba(255,250,240,.55); }

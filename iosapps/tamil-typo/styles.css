@@ -12,6 +12,10 @@
   white-space: normal;
 }
 
+.ipad-screen {
+  padding: 16px 16px 18px;
+}
+
 @media (max-width: 820px) {
   .tamil-hero-title {
     max-width: 14ch;
