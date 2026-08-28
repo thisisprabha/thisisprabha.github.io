@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Time Left — Countdown &amp; Days Left Widget for iPhone</title>
-  <meta name="description" content="Time Left puts your countdowns on the Lock Screen and Home Screen. Track the days left until birthdays, exams, trips, and deadlines — no account needed, private by design.">
+  <title>Time Left: Countdown &amp; Days Left Widget for iPhone</title>
+  <meta name="description" content="Time Left puts your countdowns on the Lock Screen and Home Screen. Track the days left until birthdays, exams, trips, and deadlines. No account needed. Private by design.">
   <meta name="theme-color" content="#f4eee0">
   <link rel="canonical" href="https://thisisprabha.com/iosapps/time-left/">
   <link rel="alternate" type="text/markdown" href="https://thisisprabha.com/iosapps/time-left/index.md">
@@ -15,12 +15,12 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://thisisprabha.com/iosapps/time-left/">
-  <meta property="og:title" content="Time Left — Countdown &amp; Days Left Widget for iPhone">
-  <meta property="og:description" content="Birthdays, exams, trips, deadlines. See exactly how much time is left — right on your Lock Screen and Home Screen. No account needed.">
+  <meta property="og:title" content="Time Left: Countdown &amp; Days Left Widget for iPhone">
+  <meta property="og:description" content="Birthdays, exams, trips, deadlines. See exactly how much time is left on your Lock Screen and Home Screen. No account needed.">
   <meta property="og:image" content="https://thisisprabha.com/iosapps/time-left/assets/time-left-v2-01.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Time Left — Countdown &amp; Days Left Widget for iPhone">
-  <meta name="twitter:description" content="Your countdowns, right on the Lock Screen. Birthdays, exams, trips, deadlines — no account needed.">
+  <meta name="twitter:title" content="Time Left: Countdown &amp; Days Left Widget for iPhone">
+  <meta name="twitter:description" content="Your countdowns, right on the Lock Screen. Birthdays, exams, trips, deadlines. No account needed.">
   <meta name="twitter:image" content="https://thisisprabha.com/iosapps/time-left/assets/time-left-v2-01.png">
 
   <script type="application/ld+json">
@@ -30,7 +30,7 @@
     "name": "Time Left",
     "operatingSystem": "iOS",
     "applicationCategory": "UtilitiesApplication",
-    "description": "Countdown and days-left widget app for iPhone. Track birthdays, exams, trips, and deadlines on your Lock Screen and Home Screen. Private by design — no account needed.",
+    "description": "Countdown and days-left widget app for iPhone. Track birthdays, exams, trips, and deadlines on your Lock Screen and Home Screen. Private by design. No account needed.",
     "url": "https://apps.apple.com/app/id6755923528",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
   }
@@ -317,15 +317,30 @@
     .feature-row h3 { margin-bottom: 4px; }
     .feature-row p { font-size: 0.97rem; }
 
-    .shot-strip { display: flex; justify-content: center; gap: 24px; }
+    .store-gallery-head { max-width: 640px; margin: 48px 0 24px; }
+    .store-gallery-head h3 { font-size: clamp(1.45rem, 3vw, 2rem); margin-bottom: 8px; }
+    .store-gallery-head p { color: var(--ink-soft); font-size: 1rem; }
+    .shot-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(220px, 27%);
+      justify-content: start;
+      gap: 20px;
+      padding: 8px 4px 20px;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: inline mandatory;
+      scrollbar-color: var(--ink-soft) transparent;
+    }
     .shot-pad {
       position: relative;
-      width: min(200px, 30vw);
-      padding: 10px;
+      width: auto;
+      padding: 8px;
       background: var(--paper-card);
       border: 2px solid var(--ink);
       border-radius: var(--sketch-2);
       box-shadow: var(--shadow-sketch);
+      scroll-snap-align: start;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
     .shot-pad:nth-child(odd) { --tilt: -1deg; }
@@ -333,13 +348,12 @@
     .shot-pad:hover { transform: translateY(-4px) rotate(0deg); box-shadow: 6px 8px 0 rgba(51, 48, 43, 0.14); }
     .shot {
       position: relative;
-      aspect-ratio: 1206 / 2622;
-      border-radius: 26px;
+      border-radius: 20px;
+      overflow: hidden;
       background: #23201c;
-      padding: 6px;
     }
-    .shot img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 21px; }
-    .shot-caption { text-align: center; margin-top: 26px; color: var(--ink-soft); font-size: 0.98rem; transform: rotate(-0.3deg); }
+    .shot img { display: block; width: 100%; height: auto; aspect-ratio: 1242 / 2687; object-fit: cover; }
+    .shot-caption { margin-top: 10px; color: var(--ink-soft); font-size: 0.9rem; }
 
     /* ---------- Privacy ---------- */
     .privacy-card {
@@ -471,13 +485,13 @@
       .grid { grid-template-columns: repeat(2, 1fr); }
       .two-col { grid-template-columns: 1fr; }
       .privacy-card { grid-template-columns: 1fr; padding: 30px; }
-      .shot-strip { gap: 16px; }
+      .shot-strip { grid-auto-columns: minmax(220px, 42%); gap: 16px; }
     }
     @media (max-width: 480px) {
       .grid { grid-template-columns: 1fr; }
       .nav { display: none; }
       .header-cta { display: none; }
-      .shot-pad { width: min(160px, 40vw); }
+      .shot-strip { grid-auto-columns: minmax(250px, 82vw); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -520,7 +534,7 @@
           <span class="eyebrow">iPhone app · Countdown widget</span>
           <h1>See how much time is <span class="hl">left</span>, at a glance.</h1>
           <p class="hero-sub">
-            Time Left turns your countdowns into beautiful Lock Screen and Home Screen widgets —
+            Time Left turns your countdowns into beautiful Lock Screen and Home Screen widgets,
             so birthdays, exams, trips, and deadlines are always one glance away.
           </p>
           <div class="hero-actions">
@@ -573,7 +587,7 @@
               </svg>
             </div>
             <h3>Birthdays</h3>
-            <p>Never lose track — see exactly how many days until the next birthday, and keep counting up after the day arrives.</p>
+            <p>Never lose track. See exactly how many days until the next birthday, and keep counting up after the day arrives.</p>
           </div>
           <div class="card reveal">
             <div class="icon icon--blue">
@@ -594,7 +608,7 @@
               </svg>
             </div>
             <h3>Trips</h3>
-            <p>From departure day to the count-up after you land — the whole trip lives right on your widgets.</p>
+            <p>From departure day to the count-up after you land, the whole trip lives right on your widgets.</p>
           </div>
           <div class="card reveal">
             <div class="icon icon--amber">
@@ -616,7 +630,7 @@
         <div class="sec-head" style="margin-bottom: 32px;">
           <p class="sec-tag">Widgets</p>
           <h2>Made for your Lock Screen &amp; Home Screen</h2>
-          <p>Your countdowns where you actually look — no opening the app, no digging around.</p>
+          <p>Your countdowns where you actually look. No opening the app, no digging around.</p>
         </div>
         <div class="two-col">
           <div class="card feature-row reveal">
@@ -642,28 +656,37 @@
             </div>
             <div>
               <h3>Home Screen widgets</h3>
-              <p>Choose a size that fits your screen and keep your next milestone always visible — refreshed throughout the day.</p>
+              <p>Choose a size that fits your screen and keep your next milestone always visible throughout the day.</p>
             </div>
           </div>
         </div>
-        <div class="shot-strip reveal">
-          <div class="shot-pad">
-            <div class="shot">
-              <img src="assets/time-left-v2-02.png" alt="Time Left Home Screen widget" loading="lazy" width="1206" height="2622">
-            </div>
-          </div>
-          <div class="shot-pad">
-            <div class="shot">
-              <img src="assets/time-left-v2-03.png" alt="Time Left Lock Screen countdown widget" loading="lazy" width="1206" height="2622">
-            </div>
-          </div>
-          <div class="shot-pad">
-            <div class="shot">
-              <img src="assets/time-left-v2-04.png" alt="Time Left countdown cards" loading="lazy" width="1206" height="2622">
-            </div>
-          </div>
+        <div class="store-gallery-head">
+          <p class="sec-tag">Inside Time Left</p>
+          <h3>Your time, made visible</h3>
+          <p>Count what matters, shape the view around your life, and keep it close on your iPhone.</p>
         </div>
-        <p class="shot-caption">Time Left on your iPhone — widgets, countdowns, and count-ups.</p>
+        <div class="shot-strip reveal" aria-label="Time Left App Store screenshots">
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/appstore-1.jpg" alt="Time Left countdown app overview" loading="lazy" width="1242" height="2687">
+            </div>
+          </div>
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/appstore-2.jpg" alt="Time Left themes and iCloud sync" loading="lazy" width="1242" height="2687">
+            </div>
+          </div>
+          <div class="shot-pad">
+            <div class="shot">
+              <img src="assets/appstore-3.jpg" alt="Time Left day, year, and life overview" loading="lazy" width="1242" height="2687">
+            </div>
+          </div>
+          <div class="shot-pad"><div class="shot"><img src="assets/appstore-4.jpg" alt="Time Left birthdays, goals, exams, and deadlines" loading="lazy" width="1242" height="2687"></div></div>
+          <div class="shot-pad"><div class="shot"><img src="assets/appstore-5.jpg" alt="Time Left motivational widgets" loading="lazy" width="1242" height="2687"></div></div>
+          <div class="shot-pad"><div class="shot"><img src="assets/appstore-6.jpg" alt="Time Left custom event details" loading="lazy" width="1242" height="2687"></div></div>
+          <div class="shot-pad"><div class="shot"><img src="assets/appstore-7.jpg" alt="Time Left dark mode" loading="lazy" width="1242" height="2687"></div></div>
+        </div>
+        <p class="shot-caption">Swipe to see all seven App Store screenshots.</p>
       </div>
     </section>
 
@@ -680,7 +703,7 @@
             </p>
           </div>
           <div class="privacy-points">
-            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> No account, no sign-up, no login — ever.</div>
+            <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> No account, sign-up, or login. Ever.</div>
             <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> Events and settings are stored locally on your device.</div>
             <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> No analytics, no ad trackers, no data selling.</div>
             <div class="privacy-point"><span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5.5 5.5L20 6"/></svg></span> Optional iCloud Sync is handled entirely by Apple.</div>
@@ -713,7 +736,7 @@
               Do I need an account?
               <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
-            <div class="faq-answer"><p>No. Time Left works entirely on your device — there's no sign-up, no login, and no account to create. Just download and start counting down.</p></div>
+            <div class="faq-answer"><p>No. Time Left works entirely on your device. There's no sign-up, no login, and no account to create. Just download and start counting down.</p></div>
           </div>
           <div class="faq-item reveal">
             <button class="faq-question" type="button" aria-expanded="false">
@@ -734,7 +757,7 @@
               Can I count up too, not just down?
               <span class="chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
-            <div class="faq-answer"><p>Absolutely. Count down to a future date or count up from one that's passed — days, hours, and more. Birthdays after the party and trips after the flight keep going on their own.</p></div>
+            <div class="faq-answer"><p>Absolutely. Count down to a future date or count up from one that's passed, in days, hours, and more. Birthdays after the party and trips after the flight keep going on their own.</p></div>
           </div>
         </div>
       </div>

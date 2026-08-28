@@ -150,6 +150,28 @@ section { padding: 64px 0; }
 .blue { color: var(--blue); }
 .green { color: var(--green); }
 .feature p { margin-bottom: 0; color: var(--ink-soft); }
+.store-gallery {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 34%);
+  gap: 20px;
+  padding: 8px 4px 20px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scrollbar-color: var(--ink-soft) transparent;
+}
+.store-shot {
+  margin: 0;
+  padding: 8px;
+  border: 2px solid var(--ink);
+  border-radius: var(--sketch-alt);
+  background: var(--paper-card);
+  box-shadow: var(--shadow);
+  scroll-snap-align: start;
+}
+.store-shot img { width: 100%; height: auto; aspect-ratio: 2048 / 2731; object-fit: cover; border-radius: 18px; }
+.gallery-note { margin: 10px 0 0; color: var(--ink-soft); font-size: .9rem; }
 .privacy-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 38px; padding: 42px; border: 2px solid var(--ink); border-radius: var(--sketch-alt); background: var(--paper-card); box-shadow: var(--shadow); }
 .check-list { display: grid; gap: 13px; align-content: start; }
 .check { display: flex; gap: 11px; }
@@ -182,6 +204,7 @@ footer { padding: 36px 0 52px; color: var(--ink-soft); text-align: center; }
   .hero { padding-top: 48px; }
   .steps { grid-template-columns: 1fr; }
   .ipad-stage { min-height: 380px; }
+  .store-gallery { grid-auto-columns: minmax(280px, 58%); }
 }
 @media (max-width: 620px) {
   .nav .nav-link { display: none; }
@@ -191,6 +214,7 @@ footer { padding: 36px 0 52px; color: var(--ink-soft); text-align: center; }
   .ipad-screen { padding: 0; }
   .pencil-line { width: 150px; right: -12px; }
   .privacy-panel { padding: 27px 22px; }
+  .store-gallery { grid-auto-columns: minmax(280px, 88vw); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
