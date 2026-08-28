@@ -8,6 +8,7 @@ Prabhakaran designs AI-native SaaS workflows and builds native SwiftUI apps for 
 
 - [iOS app portfolio](https://thisisprabha.com/iosapps/): All public app landing pages and App Store links.
 - [Time Left](https://thisisprabha.com/iosapps/time-left/): Countdown and days-left widgets for iPhone.
+- [WhatPay](https://thisisprabha.com/iosapps/whatpay/): Bills, subscriptions, EMI, and renewal tracking for iPhone.
 - [Feed the Fish](https://thisisprabha.com/iosapps/feed-the-fish/): A calm virtual aquarium for iPhone.
 - [Tamil Typo](https://thisisprabha.com/iosapps/tamil-typo/): Tamil handwriting font maker for iPad.
 - [That's My Font](https://thisisprabha.com/iosapps/thats-my-font/): Handwriting font maker for iPad.
