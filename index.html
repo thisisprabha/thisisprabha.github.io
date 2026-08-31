@@ -90,6 +90,36 @@
       max-width: 16ch;
     }
 
+    .hero-word {
+      --hero-word-color: var(--text);
+      color: var(--hero-word-color);
+      display: inline-block;
+      white-space: nowrap;
+      font-style: normal;
+      text-shadow: 0 0 24px color-mix(in srgb, var(--hero-word-color) 18%, transparent);
+    }
+
+    .hero-word--name { --hero-word-color: #ff9ecb; }
+    .hero-word--designer { --hero-word-color: #8bc5ff; }
+    .hero-word--builder { --hero-word-color: #b8ef8f; }
+    .hero-word--place { --hero-word-color: #ffc86b; }
+
+    .hero-word__char {
+      display: inline-grid;
+      place-items: baseline center;
+      vertical-align: baseline;
+      transition: color 180ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .hero-word__spacer,
+    .hero-word__glyph { grid-area: 1 / 1; }
+    .hero-word__spacer { visibility: hidden; }
+    .hero-word__glyph { font-family: var(--font-display); }
+    .hero-word__char.is-shuffling { transform: translateY(-0.08em) rotate(-2deg); }
+    .hero-word__char:nth-child(3n + 1) .hero-word__glyph { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
+    .hero-word__char:nth-child(3n + 2) .hero-word__glyph { font-family: "Arial Rounded MT Bold", var(--font-display); font-weight: 700; }
+    .hero-word__char:nth-child(3n) .hero-word__glyph { font-family: "Courier New", monospace; font-weight: 700; }
+
     .hero p {
       font-size: 19px;
       color: var(--text-secondary);
@@ -468,6 +498,7 @@
     @media (prefers-reduced-motion: reduce) {
       .app-card { transition: none; }
       .app-card:hover { transform: none; }
+      .hero-word__char { transition: none; }
     }
 
     @media (max-width: 720px) {
@@ -485,7 +516,7 @@
     <header class="hero">
       <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
       <p class="eyebrow">Product Design / AI / iOS</p>
-      <h1>Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.</h1>
+      <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
       <p>I'm a product designer who writes code. Most days I'm at <strong>SuperOps</strong>, building tools MSP teams actually want to use. Product strategy, interaction design, getting into the weeds with engineering to ship things that hold up.</p>
       <p>Nights and weekends: <strong>iOS apps</strong>. I've shipped a few to the App Store. I also mess around with LLMs, agent workflows, and open source tools. Less interested in AI demos, more in stuff that actually works.</p>
       <div class="meta">
@@ -602,6 +633,72 @@
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <script>
+    (function () {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const words = Array.from(document.querySelectorAll('.hero-word'));
+      const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
+      let replayTimer;
+
+      words.forEach((word) => {
+        const text = word.dataset.word;
+        word.textContent = '';
+        Array.from(text).forEach((character) => {
+          const char = document.createElement('span');
+          char.className = 'hero-word__char';
+          const spacer = document.createElement('span');
+          spacer.className = 'hero-word__spacer';
+          spacer.textContent = character;
+          const visible = document.createElement('span');
+          visible.className = 'hero-word__glyph';
+          visible.textContent = character;
+          char.append(spacer, visible);
+          word.append(char);
+        });
+      });
+
+      function shuffleWord(word, wordIndex) {
+        const finalText = Array.from(word.dataset.word);
+        const chars = Array.from(word.querySelectorAll('.hero-word__char'));
+        chars.forEach((char, charIndex) => {
+          const visible = char.querySelector('.hero-word__glyph');
+          const finalCharacter = finalText[charIndex];
+          if (finalCharacter === ' ') return;
+          window.setTimeout(() => {
+            char.classList.add('is-shuffling');
+            let frame = 0;
+            const swaps = 3 + ((charIndex + wordIndex) % 3);
+            const interval = window.setInterval(() => {
+              frame += 1;
+              visible.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+              if (frame >= swaps) {
+                window.clearInterval(interval);
+                visible.textContent = finalCharacter;
+                char.classList.remove('is-shuffling');
+              }
+            }, 42);
+          }, charIndex * 34 + wordIndex * 110);
+        });
+      }
+
+      function play() {
+        if (reduceMotion || document.hidden) return;
+        words.forEach(shuffleWord);
+      }
+
+      if (!reduceMotion) {
+        window.setTimeout(play, 280);
+        replayTimer = window.setInterval(play, 8500);
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            window.clearInterval(replayTimer);
+          } else {
+            play();
+            replayTimer = window.setInterval(play, 8500);
+          }
+        });
+      }
+    })();
+
     (function () {
       const canvas = document.getElementById('particleCanvas');
       const ctx = canvas.getContext('2d');
