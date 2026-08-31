@@ -30,6 +30,7 @@
     html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     body {
       margin: 0;
+      overflow-x: hidden;
       background:
         radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41, 151, 255, 0.10), transparent 60%),
         var(--bg);
@@ -99,10 +100,32 @@
       text-shadow: 0 0 24px color-mix(in srgb, var(--hero-word-color) 18%, transparent);
     }
 
-    .hero-word--name { --hero-word-color: #ff9ecb; }
-    .hero-word--designer { --hero-word-color: #8bc5ff; }
-    .hero-word--builder { --hero-word-color: #b8ef8f; }
-    .hero-word--place { --hero-word-color: #ffc86b; }
+    .hero-word--name {
+      --hero-word-color: #ff9ecb;
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: -0.055em;
+    }
+    .hero-word--designer {
+      --hero-word-color: #8bc5ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-weight: 700;
+      letter-spacing: -0.085em;
+    }
+    .hero-word--builder {
+      --hero-word-color: #b8ef8f;
+      font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+    }
+    .hero-word--place {
+      --hero-word-color: #ffc86b;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.005em;
+      text-transform: uppercase;
+    }
 
     .hero-word__char {
       display: inline-grid;
@@ -110,15 +133,19 @@
       vertical-align: baseline;
       transition: color 180ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
     }
+    .hero-word__char.is-space { width: 0.32em; }
 
     .hero-word__spacer,
     .hero-word__glyph { grid-area: 1 / 1; }
     .hero-word__spacer { visibility: hidden; }
-    .hero-word__glyph { font-family: var(--font-display); }
+    .hero-word__glyph { font: inherit; }
     .hero-word__char.is-shuffling { transform: translateY(-0.08em) rotate(-2deg); }
-    .hero-word__char:nth-child(3n + 1) .hero-word__glyph { font-family: Georgia, "Times New Roman", serif; font-style: italic; }
-    .hero-word__char:nth-child(3n + 2) .hero-word__glyph { font-family: "Arial Rounded MT Bold", var(--font-display); font-weight: 700; }
-    .hero-word__char:nth-child(3n) .hero-word__glyph { font-family: "Courier New", monospace; font-weight: 700; }
+    .hero-word__char.is-shuffling .hero-word__glyph { font-style: normal; letter-spacing: 0; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="0"] { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="1"] { font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif; font-weight: 800; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="2"] { font-family: "SFMono-Regular", Consolas, "Courier New", monospace; font-weight: 700; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="3"] { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-weight: 900; text-transform: uppercase; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="4"] { font-family: Chalkboard, "Comic Sans MS", cursive; font-weight: 700; font-style: italic; }
 
     .hero p {
       font-size: 19px;
@@ -504,7 +531,7 @@
     @media (max-width: 720px) {
       .wrap { padding: 0 22px; }
       header.hero { padding: 80px 0 48px; }
-      h1 { font-size: 38px; }
+      h1 { font-size: clamp(32px, 9vw, 38px); max-width: 100%; }
       .grid { grid-template-columns: 1fr; }
       .short p { font-size: 19px; }
       footer { flex-direction: column; align-items: flex-start; }
@@ -636,7 +663,8 @@
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const words = Array.from(document.querySelectorAll('.hero-word'));
-      const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
+      const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789#@%&?';
+      const faceCount = 5;
       let replayTimer;
 
       words.forEach((word) => {
@@ -645,6 +673,7 @@
         Array.from(text).forEach((character) => {
           const char = document.createElement('span');
           char.className = 'hero-word__char';
+          if (character === ' ') char.classList.add('is-space');
           const spacer = document.createElement('span');
           spacer.className = 'hero-word__spacer';
           spacer.textContent = character;
@@ -666,17 +695,19 @@
           window.setTimeout(() => {
             char.classList.add('is-shuffling');
             let frame = 0;
-            const swaps = 3 + ((charIndex + wordIndex) % 3);
+            const swaps = 6 + ((charIndex + wordIndex) % 4);
             const interval = window.setInterval(() => {
               frame += 1;
               visible.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
+              visible.dataset.face = String((frame + charIndex + wordIndex) % faceCount);
               if (frame >= swaps) {
                 window.clearInterval(interval);
                 visible.textContent = finalCharacter;
+                delete visible.dataset.face;
                 char.classList.remove('is-shuffling');
               }
-            }, 42);
-          }, charIndex * 34 + wordIndex * 110);
+            }, 54);
+          }, charIndex * 42 + wordIndex * 150);
         });
       }
 
