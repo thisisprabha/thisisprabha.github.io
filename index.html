@@ -685,7 +685,6 @@
       const words = Array.from(document.querySelectorAll('.hero-word'));
       const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789#@%&?';
       const faceCount = 7;
-      let replayTimer;
 
       words.forEach((word) => {
         const text = word.dataset.word;
@@ -738,15 +737,6 @@
 
       if (!reduceMotion) {
         window.setTimeout(play, 280);
-        replayTimer = window.setInterval(play, 8500);
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            window.clearInterval(replayTimer);
-          } else {
-            play();
-            replayTimer = window.setInterval(play, 8500);
-          }
-        });
       }
     })();
 
