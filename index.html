@@ -10,6 +10,21 @@
   <link rel="alternate" type="text/markdown" href="https://thisisprabha.com/index.md">
   <link rel="describedby" href="https://thisisprabha.com/llms.txt">
   <style>
+    @font-face {
+      font-family: "Hero Pixel";
+      src: url("https://fonts.gstatic.com/s/pixelifysans/v3/CHy2V-3HFUT7aC4iv1TxGDR9DHEserHN25py2TQO131Y.ttf") format("truetype");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: "Hero Stitched";
+      src: url("https://fonts.gstatic.com/s/craftygirls/v16/va9B4kXI39VaDdlPJo8N_NvuQQ.ttf") format("truetype");
+      font-display: swap;
+      font-style: normal;
+      font-weight: 400;
+    }
+
     :root {
       --bg: #000000;
       --bg-elevated: #0d0d0f;
@@ -109,15 +124,17 @@
     }
     .hero-word--designer {
       --hero-word-color: #8bc5ff;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-family: "Hero Pixel", "SFMono-Regular", Consolas, monospace;
       font-weight: 700;
-      letter-spacing: -0.085em;
+      letter-spacing: -0.045em;
     }
     .hero-word--builder {
       --hero-word-color: #b8ef8f;
-      font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.06em;
+      font-family: "Hero Stitched", Chalkboard, "Comic Sans MS", cursive;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      text-decoration: underline dotted color-mix(in srgb, var(--hero-word-color) 58%, transparent) 0.055em;
+      text-underline-offset: 0.13em;
     }
     .hero-word--place {
       --hero-word-color: #ffc86b;
@@ -146,6 +163,8 @@
     .hero-word__char.is-shuffling .hero-word__glyph[data-face="2"] { font-family: "SFMono-Regular", Consolas, "Courier New", monospace; font-weight: 700; }
     .hero-word__char.is-shuffling .hero-word__glyph[data-face="3"] { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-weight: 900; text-transform: uppercase; }
     .hero-word__char.is-shuffling .hero-word__glyph[data-face="4"] { font-family: Chalkboard, "Comic Sans MS", cursive; font-weight: 700; font-style: italic; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="5"] { font-family: "Hero Pixel", "SFMono-Regular", monospace; font-weight: 700; }
+    .hero-word__char.is-shuffling .hero-word__glyph[data-face="6"] { font-family: "Hero Stitched", Chalkboard, cursive; font-weight: 400; }
 
     .hero p {
       font-size: 19px;
@@ -531,7 +550,8 @@
     @media (max-width: 720px) {
       .wrap { padding: 0 22px; }
       header.hero { padding: 80px 0 48px; }
-      h1 { font-size: clamp(32px, 9vw, 38px); max-width: 100%; }
+      h1 { font-size: clamp(29px, 8vw, 34px); max-width: 100%; }
+      .hero-word { display: inline; }
       .grid { grid-template-columns: 1fr; }
       .short p { font-size: 19px; }
       footer { flex-direction: column; align-items: flex-start; }
@@ -664,7 +684,7 @@
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const words = Array.from(document.querySelectorAll('.hero-word'));
       const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789#@%&?';
-      const faceCount = 5;
+      const faceCount = 7;
       let replayTimer;
 
       words.forEach((word) => {
