@@ -31,8 +31,8 @@
       --panel: #16161a;
       --panel-soft: #1d1d21;
       --text: #f5f5f7;
-      --text-secondary: #a1a1a6;
-      --muted: #6e6e73;
+      --text-secondary: #b8b8be;
+      --muted: #898990;
       --line: rgba(255, 255, 255, 0.10);
       --accent: #2997ff;
       --radius: 18px;
@@ -167,7 +167,8 @@
     .hero-word__char.is-shuffling .hero-word__glyph[data-face="6"] { font-family: "Hero Stitched", Chalkboard, cursive; font-weight: 400; }
 
     .hero p {
-      font-size: 19px;
+      font-size: 20px;
+      line-height: 1.55;
       color: var(--text-secondary);
       max-width: 62ch;
       margin: 0 0 20px;
@@ -220,7 +221,8 @@
     }
 
     .about p {
-      font-size: 18px;
+      font-size: 19px;
+      line-height: 1.55;
       color: var(--text-secondary);
       max-width: 62ch;
       margin: 0 0 20px;
@@ -264,25 +266,6 @@
       color: var(--text-secondary);
       margin: 0;
       line-height: 1.5;
-    }
-
-    .short {
-      background: var(--bg-elevated);
-      border-radius: var(--radius);
-      border: 1px solid var(--line);
-      padding: 40px;
-    }
-
-    .short p {
-      font-size: 22px;
-      line-height: 1.4;
-      margin: 0;
-      max-width: 48ch;
-      color: var(--text);
-    }
-
-    .short p span {
-      color: var(--text-secondary);
     }
 
     .cta {
@@ -355,7 +338,8 @@
     }
 
     .apps-intro {
-      font-size: 17px;
+      font-size: 18px;
+      line-height: 1.55;
       color: var(--text-secondary);
       max-width: 58ch;
       margin: -8px 0 36px;
@@ -564,8 +548,8 @@
       <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
       <p class="eyebrow">Product Design / AI / iOS</p>
       <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
-      <p>I'm a product designer who writes code. Most days I'm at <strong>SuperOps</strong>, building tools MSP teams actually want to use. Product strategy, interaction design, getting into the weeds with engineering to ship things that hold up.</p>
-      <p>Nights and weekends: <strong>iOS apps</strong>. I've shipped a few to the App Store. I also mess around with LLMs, agent workflows, and open source tools. Less interested in AI demos, more in stuff that actually works.</p>
+      <p>I'm a product designer who writes code. At <strong>SuperOps</strong>, I build tools MSP teams actually want to use, from product strategy and interaction design through to the engineering details.</p>
+      <p>After hours: <strong>iOS apps</strong>, LLMs, agent workflows, and open-source tools. Less interested in AI demos, more in things that work.</p>
       <div class="meta">
         <span class="tag">Chennai, India</span>
         <span class="tag">10+ years</span>
@@ -578,31 +562,30 @@
     <section class="about">
       <p class="section-label">About</p>
       <h2>Designer who also builds.</h2>
-      <p>I've been designing for a while. Started in graphic design, moved through web, landed in product. About 10+ years across <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>. Same thread throughout: take something messy and make it make sense.</p>
-      <p>These days: B2B SaaS workflows at SuperOps. On the side I explore how AI agents should interact with people (honestly, nobody's figured this out yet), and I ship SwiftUI apps when there's something worth shipping.</p>
-      <p>The stuff I geek out on: information architecture that stays out of the way. Empty states that don't look broken. Onboarding that feels like one smooth motion. Localization done properly. Design systems engineers actually use. The small decisions, the ones nobody notices unless they're wrong.</p>
+      <p>I started in graphic design, moved through web, and landed in product. Over 10+ years at <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>, the thread has stayed the same: make messy things make sense.</p>
+      <p>I care about information architecture, resilient empty states, smooth onboarding, localization, and design systems engineers actually use.</p>
     </section>
 
     <section aria-labelledby="selected-ios-apps">
       <p class="section-label">Selected iOS Apps</p>
       <h2 id="selected-ios-apps">Shipped to the App Store.</h2>
-      <p class="apps-intro">A few native products I've designed and built end to end: product thinking, interaction design, and SwiftUI shipped as real apps. <a href="iosapps/">View all iOS apps.</a></p>
+      <p class="apps-intro">Native products designed and built end to end, from product thinking to SwiftUI. <a href="iosapps/">View all iOS apps.</a></p>
       <div class="apps-grid">
-        <a class="app-card app-card--featured" href="iosapps/time-left/" aria-label="Time Left — countdown and days-left widgets for iPhone. View landing page.">
+        <a class="app-card app-card--featured" href="iosapps/time-left/" aria-label="Time Left - countdown and days-left widgets for iPhone. View landing page.">
           <div class="app-feature-media">
             <img src="iosapps/time-left/assets/time-left-v2-01.png" alt="Time Left on iPhone showing a countdown at a glance" loading="lazy" width="1206" height="2622">
           </div>
           <div class="app-feature-body">
             <p class="app-flag">iPhone · Widgets</p>
             <h3 class="app-name">Time Left</h3>
-            <p class="app-tagline">Your countdowns on the Lock Screen and Home Screen — birthdays, exams, trips, and deadlines at a glance.</p>
-            <p class="app-role">Designed the product, UX, and iOS widgets; built in SwiftUI with no account, no analytics, and data staying on-device.</p>
+            <p class="app-tagline">Your countdowns on the Lock Screen and Home Screen for birthdays, exams, trips, and deadlines at a glance.</p>
+            <p class="app-role">Designed and built in SwiftUI. No account, no analytics, and data stays on-device.</p>
             <span class="app-cta">View the app →</span>
           </div>
         </a>
 
 
-        <a class="app-card" href="iosapps/thats-my-font/" aria-label="That's My Font — turn your handwriting into a real OpenType font on iPad. View landing page.">
+        <a class="app-card" href="iosapps/thats-my-font/" aria-label="That's My Font - turn your handwriting into a real OpenType font on iPad. View landing page.">
           <div class="app-visual" aria-hidden="true">
             <div class="app-visual-toolbar"><span>That's My Font</span><span>18 of 62 drawn</span></div>
             <div class="app-glyph-grid">
@@ -616,7 +599,7 @@
             <p class="app-flag">iPad · Font maker</p>
             <h3 class="app-name">That's My Font</h3>
             <p class="app-tagline">Draw, refine, preview, and export your handwriting as a real OpenType font.</p>
-            <p class="app-role">Designed the draw-and-refine loop; built as a native iPad app with on-device font creation and OTF export.</p>
+            <p class="app-role">Designed and built as a native iPad app with on-device font creation and OTF export.</p>
             <span class="app-cta">View the app →</span>
           </div>
         </a>
@@ -629,35 +612,28 @@
       <div class="grid">
         <div class="card">
           <p class="card-title">B2B SaaS &amp; IT Ops</p>
-          <p>MSP workflows at SuperOps. Patch management, monitoring, ticketing. Making the complex stuff feel straightforward.</p>
+          <p>MSP workflows at SuperOps, making patching, monitoring, and ticketing easier to act on.</p>
         </div>
         <div class="card">
           <p class="card-title">AI Product Experiences</p>
-          <p>How do agents talk to humans? Interfaces for LLM workflows, automation with guardrails, and keeping people in the loop when it matters.</p>
+          <p>Interfaces for LLM workflows and automation that keep people in control when it matters.</p>
         </div>
         <div class="card">
           <p class="card-title">Mobile Apps</p>
-          <p>SwiftUI on the App Store. In-app purchases, subscriptions, the whole release pipeline. I enjoy the constraints of mobile. You can't just keep adding buttons.</p>
+          <p>SwiftUI apps through the full App Store release pipeline, including subscriptions and in-app purchases.</p>
         </div>
         <div class="card">
           <p class="card-title">Design Systems</p>
-          <p>Systems that engineers don't hate. Patterns that scale without turning into a straightjacket.</p>
+          <p>Patterns that scale with the product and remain useful to the engineers building it.</p>
         </div>
         <div class="card">
           <p class="card-title">Prototyping</p>
-          <p>I prototype in code, not slides. APIs, open-source models, whatever gets the idea working fast enough to test.</p>
+          <p>Working prototypes in code, using APIs and open-source models to test the real interaction.</p>
         </div>
         <div class="card">
           <p class="card-title">Developer Collaboration</p>
-          <p>I ship with engineers, not at them. Specs, prototypes, docs, and the kind of back-and-forth that catches problems before they ship.</p>
+          <p>Specs, prototypes, and close engineering collaboration that catch the important problems early.</p>
         </div>
-      </div>
-    </section>
-
-    <section>
-      <p class="section-label">In one line</p>
-      <div class="short">
-        <p>Lead Product Designer at SuperOps. I design AI-native SaaS for MSP teams. <span>After hours: iOS apps, agent experiments, and whatever else seems worth building.</span></p>
       </div>
     </section>
 
