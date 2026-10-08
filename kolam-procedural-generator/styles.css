@@ -148,6 +148,8 @@ h2 { font-size: clamp(27px, 7vw, 38px); line-height: 1.08; }
 
 #kolamCanvas:focus-visible { box-shadow: inset 0 0 0 3px var(--terracotta); }
 
+#loadingState[hidden] { display: none; }
+
 .loading-state {
   position: absolute;
   inset: 0;
