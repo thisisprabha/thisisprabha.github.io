@@ -76,6 +76,10 @@
   .tamil { font: 500 13px/1 var(--font-tamil); color: var(--ink-2); }
   .tag { font: 500 11px/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); }
   .topbar-right { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .topbar-menu { display: contents; }
+  .topbar-menu > summary { display: none; }
+  .tool-menu, .export-menu { display: contents; }
+  .tool-menu > summary, .export-menu > summary { display: none; }
   @media (max-width: 680px) { .topbar-right .tag { display: none; } }
 
   /* coach: one step at a time, lights up the control it talks about */
@@ -181,6 +185,45 @@
     .key, .tile, .key .lab, .key .ok { transition: none; }
     .key svg.turn { animation: none; }
   }
+  @media (max-width: 680px) {
+    html, body { min-height: 100%; height: auto; }
+    .room { min-height: 100svh; display: block; padding: 10px 10px calc(18px + env(safe-area-inset-bottom)); }
+    .stack { gap: 10px; }
+    .device { border-radius: 18px; padding: 12px; gap: 12px; }
+    .topbar { padding: 0 2px; flex-wrap: nowrap; }
+    .brand { gap: 7px; }
+    .mark { font-size: 23px; }
+    .tamil { font-size: 12px; }
+    .topbar-menu { display: block; position: relative; margin-left: auto; }
+    .topbar-menu > summary { list-style: none; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--key-edge); background: var(--key); color: var(--key-ink); font: 600 13px/1 var(--font-ui); cursor: pointer; }
+    .topbar-menu > summary::-webkit-details-marker { display: none; }
+    .topbar-right { display: none; }
+    .topbar-menu[open] .topbar-right { display: flex; position: absolute; z-index: 5; top: calc(100% + 8px); right: 0; width: min(280px, calc(100vw - 44px)); flex-direction: column; align-items: stretch; gap: 8px; padding: 10px; border: 1px solid var(--key-edge); border-radius: 14px; background: var(--panel); box-shadow: 0 12px 28px rgba(0,0,0,.22); }
+    .topbar-right .key { width: 100%; min-height: 44px; justify-content: flex-start; }
+    .topbar-right .key.icon { width: 100%; }
+    .deck { gap: 16px; }
+    .unit { gap: 8px; grid-template-rows: auto auto auto auto; }
+    .unit-head { min-height: 40px; flex-wrap: wrap; }
+    .seg label, .seg select { height: 44px; padding-inline: 12px; }
+    .seg .cap { padding-left: 10px; }
+    .surface { width: 100%; padding: 10px; border-radius: 12px; }
+    .surface.out svg { inset: 10px; width: calc(100% - 20px); height: calc(100% - 20px); }
+    .hint { min-height: 0; margin: 0; font-size: 12px; line-height: 1.4; }
+    .keys { gap: 8px; }
+    .tiles { flex: 1 1 100%; width: 100%; gap: 8px; overflow-x: auto; padding: 2px 2px 4px; scrollbar-width: none; }
+    .tiles::-webkit-scrollbar { display: none; }
+    .tile { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 12px; }
+    .tile svg { width: 28px; height: 28px; }
+    .tool-menu, .export-menu { display: block; position: relative; }
+    .tool-menu > summary, .export-menu > summary { list-style: none; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--key-edge); background: var(--key); color: var(--key-ink); font: 600 13px/1 var(--font-ui); cursor: pointer; }
+    .tool-menu > summary::-webkit-details-marker, .export-menu > summary::-webkit-details-marker { display: none; }
+    .tool-menu[open], .export-menu[open] { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+    .tool-menu[open] > summary, .export-menu[open] > summary { flex: 0 0 100%; justify-content: flex-start; border: 0; background: transparent; padding-inline: 2px; }
+    .tool-menu .key, .export-menu .key { min-height: 44px; }
+    .unit[aria-label="Kolam"] .keys { display: flex; align-items: center; }
+    #another { min-height: 46px; flex: 1 1 100%; justify-content: center; }
+    .about { padding: 4px 6px 0; }
+  }
 </style>
 </head>
 <body>
@@ -190,6 +233,8 @@
   <main class="device" aria-label="Pulli, draw a shape and get a kolam">
     <div class="topbar">
       <div class="brand"><span class="mark">Pulli</span><span class="tamil">கோலம்</span></div>
+      <details class="topbar-menu" id="topMenu" open>
+      <summary>Menu</summary>
       <div class="topbar-right">
         <span class="tag">Draw a shape · get a sikku kolam</span>
         <a class="key" id="daily" href="../" title="The daily kolam puzzle">
@@ -203,6 +248,7 @@
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.3"/><path d="M6.2 6.3a1.9 1.9 0 1 1 2.7 1.7c-.6.3-.9.7-.9 1.3"/><path d="M8 11.6h.01"/></svg>How to
         </button>
       </div>
+      </details>
     </div>
 
     <section class="coach" id="coach" hidden aria-label="How to use Pulli">
@@ -243,7 +289,8 @@
         <p class="hint" id="hint">Draw a shape over the faint dots. Lift your finger as often as you like.</p>
         <div class="keys">
           <div class="tiles" id="tiles" aria-label="Stencils"></div>
-          <span class="spacer"></span>
+          <details class="tool-menu" open>
+            <summary>Tools</summary>
           <button type="button" class="key icon" id="undo" disabled aria-label="Undo last stroke" title="Undo stroke (Backspace)">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2.5 7.5 6 11"/><path d="M3 7.5h6.5a3.5 3.5 0 0 1 0 7H8"/></svg>
           </button>
@@ -252,6 +299,7 @@
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V3"/><path d="M4.5 6.5 8 3l3.5 3.5"/><path d="M2.5 11.5v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1.5"/></svg>SVG
           </button>
           <input type="file" id="file" accept=".svg,image/svg+xml">
+          </details>
         </div>
       </section>
 
@@ -266,9 +314,11 @@
           <button type="button" class="key primary" id="another" disabled title="New seed on the same dots (Enter)">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>Another one
           </button>
-          <span class="spacer"></span>
+          <details class="export-menu" open>
+            <summary>Export</summary>
           <button type="button" class="key" id="copy" disabled><span class="lab">Copy SVG</span><span class="ok" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span></button>
           <button type="button" class="key" id="download" disabled><span class="lab">Download SVG</span><span class="ok" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span></button>
+          </details>
         </div>
       </section>
     </div>
@@ -294,6 +344,16 @@
   ];
   const $ = (id) => document.getElementById(id);
   const pad = $("pad"), ctx = pad.getContext("2d");
+  const topMenu = $("topMenu");
+  const toolMenu = document.querySelector(".tool-menu"), exportMenu = document.querySelector(".export-menu");
+  const syncMobileMenu = () => {
+    const mobile = matchMedia("(max-width: 680px)").matches;
+    if (topMenu) topMenu.open = !mobile;
+    if (toolMenu) toolMenu.open = !mobile;
+    if (exportMenu) exportMenu.open = !mobile;
+  };
+  syncMobileMenu();
+  matchMedia("(max-width: 680px)").addEventListener("change", syncMobileMenu);
   const hint = $("hint"), note = $("note"), out = $("out"), stat = $("stat");
   const SIZE = 300;              // logical px, square
   let N = 7;                     // cells per side
