@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pulli</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,500&family=Noto+Sans+Tamil:wght@500&display=swap">
+
 <style>
   /* Layout: one device panel centred in the viewport. Two recessed stone
      surfaces side by side (draw / kolam), each with a labelled key row.
@@ -41,16 +40,6 @@
     --font-tamil: "Noto Sans Tamil", "DM Sans", sans-serif;
     --ease: cubic-bezier(.16, 1, .3, 1);
     color-scheme: light;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --page: #15100e; --panel: #221917; --panel-edge: rgba(255,255,255,.08);
-      --panel-shadow: 0 30px 70px -40px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.05) inset;
-      --key: #2d2321; --key-edge: rgba(255,255,255,.1); --key-lip: rgba(0,0,0,.6); --key-ink: #f1e6df;
-      --ink: #f1e6df; --ink-2: #a89388; --ink-3: #6f5f57;
-      --stone: #120d0b; --stone-edge: rgba(0,0,0,.6);
-      --primary: #8a2d0c; color-scheme: dark;
-    }
   }
   :root[data-theme="dark"] {
     --page: #15100e; --panel: #221917; --panel-edge: rgba(255,255,255,.08);
@@ -224,6 +213,80 @@
     #another { min-height: 46px; flex: 1 1 100%; justify-content: center; }
     .about { padding: 4px 6px 0; }
   }
+  /* Match the daily kolam: kaavi stone, flour, and terracotta light. */
+  :root {
+    --page: #672b2a;
+    --panel: #763330;
+    --panel-edge: rgba(255, 247, 232, .13);
+    --panel-shadow: none;
+    --key: #763330;
+    --key-edge: rgba(255, 247, 232, .2);
+    --key-lip: transparent;
+    --key-ink: #fff7e8;
+    --ink: #fff7e8;
+    --ink-2: rgba(255, 247, 232, .68);
+    --ink-3: rgba(255, 247, 232, .68);
+    --stone: #4e201f;
+    --stone-edge: rgba(25, 5, 5, .34);
+    --stone-line: rgba(255, 247, 232, .13);
+    --stone-mark: rgba(255, 247, 232, .68);
+    --flour: #fff7e8;
+    --kaavi: #f1954d;
+    --kaavi-faint: rgba(255, 247, 232, .13);
+    --turmeric: #f1954d;
+    --primary: #f1954d;
+    --primary-ink: #4e201f;
+    --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-mark: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    --font-tamil: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+  }
+  [hidden] { display: none !important; }
+  html, body { min-height: 100%; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--page); color: var(--ink); font: 17px/1.5 var(--font-ui); }
+  .room { min-height: 100svh; display: block; padding: 24px 22px 40px; }
+  .stack { width: 100%; max-width: 680px; margin: 0 auto; display: block; }
+  .device { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; display: block; }
+  .topbar { justify-content: flex-start; padding: 0 0 28px; }
+  .topbar-menu, #coach, #dial, #tiles, #undo, #another, #download, .about { display: none !important; }
+  .mark { font: 600 22px/1.2 var(--font-mark); letter-spacing: -0.02em; }
+  .tamil { font: 500 13px/1.2 var(--font-tamil); color: var(--ink-2); }
+  .deck { display: flex; flex-direction: column; gap: 32px; }
+  .unit { display: grid; grid-template-rows: auto auto auto auto; gap: 16px; }
+  .unit-head { min-height: 28px; padding: 0; justify-content: flex-start; }
+  .lbl { font: 600 22px/1.2 var(--font-ui); letter-spacing: -0.015em; color: var(--ink); }
+  .step-number { display: none; }
+  .surface { width: 100%; aspect-ratio: 1; max-width: none; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: var(--stone); }
+  canvas#pad { border-radius: 0; }
+  canvas#pad:focus-visible { outline: 2px solid var(--kaavi); outline-offset: 4px; }
+  .hint { min-height: 0; padding: 0; margin: 0; font: 15px/1.5 var(--font-ui); color: var(--ink-2); }
+  .keys { gap: 12px; }
+  .unit[aria-label="Draw"] > .keys { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .tool-menu, .export-menu { display: contents; }
+  .tool-menu > summary, .export-menu > summary { display: none !important; }
+  .key { min-height: 48px; height: auto; padding: 0 16px; border: 1px solid var(--key-edge); border-radius: 8px; box-shadow: none; background: var(--key); color: var(--key-ink); font: 600 15px/1.2 var(--font-ui); transition: background .15s, transform .15s; }
+  .key:hover { background: color-mix(in srgb, var(--key) 92%, var(--ink) 8%); }
+  .key:active { transform: scale(.98); box-shadow: none; }
+  .key:focus-visible { outline: 2px solid var(--kaavi); outline-offset: 3px; }
+  .key.primary { width: 100%; min-height: 56px; border: 0; border-radius: 8px; box-shadow: none; background: var(--primary); color: var(--primary-ink); font-size: 17px; }
+  .preview-button { margin-top: 4px; }
+  #previewUnit { padding-top: 0; }
+  #previewUnit .unit-head { justify-content: space-between; }
+  #previewUnit .surface.out { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: var(--stone); }
+  #previewUnit .surface.out svg { inset: 0; width: 100%; height: 100%; }
+  #previewUnit .surface.out svg path.strand { stroke: var(--flour); }
+  #previewUnit .surface.out svg circle { fill: var(--kaavi); }
+  #previewUnit .surface.out .empty { padding: 24px; color: var(--ink-2); font: 15px/1.5 var(--font-ui); letter-spacing: 0; text-transform: none; }
+  #previewUnit .readout { font: 13px/1.4 var(--font-ui); color: var(--ink-2); letter-spacing: 0; text-transform: none; }
+  #previewUnit .readout .led { box-shadow: none; }
+  #previewUnit .keys { display: block; }
+  #copy { width: 100%; min-height: 52px; }
+  #copy .ok svg { width: 18px; height: 18px; }
+  #note { min-height: 0; color: var(--ink-2); }
+  @media (max-width: 420px) { .room { padding: 16px 16px 32px; } .topbar { padding-bottom: 20px; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; } }
 </style>
 </head>
 <body>
@@ -286,39 +349,38 @@
           </div>
         </div>
         <div class="surface"><canvas id="pad" tabindex="0" aria-label="Drawing pad. Draw in one or more strokes; tap a cell to add or remove a dot."></canvas></div>
-        <p class="hint" id="hint">Draw a shape over the faint dots. Lift your finger as often as you like.</p>
+        <p class="hint" id="hint">Draw over the dots. Tap one to add or remove it.</p>
         <div class="keys">
           <div class="tiles" id="tiles" aria-label="Stencils"></div>
-          <details class="tool-menu" open>
-            <summary>Tools</summary>
+          <div class="tool-menu">
           <button type="button" class="key icon" id="undo" disabled aria-label="Undo last stroke" title="Undo stroke (Backspace)">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2.5 7.5 6 11"/><path d="M3 7.5h6.5a3.5 3.5 0 0 1 0 7H8"/></svg>
           </button>
           <button type="button" class="key" id="clear" title="Clear (Esc)">Clear</button>
           <button type="button" class="key" id="upload" title="Use an SVG as the shape">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V3"/><path d="M4.5 6.5 8 3l3.5 3.5"/><path d="M2.5 11.5v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1.5"/></svg>SVG
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 11V3"/><path d="M4.5 6.5 8 3l3.5 3.5"/><path d="M2.5 11.5v1.5a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1.5"/></svg>Upload SVG
           </button>
           <input type="file" id="file" accept=".svg,image/svg+xml">
-          </details>
+          </div>
         </div>
+        <button type="button" class="key primary preview-button" id="previewBtn">Preview</button>
       </section>
 
-      <section class="unit" aria-label="Preview">
+      <section class="unit" id="previewUnit" aria-label="Preview" hidden>
         <div class="unit-head">
           <span class="lbl"><span class="step-number">02</span> Preview</span>
           <span class="readout" id="stat" aria-live="polite"><span class="led"></span>no dots</span>
         </div>
-        <div class="surface out" id="out"><p class="empty">dots appear here</p></div>
+        <div class="surface out" id="out"><p class="empty">Draw a shape above to see your kolam.</p></div>
         <p class="hint" id="note"></p>
         <div class="keys">
           <button type="button" class="key primary" id="another" disabled title="New seed on the same dots (Enter)">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>Another one
           </button>
-          <details class="export-menu" open>
-            <summary>Export</summary>
+          <div class="export-menu">
           <button type="button" class="key" id="copy" disabled><span class="lab">Copy SVG</span><span class="ok" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span></button>
           <button type="button" class="key" id="download" disabled><span class="lab">Download SVG</span><span class="ok" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg></span></button>
-          </details>
+          </div>
         </div>
       </section>
     </div>
@@ -347,10 +409,9 @@
   const topMenu = $("topMenu");
   const toolMenu = document.querySelector(".tool-menu"), exportMenu = document.querySelector(".export-menu");
   const syncMobileMenu = () => {
-    const mobile = matchMedia("(max-width: 680px)").matches;
-    if (topMenu) topMenu.open = !mobile;
-    if (toolMenu) toolMenu.open = !mobile;
-    if (exportMenu) exportMenu.open = !mobile;
+    if (topMenu) topMenu.open = false;
+    if (toolMenu) toolMenu.open = true;
+    if (exportMenu) exportMenu.open = true;
   };
   syncMobileMenu();
   matchMedia("(max-width: 680px)").addEventListener("change", syncMobileMenu);
@@ -372,7 +433,7 @@
   let ghost = null, ghostAt = 0; // snapshot of the old pad fading out (dial change on strokes / SVG)
   let sameDots = false;          // next generate() keeps the dots: un-draw the old line instead of swapping
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const EXPORT = { stroke: "#702307", dotFill: "#b5603a", background: "#faf3ee" };   // brand palette for Copy / Download
+  const EXPORT = { stroke: "#fff7e8", dotFill: "#f1954d", background: "#4e201f" };   // daily kolam palette for Copy / Download
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // ---------- sound: three synthesised cues, off until the speaker key is pressed
@@ -593,7 +654,7 @@
     audio.taps(fresh.length, step);
     cells = next;
     $("undo").disabled = !strokes.length;
-    commit(cells.size ? msg : "Draw a shape over the faint dots. Lift your finger as often as you like.");
+    commit(cells.size ? msg : "Draw over the dots. Tap one to add or remove it.");
   }
 
   // ---------- cells -> engine: every 4-connected piece gets its own stroke
@@ -619,7 +680,7 @@
     if (!all.length) {
       result = null; lastSVG = ""; sameDots = false;
       if (prev) prev.remove();
-      out.insertAdjacentHTML("beforeend", '<p class="empty">dots appear here</p>');
+      out.insertAdjacentHTML("beforeend", '<p class="empty">Draw a shape above to see your kolam.</p>');
       setReadout("", "no dots"); note.textContent = "";
       $("another").disabled = true; $("copy").disabled = true; if (dl) dl.disabled = true;
       return;
@@ -712,7 +773,12 @@
     setTimeout(() => { btn.classList.remove("done"); setTimeout(() => (btn.style.width = ""), 420); }, 1200);
   }
   const reset = () => { strokes = []; stroke = []; base = new Set(); baseKind = null; overrides = new Map(); lastSvgImg = null; };
-  $("clear").addEventListener("click", () => { reset(); recompute(""); });
+  $("clear").addEventListener("click", () => {
+    reset();
+    $("previewUnit").hidden = true;
+    recompute("");
+    window.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" });
+  });
   $("undo").addEventListener("click", () => {
     strokes.pop();
     recompute(strokes.length ? "Last stroke removed." : "Draw a shape over the faint dots. Lift your finger as often as you like.");
@@ -806,6 +872,11 @@
   $("coachBack").addEventListener("click", () => showStep(step - 1));
   $("coachNext").addEventListener("click", () => { if (step === STEPS.length - 1) openCoach(false); else showStep(step + 1); });
 
+  $("previewBtn").addEventListener("click", () => {
+    const preview = $("previewUnit");
+    preview.hidden = false;
+    preview.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
+  });
   $("copy").addEventListener("click", async () => {
     const b = $("copy");
     try { await navigator.clipboard.writeText(lastSVG); confirmKey(b); }
@@ -846,7 +917,7 @@
     const peak = Math.max(...cover.map((t) => t[2]));
     const threshold = Math.max(0.06, Math.min(0.4, peak * 0.45));
     base = new Set(cover.filter((t) => t[2] >= threshold).map(([r, c]) => r + "," + c));
-    recompute(base.size ? `Shape taken from your SVG at ${N} dots per side. Try 20 for a simpler kolam, 40 for more detail.` : "Couldn’t find a shape in that SVG.");
+    recompute(base.size ? "SVG loaded. Preview it, or draw on the canvas to refine it." : "Couldn’t find a shape in that SVG.");
   }
   $("upload").addEventListener("click", () => $("file").click());
   $("file").addEventListener("change", (e) => {
@@ -876,7 +947,7 @@
 
   // keyboard: Enter/Space on the pad reseeds, Backspace undoes a stroke, Escape clears
   pad.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); if (result) $("another").click(); }
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("previewBtn").click(); }
     if (e.key === "Backspace" || e.key === "Delete") { e.preventDefault(); $("undo").click(); }
     if (e.key === "Escape") { e.preventDefault(); $("clear").click(); }
   });
