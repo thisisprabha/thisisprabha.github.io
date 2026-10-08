@@ -126,6 +126,7 @@
   /* keys */
   .keys { display: flex; gap: 8px 6px; flex-wrap: wrap; align-items: center; }
   .key.icon { padding: 0; width: 34px; justify-content: center; }
+  a.key { text-decoration: none; }
   .keys .spacer { flex: 1; }
   /* keys are physical: a fast press, a sprung release with a hair of overshoot */
   .key { position: relative; font: 500 13px/1 var(--font-ui); color: var(--key-ink); background: var(--key); border: 1px solid var(--key-edge); border-radius: 9px; padding: 0 13px; height: 34px; cursor: pointer; box-shadow: 0 1.5px 0 var(--key-lip); display: inline-flex; align-items: center; justify-content: center; gap: 7px; white-space: nowrap; box-sizing: border-box;
@@ -191,6 +192,9 @@
       <div class="brand"><span class="mark">Pulli</span><span class="tamil">கோலம்</span></div>
       <div class="topbar-right">
         <span class="tag">Draw a shape · get a sikku kolam</span>
+        <a class="key" id="daily" href="../" title="The daily kolam puzzle">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 7h11M5.5 2v3M10.5 2v3"/></svg>Today’s kolam
+        </a>
         <button type="button" class="key icon" id="sound" aria-pressed="false" aria-label="Sound off" title="Sound">
           <svg class="off" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.3L8.5 3v10L4.8 10H2.5z"/><path d="M11 6.2l3 3.6M14 6.2l-3 3.6"/></svg>
           <svg class="on" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.3L8.5 3v10L4.8 10H2.5z"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5"/><path d="M12.8 3.6a6 6 0 0 1 0 8.8"/></svg>

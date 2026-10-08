@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#6f2c2a">
+  <meta name="description" content="A calming daily kolam puzzle. Draw one continuous line around every dot, with a gentle hint when you need it.">
+  <meta property="og:title" content="Kolam — a daily line ritual">
+  <meta property="og:description" content="Draw one continuous line around every dot. A new kolam waits each day.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thisisprabha.github.io/kolam-procedural-generator/">
+  <meta property="og:image" content="https://thisisprabha.github.io/kolam-procedural-generator/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="KOLAM — A DAILY LINE RITUAL, framed by an ivory kolam pattern on terracotta">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kolam — a daily line ritual">
+  <meta name="twitter:description" content="Draw one continuous line around every dot. A new kolam waits each day.">
+  <meta name="twitter:image" content="https://thisisprabha.github.io/kolam-procedural-generator/og.png">
+  <title>Kolam — a daily line ritual</title>
+  <link rel="icon" href="./assets/icon.png">
+  <link rel="apple-touch-icon" href="./assets/icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#game">Skip to today’s kolam</a>
+
+  <header class="site-header">
+    <button class="icon-button" id="infoButton" type="button" aria-label="How to play">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5h.01"></path></svg>
+    </button>
+    <a class="wordmark" href="./" aria-label="Kolam home">
+      <span class="wordmark-mark" aria-hidden="true">⌘</span>
+      <span>KOLAM</span>
+    </a>
+    <button class="icon-button" id="statsButton" type="button" aria-label="Your statistics">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 19V9M12 19V5M19 19v-7"></path></svg>
+    </button>
+  </header>
+
+  <main id="game" class="game-shell">
+    <section class="game-heading" aria-labelledby="puzzleTitle">
+      <div>
+        <p class="eyebrow" id="dailyLabel">TODAY’S KOLAM</p>
+        <h1 id="puzzleTitle">Find the one flowing line.</h1>
+      </div>
+      <div class="dot-score" aria-live="polite">
+        <strong id="dotCount">0/0</strong>
+        <span>dots</span>
+      </div>
+    </section>
+
+    <section class="canvas-card" aria-label="Kolam drawing area">
+      <canvas id="kolamCanvas" tabindex="0" aria-label="Draw a continuous line around every dot"></canvas>
+      <div class="loading-state" id="loadingState" role="status">Preparing today’s dots…</div>
+      <div class="hint-note" id="hintNote" role="status" aria-live="polite" hidden>
+        Follow the warm light. You can lift your finger and continue near the line’s end.
+      </div>
+    </section>
+
+    <p class="game-message" id="gameMessage" aria-live="polite">Draw around every dot.</p>
+
+    <div class="game-controls" aria-label="Drawing controls">
+      <button class="text-button" id="undoButton" type="button" disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 7 4 12l5 5M5 12h8a6 6 0 0 1 6 6"></path></svg>
+        Undo
+      </button>
+      <button class="text-button" id="clearButton" type="button" disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 16 8.5-8.5a2.1 2.1 0 0 1 3 3L10 19H7l-3-3 7-7"></path></svg>
+        Clear
+      </button>
+      <button class="hint-button" id="hintButton" type="button" disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M8.8 14.5a7 7 0 1 1 6.4 0c-.8.6-1.2 1.4-1.2 2.5h-4c0-1.1-.4-1.9-1.2-2.5Z"></path></svg>
+        <span>Show me</span>
+      </button>
+    </div>
+
+    <p class="continuity-tip"><span aria-hidden="true">↗</span> Lift your finger anytime—start again near the loose end to keep one continuous line.</p>
+    <p class="continuity-tip draw-link"><span aria-hidden="true">✎</span> Want your own shape? <a href="./draw/">Draw a kolam from a sketch or a logo</a>.</p>
+  </main>
+
+  <dialog class="modal" id="infoDialog">
+    <div class="modal-inner">
+      <button class="modal-close" data-close-dialog type="button" aria-label="Close">×</button>
+      <p class="eyebrow">HOW TO PLAY</p>
+      <h2>One line. Every dot.</h2>
+      <ol class="how-list">
+        <li><span>1</span><p>Draw a line that loops around every dot without touching them.</p></li>
+        <li><span>2</span><p>You may lift your finger. Begin again near the loose end and the line reconnects.</p></li>
+        <li><span>3</span><p>Close the loop. When all dots are held, your kolam settles into its perfect form.</p></li>
+      </ol>
+      <p class="modal-footnote">Need help? The bulb traces today’s path slowly.</p>
+    </div>
+  </dialog>
+
+  <dialog class="modal" id="statsDialog">
+    <div class="modal-inner">
+      <button class="modal-close" data-close-dialog type="button" aria-label="Close">×</button>
+      <p class="eyebrow">YOUR RITUAL</p>
+      <h2>Quiet progress, day by day.</h2>
+      <div class="stats-grid">
+        <div><strong id="playedStat">0</strong><span>played</span></div>
+        <div><strong id="streakStat">0</strong><span>streak</span></div>
+        <div><strong id="bestStat">0</strong><span>best</span></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="modal celebration" id="completeDialog">
+    <div class="modal-inner">
+      <div class="complete-mark" aria-hidden="true">⌘</div>
+      <p class="eyebrow">TODAY’S KOLAM IS COMPLETE</p>
+      <h2>You found the line.</h2>
+      <p class="complete-copy">Your drawing has settled into its balanced form.</p>
+      <div class="stats-grid compact">
+        <div><strong id="completeStreak">1</strong><span>day streak</span></div>
+        <div><strong id="hintStat">0</strong><span>hints</span></div>
+      </div>
+      <button class="primary-button" id="shareButton" type="button">Share today’s kolam</button>
+      <button class="secondary-button" id="practiceButton" type="button">Try a bigger kolam</button>
+      <button class="quiet-button" data-close-dialog type="button">Stay with this one</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Kolam — a daily line ritual",
+  "short_name": "Kolam",
+  "description": "Draw one continuous line around every dot. A new kolam waits each day.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#672b2a",
+  "theme_color": "#672b2a",
+  "icons": [
+    {
+      "src": "./assets/icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
