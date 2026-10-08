@@ -108,6 +108,8 @@
       max-width: 20ch;
     }
 
+    .hero-role { white-space: nowrap; }
+
     .hero-word {
       --hero-word-color: var(--text);
       color: var(--hero-word-color);
@@ -545,6 +547,7 @@
     }
 
     @media (max-width: 720px) {
+      .hero-role { white-space: normal; }
       .wrap { padding: 0 22px; }
       header.hero { padding: 80px 0 48px; }
       h1 { font-size: clamp(29px, 8vw, 34px); max-width: 100%; }
@@ -560,7 +563,7 @@
     <header class="hero">
       <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
       <p class="eyebrow">Product Design / AI / iOS</p>
-      <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
+      <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. <span class="hero-role">Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and</span> <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
       <p>I'm a product designer who writes code. At <strong>SuperOps</strong>, I build tools MSP teams actually want to use, from product strategy and interaction design through to the engineering details.</p>
       <p>After hours: <strong>iOS apps</strong>, LLMs, agent workflows, and open-source tools. Less interested in AI demos, more in things that work.</p>
       <div class="meta">
