@@ -102,8 +102,8 @@
   @media (max-width: 680px) { .deck { grid-template-columns: 1fr; } .keys .spacer { display: none; } .keys { gap: 8px 6px; } }
   .unit { min-width: 0; display: grid; gap: 10px; grid-template-rows: auto auto 1fr auto; }
   .unit-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 30px; padding-inline: 2px; }
-  .lbl { font: 600 11px/1 var(--font-ui); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); display: inline-flex; align-items: center; gap: 8px; }
-  .lbl i { width: 6px; height: 6px; border-radius: 50%; background: var(--ink-3); display: inline-block; }
+  .lbl { font: 600 14px/1 var(--font-ui); letter-spacing: 0; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+  .step-number { color: var(--ink-3); font: 500 11px/1 var(--font-mono); letter-spacing: .04em; }
 
   /* recessed stone surfaces */
   .surface { background: var(--stone); border-radius: 14px; box-shadow: 0 0 0 1px var(--stone-edge), inset 0 2px 6px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04); padding: 14px; display: grid; place-items: center; aspect-ratio: 1; max-width: 100%; }
@@ -271,7 +271,7 @@
     <div class="deck">
       <section class="unit" aria-label="Draw">
         <div class="unit-head">
-          <span class="lbl"><i></i>Draw</span>
+          <span class="lbl"><span class="step-number">01</span> Draw</span>
           <div class="seg" id="dial" role="group" aria-label="Dots per side">
             <span class="cap">Dots</span>
             <input type="radio" name="res" id="res5" value="5"><label for="res5">5</label>
@@ -303,9 +303,9 @@
         </div>
       </section>
 
-      <section class="unit" aria-label="Kolam">
+      <section class="unit" aria-label="Preview">
         <div class="unit-head">
-          <span class="lbl"><i></i>Kolam</span>
+          <span class="lbl"><span class="step-number">02</span> Preview</span>
           <span class="readout" id="stat" aria-live="polite"><span class="led"></span>no dots</span>
         </div>
         <div class="surface out" id="out"><p class="empty">dots appear here</p></div>
