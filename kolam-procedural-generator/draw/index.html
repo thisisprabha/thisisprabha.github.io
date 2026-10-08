@@ -825,10 +825,7 @@
   new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
   window.addEventListener("resize", setupCanvas);
   setupCanvas();
-  tiles.querySelector('[data-preset="heart"]').click();
-  let seen = true;
-  try { seen = localStorage.getItem("pulli.howto") === "seen"; } catch (e) {}
-  if (!seen) openCoach(true);
+  recompute("");   // start on an empty grid; the How to key opens the guide on demand
 })();
 </script>
 
