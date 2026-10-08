@@ -249,13 +249,24 @@
   .room { min-height: 100svh; display: block; padding: 24px 22px 40px; }
   .stack { width: 100%; max-width: 680px; margin: 0 auto; display: block; }
   .device { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; display: block; }
-  .topbar { justify-content: flex-start; padding: 0 0 28px; }
-  .topbar-menu, #coach, #dial, #tiles, #undo, #another, #download, .about { display: none !important; }
+  .topbar { justify-content: space-between; padding: 0 0 28px; }
+  #coach, #tiles, #undo, #another, #download, .about { display: none !important; }
+  .topbar-menu { display: block !important; position: static !important; width: 82px; height: 48px; flex: 0 0 82px; margin-left: auto !important; }
+  .topbar-menu > summary { display: none !important; }
+  .topbar-right { display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0; flex: none; margin: 0; justify-content: flex-end; }
+  .topbar-menu[open] .topbar-right { position: static; z-index: auto; width: 100%; min-width: 0; flex: none; margin: 0; flex-direction: row; align-items: center; justify-content: flex-end; gap: 8px; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+  .topbar-right .tag, .topbar-right #daily, .topbar-right #howto { display: none !important; }
+  .topbar-right #sound { display: inline-flex !important; width: auto; min-width: 48px; gap: 7px; padding: 0 11px; }
+  .sound-label { font-size: 13px; }
   .mark { font: 600 22px/1.2 var(--font-mark); letter-spacing: -0.02em; }
   .tamil { font: 500 13px/1.2 var(--font-tamil); color: var(--ink-2); }
   .deck { display: flex; flex-direction: column; gap: 32px; }
   .unit { display: grid; grid-template-rows: auto auto auto auto; gap: 16px; }
-  .unit-head { min-height: 28px; padding: 0; justify-content: flex-start; }
+  .unit-head { min-height: 28px; padding: 0; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  #dial { display: inline-flex !important; max-width: 100%; flex-wrap: nowrap; }
+  #dial .cap { padding-inline: 10px; color: var(--ink-2); }
+  #dial label { height: 36px; padding: 0 12px; }
+  #dial select { height: 36px; max-width: 112px; border: 0; border-left: 1px solid var(--key-edge); padding: 0 9px; background: var(--key); color: var(--key-ink); font: 600 12px/1 var(--font-ui); cursor: pointer; }
   .lbl { font: 600 22px/1.2 var(--font-ui); letter-spacing: -0.015em; color: var(--ink); }
   .step-number { display: none; }
   .surface { width: 100%; aspect-ratio: 1; max-width: none; padding: 0; border: 0; border-radius: 0; box-shadow: none; background: var(--stone); }
@@ -305,7 +316,7 @@
         </a>
         <button type="button" class="key icon" id="sound" aria-pressed="false" aria-label="Sound off" title="Sound">
           <svg class="off" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.3L8.5 3v10L4.8 10H2.5z"/><path d="M11 6.2l3 3.6M14 6.2l-3 3.6"/></svg>
-          <svg class="on" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.3L8.5 3v10L4.8 10H2.5z"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5"/><path d="M12.8 3.6a6 6 0 0 1 0 8.8"/></svg>
+          <svg class="on" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h2.3L8.5 3v10L4.8 10H2.5z"/><path d="M11 5.5a3.5 3.5 0 0 1 0 5"/><path d="M12.8 3.6a6 6 0 0 1 0 8.8"/></svg><span class="sound-label">Sound</span>
         </button>
         <button type="button" class="key" id="howto" aria-expanded="false" aria-controls="coach">
           <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6.3"/><path d="M6.2 6.3a1.9 1.9 0 1 1 2.7 1.7c-.6.3-.9.7-.9 1.3"/><path d="M8 11.6h.01"/></svg>How to
@@ -336,7 +347,7 @@
         <div class="unit-head">
           <span class="lbl"><span class="step-number">01</span> Draw</span>
           <div class="seg" id="dial" role="group" aria-label="Dots per side">
-            <span class="cap">Dots</span>
+            <span class="cap">Simple</span>
             <input type="radio" name="res" id="res5" value="5"><label for="res5">5</label>
             <input type="radio" name="res" id="res7" value="7" checked><label for="res7">7</label>
             <input type="radio" name="res" id="res9" value="9"><label for="res9">9</label>
