@@ -9,18 +9,20 @@
   <link rel="canonical" href="https://thisisprabha.com/">
   <link rel="alternate" type="text/markdown" href="https://thisisprabha.com/index.md">
   <link rel="describedby" href="https://thisisprabha.com/llms.txt">
+  <link rel="preload" href="https://fonts.gstatic.com/s/pixelifysans/v3/CHy2V-3HFUT7aC4iv1TxGDR9DHEserHN25py2TQO131Y.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="https://fonts.gstatic.com/s/craftygirls/v16/va9B4kXI39VaDdlPJo8N_NvuQQ.ttf" as="font" type="font/ttf" crossorigin>
   <style>
     @font-face {
       font-family: "Hero Pixel";
       src: url("https://fonts.gstatic.com/s/pixelifysans/v3/CHy2V-3HFUT7aC4iv1TxGDR9DHEserHN25py2TQO131Y.ttf") format("truetype");
-      font-display: swap;
+      font-display: optional;
       font-style: normal;
       font-weight: 700;
     }
     @font-face {
       font-family: "Hero Stitched";
       src: url("https://fonts.gstatic.com/s/craftygirls/v16/va9B4kXI39VaDdlPJo8N_NvuQQ.ttf") format("truetype");
-      font-display: swap;
+      font-display: optional;
       font-style: normal;
       font-weight: 400;
     }
@@ -110,6 +112,7 @@
       --hero-word-color: var(--text);
       color: var(--hero-word-color);
       display: inline-block;
+      vertical-align: baseline;
       white-space: nowrap;
       font-style: normal;
       text-shadow: 0 0 24px color-mix(in srgb, var(--hero-word-color) 18%, transparent);
@@ -147,6 +150,8 @@
     .hero-word__char {
       display: inline-grid;
       place-items: baseline center;
+      position: relative;
+      overflow: visible;
       vertical-align: baseline;
       transition: color 180ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
     }
@@ -155,7 +160,16 @@
     .hero-word__spacer,
     .hero-word__glyph { grid-area: 1 / 1; }
     .hero-word__spacer { visibility: hidden; }
-    .hero-word__glyph { font: inherit; }
+    .hero-word__glyph {
+      font: inherit;
+      line-height: inherit;
+      position: absolute;
+      inset: 0;
+      display: inline-grid;
+      place-items: baseline center;
+      white-space: nowrap;
+      pointer-events: none;
+    }
     .hero-word__char.is-shuffling { transform: translateY(-0.08em) rotate(-2deg); }
     .hero-word__char.is-shuffling .hero-word__glyph { font-style: normal; letter-spacing: 0; }
     .hero-word__char.is-shuffling .hero-word__glyph[data-face="0"] { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; }
@@ -464,7 +478,6 @@
         var(--bg-elevated);
       border-bottom: 1px solid var(--line);
     }
-
 
     .app-visual-toolbar {
       display: flex;
