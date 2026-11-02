@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Prabhakaran - Lead Product Designer &amp; Indie Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Prabhakaran is a Lead Product Designer and indie builder in Chennai. AI product design, agentic interfaces, iOS apps, and SaaS workflows.">
+  <meta name="description" content="Prabhakaran leads product design at SuperOps in Chennai: complex B2B software, AI features, design systems, and self-built iOS apps.">
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://thisisprabha.com/">
   <link rel="alternate" type="text/markdown" href="https://thisisprabha.com/index.md">
@@ -244,9 +244,38 @@
       margin: 0 0 20px;
     }
 
-    .about p strong {
+    .about p strong,
+    .about li strong {
       color: var(--text);
       font-weight: 600;
+    }
+
+    .about ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+      max-width: 62ch;
+    }
+
+    .about li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .about li::before {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 0.65em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
     .grid {
@@ -564,28 +593,57 @@
       <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
       <p class="eyebrow">Product Design / AI / iOS</p>
       <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. <span class="hero-role">Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and</span> <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
-      <p>I'm a product designer who writes code. At <strong>SuperOps</strong>, I build tools MSP teams actually want to use, from product strategy and interaction design through to the engineering details.</p>
-      <p>After hours: <strong>iOS apps</strong>, LLMs, agent workflows, and open-source tools. Less interested in AI demos, more in things that work.</p>
+      <p>I lead product design at <strong>SuperOps</strong>, which makes software IT service teams use every day to handle tickets, look after devices, and respond to alerts. I take work from the problem and product strategy through to detailed interaction design.</p>
+      <p>I also prototype in code, so product and engineering can try an idea before committing to build it. Outside work, I design and ship my own <strong>iOS apps</strong>.</p>
       <div class="meta">
         <span class="tag">Chennai, India</span>
         <span class="tag">10+ years</span>
-        <span class="tag">SwiftUI</span>
-        <span class="tag">Agentic UX</span>
-        <span class="tag">Design Systems</span>
+        <span class="tag">B2B SaaS</span>
+        <span class="tag">AI products</span>
+        <span class="tag">Design systems</span>
+        <span class="tag">iOS</span>
       </div>
     </header>
 
     <section class="about">
       <p class="section-label">About</p>
-      <h2>Designer who also builds.</h2>
-      <p>I started in graphic design, moved through web, and landed in product. Over 10+ years at <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>, the thread has stayed the same: make messy things make sense.</p>
-      <p>I care about information architecture, resilient empty states, smooth onboarding, localization, and design systems engineers actually use.</p>
+      <h2>10 years of making complex products easy to use.</h2>
+      <p>I started in graphic design, moved to web, then product. Across <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>, the job has stayed the same: take something messy and make it make sense.</p>
+      <p>How I work with product and engineering:</p>
+      <ul>
+        <li><strong>Problem first.</strong> I start with who is stuck and what they need to get done, then agree on what success looks like before designing screens.</li>
+        <li><strong>Prototypes over long specs.</strong> Teams react to something they can click, which surfaces the hard questions early, when they are cheap to fix.</li>
+        <li><strong>The details that get skipped.</strong> First-time setup, empty and error states, other languages, and components engineers actually reuse.</li>
+      </ul>
+    </section>
+
+    <section>
+      <p class="section-label">What I work on</p>
+      <h2>Where I focus.</h2>
+      <div class="grid">
+        <div class="card">
+          <p class="card-title">Complex B2B software</p>
+          <p>Dense, high-stakes workflows for IT teams, made quick to understand and act on.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">AI features people trust</p>
+          <p>Deciding what AI does on its own, what it suggests, and where a person should approve.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Design systems</p>
+          <p>Shared components and patterns that keep the product consistent as teams and features grow.</p>
+        </div>
+        <div class="card">
+          <p class="card-title">Apps, idea to launch</p>
+          <p>My own iOS apps, from the first sketch to App Store release, including subscriptions.</p>
+        </div>
+      </div>
     </section>
 
     <section aria-labelledby="selected-ios-apps">
-      <p class="section-label">Selected iOS Apps</p>
-      <h2 id="selected-ios-apps">Shipped to the App Store.</h2>
-      <p class="apps-intro">Native products designed and built end to end, from product thinking to SwiftUI. <a href="iosapps/">View all iOS apps.</a></p>
+      <p class="section-label">Side projects</p>
+      <h2 id="selected-ios-apps">Apps I designed, built, and shipped.</h2>
+      <p class="apps-intro">Solo projects on the App Store. Owning every decision, from the idea to the store listing, keeps my product judgment sharp. <a href="iosapps/">See all apps.</a></p>
       <div class="apps-grid">
         <a class="app-card app-card--featured" href="iosapps/time-left/" aria-label="Time Left - countdowns, count-ups, and widgets for iPhone. View landing page.">
           <div class="app-feature-media">
@@ -595,7 +653,7 @@
             <p class="app-flag">iPhone · Widgets</p>
             <h3 class="app-name">Time Left</h3>
             <p class="app-tagline">See how long until a moment, or how long since it began, on iPhone and Apple Watch.</p>
-            <p class="app-role">Designed and built in SwiftUI. No account or analytics; iCloud sync is optional.</p>
+            <p class="app-role">Designed and built solo. No sign-up and no tracking; syncs with iCloud if you want it.</p>
             <span class="app-cta">View the app →</span>
           </div>
         </a>
@@ -614,52 +672,21 @@
           <div class="app-body">
             <p class="app-flag">iPad · Font maker</p>
             <h3 class="app-name">That's My Font</h3>
-            <p class="app-tagline">Draw, refine, preview, and export your handwriting as a real OpenType font.</p>
-            <p class="app-role">Designed and built as a native iPad app with on-device font creation and OTF export.</p>
+            <p class="app-tagline">Turn your handwriting into a real font you can install and type with.</p>
+            <p class="app-role">Designed and built solo for iPad. Fonts are made on the device, nothing is uploaded.</p>
             <span class="app-cta">View the app →</span>
           </div>
         </a>
       </div>
     </section>
 
-    <section>
-      <p class="section-label">What I work on</p>
-      <h2>Design, code, ship.</h2>
-      <div class="grid">
-        <div class="card">
-          <p class="card-title">B2B SaaS &amp; IT Ops</p>
-          <p>MSP workflows at SuperOps, making patching, monitoring, and ticketing easier to act on.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">AI Product Experiences</p>
-          <p>Interfaces for LLM workflows and automation that keep people in control when it matters.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Mobile Apps</p>
-          <p>SwiftUI apps through the full App Store release pipeline, including subscriptions and in-app purchases.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Design Systems</p>
-          <p>Patterns that scale with the product and remain useful to the engineers building it.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Prototyping</p>
-          <p>Working prototypes in code, using APIs and open-source models to test the real interaction.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Developer Collaboration</p>
-          <p>Specs, prototypes, and close engineering collaboration that catch the important problems early.</p>
-        </div>
-      </div>
-    </section>
-
     <section class="cta">
       <p class="section-label">Let's talk</p>
-      <h2>Thoughtful conversations welcome.</h2>
-      <p>If you're building in <strong>AI, iOS, or SaaS</strong> and want to talk, reach out. I'm on LinkedIn, and most of my side projects are on GitHub.</p>
+      <h2>Hiring, or want to compare notes?</h2>
+      <p>If you're building an <strong>AI, SaaS, or iOS</strong> product and want a designer who can take an idea from problem to launch, reach out on LinkedIn.</p>
       <div class="actions">
         <a class="btn btn-primary" href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">Explore what I build</a>
+        <a class="btn btn-ghost" href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">See my projects on GitHub</a>
       </div>
     </section>
 
