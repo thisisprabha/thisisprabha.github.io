@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Whatpay</title>
+    <title>Privacy Policy - WhatPay</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -32,6 +32,14 @@
         p {
             margin-bottom: 15px;
         }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .summary {
+            background: #f2f8f3;
+            border-left: 4px solid #1f8a4c;
+            padding: 14px 18px;
+            margin-bottom: 24px;
+        }
         .last-updated {
             color: #666;
             font-style: italic;
@@ -42,82 +50,64 @@
 <body>
     <div class="container">
         <h1>Privacy Policy</h1>
-        <p class="last-updated">Last Updated: <span id="date"></span></p>
-        
-        <h2>Introduction</h2>
-        <p>
-            Whatpay ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we handle your data when you use our mobile application.
-        </p>
-        
-        <h2>Information We Collect</h2>
-        <p>
-            Whatpay is designed with privacy in mind. We collect and store the following information locally on your device:
-        </p>
+        <p class="last-updated">Last updated: 7 November 2026 (WhatPay 1.3.4)</p>
+
+        <div class="summary">
+            <p><strong>In short:</strong> WhatPay has no account, no ads and no analytics. Your bills stay on your iPhone and in your own private iCloud. The only thing the app sends to WhatPay's server is the country you pick, so it can show local plans, prices and cancel guides.</p>
+        </div>
+
+        <h2>Who we are</h2>
+        <p>WhatPay ("WhatPay", "we", "us") is an iPhone app made by Prabhakaran Ravichandran. This policy explains what the app does with your information.</p>
+
+        <h2>What you put into WhatPay</h2>
         <ul>
-            <li><strong>Subscription and Payment Data:</strong> Information about your subscriptions, EMIs, free trials, payment amounts, billing cycles, and payment dates that you manually enter into the app.</li>
-            <li><strong>User Name:</strong> The name you choose to display in the app (defaults to "My" if not set).</li>
-            <li><strong>No Account Information:</strong> Whatpay does not require account creation or login.</li>
+            <li><strong>Bills:</strong> subscriptions, bills, loans and free trials you add, with their names, amounts, currency, billing cycle, payment dates, category, colour and reminder settings, and whether you marked them cancelled or paid off.</li>
+            <li><strong>People:</strong> the names you give to people you track bills for, such as a partner or a parent.</li>
+            <li><strong>Settings:</strong> your country, currency and app preferences.</li>
         </ul>
-        
-        <h2>Data Storage</h2>
-        <p>
-            Data you enter in Whatpay is stored locally on your device using Apple's UserDefaults and App Groups and is synchronized with your personal iCloud account through Apple's CloudKit by default. This data is:
-        </p>
+        <p>WhatPay doesn't ask for your name, email, phone number, bank login or card details.</p>
+
+        <h2>Where it's stored</h2>
         <ul>
-            <li>Stored on your device and in your personal iCloud account</li>
-            <li>Not stored on our own servers</li>
-            <li>Never shared with third parties</li>
-            <li>Accessible only to you and the app's widget extension</li>
+            <li><strong>On your iPhone</strong>, inside the app and its Home Screen widget (shared on the device through an App Group).</li>
+            <li><strong>In your private iCloud</strong>, through Apple's CloudKit and iCloud key-value storage, so your devices stay in sync. This is your own iCloud storage. We can't read it.</li>
         </ul>
-        
-        <h2>Data Sharing</h2>
-        <p>
-            We do not collect, transmit, or share your data with any third parties for advertising purposes. Your data is stored on your device and synchronized with your personal iCloud account through CloudKit. Limited sharing required for core functionality is listed below:
-        </p>
+        <p>WhatPay doesn't store your bills on any server of ours.</p>
+
+        <h2>Importing from screenshots and files</h2>
+        <p>If you import bills from screenshots, you choose the images with Apple's photo picker. WhatPay only sees the images you pick and doesn't get access to the rest of your photos. Text is read on your iPhone with Apple's Vision framework. Images are not uploaded and not kept after the import. CSV and text files you import are also read only on your iPhone.</p>
+
+        <h2>Plans, prices and cancel guides</h2>
+        <p>To suggest plans, show reference prices, find cheaper plans and show how to cancel a service, WhatPay downloads public reference data from its catalog server, hosted by <a href="https://supabase.com/privacy">Supabase</a>. Each request contains only the country you chose (for example, US). No bills, amounts, names, device identifiers or Apple Account details are sent. As with any internet request, the server can see your IP address in short-lived technical logs. We don't use it to identify you. A copy of the cancel guides is kept on your iPhone so they work offline.</p>
+
+        <h2>Reminders</h2>
+        <p>Payment and trial reminders are local notifications scheduled on your iPhone. Nothing is sent to a push server.</p>
+
+        <h2>Purchases</h2>
+        <p>WhatPay Pro is sold through the App Store. Apple processes the payment, and we never receive your payment details. The app asks Apple whether your Apple Account owns WhatPay Pro so it can unlock Pro features.</p>
+
+        <h2>Third parties</h2>
         <ul>
-            <li><strong>Widget Extension:</strong> Your subscription data is shared with the Whatpay widget extension through Apple's App Groups feature, allowing the widget to display your information. This sharing occurs entirely on your device.</li>
-            <li><strong>iCloud Sync:</strong> Your app data is synchronized with your personal iCloud account through Apple's CloudKit by default.</li>
-            <li><strong>In-App Purchases:</strong> Purchases are processed by Apple through the App Store and StoreKit. We do not receive your full payment card details.</li>
-        </ul>        
-        <h2>Third-Party Services</h2>
-        <p>
-            Whatpay uses Apple services for iCloud sync (CloudKit) and in-app purchases (App Store/StoreKit). We do not use third-party analytics, advertising SDKs, or ad tracking.
-        </p>
-        
-        <h2>Data Deletion</h2>
-        <p>
-            You can delete individual subscriptions or all data at any time through the app. When you delete the app from your device, local data is removed. Synced iCloud data can also be managed in your Apple ID iCloud settings.
-        </p>
-        
-        <h2>Children's Privacy</h2>
-        <p>
-            Whatpay is not intended for children under the age of 13. We do not knowingly collect personal information from children.
-        </p>
-        
-        <h2>Changes to This Privacy Policy</h2>
-        <p>
-            We may update this Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this policy. You are advised to review this Privacy Policy periodically for any changes.
-        </p>
-        
-        <h2>Contact Us</h2>
-        <p>
-            If you have any questions about this Privacy Policy, please contact us through the app's support channels or your preferred method of communication.
-        </p>
-        
-        <h2>Your Consent</h2>
-        <p>
-            By using Whatpay, you consent to this Privacy Policy and agree to its terms.
-        </p>
+            <li><strong>Apple</strong>, for iCloud sync, in-app purchases and on-device text recognition.</li>
+            <li><strong>Supabase</strong>, which hosts the public price catalog and cancel guides.</li>
+        </ul>
+        <p>WhatPay has no analytics, advertising or tracking SDKs. We don't sell or share your information, and we don't track you across apps or websites.</p>
+
+        <h2>Deleting your data</h2>
+        <ul>
+            <li>Delete any bill or person in the app at any time.</li>
+            <li>Deleting the app removes the data stored on your iPhone.</li>
+            <li>To remove the iCloud copy, open Settings on your iPhone, tap your name, then iCloud, and manage WhatPay's data under your iCloud storage. You can also turn off iCloud for WhatPay there.</li>
+        </ul>
+
+        <h2>Children</h2>
+        <p>WhatPay isn't directed at children under 13, and we don't knowingly collect information from them.</p>
+
+        <h2>Changes to this policy</h2>
+        <p>If WhatPay changes how it handles information, we'll update this page and the date at the top. If a translated version of this policy differs from this English version, this version applies.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about privacy: <a href="mailto:uxcurry@gmail.com">uxcurry@gmail.com</a>, or see <a href="https://thisisprabha.com/whatpay-support.html">WhatPay support</a>.</p>
     </div>
-    
-    <script>
-        // Set current date
-        document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
-    </script>
 </body>
 </html>
-
