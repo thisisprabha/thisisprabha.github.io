@@ -5,6 +5,7 @@
 ## Apps
 
 - [Time Left](https://thisisprabha.com/iosapps/time-left/index.md): Countdowns, dates since milestones, and iPhone and Apple Watch widgets. [App Store](https://apps.apple.com/app/id6755923528)
+- [Rail](https://thisisprabha.com/iosapps/rail/index.md): Closet and outfit planner that picks what to wear from your clothes and the weather, with AI studio photos. [App Store](https://apps.apple.com/app/id6793017713)
 - [WhatPay](https://thisisprabha.com/iosapps/whatpay/index.md): Track subscriptions, EMIs, trials, and recurring bills with totals, reminders, widgets, and iCloud sync. [App Store](https://apps.apple.com/app/id6756521274)
 - [Clickwork](https://thisisprabha.com/iosapps/clickwork/index.md): iPhone remote for Android TV and Google TV with tactile keys, context-aware buttons, learned shortcuts and wake over Wi-Fi. [App Store](https://apps.apple.com/app/id6830611585)
 - [Feed the Fish](https://thisisprabha.com/iosapps/feed-the-fish/index.md): Preview of a calm virtual aquarium with no streaks, scores, or daily jobs.

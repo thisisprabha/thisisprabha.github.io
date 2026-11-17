@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rail: Closet &amp; Outfit Planner for iPhone</title>
+<meta name="description" content="Rail looks in your closet every morning and tells you what to wear, from the clothes you own and today's weather.">
+<link rel="icon" href="assets/rail-icon.png?v=2">
+<meta property="og:title" content="Rail: Closet & Outfit Planner">
+<meta property="og:description" content="Know what to wear, every morning.">
+<meta property="og:image" content="https://thisisprabha.com/iosapps/rail/assets/rail-hero.webp">
+<style>
+  :root { --ink:#000; --soft:#6E6E73; --line:#E5E5EA; --paper:#F6F6F8; --max:1080px; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:17px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif; color:var(--ink); background:#fff; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .wrap { max-width:var(--max); margin:0 auto; padding:0 24px; }
+
+  nav { position:sticky; top:0; z-index:5; background:rgba(255,255,255,.85); backdrop-filter:saturate(180%) blur(16px); border-bottom:1px solid var(--line); }
+  nav .wrap { display:flex; align-items:center; gap:24px; height:60px; }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; text-decoration:none; }
+  .brand img { width:30px; height:30px; border-radius:8px; }
+  nav .links { display:flex; gap:20px; margin-left:auto; font-size:15px; }
+  nav .links a { text-decoration:none; color:var(--soft); }
+  nav .links a:hover { color:var(--ink); }
+  .btn { display:inline-flex; align-items:center; gap:8px; background:var(--ink); color:#fff; text-decoration:none; font-weight:600; border-radius:999px; padding:12px 22px; white-space:nowrap; }
+  nav .btn { padding:8px 16px; font-size:15px; }
+
+  .hero { background:linear-gradient(160deg,#FBD3B4 0%,#F4E2E6 45%,#DCE4F8 100%); }
+  .hero .wrap { display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; padding-top:72px; padding-bottom:72px; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.08em; font-size:13px; font-weight:600; color:var(--soft); margin:0 0 12px; }
+  h1 { font-size:clamp(40px,6vw,64px); line-height:1.02; letter-spacing:-.03em; margin:0 0 20px; }
+  h1 span { color:var(--soft); }
+  .lede { font-size:20px; color:#333; max-width:30em; margin:0 0 28px; }
+  .cta { display:flex; flex-wrap:wrap; align-items:center; gap:18px; }
+  .cta .ghost { font-weight:600; text-decoration:none; border-bottom:1.5px solid currentColor; }
+  .small { font-size:14px; color:var(--soft); margin-top:18px; }
+  .hero img { width:100%; max-width:380px; justify-self:center; border-radius:36px; box-shadow:0 30px 60px rgba(0,0,0,.18); }
+
+  section { padding:88px 0; }
+  section.alt { background:var(--paper); }
+  h2 { font-size:clamp(30px,4vw,42px); line-height:1.1; letter-spacing:-.02em; margin:0 0 14px; }
+  .intro { color:var(--soft); font-size:19px; max-width:36em; margin:0 0 40px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:20px; padding:24px; }
+  section.alt .card { border-color:transparent; }
+  .card h3 { margin:0 0 6px; font-size:18px; }
+  .card p { margin:0; color:var(--soft); font-size:16px; }
+
+  .shots { display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:12px; }
+  .shots img { flex:0 0 auto; width:min(250px,70vw); border-radius:24px; scroll-snap-align:start; border:1px solid var(--line); }
+  .hint { color:var(--soft); font-size:14px; margin-top:8px; }
+
+  ul.ticks { list-style:none; padding:0; margin:0 0 24px; display:grid; gap:12px; max-width:40em; }
+  ul.ticks li { padding-left:30px; position:relative; }
+  ul.ticks li::before { content:"✓"; position:absolute; left:0; font-weight:700; }
+
+  details { border-bottom:1px solid var(--line); padding:18px 0; max-width:48em; }
+  summary { font-weight:600; cursor:pointer; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:"+"; float:right; color:var(--soft); }
+  details[open] summary::after { content:"–"; }
+  details p { color:#333; margin:10px 0 0; }
+
+  .closing { text-align:center; }
+  .closing img { width:96px; height:96px; border-radius:22px; margin-bottom:20px; }
+
+  footer { border-top:1px solid var(--line); padding:28px 0 48px; font-size:14px; color:var(--soft); }
+  footer .wrap { display:flex; flex-wrap:wrap; gap:20px; }
+  footer a { text-decoration:none; }
+  footer .copy { margin-left:auto; }
+
+  @media (max-width:800px) {
+    nav .links { display:none; }
+    nav .btn { margin-left:auto; }
+    .hero .wrap { grid-template-columns:1fr; padding-top:48px; }
+    .closing .btn { padding:14px 20px; font-size:16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/rail-icon.png?v=2" alt="">Rail</a>
+    <div class="links">
+      <a href="#today">Today</a>
+      <a href="#closet">Your closet</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn" href="https://apps.apple.com/app/id6793017713">Get the app</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">iPhone · Closet &amp; outfit planner</p>
+      <h1>Know what to wear, <span>every morning.</span></h1>
+      <p class="lede">Snap your clothes once. Rail cuts each piece out, sorts it onto the right shelf and picks an outfit for today from what you own, the weather and where you're headed.</p>
+      <div class="cta">
+        <a class="btn" href="https://apps.apple.com/app/id6793017713"> Download on the App Store</a>
+        <a class="ghost" href="#shots">See the app</a>
+      </div>
+      <p class="small">Free to start · No sign-up · Syncs with your iCloud</p>
+    </div>
+    <img src="assets/rail-hero.webp" alt="Rail Today screen with an outfit picked for the weather" width="380">
+  </div>
+</header>
+
+<section id="today">
+  <div class="wrap">
+    <p class="eyebrow">Today</p>
+    <h2>Dressed for the weather, and the day</h2>
+    <p class="intro">One outfit, ready when you wake up. Swipe a piece to swap it, shuffle for a new look, tap "Wear this" when you're set.</p>
+    <div class="cards">
+      <div class="card"><h3>Weather-aware</h3><p>Picks for the forecast, in your own temperature unit.</p></div>
+      <div class="card"><h3>Dress for the occasion</h3><p>Office, Weekend, Date night, Party or something special.</p></div>
+      <div class="card"><h3>Colours that work</h3><p>Pairs that go together, with a short note on why.</p></div>
+      <div class="card"><h3>Morning nudge</h3><p>An optional notification with today's outfit.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="closet" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Your closet</p>
+    <h2>Your whole closet, in your pocket</h2>
+    <p class="intro">Add clothes from the camera or Photos, even a messy mirror selfie. Rail keeps track of what's worn and what's in the wash.</p>
+    <div class="cards">
+      <div class="card"><h3>Cut out and sorted</h3><p>Each garment is cut out whole and placed on the right shelf. Fix or merge pieces before saving.</p></div>
+      <div class="card"><h3>AI studio</h3><p>Turn a messy photo into a clean studio photo. Your first 4 are free; one-time packs after that.</p></div>
+      <div class="card"><h3>Worn &amp; washing</h3><p>Worn pieces rest for a few days. Pieces in the wash sit out until they're clean.</p></div>
+      <div class="card"><h3>Share the look</h3><p>Four designed cards, or flip to a selfie and share a short video.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="shots">
+  <div class="wrap">
+    <p class="eyebrow">Inside Rail</p>
+    <h2>Stop staring at the wardrobe</h2>
+    <div class="shots">
+      <img src="assets/rail-01.webp" alt="Know what to wear every morning" loading="lazy">
+      <img src="assets/rail-02.webp" alt="Messy photo in, studio photo out" loading="lazy">
+      <img src="assets/rail-03.webp" alt="Your whole closet in your pocket" loading="lazy">
+      <img src="assets/rail-04.webp" alt="Dressed for the weather" loading="lazy">
+      <img src="assets/rail-05.webp" alt="Worn clothes come back in a few days" loading="lazy">
+      <img src="assets/rail-06.webp" alt="Clothes in the wash are skipped" loading="lazy">
+    </div>
+    <p class="hint">Swipe to see all six screens.</p>
+  </div>
+</section>
+
+<section id="privacy" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Private by design</p>
+    <h2>Your closet stays yours.</h2>
+    <ul class="ticks">
+      <li>No account or sign-up needed.</li>
+      <li>Cutouts are made on your iPhone, and your closet stays on it and in your iCloud.</li>
+      <li>Only the pieces you choose for AI cleanup are sent, and only after you allow it.</li>
+      <li>No ads, no tracking, no selling your data.</li>
+    </ul>
+    <a class="ghost" href="../../rail-privacy-policy.html">Read the Privacy Policy</a>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>Questions, answered</h2>
+    <details><summary>Is Rail free?</summary><p>Yes. Adding clothes and daily outfits are free, and your first 4 AI studio photos are free. More studio photos come in one-time packs, with no subscription.</p></details>
+    <details><summary>Do I need to photograph clothes perfectly?</summary><p>No. Clothes on a bed, a chair, a hanger or a mirror selfie all work. You can fix, merge or remove pieces before saving.</p></details>
+    <details><summary>How does Rail know the weather?</summary><p>With your permission, Rail uses your rough location about once a day to get the forecast from Apple Weather.</p></details>
+    <details><summary>Where are my clothes stored?</summary><p>On your iPhone, and synced through your own iCloud if it's on. We don't keep your closet on our servers.</p></details>
+    <details><summary>Does it work on iPad?</summary><p>Rail is made for iPhone and also runs on iPad.</p></details>
+  </div>
+</section>
+
+<section class="closing alt">
+  <div class="wrap">
+    <img src="assets/rail-icon.png?v=2" alt="Rail app icon">
+    <h2>Get dressed faster tomorrow</h2>
+    <p class="intro" style="margin:0 auto 28px">Open Rail, see your outfit, go.</p>
+    <a class="btn" href="https://apps.apple.com/app/id6793017713"> Download on the App Store</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="../../rail-privacy-policy.html">Privacy Policy</a>
+    <a href="../../rail-support.html">Support</a>
+    <a href="mailto:uxcurry@gmail.com?subject=Rail">Contact</a>
+    <span class="copy">© 2026 Rail. All rights reserved.</span>
+  </div>
+</footer>
+
+</body>
+</html>

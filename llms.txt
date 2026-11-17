@@ -12,6 +12,7 @@ Use the Markdown links below for concise product facts. Use the HTML landing pag
 
 - [iOS app portfolio](https://thisisprabha.com/iosapps/index.md): Index of all public apps on this site.
 - [Time Left](https://thisisprabha.com/iosapps/time-left/index.md): Countdowns, dates since milestones, and widgets for iPhone and Apple Watch.
+- [Rail](https://thisisprabha.com/iosapps/rail/index.md): Closet and outfit planner for iPhone that picks what to wear from your clothes and the weather.
 - [WhatPay](https://thisisprabha.com/iosapps/whatpay/index.md): Bills, subscriptions, EMI, and renewal tracking for iPhone.
 - [Clickwork](https://thisisprabha.com/iosapps/clickwork/index.md): iPhone remote for Android TV and Google TV.
 - [Feed the Fish](https://thisisprabha.com/iosapps/feed-the-fish/index.md): A calm virtual aquarium for iPhone.
