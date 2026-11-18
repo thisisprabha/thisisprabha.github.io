@@ -12,6 +12,7 @@ Draw one continuous line that loops around every dot. Finish the kolam, light a 
 - Festival cards in several colourways, saved to Photos or shared
 - Works offline; progress syncs through the user's own iCloud account
 - No ads, no account, no analytics
+- First 20 kolams free; one-time Full Kolam purchase opens the rest (no subscription, Family Sharing)
 
 ## Links
 
