@@ -1,23 +1,22 @@
 # Prabhakaran Ravichandran
 
-> Lead Product Designer at SuperOps in Chennai, India. Independent iOS developer.
+Lead Product Designer at SuperOps in Chennai, India. Over 10 years in product design.
 
-I design tools for IT teams and prototype in code. I also design, build, and ship my own apps.
+## Selected work at SuperOps
 
-## Apps
+- **AI-assisted ticket triage** — Designed an agent that triages tickets, fills in fields, and replies to requesters. Designed similar-ticket and solution suggestions.
+- **IT automation playbooks** — Designed how technicians review agent-proposed fixes, take over when needed, and verify the outcome.
+- **Network Monitoring** — Designed the module from early flows through launch. [Launch note on LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7156449426440417280/)
 
-- [iOS app portfolio](https://thisisprabha.com/iosapps/)
-- [Time Left](https://thisisprabha.com/iosapps/time-left/): Count down to a date or see how long it’s been.
-- [WhatPay](https://thisisprabha.com/iosapps/whatpay/): See what your subscriptions, bills, and EMIs add up to.
-- [Rail](https://thisisprabha.com/iosapps/rail/): Pick what to wear from your own closet and the weather.
-- [That’s My Font](https://thisisprabha.com/iosapps/thats-my-font/): Turn your handwriting into a font you can install.
+## Strengths
 
-## Writing
+Complex B2B workflows, design systems, and prototyping in code with product and engineering.
 
-- [I built an AI agent that makes my videos](https://thisisprabha.com/devlog/issue-001.html)
-- [How subscription trackers sell themselves on the App Store](https://thisisprabha.com/whatpay-research-subscription-trackers.html)
+## Outside work
 
-## Profiles
+I build iOS apps as a hobby. Time Left, WhatPay, Rail, Clickwork, Leave Hack, and That's My Font.
 
-- [GitHub](https://github.com/thisisprabha)
+## Résumé and contact
+
+- [Résumé](https://thisisprabha.com/resume/)
 - [LinkedIn](https://www.linkedin.com/in/thisisprabhakaran/)
