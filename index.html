@@ -2,831 +2,103 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Prabhakaran - Lead Product Designer &amp; Indie Builder</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Prabhakaran leads product design at SuperOps in Chennai: complex B2B software, AI features, design systems, and self-built iOS apps.">
-  <meta name="color-scheme" content="dark">
+  <title>Prabhakaran Ravichandran · Product Designer &amp; iOS Developer</title>
+  <meta name="description" content="Prabhakaran leads product design at SuperOps in Chennai and independently builds apps for iPhone and iPad.">
+  <meta name="theme-color" content="#f8f7f4">
   <link rel="canonical" href="https://thisisprabha.com/">
   <link rel="alternate" type="text/markdown" href="https://thisisprabha.com/index.md">
   <link rel="describedby" href="https://thisisprabha.com/llms.txt">
-  <link rel="preload" href="https://fonts.gstatic.com/s/pixelifysans/v3/CHy2V-3HFUT7aC4iv1TxGDR9DHEserHN25py2TQO131Y.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="https://fonts.gstatic.com/s/craftygirls/v16/va9B4kXI39VaDdlPJo8N_NvuQQ.ttf" as="font" type="font/ttf" crossorigin>
-  <style>
-    @font-face {
-      font-family: "Hero Pixel";
-      src: url("https://fonts.gstatic.com/s/pixelifysans/v3/CHy2V-3HFUT7aC4iv1TxGDR9DHEserHN25py2TQO131Y.ttf") format("truetype");
-      font-display: optional;
-      font-style: normal;
-      font-weight: 700;
-    }
-    @font-face {
-      font-family: "Hero Stitched";
-      src: url("https://fonts.gstatic.com/s/craftygirls/v16/va9B4kXI39VaDdlPJo8N_NvuQQ.ttf") format("truetype");
-      font-display: optional;
-      font-style: normal;
-      font-weight: 400;
-    }
-
-    :root {
-      --bg: #000000;
-      --bg-elevated: #0d0d0f;
-      --panel: #16161a;
-      --panel-soft: #1d1d21;
-      --text: #f5f5f7;
-      --text-secondary: #b8b8be;
-      --muted: #898990;
-      --line: rgba(255, 255, 255, 0.10);
-      --accent: #2997ff;
-      --radius: 18px;
-      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --font-mono: "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    }
-
-    * { box-sizing: border-box; }
-    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-    body {
-      margin: 0;
-      overflow-x: hidden;
-      background:
-        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41, 151, 255, 0.10), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      line-height: 1.47;
-    }
-
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 0 48px;
-      position: relative;
-      z-index: 1;
-    }
-
-    #particleCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    header.hero {
-      padding: 120px 0 72px;
-    }
-
-    .avatar {
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      border: 2px solid var(--line);
-      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.03);
-      margin-bottom: 32px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 24px;
-    }
-
-    h1 {
-      font-family: var(--font-display);
-      font-size: clamp(32px, 4.8vw, 58px);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      margin: 0 0 28px;
-      max-width: 20ch;
-    }
-
-    .hero-role { white-space: nowrap; }
-
-    .hero-word {
-      --hero-word-color: var(--text);
-      color: var(--hero-word-color);
-      display: inline-block;
-      vertical-align: baseline;
-      white-space: nowrap;
-      font-style: normal;
-      text-shadow: 0 0 24px color-mix(in srgb, var(--hero-word-color) 18%, transparent);
-    }
-
-    .hero-word--name {
-      --hero-word-color: #ff9ecb;
-      font-family: Georgia, "Times New Roman", serif;
-      font-style: italic;
-      font-weight: 700;
-      letter-spacing: -0.055em;
-    }
-    .hero-word--designer {
-      --hero-word-color: #8bc5ff;
-      font-family: "Hero Pixel", "SFMono-Regular", Consolas, monospace;
-      font-weight: 700;
-      letter-spacing: -0.045em;
-    }
-    .hero-word--builder {
-      --hero-word-color: #b8ef8f;
-      font-family: "Hero Stitched", Chalkboard, "Comic Sans MS", cursive;
-      font-weight: 400;
-      letter-spacing: -0.035em;
-      text-decoration: underline dotted color-mix(in srgb, var(--hero-word-color) 58%, transparent) 0.055em;
-      text-underline-offset: 0.13em;
-    }
-    .hero-word--place {
-      --hero-word-color: #ffc86b;
-      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      font-weight: 900;
-      letter-spacing: 0.005em;
-      text-transform: uppercase;
-    }
-
-    .hero-word__char {
-      display: inline-grid;
-      place-items: baseline center;
-      position: relative;
-      overflow: visible;
-      vertical-align: baseline;
-      transition: color 180ms ease, transform 220ms cubic-bezier(.2,.8,.2,1);
-    }
-    .hero-word__char.is-space { width: 0.32em; }
-
-    .hero-word__spacer,
-    .hero-word__glyph { grid-area: 1 / 1; }
-    .hero-word__spacer { visibility: hidden; }
-    .hero-word__glyph {
-      font: inherit;
-      line-height: inherit;
-      position: absolute;
-      inset: 0;
-      display: inline-grid;
-      place-items: baseline center;
-      white-space: nowrap;
-      pointer-events: none;
-    }
-    .hero-word__char.is-shuffling { transform: translateY(-0.08em) rotate(-2deg); }
-    .hero-word__char.is-shuffling .hero-word__glyph { font-style: normal; letter-spacing: 0; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="0"] { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-weight: 700; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="1"] { font-family: "Arial Rounded MT Bold", "Trebuchet MS", sans-serif; font-weight: 800; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="2"] { font-family: "SFMono-Regular", Consolas, "Courier New", monospace; font-weight: 700; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="3"] { font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-weight: 900; text-transform: uppercase; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="4"] { font-family: Chalkboard, "Comic Sans MS", cursive; font-weight: 700; font-style: italic; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="5"] { font-family: "Hero Pixel", "SFMono-Regular", monospace; font-weight: 700; }
-    .hero-word__char.is-shuffling .hero-word__glyph[data-face="6"] { font-family: "Hero Stitched", Chalkboard, cursive; font-weight: 400; }
-
-    .hero p {
-      font-size: 20px;
-      line-height: 1.55;
-      color: var(--text-secondary);
-      max-width: 62ch;
-      margin: 0 0 20px;
-    }
-
-    .hero p strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 36px;
-    }
-
-    .tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      color: var(--text-secondary);
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 999px;
-      padding: 8px 14px;
-    }
-
-    section {
-      padding: 64px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 20px;
-    }
-
-    h2 {
-      font-family: var(--font-display);
-      font-size: 34px;
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin: 0 0 28px;
-    }
-
-    .about p {
-      font-size: 19px;
-      line-height: 1.55;
-      color: var(--text-secondary);
-      max-width: 62ch;
-      margin: 0 0 20px;
-    }
-
-    .about p strong,
-    .about li strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .about ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 14px;
-      max-width: 62ch;
-    }
-
-    .about li {
-      position: relative;
-      padding-left: 22px;
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--text-secondary);
-    }
-
-    .about li::before {
-      content: "";
-      position: absolute;
-      left: 2px;
-      top: 0.65em;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      transition: border-color 160ms ease, transform 160ms ease;
-    }
-
-    .card:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      transform: translateY(-2px);
-    }
-
-    .card-title {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 0 0 12px;
-    }
-
-    .card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin: 0;
-      line-height: 1.5;
-    }
-
-    .cta {
-      text-align: left;
-    }
-
-    .cta p {
-      font-size: 20px;
-      color: var(--text-secondary);
-      max-width: 52ch;
-      margin: 0 0 32px;
-    }
-
-    .cta p strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .btn {
-      display: inline-block;
-      font-family: var(--font-body);
-      font-size: 16px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 999px;
-      padding: 14px 28px;
-      transition: opacity 160ms ease, transform 160ms ease;
-    }
-
-    .btn:hover {
-      opacity: 0.85;
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-    }
-
-    .btn-ghost {
-      border: 1px solid var(--line);
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    footer {
-      padding: 48px 0 64px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    footer a {
-      color: var(--text-secondary);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--text);
-    }
-
-    .apps-intro {
-      font-size: 18px;
-      line-height: 1.55;
-      color: var(--text-secondary);
-      max-width: 58ch;
-      margin: -8px 0 36px;
-    }
-
-    .apps-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .app-card {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: var(--text);
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: border-color 160ms ease, transform 160ms ease;
-    }
-
-    .app-card:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      transform: translateY(-2px);
-    }
-
-    .app-card:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
-    }
-
-    .app-card--featured {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      min-height: 400px;
-    }
-
-    .app-feature-media {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
-      background:
-        radial-gradient(ellipse 70% 70% at 50% 38%, rgba(41, 151, 255, 0.09), transparent 72%),
-        var(--bg-elevated);
-      border-right: 1px solid var(--line);
-    }
-
-    .app-feature-media img {
-      display: block;
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 360px;
-      object-fit: contain;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      box-shadow: 0 28px 60px -32px rgba(0, 0, 0, 0.85);
-    }
-
-    .app-feature-body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 14px;
-      padding: 36px 40px;
-    }
-
-    .app-flag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
-
-    .app-name {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin: 0;
-    }
-
-    .app-card:not(.app-card--featured) .app-name {
-      font-size: 22px;
-    }
-
-    .app-tagline {
-      font-size: 17px;
-      line-height: 1.45;
-      color: var(--text);
-      margin: 0;
-    }
-
-    .app-role {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      line-height: 1.5;
-      letter-spacing: 0.02em;
-      color: var(--muted);
-      margin: 0;
-    }
-
-    .app-cta {
-      margin-top: auto;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-    }
-
-    .app-visual {
-      display: grid;
-      gap: 14px;
-      padding: 22px;
-      background:
-        radial-gradient(ellipse 70% 70% at 50% 30%, rgba(41, 151, 255, 0.08), transparent 72%),
-        var(--bg-elevated);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .app-visual-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 0.04em;
-      color: var(--text-secondary);
-    }
-
-    .app-visual-toolbar span:last-child {
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--muted);
-    }
-
-    .app-glyph-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 7px;
-    }
-
-    .app-glyph {
-      aspect-ratio: 1;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text);
-      font-size: 17px;
-      font-weight: 500;
-    }
-
-    .app-glyph.is-empty {
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.015);
-    }
-
-    .app-body {
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-      padding: 24px;
-      flex: 1;
-    }
-
-    @media (max-width: 720px) {
-      .apps-grid { grid-template-columns: 1fr; }
-      .app-card--featured { grid-template-columns: 1fr; min-height: 0; }
-      .app-feature-media { border-right: 0; border-bottom: 1px solid var(--line); padding: 22px; }
-      .app-feature-media img { max-height: 300px; }
-      .app-feature-body { padding: 26px 24px; }
-      .app-visual { padding: 18px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .app-card { transition: none; }
-      .app-card:hover { transform: none; }
-      .hero-word__char { transition: none; }
-    }
-
-    @media (max-width: 720px) {
-      .hero-role { white-space: normal; }
-      .wrap { padding: 0 22px; }
-      header.hero { padding: 80px 0 48px; }
-      h1 { font-size: clamp(29px, 8vw, 34px); max-width: 100%; }
-      .hero-word { display: inline; }
-      .grid { grid-template-columns: 1fr; }
-      .short p { font-size: 19px; }
-      footer { flex-direction: column; align-items: flex-start; }
-    }
-  </style>
+  <link rel="preload" href="/assets/portfolio/wilddogs-2026.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="/assets/portfolio/site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thisisprabha.com/">
+  <meta property="og:title" content="Prabhakaran Ravichandran · Product Designer &amp; iOS Developer">
+  <meta property="og:description" content="Product design at SuperOps. Independent apps for iPhone and iPad.">
 </head>
 <body>
-  <div class="wrap">
-    <header class="hero">
-      <img class="avatar" src="https://thisisprabha.wordpress.com/wp-content/uploads/2022/04/prabha.jpg" alt="Prabhakaran" width="112" height="112">
-      <p class="eyebrow">Product Design / AI / iOS</p>
-      <h1 aria-label="Hi, I'm Prabhakaran. Lead Product Designer and indie builder in Chennai.">Hi, I'm <span class="hero-word hero-word--name" data-word="Prabhakaran" aria-hidden="true">Prabhakaran</span>. <span class="hero-role">Lead <span class="hero-word hero-word--designer" data-word="Product Designer" aria-hidden="true">Product Designer</span> and</span> <span class="hero-word hero-word--builder" data-word="indie builder" aria-hidden="true">indie builder</span> in <span class="hero-word hero-word--place" data-word="Chennai" aria-hidden="true">Chennai</span>.</h1>
-      <p>I design software for IT teams at <strong>SuperOps</strong>, from strategy to final screens.</p>
-      <p>I prototype in code, and I ship my own <strong>iOS apps</strong>.</p>
-      <div class="meta">
-        <span class="tag">Chennai, India</span>
-        <span class="tag">10+ years</span>
-        <span class="tag">B2B SaaS</span>
-        <span class="tag">AI products</span>
-        <span class="tag">Design systems</span>
-        <span class="tag">iOS</span>
-      </div>
-    </header>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="masthead wrap">
+    <a class="wordmark" href="/" aria-current="page">This is Prabha</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/iosapps/">iOS apps</a>
+      <a href="#writing">Writing</a>
+      <a href="mailto:uxcurry@gmail.com">Contact</a>
+    </nav>
+  </header>
 
-    <section class="about">
-      <p class="section-label">About</p>
-      <h2>10 years making complex products simple.</h2>
-      <p>Graphic design, then web, then product, at <strong>SuperOps, Subex, IndiaProperty, and Fantain</strong>.</p>
-      <p>How I work:</p>
-      <ul>
-        <li><strong>Problem first.</strong> Agree on the user and the goal before any screens.</li>
-        <li><strong>Prototypes, not long specs.</strong> Hard questions come up early.</li>
-        <li><strong>The details.</strong> Onboarding, empty and error states, localization.</li>
+  <main class="wrap" id="main">
+    <section class="hero" aria-labelledby="intro">
+      <div class="hero-copy-wrap">
+        <h1 class="display" id="intro">Hey, I'm <span>Prabhakaran.</span></h1>
+        <p class="hero-copy">I lead product design at <a href="https://superops.com/">SuperOps</a> in Chennai. I also design, build, and ship my own iOS apps.</p>
+        <div class="hero-actions">
+          <a class="button" href="/iosapps/">Explore my apps</a>
+          <a class="text-link" href="#work">How I work</a>
+        </div>
+      </div>
+      <a class="feature" href="/iosapps/time-left/" aria-label="Explore Time Left, handwritten countdowns and widgets">
+        <div class="feature-stage">
+          <img class="feature-device" src="/assets/portfolio/time-left.webp" alt="" width="560" height="1215" fetchpriority="high">
+        </div>
+        <div class="feature-caption"><strong>Time Left</strong><span>Handwritten countdowns</span></div>
+      </a>
+    </section>
+
+    <section class="section" aria-labelledby="selected-apps">
+      <div class="section-bar">
+        <h2 class="section-title" id="selected-apps">Selected apps</h2>
+        <a class="text-link" href="/iosapps/">All iOS apps</a>
+      </div>
+      <div class="app-grid">
+        <article class="app-card">
+          <a class="app-card-link" href="/iosapps/whatpay/">
+            <span class="app-thumb app-thumb--whatpay"><img src="/assets/portfolio/whatpay.webp" alt="" width="420" height="914" loading="lazy"></span>
+            <h3 class="app-title">WhatPay</h3>
+          </a>
+          <p class="app-summary">See what your subscriptions, bills, and EMIs add up to.</p>
+        </article>
+        <article class="app-card">
+          <a class="app-card-link" href="/iosapps/rail/">
+            <span class="app-thumb app-thumb--rail"><img src="/assets/portfolio/rail.webp" alt="" width="420" height="913" loading="lazy"></span>
+            <h3 class="app-title">Rail</h3>
+          </a>
+          <p class="app-summary">Pick what to wear from your own closet and the weather.</p>
+        </article>
+        <article class="app-card">
+          <a class="app-card-link" href="/iosapps/thats-my-font/">
+            <span class="app-thumb app-thumb--font"><img src="/assets/portfolio/thats-my-font.webp" alt="" width="480" height="688" loading="lazy"></span>
+            <h3 class="app-title">That’s My Font</h3>
+          </a>
+          <p class="app-summary">Turn your handwriting into a font you can install.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" id="work" aria-labelledby="work-title">
+      <h2 class="section-title" id="work-title">How I work</h2>
+      <div class="work-copy">
+        <p>I design tools for IT teams. In automation, I focus on what the system can handle and where a technician needs to make the call.</p>
+        <p>I prototype in code early so we can test those decisions before they make it into the product.</p>
+      </div>
+    </section>
+
+    <section class="section split" id="writing" aria-labelledby="writing-title">
+      <h2 class="section-title" id="writing-title">Writing</h2>
+      <ul class="writing-list">
+        <li><a href="/devlog/issue-001.html"><strong>I built an AI agent that makes my videos</strong><span>Devlog</span></a></li>
+        <li><a href="/whatpay-research-subscription-trackers.html"><strong>How subscription trackers sell themselves on the App Store</strong><span>Design research</span></a></li>
       </ul>
     </section>
+  </main>
 
-    <section>
-      <p class="section-label">What I work on</p>
-      <h2>Where I focus.</h2>
-      <div class="grid">
-        <div class="card">
-          <p class="card-title">Complex B2B software</p>
-          <p>Dense IT workflows, made quick to act on.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">AI features people trust</p>
-          <p>What AI does alone, and where people approve.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Design systems</p>
-          <p>Components engineers actually reuse.</p>
-        </div>
-        <div class="card">
-          <p class="card-title">Apps, idea to launch</p>
-          <p>My own iOS apps, sketch to App Store.</p>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="selected-ios-apps">
-      <p class="section-label">Side projects</p>
-      <h2 id="selected-ios-apps">Apps I designed, built, and shipped.</h2>
-      <p class="apps-intro">Solo projects, live on the App Store. <a href="iosapps/">See all apps.</a></p>
-      <div class="apps-grid">
-        <a class="app-card app-card--featured" href="iosapps/time-left/" aria-label="Time Left - countdowns, count-ups, and widgets for iPhone. View landing page.">
-          <div class="app-feature-media">
-            <img src="iosapps/time-left/assets/time-left-home.webp" alt="Time Left home screen showing upcoming dates" loading="lazy" width="1179" height="2556">
-          </div>
-          <div class="app-feature-body">
-            <p class="app-flag">iPhone · Widgets</p>
-            <h3 class="app-name">Time Left</h3>
-            <p class="app-tagline">See how long until a moment, or how long since it began, on iPhone and Apple Watch.</p>
-            <p class="app-role">Designed and built solo. No sign-up, no tracking.</p>
-            <span class="app-cta">View the app →</span>
-          </div>
-        </a>
-
-
-        <a class="app-card" href="iosapps/thats-my-font/" aria-label="That's My Font - turn your handwriting into a real OpenType font on iPad. View landing page.">
-          <div class="app-visual" aria-hidden="true">
-            <div class="app-visual-toolbar"><span>That's My Font</span><span>18 of 62 drawn</span></div>
-            <div class="app-glyph-grid">
-              <span class="app-glyph">A</span><span class="app-glyph">B</span><span class="app-glyph">C</span><span class="app-glyph">D</span><span class="app-glyph">E</span><span class="app-glyph">F</span>
-              <span class="app-glyph">G</span><span class="app-glyph">H</span><span class="app-glyph">I</span><span class="app-glyph">J</span><span class="app-glyph">K</span><span class="app-glyph">L</span>
-              <span class="app-glyph">M</span><span class="app-glyph">N</span><span class="app-glyph">O</span><span class="app-glyph">P</span><span class="app-glyph">Q</span><span class="app-glyph">R</span>
-              <span class="app-glyph is-empty">S</span><span class="app-glyph is-empty">T</span><span class="app-glyph is-empty">U</span><span class="app-glyph is-empty">V</span><span class="app-glyph is-empty">W</span><span class="app-glyph is-empty">X</span>
-            </div>
-          </div>
-          <div class="app-body">
-            <p class="app-flag">iPad · Font maker</p>
-            <h3 class="app-name">That's My Font</h3>
-            <p class="app-tagline">Turn your handwriting into a real font you can install and type with.</p>
-            <p class="app-role">Designed and built solo for iPad.</p>
-            <span class="app-cta">View the app →</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="cta">
-      <p class="section-label">Let's talk</p>
-      <h2>Hiring? Let's talk.</h2>
-      <p>Building in <strong>AI, SaaS, or iOS</strong>? Message me on LinkedIn.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
-        <a class="btn btn-ghost" href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">See my projects on GitHub</a>
-      </div>
-    </section>
-
-    <footer>
-      <span>&copy; 2026 Prabhakaran. Chennai, India.</span>
-      <span><a href="https://github.com/thisisprabha" target="_blank" rel="noopener noreferrer">GitHub</a> / <a href="https://www.linkedin.com/in/thisisprabhakaran/" target="_blank" rel="noopener noreferrer">LinkedIn</a></span>
-    </footer>
-  </div>
-
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
-
-  <script>
-    (function () {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const words = Array.from(document.querySelectorAll('.hero-word'));
-      const glyphs = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789#@%&?';
-      const faceCount = 7;
-
-      words.forEach((word) => {
-        const text = word.dataset.word;
-        word.textContent = '';
-        Array.from(text).forEach((character) => {
-          const char = document.createElement('span');
-          char.className = 'hero-word__char';
-          if (character === ' ') char.classList.add('is-space');
-          const spacer = document.createElement('span');
-          spacer.className = 'hero-word__spacer';
-          spacer.textContent = character;
-          const visible = document.createElement('span');
-          visible.className = 'hero-word__glyph';
-          visible.textContent = character;
-          char.append(spacer, visible);
-          word.append(char);
-        });
-      });
-
-      function shuffleWord(word, wordIndex) {
-        const finalText = Array.from(word.dataset.word);
-        const chars = Array.from(word.querySelectorAll('.hero-word__char'));
-        chars.forEach((char, charIndex) => {
-          const visible = char.querySelector('.hero-word__glyph');
-          const finalCharacter = finalText[charIndex];
-          if (finalCharacter === ' ') return;
-          window.setTimeout(() => {
-            char.classList.add('is-shuffling');
-            let frame = 0;
-            const swaps = 6 + ((charIndex + wordIndex) % 4);
-            const interval = window.setInterval(() => {
-              frame += 1;
-              visible.textContent = glyphs[Math.floor(Math.random() * glyphs.length)];
-              visible.dataset.face = String((frame + charIndex + wordIndex) % faceCount);
-              if (frame >= swaps) {
-                window.clearInterval(interval);
-                visible.textContent = finalCharacter;
-                delete visible.dataset.face;
-                char.classList.remove('is-shuffling');
-              }
-            }, 54);
-          }, charIndex * 42 + wordIndex * 150);
-        });
-      }
-
-      function play() {
-        if (reduceMotion || document.hidden) return;
-        words.forEach(shuffleWord);
-      }
-
-      if (!reduceMotion) {
-        window.setTimeout(play, 280);
-      }
-    })();
-
-    (function () {
-      const canvas = document.getElementById('particleCanvas');
-      const ctx = canvas.getContext('2d');
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      let particles = [];
-      let w, h;
-
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-      }
-
-      function spawn(x, y, count) {
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: x !== undefined ? x : Math.random() * w,
-            y: y !== undefined ? y : h + Math.random() * 100,
-            size: Math.random() * 1.6 + 0.4,
-            speedY: -(Math.random() * 0.7 + 0.25),
-            drift: Math.random() * 0.4 - 0.2,
-            alpha: Math.random() * 0.35 + 0.25
-          });
-        }
-      }
-
-      function step() {
-        ctx.clearRect(0, 0, w, h);
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.y += p.speedY;
-          p.x += p.drift;
-          if (p.y < -10) {
-            particles.splice(i, 1);
-            spawn(undefined, undefined, 1);
-            continue;
-          }
-          ctx.beginPath();
-          ctx.fillStyle = 'rgba(245, 245, 247, ' + p.alpha + ')';
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-
-      function loop() {
-        step();
-        requestAnimationFrame(loop);
-      }
-
-      resize();
-      spawn(undefined, undefined, 90);
-      if (!reduceMotion) {
-        loop();
-      } else {
-        step();
-      }
-
-      window.addEventListener('resize', () => {
-        resize();
-        particles = [];
-        spawn(undefined, undefined, 90);
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (reduceMotion) return;
-        spawn(e.clientX, e.clientY, 4);
-      });
-    })();
-  </script>
+  <footer class="footer wrap">
+    <span>Prabhakaran Ravichandran · Chennai, India</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/thisisprabhakaran/">LinkedIn</a>
+      <a href="https://github.com/thisisprabha">GitHub</a>
+      <a href="mailto:uxcurry@gmail.com">Email</a>
+    </div>
+  </footer>
 </body>
 </html>
