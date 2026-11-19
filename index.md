@@ -14,7 +14,7 @@ Complex B2B workflows, design systems, and prototyping in code with product and 
 
 ## Outside work
 
-I build iOS apps as a hobby. Time Left, WhatPay, Rail, Clickwork, Leave Hack, and That's My Font.
+I build [iOS apps](https://thisisprabha.com/iosapps/) as a hobby. Time Left, WhatPay, Rail, Clickwork, Leave Hack, and That's My Font.
 
 ## Résumé and contact
 
