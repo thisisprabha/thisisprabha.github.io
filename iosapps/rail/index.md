@@ -11,7 +11,7 @@
 
 - One outfit ready every morning, picked for the forecast and the occasion (Office, Weekend, Date night, Party, Special occasion)
 - Add clothes from the camera or Photos, even a mirror selfie; each garment is cut out on the device and sorted onto a shelf
-- AI studio turns a messy photo into a clean studio photo; first 4 free, then one-time packs
+- Clean up photo turns a messy photo into a clean, clear photo; first 4 free, then one-time packs
 - Tracks what's worn and what's in the wash
 - Share today's look as a designed card or a selfie video
 

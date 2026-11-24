@@ -30,13 +30,13 @@
 <h3>iCloud Sync</h3>
 <p>Rail can keep your closet in sync across your devices using Apple's iCloud (CloudKit), in your own private iCloud database. We cannot see that data. Turning off iCloud for Rail in iOS Settings stops further syncing; it does not necessarily remove data already stored in your iCloud account.</p>
 
-<h3>AI Studio (optional)</h3>
-<p>If you turn on <strong>AI cleanup</strong> for a garment, Rail sends that one garment image to our server so it can be turned into a clean studio photo. Only the images you choose are sent. Nothing else in your closet leaves your device for this feature.</p>
-<p>To make the studio photo, our server sends the garment image to an AI image model through <strong>OpenRouter</strong> (openrouter.ai), which passes it to the model provider. These providers process the image only to return the result. The finished studio photo is stored on our server so that a retried request does not charge you twice. <!-- TODO: state how long finished jobs are kept, e.g. "and deleted after 30 days" --></p>
-<p>Before sending, Rail cuts the garment out of your photo. Try not to include faces or other people in photos you send for AI cleanup.</p>
+<h3>Clean up photo (optional)</h3>
+<p>If you tap <strong>Clean up photo</strong> on a garment and allow it, Rail sends that one garment image to our server so it can be turned into a clean photo. Only the images you choose are sent. Nothing else in your closet leaves your device for this feature.</p>
+<p>To clean up the photo, our server sends the garment image to an AI image model through <strong>OpenRouter</strong> (openrouter.ai), which passes it to the model provider. These providers process the image only to return the result. The finished clean photo is stored on our server so that a retried request does not charge you twice. <!-- TODO: state how long finished jobs are kept, e.g. "and deleted after 30 days" --></p>
+<p>Before sending, Rail cuts the garment out of your photo. Try not to include faces or other people in photos you send for Clean up photo.</p>
 
 <h3>Anonymous Account and Purchases</h3>
-<p>To keep your studio photo balance, Rail creates an anonymous account identifier on your device. It is not linked to your name, email or Apple ID. Studio photo packs are bought through Apple's App Store. Our server checks each purchase with Apple before adding photos to your balance. We do not receive your payment card details.</p>
+<p>To keep your cleanup balance, Rail creates an anonymous account identifier on your device. It is not linked to your name, email or Apple ID. Cleanup packs are bought through Apple's App Store. Our server checks each purchase with Apple before adding photos to your balance. We do not receive your payment card details.</p>
 
 <h3>Location and Weather</h3>
 <p>If you allow it, Rail uses your approximate location about once a day to get the forecast from Apple Weather (WeatherKit) and pick clothes for it. Rail does not send your location to our server or keep a location history.</p>
@@ -54,12 +54,12 @@
 <p>Rail does not include third-party advertising or analytics. We use these services to run the app:</p>
 <ul>
   <li>Apple: iCloud, App Store purchases, WeatherKit, notifications and diagnostics</li>
-  <li>Supabase: hosts our server and stores your anonymous studio photo balance and finished studio photos</li>
-  <li>OpenRouter and the AI model provider it routes to: create studio photos from images you choose to send</li>
+  <li>Supabase: hosts our server and stores your anonymous cleanup balance and finished clean photos</li>
+  <li>OpenRouter and the AI model provider it routes to: clean up photos you choose to send</li>
 </ul>
 
 <h2>Deleting Your Data</h2>
-<p>Deleting Rail removes the data stored on your device. To delete data synced to iCloud, go to iOS Settings &gt; [your name] &gt; iCloud &gt; Manage Storage. To delete your studio photo balance and any studio photos stored on our server, email us from the app's Settings or at the address below and we will remove them.</p>
+<p>Deleting Rail removes the data stored on your device. To delete data synced to iCloud, go to iOS Settings &gt; [your name] &gt; iCloud &gt; Manage Storage. To delete your cleanup balance and any clean photos stored on our server, email us from the app's Settings or at the address below and we will remove them.</p>
 
 <h2>Children's Privacy</h2>
 <p>Rail is a general app and is not directed at children under 13. We do not knowingly collect personal information from children.</p>
